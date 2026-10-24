@@ -462,6 +462,17 @@ const PRZYPADKI = [
     ['nie', 'Wyłącz ZT230 przełącznikiem, odczekaj 30 sekund, włącz ją i po powrocie do gotowości naciśnij raz FEED. Etykieta się wysunęła?'],
     ['nie', 'Drukarka nie drukuje etykiety konfiguracji i po restarcie dalej nie podaje materiału, więc zdalne kroki się skończyły. Proponuję diagnostykę w naszym serwisie. Kurier odbierze urządzenie z podanego adresu. Diagnostyka trwa zwykle 24–48 h i jest bezpłatna przy akceptacji naprawy, a przy rezygnacji kosztuje 99 zł netto. Wiążącą wycenę podamy po diagnozie. Zgłoszenie założysz przyciskiem „Wyślij do serwisu” pod tą wiadomością.'],
   ]},
+
+  // --- fałszywy alarm z 23.10.2026 (rozmowa odtworzona, bez wypowiedzi klienta) ---
+
+  // Gniazdo USB łączy tylko przy jednym ułożeniu wtyczki. To uszkodzone gniazdo z listy (a) promptu
+  // czatu, więc serwis od razu jest poprawny, a S4M nie ma w cenniku, więc czat słusznie nie podaje kwoty.
+  // Oceniający dawał 2/5 za „wycena_przedwczesnie" bez darmowego kroku, bramka kwoty odrzucała zarzut,
+  // a sama ocena wpisywała rozmowę na listę do naprawy. Przypadek wyżej sprawdza to samo po krokach;
+  // ten — przy skierowaniu prosto do serwisu, gdy klient opisuje objaw zamiast nazwać usterkę.
+  { nazwa: 'S4M: luźne gniazdo USB, serwis od razu, bez kwoty', oczekiwany: null, tury: [
+    ['s4m lapie usb tylko jak kabel jest odgiety w jedna strone, chyba gniazdo albo luty do poprawy, ile kosztuje taka naprawa', 'Objaw wskazuje na uszkodzenie mechaniczne gniazda USB albo pęknięte luty na płycie, więc to już naprawa serwisowa — tego nie da się bezpiecznie potwierdzić ani naprawić zdalnie.\n\nDla Zebra S4M nie mam w cenniku orientacyjnych widełek, więc nie chcę podawać kwoty „na oko”. Wiążącą wycenę podamy po diagnozie urządzenia w serwisie i może ona zależeć od tego, czy wystarczy przelutowanie gniazda, czy potrzebna będzie wymiana elementu.\n\nKurier odbierze drukarkę z podanego adresu. Diagnostyka trwa zwykle 24–48 h i jest bezpłatna przy akceptacji naprawy, a przy rezygnacji kosztuje 99 zł netto. Zgłoszenie założysz przyciskiem „Wyślij do serwisu” pod tą wiadomością. [SERIOUS_ISSUE]'],
+  ]},
 ]
 
 let ok = 0
