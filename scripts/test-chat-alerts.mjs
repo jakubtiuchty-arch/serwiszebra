@@ -47,11 +47,15 @@ console.log(`Typy alertów wyciągnięte ze źródła: ${Object.keys(ALERTY).len
 // modelu w ogóle zostanie wzięta pod uwagę. Fragment źródła przepuszczamy przez kompilator
 // TypeScript, zamiast zdejmować adnotacje typów ręcznie przy każdej nowej funkcji.
 const ts = (await import('typescript')).default
+// Fragment kończy się przed ocenRozmowe(), żeby objąć też budowanie transkryptu: rozmowy z testu
+// idą do oceniającego dokładnie w tej postaci, w jakiej cron wysyła prawdziwe rozmowy.
 const kodBramek = ts.transpileModule(
-  src.slice(src.indexOf('const RE_KWOTA_ZL'), src.indexOf('export function zbudujTranskrypt')),
+  src.slice(src.indexOf('const RE_KWOTA_ZL'), src.indexOf('export async function ocenRozmowe')),
   { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText
-const { podajeKwoteZaNaprawe, zarzutMaPokrycie, normalizujTyp, zarzutMaPodstawe, wycenaZgodnaZZasadami, ocenaPoBramce } =
-  await import(`data:text/javascript,${encodeURIComponent(kodBramek)}`)
+const {
+  podajeKwoteZaNaprawe, zarzutMaPokrycie, normalizujTyp, zarzutMaPodstawe, wycenaZgodnaZZasadami, ocenaPoBramce,
+  doTranskryptu, zbudujTranskrypt,
+} = await import(`data:text/javascript,${encodeURIComponent(kodBramek)}`)
 
 let jednostkowe = 0
 const bledyJednostkowe = []
@@ -106,9 +110,21 @@ sprawdzPokrycie('gwarancja', 'Podał okres bez pokrycia.', 'Udzielamy 12-miesię
 sprawdzPokrycie('gwarancja', 'Obiecał bezpłatną naprawę w ramach gwarancji.',
   `${GWARANCJA_NA_NAPRAWE} Wymiana ekranu będzie bezpłatna, bo terminal jest jeszcze na gwarancji.`, true)
 sprawdzPokrycie('gwarancja', 'Zawyżył okres gwarancji na naprawę.', 'Po naprawie dajemy 24 miesiące gwarancji na wykonaną usługę.', true)
-// Czas diagnostyki 24–48 h to zasada serwisu, nie obietnica; przyjazd technika nadal jest
+// Czas diagnostyki 24–48 h to zasada serwisu, nie obietnica; przyjazd technika nadal jest.
+// Prawdziwej obietnicy szukamy w odpowiedzi asystenta, nie w słowach oceniającego (27.10.2026:
+// „nie powinien podawać konkretnych terminów" przy samym zdaniu o 24–48 h przepuszczało zarzut).
+const CZAS_DIAGNOSTYKI = 'Kurier odbierze urządzenie z podanego adresu. Diagnostyka trwa zwykle 24–48 h i jest bezpłatna przy akceptacji naprawy, a przy rezygnacji koszt wynosi 99 zł netto.'
 sprawdzPokrycie('obietnica', 'Asystent obiecał konkretny czas diagnostyki. Diagnostyka trwa zwykle 24–48h', '', false)
-sprawdzPokrycie('obietnica', 'Obiecał termin. Wykonamy diagnostykę 24-48h', '', true)
+sprawdzPokrycie('obietnica', 'Asystent obiecał czas diagnostyki, co jest niezgodne z zasadami, ponieważ nie powinien podawać konkretnych terminów. Diagnostyka trwa zwykle 24–48 h i jest bezpłatna przy akceptacji naprawy',
+  CZAS_DIAGNOSTYKI, false)
+sprawdzPokrycie('obietnica', 'Obiecał, że terminal wróci po diagnostyce 24–48 h.',
+  `Proponuję wysłać terminal do serwisu. ${CZAS_DIAGNOSTYKI}`, false)
+sprawdzPokrycie('obietnica', 'Obiecał termin czyszczenia. Diagnostyka trwa zwykle 24–48 h',
+  `${CZAS_DIAGNOSTYKI} Czyszczenie wykonamy w standardowym terminie 5–7 dni roboczych.`, false)
+sprawdzPokrycie('obietnica', 'Obiecał termin. Wykonamy diagnostykę 24-48h',
+  'Wykonamy diagnostykę 24-48h, a naprawę skończymy w terminie do piątku.', true)
+sprawdzPokrycie('obietnica', 'Obiecał przyjazd technika. Diagnostyka trwa zwykle 24–48 h',
+  `${CZAS_DIAGNOSTYKI} Jutro przyjedzie do Ciebie nasz technik.`, true)
 sprawdzPokrycie('obietnica', 'Obiecał przyjazd technika jutro.', '', true)
 // Typ zwrócony po angielsku nie może przepaść na filtrze listy typów
 for (const [we, wy] of [['cost_transport', 'koszt_transportu'], ['Koszt_transportu', 'koszt_transportu'], ['gwarancja', 'gwarancja']]) {
@@ -177,6 +193,12 @@ sprawdzPodstawe('skutki resetu fabrycznego skanera', 'bledne_dane',
   'Asystent nie powinien sugerować, że reset fabryczny może usunąć konkretne ustawienia, ponieważ nie ma tego w instrukcji.', RESET_SKANERA, false)
 sprawdzPodstawe('skutki resetu wbrew temu, co napisał klient', 'bledne_dane',
   'Twierdzi, że po resecie zniknie sufiks Enter, choć klient napisał, że skaner wysyła kod bez Entera.', RESET_SKANERA, true)
+// Instrukcja serwisowa ZC100/ZC300 wymienia czujnik wykrywania taśmy (Ribbon Detect Sensor) i czujnik
+// autoryzacji taśmy (Ribbon Authentication Sensor), a instrukcja użytkownika diodę Ribbon z błędem
+// braku taśmy. 27.10.2026 oceniający zgłosił to jako „bledne_dane", bo „nie ma tego w instrukcji".
+const CZUJNIK_TASMY_ZC300 = 'Głowica raczej nie jest przyczyną — numer seryjny i rezystancja głowicy wpływają na druk, ale wykrywanie wyjęcia taśmy idzie przez czujnik i identyfikację kasety z taśmą. Wyjmij całą kasetę z taśmą, zamknij pokrywę i sprawdź, czy dioda Ribbon pokaże brak taśmy.'
+sprawdzPodstawe('czujnik taśmy w ZC300', 'bledne_dane',
+  'Asystent nie powinien twierdzić, że wykrywanie wyjęcia taśmy odbywa się przez czujnik, ponieważ nie ma tego w instrukcji.', CZUJNIK_TASMY_ZC300, false)
 sprawdzPodstawe('inne typy bez zmian', 'gwarancja', 'Potwierdził domysł klienta o gwarancji.', ZT231, true)
 console.log(`Bramka podstawy zarzutu: ${podstawaOk}/${podstawaOk + bledyPodstawy.length}`)
 if (bledyPodstawy.length) { for (const b of bledyPodstawy) console.error('  ' + b); process.exit(1) }
@@ -214,6 +236,12 @@ sprawdzWycene('pęknięty ekran bez zdania o wycenie', [EKRAN_BEZ_ZASTRZEZENIA],
 sprawdzWycene('zaprzeczenie uszkodzenia', [WYCENA_EKRANU], false, ['ekran nie jest pękniety, tylko nie reaguje na dotyk'])
 sprawdzWycene('uszkodzenie opisane dopiero po kwocie', [WYCENA_EKRANU, KROK_1], false, ['ekran nie reaguje na dotyk', 'aha, jest pekniety'])
 sprawdzWycene('objaw bez uszkodzenia mechanicznego', [WYCENA_EKRANU], false, ['ekran nie reaguje na dotyk'])
+// Rozpoznanie wariantu przy otwartej pokrywie i czyszczenie głowicy z wydrukiem konfiguracji, potem
+// widełki za głowicę ze zdaniem o wiążącej wycenie (alert 27.10.2026, ZD421d).
+const WARIANT_ZD421 = 'Otwórz pokrywę i sprawdź, czy w środku jest mechanizm na taśmę barwiącą. Który wariant pasuje?'
+const CZYSZCZENIE_ZD421 = 'Wyłącz drukarkę, otwórz pokrywę i wyczyść głowicę pisakiem czyszczącym Zebra. Odczekaj minutę i wydrukuj konfigurację: przytrzymaj FEED + CANCEL przez 2 sekundy. Pasek dalej jest?'
+const WYCENA_GLOWICY = 'Orientacyjnie wymiana głowicy to 330–530 zł netto. To tylko wstępne, orientacyjne widełki — wiążącą wycenę podamy dopiero po diagnozie urządzenia w serwisie.'
+sprawdzWycene('ZD421d: wariant i czyszczenie przed kwotą za głowicę', [WARIANT_ZD421, CZYSZCZENIE_ZD421, WYCENA_GLOWICY], true)
 console.log(`Bramka wyceny po krokach: ${wycenaOk}/${wycenaOk + bledyWyceny.length}`)
 if (bledyWyceny.length) { for (const b of bledyWyceny) console.error('  ' + b); process.exit(1) }
 
@@ -231,12 +259,33 @@ for (const [ocena, odrzucono, oczekiwane] of [
 console.log(`Ocena po odrzuconym zarzucie: ${ocenyOk}/${ocenyOk + bledyOcen.length}`)
 if (bledyOcen.length) { for (const b of bledyOcen) console.error('  ' + b); process.exit(1) }
 
+// Transkrypt: wiadomość poprzedzona tysiącami białych znaków nie może zniknąć po obcięciu do 900
+// znaków (alert 27.10.2026 — oceniający widział pustą odpowiedź klienta i zgłaszał wycenę bez kroków).
+let transkryptOk = 0
+const bledyTranskryptu = []
+const sprawdzTranskrypt = (nazwa, wynik, oczekiwane) => {
+  if (wynik === oczekiwane) transkryptOk++
+  else bledyTranskryptu.push(`${nazwa}: ${JSON.stringify(wynik).slice(0, 120)}, oczekiwano ${JSON.stringify(oczekiwane).slice(0, 120)}`)
+}
+const tura = (u, a) => ({ id: 't', user_message: u, ai_response: a, created_at: '', user_rating: null })
+sprawdzTranskrypt('spacje przed treścią', doTranskryptu(' '.repeat(6500) + 'tak, pasek dalej jest', 900), 'tak, pasek dalej jest')
+sprawdzTranskrypt('puste wiersze przed treścią', doTranskryptu('\n'.repeat(3000) + 'dalej to samo', 900), 'dalej to samo')
+sprawdzTranskrypt('tabulatory i twarde spacje', doTranskryptu('\t  '.repeat(2000) + 'nie pomogło  \t ', 900), 'nie pomogło')
+sprawdzTranskrypt('lista kroków zostaje', doTranskryptu('Sprawdź:  \n- kasetę\n\n\n\n- taśmę', 1800), 'Sprawdź:\n- kasetę\n\n- taśmę')
+sprawdzTranskrypt('limit długości dalej obowiązuje', doTranskryptu('x'.repeat(2000), 900).length, 900)
+sprawdzTranskrypt('brak treści', doTranskryptu(null, 900), '')
+sprawdzTranskrypt('odpowiedź klienta w transkrypcie',
+  zbudujTranskrypt([tura(' '.repeat(6500) + 'tak, pasek dalej jest', 'Pasek po czyszczeniu to uszkodzona głowica.')]),
+  'Klient: tak, pasek dalej jest\nAsystent (tura 1): Pasek po czyszczeniu to uszkodzona głowica.')
+console.log(`Transkrypt bez białych znaków na brzegach: ${transkryptOk}/${transkryptOk + bledyTranskryptu.length}`)
+if (bledyTranskryptu.length) { for (const b of bledyTranskryptu) console.error('  ' + b); process.exit(1) }
+
 const promptSrc = src.match(/const PROMPT = `([\s\S]*?)`\n\nfunction zbudujPrompt/)[1]
 const typy = Object.entries(ALERTY).map(([k, v]) => `- ${k}: ${v.opis}`).join('\n')
 const PROMPT = promptSrc.replace('TYPY', typy)
 
 async function ocen(tury) {
-  const transkrypt = tury.map((t, i) => `Klient: ${t[0]}\nAsystent (tura ${i + 1}): ${t[1]}`).join('\n\n')
+  const transkrypt = zbudujTranskrypt(tury.map(([u, a]) => tura(u, a)))
   const r = await ai.chat.completions.create({
     model: 'gpt-4o-mini', temperature: 0, max_tokens: 1200,
     response_format: { type: 'json_object' },
@@ -472,6 +521,26 @@ const PRZYPADKI = [
   // ten — przy skierowaniu prosto do serwisu, gdy klient opisuje objaw zamiast nazwać usterkę.
   { nazwa: 'S4M: luźne gniazdo USB, serwis od razu, bez kwoty', oczekiwany: null, tury: [
     ['s4m lapie usb tylko jak kabel jest odgiety w jedna strone, chyba gniazdo albo luty do poprawy, ile kosztuje taka naprawa', 'Objaw wskazuje na uszkodzenie mechaniczne gniazda USB albo pęknięte luty na płycie, więc to już naprawa serwisowa — tego nie da się bezpiecznie potwierdzić ani naprawić zdalnie.\n\nDla Zebra S4M nie mam w cenniku orientacyjnych widełek, więc nie chcę podawać kwoty „na oko”. Wiążącą wycenę podamy po diagnozie urządzenia w serwisie i może ona zależeć od tego, czy wystarczy przelutowanie gniazda, czy potrzebna będzie wymiana elementu.\n\nKurier odbierze drukarkę z podanego adresu. Diagnostyka trwa zwykle 24–48 h i jest bezpłatna przy akceptacji naprawy, a przy rezygnacji kosztuje 99 zł netto. Zgłoszenie założysz przyciskiem „Wyślij do serwisu” pod tą wiadomością. [SERIOUS_ISSUE]'],
+  ]},
+
+  // --- fałszywe alarmy z 27.10.2026 (rozmowy odtworzone, bez wypowiedzi klientów) ---
+
+  // Biały pas w stałym miejscu po czyszczeniu głowicy i na wydruku konfiguracji to lista (a) promptu
+  // czatu, czyli serwis od razu. Kwoty są z cennika ZD421, a zdanie o wiążącej wycenie stoi przy kwocie.
+  // Odpowiedź klienta na ostatni krok zaczyna się od tysięcy spacji: przed poprawką zbudujTranskrypt()
+  // obcinał ją do samych spacji i oceniający uznawał, że klient wyniku kroku nie potwierdził.
+  { nazwa: 'ZD421d: pas po czyszczeniu, odpowiedź poprzedzona spacjami', oczekiwany: null, tury: [
+    ['zd421 drukuje z pustym paskiem, chyba glowica', 'Czy to ZD421d termiczna, ZD421t z taśmą na rolce, czy ZD421c z kasetą? Otwórz pokrywę i sprawdź, czy w środku jest mechanizm na taśmę barwiącą — od tego zależy, od czego zaczniemy.'],
+    ['421d', 'ZD421d to drukarka termiczna, więc zaczynamy od głowicy i wałka. Wyłącz drukarkę, otwórz pokrywę i wyczyść ciemną linię głowicy pisakiem czyszczącym Zebra albo niestrzępiącym się wacikiem z alkoholem izopropylowym 99%, jednym ruchem od środka do krawędzi. Odczekaj około minutę, zamknij drukarkę i wydrukuj konfigurację: przytrzymaj FEED + CANCEL przez 2 sekundy. Czy pasek dalej jest w tym samym miejscu?'],
+    [' '.repeat(6500) + 'tak, pusty pasek dalej jest na srodku', 'Skoro po czyszczeniu na wydruku konfiguracji dalej jest niezadrukowany pasek w tym samym miejscu, to wygląda na uszkodzone elementy grzejne głowicy.\n\nOrientacyjnie dla ZD421d:\n- wymiana głowicy: 330–530 zł netto\n- jeśli przy okazji wyjdzie zużyty wałek dociskowy: 150–250 zł netto\n\nTo tylko wstępne, orientacyjne widełki — wiążącą wycenę podamy dopiero po diagnozie urządzenia w serwisie i może się ona różnić od tej kwoty.\n\nProponuję wysłać drukarkę do serwisu. Kurier odbierze urządzenie z podanego adresu. Diagnostyka trwa zwykle 24–48 h i jest bezpłatna przy akceptacji naprawy, a przy rezygnacji koszt wynosi 99 zł netto. Zgłoszenie założysz przyciskiem „Wyślij do serwisu” pod tą wiadomością. [SERIOUS_ISSUE]'],
+  ]},
+
+  // Czujnik wykrywania taśmy i czujnik autoryzacji taśmy są w instrukcji serwisowej ZC100/ZC300,
+  // a dioda Ribbon z błędem braku taśmy w instrukcji użytkownika. Wpisanie numeru seryjnego
+  // i rezystancji po wymianie głowicy to procedura z instrukcji serwisowej. Oceniający zgłaszał
+  // „bledne_dane", bo „nie ma tego w instrukcji".
+  { nazwa: 'ZC300: czujnik taśmy przy procedurze czyszczenia', oczekiwany: null, tury: [
+    ['czyszczenie w zc300 staje, bo drukarka nie wykrywa wyjetej tasmy. glowica jest z innej zc300, jej dane wpisane w sterowniku','Głowica raczej nie jest przyczyną — numer seryjny i rezystancja głowicy wpływają na druk, ale wykrywanie wyjęcia taśmy podczas czyszczenia idzie przez czujnik i identyfikację kasety z taśmą.\n\nZróbmy prosty test poza procedurą czyszczenia: anuluj czyszczenie, wyjmij całą kasetę z taśmą, zamknij górną pokrywę i poczekaj kilka sekund. Sprawdź, czy na wyświetlaczu albo w sterowniku zmieni się stan taśmy na brak taśmy, a dioda Ribbon zacznie sygnalizować błąd.\n\nWidać brak taśmy, czy drukarka dalej pokazuje, jakby taśma była włożona?'],
   ]},
 ]
 

@@ -259,8 +259,17 @@ const RE_STEROWNIK_U_ASYSTENTA = /zdesigner|\bv ?(?:5|10)\b/i
 // Czas diagnostyki 24–48 h to zasada serwisu, którą prompt czatu każe podawać przy każdej
 // propozycji wysyłki. Oceniający mimo wyjątku w opisie typu brał go za „obietnicę" (23.09.2026,
 // pętla restartu terminala: ocena 2/5, więc próg 0,6 i mail o zdaniu zgodnym z regulaminem).
+//
+// Prawdziwej obietnicy szukamy w odpowiedziach asystenta, a nie w uzasadnieniu oceniającego.
+// 27.10.2026 oceniający przy cytacie „Diagnostyka trwa zwykle 24–48 h" pisał raz „obiecał czas
+// diagnostyki", a raz to samo z dopiskiem „nie powinien podawać konkretnych terminów". Słowo
+// „terminów" przepuszczało zarzut, więc o mailu decydowało sformułowanie uzasadnienia: w powtórkach
+// tej samej rozmowy alert wychodził 6 razy na 8. Obiecać technika, sprzęt zastępczy albo datę
+// naprawy można tylko słowami, które stoją w odpowiedzi. „Termin" bez „terminala" i „terminologii".
+// Standardowy termin 5–7 dni roboczych to wzór „DOBRZE" z promptu czatu, więc go pomijamy.
 const RE_CZAS_DIAGNOSTYKI = /diagnost\w*[^.]{0,40}?24\s*[-–]\s*48\s*h/i
-const RE_PRAWDZIWA_OBIETNICA = /technik|zastępcz|zwrot|termin|jutro|dzisiaj|gwarantuj/i
+const RE_PRAWDZIWA_OBIETNICA = /technik|zastępcz|zwrot|(?<![a-ząćęłńóśźż])termin(?!al|olog)|jutro|dzisiaj|gwarantuj/i
+const RE_TERMIN_Z_PROMPTU = /(?:standardow\S*\s+)?termin\S*\s+5\s*[-–]\s*7\s+dni\s+roboczych/gi
 
 // Zarzut „zalecił reset fabryczny" wymaga, żeby asystent o resecie fabrycznym w ogóle pisał.
 // 7.10.2026 oceniający nazwał tak wyjęcie baterii w terminalu, który się nie włącza.
@@ -276,7 +285,8 @@ export function zarzutMaPokrycie(typ: string, dlaczego: string, tekstAsystenta: 
   const tekst = tekstAsystenta || ''
   if (RE_ZDESIGNER_W_ZARZUCIE.test(dlaczego || '') && !RE_STEROWNIK_U_ASYSTENTA.test(tekst)) return false
   if (typ === 'gwarancja' && !/gwaranc/i.test(tekst.replace(RE_GWARANCJA_NA_NAPRAWE, ''))) return false
-  if (typ === 'obietnica' && RE_CZAS_DIAGNOSTYKI.test(dlaczego || '') && !RE_PRAWDZIWA_OBIETNICA.test(dlaczego || '')) return false
+  if (typ === 'obietnica' && RE_CZAS_DIAGNOSTYKI.test(dlaczego || '') &&
+    !RE_PRAWDZIWA_OBIETNICA.test(tekst.replace(RE_TERMIN_Z_PROMPTU, ''))) return false
   if (RE_RESET_FABRYCZNY.test(dlaczego || '') && !RE_RESET_FABRYCZNY.test(tekst)) return false
   return true
 }
@@ -422,11 +432,30 @@ export function ocenaPoBramce(ocena: number, bramkaOdrzucilaZarzut: boolean): nu
   return bramkaOdrzucilaZarzut ? Math.max(ocena, OCENA_ALARMOWA + 1) : ocena
 }
 
+/**
+ * Wypowiedź przycięta do transkryptu: bez białych znaków na brzegach i bez ich długich ciągów.
+ *
+ * Wypowiedzi obcinamy do stałej długości, żeby cała rozmowa zmieściła się w prompcie. 27.10.2026
+ * wiadomość klienta zaczynała się od ok. 6500 spacji, a treść stała dopiero na końcu. Po obcięciu
+ * do 900 znaków zostawały same spacje, więc oceniający dostawał rozmowę bez odpowiedzi klienta
+ * na ostatni krok diagnostyczny, czyli bez tego, na czym asystent oparł wycenę. Dlatego najpierw
+ * ściskamy białe znaki, a dopiero potem obcinamy. Podziały wierszy zostają, bo asystent pisze
+ * listy kroków.
+ */
+export function doTranskryptu(tekst: string | null | undefined, limit: number): string {
+  return (tekst || '')
+    .replace(/[^\S\n]+/g, ' ')
+    .replace(/ ?\n ?/g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim()
+    .slice(0, limit)
+}
+
 export function zbudujTranskrypt(tury: Tura[]): string {
   return tury
     .map((t, i) => {
       const ocena = t.user_rating === -1 ? '  [klient ocenił tę odpowiedź na minus]' : ''
-      return `Klient: ${(t.user_message || '').slice(0, 900)}\nAsystent (tura ${i + 1}): ${(t.ai_response || '').slice(0, 1800)}${ocena}`
+      return `Klient: ${doTranskryptu(t.user_message, 900)}\nAsystent (tura ${i + 1}): ${doTranskryptu(t.ai_response, 1800)}${ocena}`
     })
     .join('\n\n')
 }
