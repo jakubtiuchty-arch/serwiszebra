@@ -54,7 +54,7 @@ const kodBramek = ts.transpileModule(
   { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText
 const {
   podajeKwoteZaNaprawe, zarzutMaPokrycie, normalizujTyp, zarzutMaPodstawe, wycenaZgodnaZZasadami, ocenaPoBramce,
-  doTranskryptu, zbudujTranskrypt,
+  doTranskryptu, zbudujTranskrypt, zarzutOdrzuceniaMaPodstawe,
 } = await import(`data:text/javascript,${encodeURIComponent(kodBramek)}`)
 
 let jednostkowe = 0
@@ -203,6 +203,43 @@ sprawdzPodstawe('inne typy bez zmian', 'gwarancja', 'Potwierdził domysł klient
 console.log(`Bramka podstawy zarzutu: ${podstawaOk}/${podstawaOk + bledyPodstawy.length}`)
 if (bledyPodstawy.length) { for (const b of bledyPodstawy) console.error('  ' + b); process.exit(1) }
 
+// Bramka odesłania do sklepu: szablon sklepu w odpowiedzi na prośbę o zakup to zasada czatu, nie odbicie
+// klienta (28.10.2026, prośba o odklejak do ZD220d). Szablon w środku diagnozy albo po opisie usterki
+// i gotowa odmowa „jestem asystentem…" dalej są zarzutem.
+let sklepOk = 0
+const bledySklepu = []
+const sprawdzSklep = (nazwa, cytat, tura, odpowiedzi, wiadomosciKlienta, oczekiwane) => {
+  const wynik = zarzutOdrzuceniaMaPodstawe('odrzucony_klient', cytat, tura, odpowiedzi, wiadomosciKlienta)
+  if (wynik === oczekiwane) sklepOk++
+  else bledySklepu.push(`zarzutOdrzuceniaMaPodstawe(${nazwa}) = ${wynik}, oczekiwano ${oczekiwane}`)
+}
+const SZABLON_SKLEPU = 'W sprawach zakupu urządzeń, etykiet, akcesoriów i materiałów eksploatacyjnych zapraszam do sklepu TAKMA — autoryzowanego partnera Zebra: **[takma.com.pl](https://www.takma.com.pl)** lub telefonicznie: +48 601 619 898.'
+const CYTAT_SKLEPU = 'W sprawach zakupu urządzeń, etykiet, akcesoriów i materiałów eksploatacyjnych zapraszam do sklepu TAKMA — autoryzowanego partnera Zebra: takma.com.pl'
+const DOPYTANIE_ODKLEJAK = 'Doprecyzuj proszę: chodzi o to, że etykiety same odklejają się od podkładu i zacinają w środku, czy chcesz ustawić drukarkę ZD220d tak, żeby odklejała etykiety po wydruku?'
+const ODMOWA = 'Przepraszam, ale jestem asystentem specjalizującym się wyłącznie w urządzeniach Zebra Technologies.'
+sprawdzSklep('prośba o zakup odklejaka po dopytaniu', CYTAT_SKLEPU, 2,
+  [DOPYTANIE_ODKLEJAK, SZABLON_SKLEPU], ['ZD220d, chodzi o odklejak', 'chcę kupić odklejak do tej drukarki'], false)
+sprawdzSklep('przesunięty numer tury, cytat rozstrzyga', CYTAT_SKLEPU, 1,
+  [DOPYTANIE_ODKLEJAK, SZABLON_SKLEPU], ['ZD220d, chodzi o odklejak', 'chcę kupić odklejak do tej drukarki'], false)
+sprawdzSklep('gdzie zamówić etykiety', CYTAT_SKLEPU, 1, [SZABLON_SKLEPU], ['gdzie moge zamowic etykiety do ZD421?'], false)
+sprawdzSklep('czy sprzedajecie głowice', CYTAT_SKLEPU, 1, [SZABLON_SKLEPU], ['Czy sprzedajecie głowice do ZT411?'], false)
+sprawdzSklep('szablon w środku diagnozy', CYTAT_SKLEPU, 2,
+  ['Otwórz pokrywę, wyjmij rolkę i załóż ją ponownie pod prowadnicami. Pomogło?', SZABLON_SKLEPU],
+  ['ZD421 zacina etykiety', 'dalej to samo, etykiety sa z innego sklepu'], true)
+sprawdzSklep('„kupiłem" przed opisem usterki', CYTAT_SKLEPU, 1, [SZABLON_SKLEPU], ['kupiłem drukarkę rok temu i przestała drukować'], true)
+sprawdzSklep('zakup razem z usterką', CYTAT_SKLEPU, 1, [SZABLON_SKLEPU], ['chcę kupić nową głowicę, bo stara drukuje z białym pasem i nie działa'], true)
+sprawdzSklep('zakup razem z prośbą o naprawę', CYTAT_SKLEPU, 1, [SZABLON_SKLEPU], ['wolę kupić część i oddać drukarkę do naprawy u was'], true)
+sprawdzSklep('zamówienie kuriera to serwis', CYTAT_SKLEPU, 1, [SZABLON_SKLEPU], ['chcę zamówić kuriera po drukarkę'], true)
+sprawdzSklep('gotowa odmowa przy prośbie o zakup', ODMOWA, 1, [ODMOWA], ['chcę kupić terminal TC22'], true)
+sprawdzSklep('nieznana tura', 'Zupełnie inny cytat, którego nie ma w rozmowie.', 7, [SZABLON_SKLEPU], ['chcę kupić etykiety'], true)
+for (const [typ, oczekiwane] of [['gwarancja', true], ['bledne_dane', true]]) {
+  const wynik = zarzutOdrzuceniaMaPodstawe(typ, CYTAT_SKLEPU, 1, [SZABLON_SKLEPU], ['chcę kupić etykiety'])
+  if (wynik === oczekiwane) sklepOk++
+  else bledySklepu.push(`zarzutOdrzuceniaMaPodstawe(${typ}) = ${wynik}, oczekiwano ${oczekiwane}`)
+}
+console.log(`Bramka odesłania do sklepu: ${sklepOk}/${sklepOk + bledySklepu.length}`)
+if (bledySklepu.length) { for (const b of bledySklepu) console.error('  ' + b); process.exit(1) }
+
 // Bramka wyceny: dwa kroki przed kwotą i zdanie o wiążącej wycenie to zasada czatu (7–8.10.2026)
 let wycenaOk = 0
 const bledyWyceny = []
@@ -304,6 +341,7 @@ async function ocen(tury) {
     .filter((x) => x.typ !== 'wycena_przedwczesnie' || (bylaKwota && !wycenaPoZasadach))
     .filter((x) => zarzutMaPokrycie(x.typ, `${x.dlaczego || ''} ${x.cytat || ''}`, odpowiedzi.join('\n')))
     .filter((x) => zarzutMaPodstawe(x.typ, String(x.dlaczego || ''), String(x.cytat || ''), odpowiedzi.join('\n'), wiadomosciKlienta.join('\n')))
+    .filter((x) => zarzutOdrzuceniaMaPodstawe(x.typ, String(x.cytat || ''), Number(x.tura), odpowiedzi, wiadomosciKlienta))
   const ocenaModelu = Number.isFinite(p.ocena) ? Math.min(5, Math.max(1, Math.round(p.ocena))) : 3
   const ocena = ocenaPoBramce(ocenaModelu, problemy.length < znane.length)
   // ta sama reguła co doAlertu() w lib/chat-alerts.ts
@@ -542,20 +580,38 @@ const PRZYPADKI = [
   { nazwa: 'ZC300: czujnik taśmy przy procedurze czyszczenia', oczekiwany: null, tury: [
     ['czyszczenie w zc300 staje, bo drukarka nie wykrywa wyjetej tasmy. glowica jest z innej zc300, jej dane wpisane w sterowniku','Głowica raczej nie jest przyczyną — numer seryjny i rezystancja głowicy wpływają na druk, ale wykrywanie wyjęcia taśmy podczas czyszczenia idzie przez czujnik i identyfikację kasety z taśmą.\n\nZróbmy prosty test poza procedurą czyszczenia: anuluj czyszczenie, wyjmij całą kasetę z taśmą, zamknij górną pokrywę i poczekaj kilka sekund. Sprawdź, czy na wyświetlaczu albo w sterowniku zmieni się stan taśmy na brak taśmy, a dioda Ribbon zacznie sygnalizować błąd.\n\nWidać brak taśmy, czy drukarka dalej pokazuje, jakby taśma była włożona?'],
   ]},
+
+  // --- fałszywy alarm z 28.10.2026 (rozmowa odtworzona, bez wypowiedzi klienta) ---
+
+  // Po pytaniu doprecyzowującym klient prosi wprost o zakup odklejaka, a czat odpowiada szablonem sklepu,
+  // jak każe prompt. Oceniający zgłaszał „odrzucony_klient" z pewnością 0,8: poniżej progu, więc bez maila,
+  // ale zarzut zapisywał się w chat_logs i rozmowa trafiała na listę do naprawy. Dlatego tu nie może
+  // zostać żaden zarzut, nie tylko alert.
+  { nazwa: 'ZD220d: prośba o zakup odklejaka, szablon sklepu', oczekiwany: null, bezZarzutow: true, tury: [
+    ['ZD220d, chodzi o odklejak', `${DOPYTANIE_ODKLEJAK}\n\nNapisz krótko: „zacina" albo „chcę odklejanie".`],
+    ['chcę kupić odklejak do tej drukarki', SZABLON_SKLEPU],
+  ]},
 ]
 
 let ok = 0
 const bledy = []
 for (const p of PRZYPADKI) {
   const { ocena, alerty, wszystkie } = await ocen(p.tury)
-  const typy = alerty.map((a) => a.typ)
   // Liczy się, czy rozmowa w ogóle zapali alert — typ problemu bywa niestabilny,
   // a w mailu i tak jest zdanie „dlaczego", nie sam typ.
   // Dobra rozmowa nie może też dostać oceny 2 lub niższej: taką sesję scripts/alerty-do-naprawy.mjs
   // wypisuje do naprawy nawet bez jednego zarzutu (alert 22.10.2026).
-  const trafil = p.oczekiwany ? alerty.length > 0 : alerty.length === 0 && ocena > 2
+  // Przypadek z `bezZarzutow` nie może zostawić nawet zarzutu poniżej progu: cron zapisuje każdy
+  // zarzut w chat_logs, a scripts/alerty-do-naprawy.mjs wypisuje każdą sesję z zapisanym zarzutem.
+  const trafil = p.oczekiwany
+    ? alerty.length > 0
+    : alerty.length === 0 && ocena > 2 && (!p.bezZarzutow || wszystkie.length === 0)
   if (trafil) ok++
-  else bledy.push(`${p.nazwa}: oczekiwano ${p.oczekiwany ?? 'braku alertów i oceny powyżej 2'}, dostałem [${typy.join(', ') || 'brak'}], ocena ${ocena}/5`)
+  else {
+    const oczekiwano = p.oczekiwany ?? `braku ${p.bezZarzutow ? 'zarzutów' : 'alertów'} i oceny powyżej 2`
+    const dostalem = (p.bezZarzutow ? wszystkie : alerty).map((a) => a.typ)
+    bledy.push(`${p.nazwa}: oczekiwano ${oczekiwano}, dostałem [${dostalem.join(', ') || 'brak'}], ocena ${ocena}/5`)
+  }
   const zapala = (x) => Number(x.waga) >= (ocena <= 2 ? Math.min(ALERTY[x.typ].prog, 0.6) : ALERTY[x.typ].prog)
   const szczegoly = wszystkie.map((x) => `${x.typ}=${x.waga}${zapala(x) ? '*' : ''}`).join(' ')
   console.log(`${trafil ? 'OK  ' : 'BŁĄD'} ${p.nazwa.padEnd(42)} ocena ${ocena}/5  ${szczegoly || '—'}`)

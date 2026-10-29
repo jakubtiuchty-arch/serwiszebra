@@ -361,6 +361,59 @@ export function zarzutMaPodstawe(typ: string, dlaczego: string, cytat: string, t
 }
 
 /**
+ * Czy zarzut „odrzucony_klient" ma podstawę, gdy dotyczy szablonu sklepu.
+ *
+ * Prompt czatu każe pytania o zakup urządzenia, części, akcesoriów i materiałów kierować
+ * szablonem do sklepu TAKMA, bez odpowiedzi merytorycznej i bez tagu serwisu. Opis typu zgłasza
+ * szablon sklepu tylko wtedy, gdy przerywa diagnozę. 28.10.2026 klient po pytaniu doprecyzowującym
+ * napisał wprost, że chce kupić odklejak do drukarki, a oceniający w pięciu powtórkach na pięć
+ * uznał szablon sklepu za odbicie klienta „pytającego o akcesorium do naprawy" (pewność 0,8).
+ * Zarzut poniżej progu nie idzie mailem, ale zapisuje się w chat_logs, więc rozmowa trafiała
+ * na listę do naprawy (scripts/alerty-do-naprawy.mjs).
+ *
+ * Zarzut odrzucamy tylko wtedy, gdy wskazana tura zawiera szablon sklepu, a wiadomość klienta
+ * w tej turze prosi o zakup i nie opisuje usterki ani nie mówi o naprawie, serwisie czy wysyłce.
+ * Czas przeszły („kupiłem", „data zakupu") nie jest prośbą o zakup: zwykle zaczyna opis usterki
+ * i wtedy szablon sklepu jest właśnie tym przerwaniem diagnozy, które typ ma łapać.
+ */
+const RE_SZABLON_SKLEPU = /sklep\S*\s+TAKMA/i
+const RE_PROSBA_O_ZAKUP = new RegExp(
+  `(?<![${LITERY}])(?:(?:za|do)?kup(?:i[cćeę]|imy|uj[eę])|zam[oó]wi(?:[cćeę]|my)|nab(?:y[cć]|ęd[eę])|` +
+  `sprzedaj(?:ecie|esz)|w\\s+sprzeda[żz]y)(?![${LITERY}])`, 'i')
+const RE_USTERKA_LUB_SERWIS = new RegExp(
+  `napraw|serwis|kurier|wysy[łl]|wys[łl]a[cćn]|odbi[oóe]r|diagnoz|reklamac|usterk|awari|zepsu|uszkodz|zacina|b[łl][aąeę]d|` +
+  `(?<![${LITERY}])(?:u\\s+was|nie\\s+(?:dzia[łl]|drukuj|w[łl][aą]cz|skanuj|czyt|[łl][aą]cz|widzi|reaguj|[łl]aduj))`, 'i')
+
+// Tura, której dotyczy cytat. Numer tury od oceniającego bywa przesunięty, dlatego najpierw
+// szukamy początku cytatu w odpowiedziach. Cytat model podaje bez znaczników markdownu.
+function turaCytatu(cytat: string, tura: number, odpowiedzi: string[]): number {
+  const norm = (s: string) => (s || '')
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/[*_`]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase()
+  const poczatek = norm(cytat).slice(0, 60)
+  if (poczatek.length >= 20) {
+    const i = odpowiedzi.findIndex((o) => norm(o).includes(poczatek))
+    if (i >= 0) return i
+  }
+  return Number.isInteger(tura) && tura >= 1 && tura <= odpowiedzi.length ? tura - 1 : -1
+}
+
+export function zarzutOdrzuceniaMaPodstawe(
+  typ: string, cytat: string, tura: number, odpowiedzi: string[], wiadomosciKlienta: string[],
+): boolean {
+  if (typ !== 'odrzucony_klient') return true
+  const i = turaCytatu(cytat, tura, odpowiedzi)
+  if (i < 0) return true
+  const klient = wiadomosciKlienta[i] || ''
+  const szablonNaProsbe = RE_SZABLON_SKLEPU.test(odpowiedzi[i] || '') &&
+    RE_PROSBA_O_ZAKUP.test(klient) && !RE_USTERKA_LUB_SERWIS.test(klient)
+  return !szablonNaProsbe
+}
+
+/**
  * Czy wycena przyszła zgodnie z zasadą czatu: po co najmniej dwóch turach z darmowym krokiem
  * i ze zdaniem o wiążącej wycenie po diagnozie w każdej turze, która podaje kwotę.
  *
@@ -497,6 +550,8 @@ export async function ocenRozmowe(tury: Tura[]): Promise<OcenaRozmowy | null> {
       .filter((p: any) => zarzutMaPokrycie(p.typ, `${p.dlaczego || ''} ${p.cytat || ''}`, tekstAsystenta))
       .filter((p: any) =>
         zarzutMaPodstawe(p.typ, String(p.dlaczego || ''), String(p.cytat || ''), tekstAsystenta, wiadomosciKlienta.join('\n')))
+      .filter((p: any) =>
+        zarzutOdrzuceniaMaPodstawe(p.typ, String(p.cytat || ''), Number(p.tura), odpowiedzi, wiadomosciKlienta))
 
     const problemy: ZnalezionyProblem[] = przyjete
       .map((p: any) => ({
