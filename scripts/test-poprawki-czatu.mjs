@@ -544,6 +544,44 @@ sprawdz('modelOdKlienta: klient napisał', modelOdKlienta('TC8000', ['terminal t
 sprawdz('modelOdKlienta: podsunął czat', modelOdKlienta('TC27', ['terminal nie widzi sieci']), '', 'TC27')
 sprawdz('modelOdKlienta: nie kształt modelu', modelOdKlienta('Zebra', ['zebra nie drukuje']), '', 'Zebra')
 
+// --- runda 9: drukarki EU RED — kreator zabezpieczeń zamiast setvar (alerty 5.10.2026) ---
+// Dwie rozmowy o nowej ZD421 trwały 34 i 40 tur bez rozwiązania. Prompt prowadził klienta przez
+// setvar "ip.tcp.enable" i "ip.port" w ZSU i zapowiadał, że ZSU poprosi o hasło. W trybie chronionym
+// setvar nie zmienia ustawień chronionych, więc wartość wracała na "off", a monit o hasło się nie
+// pojawiał. Czat uznał wtedy ZSU za „za stary" i odesłał klienta do reinstalacji. Porty włącza się
+// kreatorem zabezpieczeń Zebry (Nucleus Connector, opcja Enable TCP/IP Raw Ports) — tak opisuje
+// to wpis zebra-wymaga-hasla-dyrektywa-red-konfiguracja w lib/blog.ts.
+const sekcjaRed = (() => {
+  const a = src.indexOf('**DRUKARKA NIE ODPOWIADA PO SIECI')
+  const b = src.indexOf('**JAK PROWADZIĆ ROZMOWĘ:**', a)
+  if (a < 0 || b < 0) throw new Error('Nie znaleziono sekcji o drukarkach EU RED w prompcie')
+  return src.slice(a, b)
+})()
+for (const [nazwa, wzor, oczekiwane] of [
+  ['brak komend setvar na liście kroków', /^\s*! U1 setvar/m, false],
+  ['brak zapowiedzi monitu o hasło w ZSU', /protected mode, ZSU poprosi|poprosi o nadanie hasła/, false],
+  ['setvar nie zmienia ustawień chronionych', /setvar\s+nie zmienia ustawień chronionych/, true],
+  ['kreator: Nucleus Connector ze strony zebra.com/setup', /Zebra Nucleus Connector dla Windows\*\* ze strony \*\*zebra\.com\/setup/, true],
+  ['kreator: opcja Enable TCP/IP Raw Ports', /Enable TCP\/IP Raw Ports/, true],
+  ['hasło trybu chronionego 14–128 znaków', /od 14 do 128 znaków/, true],
+  ['zakaz „za starej" wersji ZSU', /nie twierdź, że jego wersja jest za stara/, true],
+  ['odczyt trybu chronionego przez USB zostaje', /! U1 getvar "device\.protected_mode"/, true],
+]) sprawdz('prompt EU RED: ' + nazwa, wzor.test(sekcjaRed), oczekiwane, nazwa)
+
+// Prompt i baza wiedzy mają mówić to samo — jeśli któryś wpis zmieni procedurę, ten test to pokaże
+const wpisBloga = (slug) => {
+  const a = blog.indexOf(`slug: '${slug}'`)
+  if (a < 0) throw new Error(`Nie znaleziono wpisu ${slug} w lib/blog.ts`)
+  const b = blog.indexOf('\n    slug: ', a + 10)
+  return blog.slice(a, b < 0 ? undefined : b)
+}
+const wpisRed = wpisBloga('zebra-wymaga-hasla-dyrektywa-red-konfiguracja')
+const wpisPrintSecure = wpisBloga('zebra-printsecure-przewodnik-administratora-it')
+sprawdz('blog EU RED: opcja Enable TCP/IP Raw Ports', /Enable TCP\/IP Raw Ports/.test(wpisRed), true, 'wpis o EU RED')
+sprawdz('blog EU RED: Nucleus Connector ze strony zebra.com/setup', /Nucleus Connector[\s\S]{0,200}zebra\.com\/setup/.test(wpisRed), true, 'wpis o EU RED')
+sprawdz('blog PrintSecure: setvar nie zmienia ustawień chronionych',
+  /polecenie setvar nie zmienia ustawień chronionych/.test(wpisPrintSecure), true, 'wpis o PrintSecure')
+
 // --- wynik -----------------------------------------------------------------
 console.log(`\nZaliczone: ${zaliczone}/${zaliczone + bledy.length}`)
 if (bledy.length) {
