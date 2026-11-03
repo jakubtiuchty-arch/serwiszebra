@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { searchBlogForAI } from '@/lib/blog'
 import { pobierzKomplet, naglowekKompletu, type KompletDokumentow } from '@/lib/manuals-full-text'
+import { zglosAwarieCzatu } from '@/lib/chat-awarie'
 
 /**
  * Wpis czarnej skrzynki (chat_logs.rag_sources). Przy wyszukiwaniu wektorowym: strona i podobieństwo.
@@ -1831,9 +1832,14 @@ Przykładowe pytania:
 
 export async function POST(req: NextRequest) {
   const startTime = Date.now()
+  // Poza try, żeby catch na końcu mógł zapisać nieudane pytanie w chat_awarie
+  let sessionId: string | undefined
+  let lastUserMessage = ''
 
   try {
-    const { messages, sessionId, attachments } = await req.json()
+    const body = await req.json()
+    const { messages, attachments } = body
+    sessionId = body.sessionId
 
     // Pobierz IP użytkownika z headerów (Vercel/Cloudflare/proxy)
     const userIp = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
@@ -1848,7 +1854,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Pobierz ostatnią wiadomość użytkownika
-    const lastUserMessage = messages[messages.length - 1]?.content || ''
+    lastUserMessage = messages[messages.length - 1]?.content || ''
 
     // 🚫 PRE-FILTR: Odrzuć oczywiste off-topic ZANIM wywołamy drogie modele AI
     // ALE: jeśli są załączniki (zdjęcia/wideo), przepuść - użytkownik może pokazywać urządzenie Zebra
@@ -2353,6 +2359,8 @@ ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
           // Bez trailera przeglądarka liczyła przycisk po swojemu i potrafiła go pokazać pod komunikatem błędu.
           // blad=true: przeglądarka zostawia przycisk po poprzedniej odpowiedzi (jak przy błędzie sieci), a bez niej go nie ma
           if (!trailerWyslany) controller.enqueue(encoder.encode(`\n\n__CITATIONS__${JSON.stringify({ blad: true })}`))
+          // Alarm od razu przy braku środków / odrzuconym kluczu; każde nieudane pytanie trafia do raportu
+          await Promise.race([zglosAwarieCzatu({ err: error, sessionId, userMessage: lastUserMessage }), new Promise((r) => setTimeout(r, 5000))])
           controller.close()
         }
       },
@@ -2366,6 +2374,8 @@ ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
     })
   } catch (error) {
     console.error('Chat API error:', error)
+    // Alarm od razu przy braku środków / odrzuconym kluczu; każde nieudane pytanie trafia do raportu
+    await Promise.race([zglosAwarieCzatu({ err: error, sessionId, userMessage: lastUserMessage }), new Promise((r) => setTimeout(r, 5000))])
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
