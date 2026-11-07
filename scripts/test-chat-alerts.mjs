@@ -54,7 +54,7 @@ const kodBramek = ts.transpileModule(
   { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText
 const {
   podajeKwoteZaNaprawe, zarzutMaPokrycie, normalizujTyp, zarzutMaPodstawe, wycenaZgodnaZZasadami, ocenaPoBramce,
-  doTranskryptu, zbudujTranskrypt, zarzutOdrzuceniaMaPodstawe,
+  doTranskryptu, zbudujTranskrypt, zarzutOdrzuceniaMaPodstawe, zaprzeczenieMaPodstawe,
 } = await import(`data:text/javascript,${encodeURIComponent(kodBramek)}`)
 
 let jednostkowe = 0
@@ -199,6 +199,21 @@ sprawdzPodstawe('skutki resetu wbrew temu, co napisał klient', 'bledne_dane',
 const CZUJNIK_TASMY_ZC300 = 'Głowica raczej nie jest przyczyną — numer seryjny i rezystancja głowicy wpływają na druk, ale wykrywanie wyjęcia taśmy idzie przez czujnik i identyfikację kasety z taśmą. Wyjmij całą kasetę z taśmą, zamknij pokrywę i sprawdź, czy dioda Ribbon pokaże brak taśmy.'
 sprawdzPodstawe('czujnik taśmy w ZC300', 'bledne_dane',
   'Asystent nie powinien twierdzić, że wykrywanie wyjęcia taśmy odbywa się przez czujnik, ponieważ nie ma tego w instrukcji.', CZUJNIK_TASMY_ZC300, false)
+// Instrukcja serwisowa GK420t (Feed Button Modes): przy włączonej drukarce przytrzymanie FEED i puszczenie
+// po jednym mignięciu drukuje etykietę konfiguracji. 5.11.2026 oceniający uznał tę procedurę za błędną.
+const KONFIGURACJA_GK420T = 'Na GK420t zrób wydruk konfiguracji bez komputera: przy włączonej drukarce i zamkniętej pokrywie przytrzymaj FEED, poczekaj, aż zielona dioda mignie raz, i puść przycisk. Drukarka powinna wydrukować jedną etykietę konfiguracji.'
+sprawdzPodstawe('procedura wydruku konfiguracji GK420t z pamięci', 'bledne_dane',
+  'Asystent podał błędną procedurę wydruku konfiguracji dla modelu GK420t, ponieważ ten model wymaga innej metody.', KONFIGURACJA_GK420T, false)
+sprawdzPodstawe('procedura wbrew temu, co napisał klient', 'bledne_dane',
+  'Każe puścić FEED po jednym mignięciu, choć klient napisał, że dioda w ogóle nie miga.', KONFIGURACJA_GK420T, true)
+// „Sprzeczne z zasadami / z instrukcją" to ocena z pamięci, nie odwołanie do rozmowy (5.11.2026, kable przy wysyłce).
+const KABLE_ODPOWIEDZ = 'Standardowo nie trzeba dołączać kabli — wystarczy sama drukarka. Jeśli problem dotyczy zasilania, dołącz zasilacz i przewód zasilający.'
+sprawdzPodstawe('„sprzeczne z zasadami"', 'bledne_dane',
+  'Asystent nie uwzględnił, że kable należy dołączyć, jeśli problem dotyczy zasilania lub komunikacji, co jest sprzeczne z zasadami.', KABLE_ODPOWIEDZ, false)
+sprawdzPodstawe('„sprzeczna z instrukcją"', 'bledne_dane',
+  'Podana procedura wydruku konfiguracji jest sprzeczna z instrukcją GK420t.', KONFIGURACJA_GK420T, false)
+sprawdzPodstawe('sprzeczność z tym, co napisał klient', 'bledne_dane',
+  'Odpowiedź jest sprzeczna z tym, co klient opisał w poprzedniej wiadomości.', KONFIGURACJA_GK420T, true)
 sprawdzPodstawe('inne typy bez zmian', 'gwarancja', 'Potwierdził domysł klienta o gwarancji.', ZT231, true)
 console.log(`Bramka podstawy zarzutu: ${podstawaOk}/${podstawaOk + bledyPodstawy.length}`)
 if (bledyPodstawy.length) { for (const b of bledyPodstawy) console.error('  ' + b); process.exit(1) }
@@ -239,6 +254,27 @@ for (const [typ, oczekiwane] of [['gwarancja', true], ['bledne_dane', true]]) {
 }
 console.log(`Bramka odesłania do sklepu: ${sklepOk}/${sklepOk + bledySklepu.length}`)
 if (bledySklepu.length) { for (const b of bledySklepu) console.error('  ' + b); process.exit(1) }
+
+// Bramka zaprzeczenia: typ dotyczy twierdzenia, że urządzenie czegoś nie ma albo nie potrafi. Zasady
+// wysyłki do serwisu to nie cecha urządzenia (5.11.2026, pytanie o kable przy wysyłce drukarki).
+let zaprzeczenieOk = 0
+const bledyZaprzeczenia = []
+const sprawdzZaprzeczenie = (nazwa, typ, cytat, odpowiedzi, oczekiwane) => {
+  const wynik = zaprzeczenieMaPodstawe(typ, cytat, odpowiedzi)
+  if (wynik === oczekiwane) zaprzeczenieOk++
+  else bledyZaprzeczenia.push(`zaprzeczenieMaPodstawe(${nazwa}) = ${wynik}, oczekiwano ${oczekiwane}`)
+}
+const KABLE_DO_WYSYLKI = 'Standardowo **nie trzeba dołączać kabli** — wystarczy sama drukarka.\n\nWyjątki:\n- jeśli problem dotyczy **zasilania**, dołącz zasilacz i przewód zasilający,\n- jeśli problem dotyczy **połączenia USB / sieci / komunikacji**, dołącz kabel, na którym występuje problem.\n\nKurier odbierze urządzenie z podanego adresu.'
+const BEZ_BLUETOOTH = 'ZD421 w tej wersji nie obsługuje Bluetooth, więc nie sparujesz jej z telefonem. Zostaje USB albo sieć.'
+const BRAK_CZUJNIKA = 'Ten model nie ma ruchomego czujnika, więc nie przesuniesz go pod znacznik.'
+sprawdzZaprzeczenie('kable przy wysyłce', 'zaprzeczenie', 'Standardowo nie trzeba dołączać kabli — wystarczy sama drukarka.', [KABLE_DO_WYSYLKI], false)
+sprawdzZaprzeczenie('streszczony cytat, odpowiedź bez przeczenia o urządzeniu', 'zaprzeczenie', 'Asystent twierdzi, że kable są zbędne.', [KABLE_DO_WYSYLKI], false)
+sprawdzZaprzeczenie('urządzenie czegoś nie obsługuje', 'zaprzeczenie', 'ZD421 w tej wersji nie obsługuje Bluetooth, więc nie sparujesz jej z telefonem.', [BEZ_BLUETOOTH], true)
+sprawdzZaprzeczenie('urządzenie czegoś nie ma', 'zaprzeczenie', 'Ten model nie ma ruchomego czujnika, więc nie przesuniesz go pod znacznik.', [KABLE_DO_WYSYLKI, BRAK_CZUJNIKA], true)
+sprawdzZaprzeczenie('streszczony cytat, przeczenie w odpowiedzi', 'zaprzeczenie', 'Twierdzi, że drukarka nie ma Bluetooth.', [BEZ_BLUETOOTH], true)
+sprawdzZaprzeczenie('inne typy bez zmian', 'bledne_dane', 'Standardowo nie trzeba dołączać kabli — wystarczy sama drukarka.', [KABLE_DO_WYSYLKI], true)
+console.log(`Bramka zaprzeczenia: ${zaprzeczenieOk}/${zaprzeczenieOk + bledyZaprzeczenia.length}`)
+if (bledyZaprzeczenia.length) { for (const b of bledyZaprzeczenia) console.error('  ' + b); process.exit(1) }
 
 // Bramka wyceny: dwa kroki przed kwotą i zdanie o wiążącej wycenie to zasada czatu (7–8.10.2026)
 let wycenaOk = 0
@@ -342,6 +378,7 @@ async function ocen(tury) {
     .filter((x) => zarzutMaPokrycie(x.typ, `${x.dlaczego || ''} ${x.cytat || ''}`, odpowiedzi.join('\n')))
     .filter((x) => zarzutMaPodstawe(x.typ, String(x.dlaczego || ''), String(x.cytat || ''), odpowiedzi.join('\n'), wiadomosciKlienta.join('\n')))
     .filter((x) => zarzutOdrzuceniaMaPodstawe(x.typ, String(x.cytat || ''), Number(x.tura), odpowiedzi, wiadomosciKlienta))
+    .filter((x) => zaprzeczenieMaPodstawe(x.typ, String(x.cytat || ''), odpowiedzi))
   const ocenaModelu = Number.isFinite(p.ocena) ? Math.min(5, Math.max(1, Math.round(p.ocena))) : 3
   const ocena = ocenaPoBramce(ocenaModelu, problemy.length < znane.length)
   // ta sama reguła co doAlertu() w lib/chat-alerts.ts
@@ -590,6 +627,23 @@ const PRZYPADKI = [
   { nazwa: 'ZD220d: prośba o zakup odklejaka, szablon sklepu', oczekiwany: null, bezZarzutow: true, tury: [
     ['ZD220d, chodzi o odklejak', `${DOPYTANIE_ODKLEJAK}\n\nNapisz krótko: „zacina" albo „chcę odklejanie".`],
     ['chcę kupić odklejak do tej drukarki', SZABLON_SKLEPU],
+  ]},
+
+  // --- fałszywe alarmy z 5.11.2026 ---
+
+  // Procedura wydruku konfiguracji jest zgodna z instrukcją serwisową GK420t (jedno mignięcie przy
+  // przytrzymanym FEED). Oceniający zgłaszał „bledne_dane" z pewnością 0,8: bez maila, ale zarzut
+  // zapisywał się w chat_logs i rozmowa trafiała na listę do naprawy.
+  { nazwa: 'GK420t: wydruk konfiguracji po jednym mignięciu', oczekiwany: null, bezZarzutow: true, tury: [
+    ['drukarka etykiet drukuje za dużo etykiet', 'Jaki to dokładnie model drukarki Zebra i wariant? Model znajdziesz na naklejce z numerem S/N. Przy takim objawie najczęściej drukarka źle wykrywa odstęp między etykietami albo w programie jest ustawiony zły rozmiar etykiety.'],
+    ['GK420t', 'Doprecyzujmy objaw: gdy zlecasz wydruk 1 etykiety, drukarka wypuszcza dodatkowe puste etykiety czy drukuje kilka etykiet z tym samym nadrukiem?'],
+    ['kilka z tym samym nadrukiem', `To raczej wygląda na ustawienie liczby kopii w programie albo sterowniku, ale sprawdźmy, czy sama drukarka nie powiela zadania.\n\n${KONFIGURACJA_GK420T}\n\nWydrukowała jedną czy kilka?`],
+  ]},
+
+  // Odpowiedź o kablach przy wysyłce jest zgodna z FAQ serwisu, a wyjątki stoją w tej samej odpowiedzi.
+  // Oceniający zgłaszał „zaprzeczenie" albo „bledne_dane" z pewnością 1,0 i oceną 1–2/5.
+  { nazwa: 'wysyłka drukarki: kable tylko przy usterce zasilania lub połączenia', oczekiwany: null, bezZarzutow: true, tury: [
+    ['wysyłam drukarkę do serwisu, mam dołożyć kable?', `${KABLE_DO_WYSYLKI} Zgłoszenie serwisowe można założyć przyciskiem „Wyślij do serwisu” pod wiadomością. [SERIOUS_ISSUE]`],
   ]},
 ]
 

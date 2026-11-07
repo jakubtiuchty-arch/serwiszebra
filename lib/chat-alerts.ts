@@ -343,8 +343,12 @@ const RE_BLEDNA_PROCEDURA_EU_RED = [
   /(?:zsu|setup utilities)[\s\S]{0,160}?(?:poprosi|zapyta|prośb|monit)[^.]{0,40}hasł/i,
   /(?:zsu|setup utilities)[^.]{0,80}(?:star(?:[aąyeę]|sz)|przestarzał|nieaktualn)|najnowsz\S*\s+wersj\S*\s+(?:zsu|zebra setup)/i,
 ]
+// „Sprzeczne" znaczy tu: asystent przeczy sam sobie albo temu, co napisał klient. „Sprzeczne z zasadami",
+// „z instrukcją" czy „z dokumentacją" to ocena z pamięci oceniającego, a nie odwołanie do rozmowy.
+// 5.11.2026 tak brzmiało uzasadnienie zarzutu wobec odpowiedzi o kablach przy wysyłce, zgodnej z FAQ
+// serwisu, i zarzut przechodził przez bramkę.
 const RE_ODWOLANIE_DO_ROZMOWY =
-  /sprzeczn|wcześniej\S*[^.]{0,40}(?:napisał|podał|twierdził|stwierdził)|klient\S*[^.]{0,40}(?:nie (?:podał|napisał|potwierdził)|napisał|podał|odpowiedział)/i
+  /sprzeczn(?!\S*\s+z\s+(?:zasad|reguł|regulamin|instrukcj|dokumentacj|specyfikacj|procedur|zalece|faq|polityk))|wcześniej\S*[^.]{0,40}(?:napisał|podał|twierdził|stwierdził)|klient\S*[^.]{0,40}(?:nie (?:podał|napisał|potwierdził)|napisał|podał|odpowiedział)/i
 
 // Temat sterownika i odwołanie do rozmowy bierzemy z uzasadnienia oceniającego, nie z cytatu:
 // zdanie asystenta „sprawdź w sterowniku" przepuściłoby każdy zarzut z tej samej odpowiedzi.
@@ -411,6 +415,34 @@ export function zarzutOdrzuceniaMaPodstawe(
   const szablonNaProsbe = RE_SZABLON_SKLEPU.test(odpowiedzi[i] || '') &&
     RE_PROSBA_O_ZAKUP.test(klient) && !RE_USTERKA_LUB_SERWIS.test(klient)
   return !szablonNaProsbe
+}
+
+/**
+ * Czy zarzut „zaprzeczenie" dotyczy tego, co opisuje ten typ: twierdzenia, że urządzenie czegoś
+ * nie ma albo czegoś nie potrafi.
+ *
+ * 5.11.2026 klient zapytał, czy do wysyłki drukarki do serwisu dołączyć kable. Asystent odpowiedział
+ * zgodnie z FAQ serwisu: zwykle nie trzeba, a zasilacz albo kabel dołącza się, gdy usterka dotyczy
+ * zasilania albo połączenia. Oceniający w czterech powtórkach na cztery zgłosił to jako „zaprzeczenie"
+ * z pewnością 1,0 i oceną 1/5, bo asystent „nie przyznał, że czasem kable są potrzebne" — choć wyjątki
+ * stały w tej samej odpowiedzi. Zdanie „nie trzeba dołączać kabli" opisuje zasady wysyłki, a nie
+ * urządzenie, więc nie ma w nim czego zaprzeczać.
+ *
+ * Kod przepuszcza ten typ tylko wtedy, gdy cytat zawiera przeczenie o urządzeniu („nie ma", „nie
+ * obsługuje", „nie potrafi", „brak funkcji"). Gdy cytatu nie ma dosłownie w odpowiedziach, bo model
+ * go streścił, sprawdzamy całą wypowiedź asystenta.
+ */
+const RE_URZADZENIE_CZEGOS_NIE_MA = new RegExp(
+  `(?<![${LITERY}])(?:` +
+  `nie\\s+(?:ma(?:ją)?|posiada\\S*|obsługuj\\S*|potrafi\\S*|umie|wspiera\\S*|pozwala\\S*|można|da\\s+się|` +
+  `jest\\s+wyposażon\\S*|współprac\\S*|występuj\\S*)|` +
+  `brak\\S*\\s+(?:\\S+\\s+)?(?:opcj\\S*|funkcj\\S*|obsług\\S*|wsparci\\S*|złącz\\S*|port\\S*|gniazd\\S*|możliwośc\\S*|modułu|czujnik\\S*)` +
+  `)(?![${LITERY}])`, 'i')
+
+export function zaprzeczenieMaPodstawe(typ: string, cytat: string, odpowiedzi: string[]): boolean {
+  if (typ !== 'zaprzeczenie') return true
+  const cytatJestWOdpowiedzi = turaCytatu(cytat, 0, odpowiedzi) >= 0
+  return RE_URZADZENIE_CZEGOS_NIE_MA.test(cytatJestWOdpowiedzi ? cytat : odpowiedzi.join('\n'))
 }
 
 /**
@@ -552,6 +584,7 @@ export async function ocenRozmowe(tury: Tura[]): Promise<OcenaRozmowy | null> {
         zarzutMaPodstawe(p.typ, String(p.dlaczego || ''), String(p.cytat || ''), tekstAsystenta, wiadomosciKlienta.join('\n')))
       .filter((p: any) =>
         zarzutOdrzuceniaMaPodstawe(p.typ, String(p.cytat || ''), Number(p.tura), odpowiedzi, wiadomosciKlienta))
+      .filter((p: any) => zaprzeczenieMaPodstawe(p.typ, String(p.cytat || ''), odpowiedzi))
 
     const problemy: ZnalezionyProblem[] = przyjete
       .map((p: any) => ({
