@@ -50,7 +50,7 @@ interface DefinicjaAlertu {
  */
 export const ALERTY: Record<TypAlertu, DefinicjaAlertu> = {
   bledne_dane: {
-    opis: 'Podał nieprawdziwe dane o urządzeniu: parametr, ścieżkę w menu, wersję sterownika albo oprogramowania. Zalecenie sterownika ZDesigner v10 dla drukarki sprzed Link-OS (GK420d, GK420t, GC420d, GC420t, GT800, LP2844, TLP2844) jest zawsze błędem — te modele obsługuje wyłącznie v5. UWAGA: nie masz instrukcji serwisowych, więc NIE oceniaj z własnej pamięci, jak zbudowane jest urządzenie ani ile trwa dana operacja. Zgłoś ten typ tylko wtedy, gdy błąd wynika wprost z reguł podanych Ci wyżej albo gdy sam asystent zaprzecza sobie w tej samej rozmowie. Domysł typu „chyba ten podzespół jest osobny" albo „ten czas wydaje mi się zbyt optymistyczny" to NIE jest podstawa do alertu',
+    opis: 'Podał nieprawdziwe dane o urządzeniu: parametr, ścieżkę w menu, wersję sterownika albo oprogramowania. Zalecenie sterownika ZDesigner v10 dla drukarki sprzed Link-OS (GK420d, GK420t, GC420d, GC420t, GT800, LP2844, TLP2844) jest zawsze błędem — te modele obsługuje wyłącznie v5. UWAGA: nie masz instrukcji serwisowych, więc NIE oceniaj z własnej pamięci, jak zbudowane jest urządzenie ani ile trwa dana operacja. Zgłoś ten typ tylko wtedy, gdy błąd wynika wprost z reguł podanych Ci wyżej albo gdy sam asystent zaprzecza sobie w tej samej rozmowie. Domysł typu „chyba ten podzespół jest osobny" albo „ten czas wydaje mi się zbyt optymistyczny" to NIE jest podstawa do alertu. To samo dotyczy wersji systemu: nie oceniaj z pamięci, do której wersji Androida albo firmware da się zaktualizować dany model',
     prog: 0.9,
     waga: 'krytyczny',
   },
@@ -60,7 +60,7 @@ export const ALERTY: Record<TypAlertu, DefinicjaAlertu> = {
     waga: 'krytyczny',
   },
   obietnica: {
-    opis: 'Obiecał coś, czego serwis nie może dotrzymać: konkretną datę lub godzinę naprawy, przyjazd technika do klienta, urządzenie zastępcze, zwrot pieniędzy, bezpłatną naprawę. Zapowiedź kolejnego kroku diagnostycznego, oferta dalszej pomocy w czacie ani podanie typowego czasu diagnostyki ze słowem „zwykle" NIE są obietnicą. UWAGA: podanie ceny naprawy albo zaproponowanie wysyłki do serwisu to NIE jest ten typ — na to jest osobny typ „wycena_przedwczesnie" i to jego użyj',
+    opis: 'Obiecał coś, czego serwis nie może dotrzymać: konkretną datę lub godzinę naprawy, przyjazd technika do klienta, urządzenie zastępcze, zwrot pieniędzy, bezpłatną naprawę. Zapowiedź kolejnego kroku diagnostycznego, oferta dalszej pomocy w czacie, propozycja usługi serwisu bez terminu (na przykład aktualizacji systemu terminala) ani podanie typowego czasu diagnostyki ze słowem „zwykle" NIE są obietnicą. UWAGA: podanie ceny naprawy albo zaproponowanie wysyłki do serwisu to NIE jest ten typ — na to jest osobny typ „wycena_przedwczesnie" i to jego użyj',
     prog: 0.9,
     waga: 'krytyczny',
   },
@@ -152,6 +152,9 @@ Zasady, które obowiązują asystenta:
   serwisu było słuszne i gdy kwotę opisano słowem „orientacyjnie".
 - Asystent nie twierdzi, że urządzenie czegoś nie ma, chyba że ma to wprost w instrukcji.
 - Asystent nie obiecuje terminów, przyjazdu technika ani sprzętu zastępczego.
+- Serwis wykonuje także aktualizacje systemu terminali. Propozycja takiej usługi to oferta, nie obietnica.
+- Pliki aktualizacji systemu terminali z Androidem publikuje tylko Zebra, więc wskazanie strony wsparcia
+  Zebra jako źródła takiego pliku jest zgodne z zasadami.
 - Sterowniki: ZDesigner v10 obsługuje drukarki Link-OS (serie ZD, ZT, ZQ, ZC). Modele sprzed Link-OS —
   GK420d, GK420t, GC420d, GC420t, GT800, LP2844, TLP2844 — wymagają ZDesigner v5; v10 potrafi je unieruchomić.
 - Gotowa odmowa „jestem asystentem specjalizującym się wyłącznie w urządzeniach Zebra" jest na miejscu tylko
@@ -169,6 +172,10 @@ CZEGO NIE ZGŁASZAĆ — to są twarde filtry, zastosuj je do KAŻDEGO problemu,
    Ci rozstrzygać, to wersje sterownika ZDesigner wypisane wyżej.
    Przykłady, których NIE WOLNO zgłaszać: „ta rolka nie jest częścią kasety", „ten czas odpowiedzi jest
    zbyt optymistyczny", „ta komenda może nie działać na każdym firmware", „ten parametr zwraca co innego".
+   Do tej samej grupy należą wersje systemu: czy dany model dostanie nowszy Android albo firmware, jaką
+   ścieżką się go aktualizuje i który pakiet do niego pasuje. Zebra wydaje nowe wersje także dla starszych
+   urządzeń, a Twoja lista jest nieaktualna. Przykład, którego NIE WOLNO zgłaszać: „ten terminal nie
+   obsługuje aktualizacji do Androida 14".
 2. NIE ZGŁASZASZ BRAKU ZDANIA, KTÓRE W ODPOWIEDZI JEST. Zanim napiszesz, że asystent czegoś nie dodał,
    znajdź to w tekście. Liczy się treść, nie dosłowne brzmienie.
 3. NIE ZGŁASZASZ TEGO, CO ZASADY WYŻEJ WPROST DOPUSZCZAJĄ. Jeśli reguła mówi, że coś jest poprawne
@@ -236,6 +243,26 @@ export function podajeKwoteZaNaprawe(tekstAsystenta: string): boolean {
   return false
 }
 
+/**
+ * Czy zarzut „bledne_dane" dotyczy wersji systemu albo aktualizacji urządzenia.
+ *
+ * Takich zarzutów oceniający nie ma prawa stawiać (filtr 1 w prompcie), ale zakaz w prompcie
+ * nie wystarcza. 10.11.2026 zgłosił jako błąd zdanie, że TC57 dostanie Androida 14, choć noty
+ * Zebry dla SDM660 (14-41-13.00-UG-U00) wymieniają TC57. Po dopisaniu zakazu wracał z tym samym
+ * zarzutem z pewnością 1,0. Model rozstrzyga z pamięci, a jego lista wersji jest starsza niż
+ * wydania Zebry. Dlatego odsiewamy te zarzuty w kodzie, tak jak kwotę przy „wycena_przedwczesnie".
+ *
+ * Zarzuty o sterownik zostają: wersje ZDesigner to jedyne fakty, które oceniający rozstrzyga.
+ */
+const RE_WERSJA_SYSTEMU =
+  /android\w*\s*\d|aktualiz\w*|upgrad\w*|\bupdate\b|\bota\b|lifeguard|wersj\w*\s+(?:systemu|androida|os)\b|system\w*\s+operacyjn\w*/i
+const RE_STEROWNIK = /sterownik|zdesigner|driver/i
+
+export function zarzutWersjiSystemu(cytat: string, dlaczego: string): boolean {
+  const tekst = `${cytat || ''} ${dlaczego || ''}`
+  return RE_WERSJA_SYSTEMU.test(tekst) && !RE_STEROWNIK.test(tekst)
+}
+
 export function zbudujTranskrypt(tury: Tura[]): string {
   return tury
     .map((t, i) => {
@@ -270,6 +297,8 @@ export async function ocenRozmowe(tury: Tura[]): Promise<OcenaRozmowy | null> {
     const problemy: ZnalezionyProblem[] = (Array.isArray(parsed.problemy) ? parsed.problemy : [])
       .filter((p: any) => p && typeof p.typ === 'string' && (p.typ as TypAlertu) in ALERTY)
       .filter((p: any) => p.typ !== 'wycena_przedwczesnie' || bylaKwota)
+      // Wersje systemu i aktualizacje są poza oceną czujki — opis przy zarzutWersjiSystemu().
+      .filter((p: any) => p.typ !== 'bledne_dane' || !zarzutWersjiSystemu(String(p.cytat || ''), String(p.dlaczego || '')))
       .map((p: any) => ({
         typ: p.typ as TypAlertu,
         waga: Math.min(1, Math.max(0, Number(p.waga) || 0)),
