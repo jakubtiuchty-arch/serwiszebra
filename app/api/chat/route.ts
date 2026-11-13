@@ -1156,6 +1156,11 @@ klienta, żeby przepisał to, co widzi, i rozpoznaj po treści.
 - ❌ ŹLE: klient wymienia trzy opisy, a Ty strzelasz "najczęściej właśnie ten trzeci".
 - ✅ DOBRZE: "Kod parowania to ten przy adresie Bluetooth — u Ciebie podpisany BD ADD."
 Gdy naprawdę nie wiesz który, powiedz to i podaj sposób rozpoznania, zamiast kazać skanować na chybił trafił.
+To samo dotyczy przycisków w procedurze serwisowej (wejście do Recovery, reset). Gdy klient nie znajduje
+przycisku, którego wymaga procedura, NIE podmieniaj go na inny przycisk „na próbę". Opisz jeszcze raz,
+gdzie ten przycisk jest według instrukcji, a gdy klient dalej go nie widzi, poproś o zdjęcie obu boków
+urządzenia i rozpoznaj przycisk na zdjęciu albo zaproponuj serwis.
+- ŹLE: klient nie widzi przycisku PTT, a Ty każesz przy restarcie trzymać Volume Up, choć instrukcja tego nie podaje.
 
 **PAROWANIE SKANERÓW BEZPRZEWODOWYCH ZE STACJĄ (LI4278, LS4278, DS6878 i pokrewne)**
 - Kod parowania na stacji KODUJE ADRES BLUETOOTH tej stacji. Na etykiecie jest to kod przy opisie

@@ -54,7 +54,7 @@ const kodBramek = ts.transpileModule(
   { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText
 const {
   podajeKwoteZaNaprawe, zarzutMaPokrycie, normalizujTyp, zarzutMaPodstawe, wycenaZgodnaZZasadami, ocenaPoBramce,
-  doTranskryptu, zbudujTranskrypt, zarzutOdrzuceniaMaPodstawe, zaprzeczenieMaPodstawe,
+  doTranskryptu, zbudujTranskrypt, zarzutOdrzuceniaMaPodstawe, zaprzeczenieMaPodstawe, kosztTransportuMaPodstawe,
 } = await import(`data:text/javascript,${encodeURIComponent(kodBramek)}`)
 
 let jednostkowe = 0
@@ -276,6 +276,36 @@ sprawdzZaprzeczenie('inne typy bez zmian', 'bledne_dane', 'Standardowo nie trzeb
 console.log(`Bramka zaprzeczenia: ${zaprzeczenieOk}/${zaprzeczenieOk + bledyZaprzeczenia.length}`)
 if (bledyZaprzeczenia.length) { for (const b of bledyZaprzeczenia) console.error('  ' + b); process.exit(1) }
 
+// Bramka kosztu transportu: zarzut wymaga zdania, które łączy przesyłkę z kosztem. Zdanie „Kurier odbierze
+// urządzenie z podanego adresu" i zdanie o diagnostyce za 99 zł netto przy rezygnacji są dozwolone
+// (alert 12.11.2026, ZD421d skierowana do serwisu po trzech darmowych krokach).
+let transportOk = 0
+const bledyTransportu = []
+const sprawdzTransport = (nazwa, odpowiedzi, oczekiwane, typ = 'koszt_transportu') => {
+  const wynik = kosztTransportuMaPodstawe(typ, odpowiedzi)
+  if (wynik === oczekiwane) transportOk++
+  else bledyTransportu.push(`kosztTransportuMaPodstawe(${nazwa}) = ${wynik}, oczekiwano ${oczekiwane}`)
+}
+const ODBIOR_I_DIAGNOSTYKA = 'Proponuję wysłać drukarkę do serwisu. Kurier odbierze urządzenie z podanego adresu. Diagnostyka trwa zwykle 24–48 h i jest bezpłatna przy akceptacji naprawy, a przy rezygnacji koszt wynosi 99 zł netto.'
+const WYCENA_I_ODBIOR = 'Orientacyjnie dla ZD421d:\n- wymiana głowicy: około **330–530 zł netto**,\n- przy usterce elektroniki kwotę podamy po diagnozie.\n\nTo tylko wstępne, orientacyjne widełki — wiążącą wycenę podamy dopiero po diagnozie urządzenia w serwisie.\n\n' + ODBIOR_I_DIAGNOSTYKA
+sprawdzTransport('zdania o odbiorze i diagnostyce', [ODBIOR_I_DIAGNOSTYKA], false)
+sprawdzTransport('kwota za głowicę i zdania o odbiorze', ['Załaduj etykiety i wydrukuj raport konfiguracji.', WYCENA_I_ODBIOR], false)
+sprawdzTransport('samo dozwolone zdanie', ['Kurier odbierze urządzenie z podanego adresu.'], false)
+sprawdzTransport('opłata za diagnostykę w nawiasie', ['Kurier odbierze terminal z podanego adresu. Diagnostyka jest bezpłatna przy akceptacji naprawy (99 zł netto przy rezygnacji).'], false)
+sprawdzTransport('odbiór i diagnostyka po przecinku', ['Kurier odbierze drukarkę z podanego adresu, a diagnostyka trwa 24–48 h i jest bezpłatna przy akceptacji naprawy.'], false)
+sprawdzTransport('wysyłka i diagnostyka po dwukropku', ['Proponuję wysłać drukarkę do serwisu: diagnostyka jest bezpłatna przy akceptacji naprawy.'], false)
+sprawdzTransport('rolki transportowe z cennika', ['Wymiana rolek transportowych: w ramach naprawy mechanizmu, 350-850 zł netto.'], false)
+sprawdzTransport('darmowy kurier', ['Kurier odbierze urządzenie bezpłatnie z Twojego adresu.'], true)
+sprawdzTransport('transport doliczony do wyceny', [ODBIOR_I_DIAGNOSTYKA, 'Koszt transportu w obie strony doliczymy do końcowej wyceny.'], true)
+sprawdzTransport('przesyłka na koszt serwisu', ['Przesyłka do serwisu jest na nasz koszt.'], true)
+sprawdzTransport('kwota za wysyłkę', ['Wysyłka kurierem kosztuje 35 zł netto.'], true)
+sprawdzTransport('transport i diagnostyka w jednym zdaniu', ['Transport i diagnostyka są bezpłatne.'], true)
+sprawdzTransport('wtrącenie o diagnostyce', ['Transport w obie strony, podobnie jak diagnostyka, jest bezpłatny.'], true)
+sprawdzTransport('odbiór za darmo', ['Odbiór kurierem jest za darmo.'], true)
+sprawdzTransport('inne typy bez zmian', [ODBIOR_I_DIAGNOSTYKA], true, 'wycena_przedwczesnie')
+console.log(`Bramka kosztu transportu: ${transportOk}/${transportOk + bledyTransportu.length}`)
+if (bledyTransportu.length) { for (const b of bledyTransportu) console.error('  ' + b); process.exit(1) }
+
 // Bramka wyceny: dwa kroki przed kwotą i zdanie o wiążącej wycenie to zasada czatu (7–8.10.2026)
 let wycenaOk = 0
 const bledyWyceny = []
@@ -379,6 +409,7 @@ async function ocen(tury) {
     .filter((x) => zarzutMaPodstawe(x.typ, String(x.dlaczego || ''), String(x.cytat || ''), odpowiedzi.join('\n'), wiadomosciKlienta.join('\n')))
     .filter((x) => zarzutOdrzuceniaMaPodstawe(x.typ, String(x.cytat || ''), Number(x.tura), odpowiedzi, wiadomosciKlienta))
     .filter((x) => zaprzeczenieMaPodstawe(x.typ, String(x.cytat || ''), odpowiedzi))
+    .filter((x) => kosztTransportuMaPodstawe(x.typ, odpowiedzi))
   const ocenaModelu = Number.isFinite(p.ocena) ? Math.min(5, Math.max(1, Math.round(p.ocena))) : 3
   const ocena = ocenaPoBramce(ocenaModelu, problemy.length < znane.length)
   // ta sama reguła co doAlertu() w lib/chat-alerts.ts
@@ -644,6 +675,35 @@ const PRZYPADKI = [
   // Oceniający zgłaszał „zaprzeczenie" albo „bledne_dane" z pewnością 1,0 i oceną 1–2/5.
   { nazwa: 'wysyłka drukarki: kable tylko przy usterce zasilania lub połączenia', oczekiwany: null, bezZarzutow: true, tury: [
     ['wysyłam drukarkę do serwisu, mam dołożyć kable?', `${KABLE_DO_WYSYLKI} Zgłoszenie serwisowe można założyć przyciskiem „Wyślij do serwisu” pod wiadomością. [SERIOUS_ISSUE]`],
+  ]},
+
+  // --- fałszywe alarmy z 12–13.11.2026 (rozmowy odtworzone, bez wypowiedzi klientów) ---
+
+  // Wariant, raport konfiguracji i przywrócenie ustawień, potem widełki za głowicę ze zdaniem o wiążącej
+  // wycenie i zdania o odbiorze i diagnostyce. Oceniający zgłaszał „wycena_przedwczesnie" („bez darmowych
+  // kroków") i „koszt_transportu" za opłatę 99 zł netto przy rezygnacji, z oceną 2/5.
+  { nazwa: 'ZD421d: czarne etykiety po trzech krokach, wycena głowicy', oczekiwany: null, bezZarzutow: true, tury: [
+    ['ZD421 drukuje całkiem czarne etykiety', 'Który to wariant: ZD421d bez taśmy barwiącej, ZD421t z taśmą na rolce czy ZD421c z kasetą? W wariancie d całkiem czarny wydruk zwykle wynika z nośnika albo zaczernienia, a w t i c dochodzi jeszcze prowadzenie taśmy.'],
+    ['d', 'Sprawdźmy, czy objaw daje sama drukarka. Załaduj etykiety, zamknij pokrywę i przy zielonej diodzie przytrzymaj FEED + CANCEL przez około 2 sekundy. Drukarka wydrukuje raport konfiguracji. Raport też jest czarny?'],
+    ['tak', 'Skoro raport drukowany przez samą drukarkę też jest czarny, program nie jest przyczyną. Przywróć ustawienia drukarki: wyłącz ją, przytrzymaj PAUSE + FEED, włącz zasilanie i puść przyciski, gdy świeci się tylko dioda STATUS. Potem wydrukuj raport jeszcze raz. Dalej jest czarny?'],
+    ['tak', `Po przywróceniu ustawień raport konfiguracji dalej jest cały czarny, więc usterka jest w drukarce: najczęściej w głowicy albo w układzie, który nią steruje.\n\n${WYCENA_I_ODBIOR} Zgłoszenie założysz przyciskiem „Wyślij do serwisu” pod tą wiadomością. [SERIOUS_ISSUE]`],
+  ]},
+
+  // Odklejona warstwa ekranu z ciemnymi plamami to uszkodzenie mechaniczne, więc serwis od razu, bez kwoty
+  // za naprawę. Oceniający brał zdanie o opłacie za diagnostykę za cenę naprawy i dawał ocenę 2/5. Zarzut
+  // odpadał na bramce kwoty, ale ocena zostawała i rozmowa wracała na listę do naprawy bez żadnego zarzutu.
+  { nazwa: 'odklejony ekran terminala: serwis bez kwoty', oczekiwany: null, bezZarzutow: true, tury: [
+    ['w terminalu odkleja się ekran i są na nim ciemne plamy', 'Odklejona warstwa ekranu i ciemne plamy to mechaniczne uszkodzenie modułu wyświetlacza. Zdalnie nie da się tego bezpiecznie naprawić, potrzebna jest wymiana modułu w serwisie.\n\nKurier odbierze urządzenie z podanego adresu. Diagnostyka trwa zwykle 24–48 h i jest bezpłatna przy akceptacji naprawy, a przy rezygnacji koszt wynosi 99 zł netto. Po diagnozie podamy wiążącą wycenę naprawy.\n\nModel i numer seryjny są na naklejce z S/N — można je wpisać w zgłoszeniu albo dodać zdjęcie naklejki. [SERIOUS_ISSUE]'],
+    ['(zdjęcie ekranu)', 'Na zdjęciu widać odwarstwienie przedniej warstwy i ciemne przebarwienia w obszarze wyświetlacza, czyli uszkodzony moduł ekranu, a nie problem z ustawieniami. Takiego ekranu nie warto dociskać ani podklejać, bo można uszkodzić digitizer albo taśmę wyświetlacza.\n\nZ tego zdjęcia nie odczytam modelu, więc nie podam widełek. Kurier odbierze urządzenie z podanego adresu. Diagnostyka trwa zwykle 24–48 h i jest bezpłatna przy akceptacji naprawy, a przy rezygnacji koszt wynosi 99 zł netto. Wiążącą wycenę podamy po sprawdzeniu terminala w serwisie. [SERIOUS_ISSUE]'],
+  ]},
+
+  // Instrukcja Zebry TC21/TC26 (Android 11, „Entering Android Recovery Manually"): Restart i przytrzymanie
+  // PTT aż do wibracji. Klient nie znalazł przycisku. Oceniający zgłaszał „zaprzeczenie" albo „bledne_dane"
+  // z pewnością 0,8 za opis położenia PTT, czyli ocenę budowy urządzenia z własnej pamięci.
+  { nazwa: 'TC21: wejście do Recovery przez PTT, klient nie widzi przycisku', oczekiwany: null, bezZarzutow: true, tury: [
+    ['jak zrobić reset fabryczny TC21 bez dostępu do ustawień', 'Bez dostępu do ustawień reset fabryczny robi się z ekranu System Recovery. Uwaga: reset fabryczny skasuje dane użytkownika z terminala.\n\nPrzytrzymaj Power i wybierz Restart, a gdy terminal zacznie się uruchamiać, przytrzymaj przycisk PTT, aż zawibruje i pokaże ekran System Recovery. Pojawił się?'],
+    ['co to jest PTT', 'PTT to boczny przycisk Push-to-Talk — w TC21 jest na lewym boku terminala, nad lewym przyciskiem skanowania. Fabrycznie służy do komunikacji głosowej, a w tej procedurze otwiera menu Recovery. Przytrzymaj go podczas restartu, aż terminal zawibruje. Weszło?'],
+    ['nie ma takiego przycisku', 'Przycisk PTT nie musi mieć napisu „PTT" i może wyglądać jak zwykły boczny przycisk. Patrząc na ekran, sprawdź lewy bok: potrzebny jest górny przycisk nad przyciskiem skanowania, nie sam przycisk skanowania. Zrób restart i trzymaj ten górny przycisk aż do wibracji. Jeśli dalej nie wchodzi, napisz, jakie przyciski są na lewym i na prawym boku.'],
   ]},
 ]
 

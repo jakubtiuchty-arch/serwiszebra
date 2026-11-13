@@ -446,6 +446,50 @@ export function zaprzeczenieMaPodstawe(typ: string, cytat: string, odpowiedzi: s
 }
 
 /**
+ * Czy zarzut „koszt_transportu" ma podstawę: czy asystent w ogóle napisał coś o koszcie przesyłki.
+ *
+ * Prompt czatu każe przy propozycji wysyłki podać dwa zdania: „Kurier odbierze urządzenie z podanego
+ * adresu" i zdanie o diagnostyce, bezpłatnej przy akceptacji naprawy i za 99 zł netto przy rezygnacji.
+ * Opis typu i prompt oceniającego mówią wprost, że oba są dozwolone. Mimo to 12.11.2026 oceniający
+ * zgłosił „koszt_transportu", bo asystent „podał informacje o kosztach diagnostyki" (ZD421d po trzech
+ * darmowych krokach skierowana do serwisu). W powtórkach ten sam zarzut wracał z typem
+ * „wycena_przedwczesnie" i uzasadnieniem, że asystent „nie powinien pisać nic o kosztach transportu".
+ * Jak przy kwocie za naprawę, warunek konieczny sprawdzamy w kodzie, a nie dopisujemy wyjątku do promptu.
+ *
+ * Zarzut przechodzi, gdy w którejś odpowiedzi jedno zdanie łączy słowo o przesyłce (kurier, transport,
+ * wysyłka, odbiór, paczka) ze słowem o koszcie (koszt, bezpłatnie, za darmo, doliczymy, kwota w zł).
+ * Fragmenty zdania o diagnostyce, naprawie albo wycenie, w których nie ma słowa o przesyłce, odrzucamy
+ * przed sprawdzeniem, bo ich koszt dotyczy usługi, nie transportu. Zdanie dzielimy na fragmenty tylko
+ * po przecinku, dwukropku, nawiasie i myślniku. Zdanie „Kurier odbierze urządzenie i diagnostyka jest
+ * bezpłatna" zostaje więc w całości i zarzut przechodzi. Wolimy przepuścić taki zarzut, niż zgubić
+ * prawdziwą wpadkę w rodzaju „transport i diagnostyka są bezpłatne".
+ */
+const RE_SLOWO_O_PRZESYLCE = new RegExp(
+  `(?<![${LITERY}])(?:kurier|transport|przesył|wysył|wysła|przesła|odbi[oó]r|odbier|dostaw|paczk|odesł|odsył|dpd|inpost|dhl|ups|gls)`, 'i')
+const RE_SLOWO_O_KOSZCIE = new RegExp(
+  `(?<![${LITERY}])(?:koszt|(?:od|nie|bez)?płatn|płac|zapła|opłat|darmo|gratis|dolicz|wlicz|pokrywa|pokryj)|\\d\\s*(?:zł|pln)(?![${LITERY}])`, 'i')
+const RE_KOSZT_USLUGI = /diagnost|rezygnac|napraw|wymian|wycen|głowic|częś|konserwac|ekspres|usług/i
+// Rolki transportowe to część mechanizmu z cennika, a nie przesyłka.
+// „Rolek" ma inny rdzeń niż „rolka" i „rolki", stąd dwie odmiany.
+const RE_ROLKI_TRANSPORTOWE = /rol(?:k|ek)\S*\s+transportow\S*/gi
+
+function zdaniaOKoszciePrzesylki(tekst: string): string[] {
+  return (tekst || '')
+    .replace(RE_ROLKI_TRANSPORTOWE, '')
+    .split(/[.!?;\n]+/)
+    .map((zdanie) => zdanie
+      .split(/[,:()]|\s[—–-]\s/)
+      .filter((fragment) => RE_SLOWO_O_PRZESYLCE.test(fragment) || !RE_KOSZT_USLUGI.test(fragment))
+      .join(' '))
+    .filter((zdanie) => RE_SLOWO_O_PRZESYLCE.test(zdanie) && RE_SLOWO_O_KOSZCIE.test(zdanie))
+}
+
+export function kosztTransportuMaPodstawe(typ: string, odpowiedzi: string[]): boolean {
+  if (typ !== 'koszt_transportu') return true
+  return odpowiedzi.some((o) => zdaniaOKoszciePrzesylki(o).length > 0)
+}
+
+/**
  * Czy wycena przyszła zgodnie z zasadą czatu: po co najmniej dwóch turach z darmowym krokiem
  * i ze zdaniem o wiążącej wycenie po diagnozie w każdej turze, która podaje kwotę.
  *
@@ -585,6 +629,7 @@ export async function ocenRozmowe(tury: Tura[]): Promise<OcenaRozmowy | null> {
       .filter((p: any) =>
         zarzutOdrzuceniaMaPodstawe(p.typ, String(p.cytat || ''), Number(p.tura), odpowiedzi, wiadomosciKlienta))
       .filter((p: any) => zaprzeczenieMaPodstawe(p.typ, String(p.cytat || ''), odpowiedzi))
+      .filter((p: any) => kosztTransportuMaPodstawe(p.typ, odpowiedzi))
 
     const problemy: ZnalezionyProblem[] = przyjete
       .map((p: any) => ({

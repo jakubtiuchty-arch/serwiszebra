@@ -594,6 +594,18 @@ const listaV10 = blog.slice(blog.indexOf('**ZDesigner v10 obsługuje:**'), blog.
 for (const model of ['ZT210', 'ZT220', 'ZT230'])
   sprawdz('blog: model na liście ZDesigner v10', listaV10.length > 0 && new RegExp(`\\b${model}\\b`).test(listaV10), true, model)
 
+// --- runda 11: przycisk z procedury Recovery (alert 13.11.2026) ---------------
+// Instrukcja Zebry TC21/TC26 (Android 11, „Entering Android Recovery Manually") podaje jedno wejście
+// do Recovery: Restart i przytrzymanie PTT aż do wibracji. Klient nie znalazł PTT, a czat kazał mu
+// trzymać Volume Up, którego instrukcja w tej procedurze nie wymienia. Prompt ma zakazać takiej podmiany.
+const regulaPrzycisku = src.slice(src.indexOf('NIE ZGADUJ, CO JEST NAPISANE NA URZĄDZENIU'), src.indexOf('PAROWANIE SKANERÓW BEZPRZEWODOWYCH'))
+for (const [nazwa, wzor] of [
+  ['zakaz podmiany przycisku z procedury', /NIE podmieniaj go na inny przycisk/],
+  ['dotyczy Recovery i resetu', /procedurze serwisowej \(wejście do Recovery, reset\)/],
+  ['zdjęcie boków zamiast zgadywania', /poproś o zdjęcie obu boków\s+urządzenia/],
+  ['przykład z PTT i Volume Up', /nie widzi przycisku PTT, a Ty każesz przy restarcie trzymać Volume Up/],
+]) sprawdz('prompt: ' + nazwa, regulaPrzycisku.length > 0 && wzor.test(regulaPrzycisku), true, nazwa)
+
 // --- wynik -----------------------------------------------------------------
 console.log(`\nZaliczone: ${zaliczone}/${zaliczone + bledy.length}`)
 if (bledy.length) {
