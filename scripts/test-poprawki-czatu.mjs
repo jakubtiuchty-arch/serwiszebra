@@ -544,6 +544,68 @@ sprawdz('modelOdKlienta: klient napisał', modelOdKlienta('TC8000', ['terminal t
 sprawdz('modelOdKlienta: podsunął czat', modelOdKlienta('TC27', ['terminal nie widzi sieci']), '', 'TC27')
 sprawdz('modelOdKlienta: nie kształt modelu', modelOdKlienta('Zebra', ['zebra nie drukuje']), '', 'Zebra')
 
+// --- runda 9: drukarki EU RED — kreator zabezpieczeń zamiast setvar (alerty 5.10.2026) ---
+// Dwie rozmowy o nowej ZD421 trwały 34 i 40 tur bez rozwiązania. Prompt prowadził klienta przez
+// setvar "ip.tcp.enable" i "ip.port" w ZSU i zapowiadał, że ZSU poprosi o hasło. W trybie chronionym
+// setvar nie zmienia ustawień chronionych, więc wartość wracała na "off", a monit o hasło się nie
+// pojawiał. Czat uznał wtedy ZSU za „za stary" i odesłał klienta do reinstalacji. Porty włącza się
+// kreatorem zabezpieczeń Zebry (Nucleus Connector, opcja Enable TCP/IP Raw Ports) — tak opisuje
+// to wpis zebra-wymaga-hasla-dyrektywa-red-konfiguracja w lib/blog.ts.
+const sekcjaRed = (() => {
+  const a = src.indexOf('**DRUKARKA NIE ODPOWIADA PO SIECI')
+  const b = src.indexOf('**JAK PROWADZIĆ ROZMOWĘ:**', a)
+  if (a < 0 || b < 0) throw new Error('Nie znaleziono sekcji o drukarkach EU RED w prompcie')
+  return src.slice(a, b)
+})()
+for (const [nazwa, wzor, oczekiwane] of [
+  ['brak komend setvar na liście kroków', /^\s*! U1 setvar/m, false],
+  ['brak zapowiedzi monitu o hasło w ZSU', /protected mode, ZSU poprosi|poprosi o nadanie hasła/, false],
+  ['setvar nie zmienia ustawień chronionych', /setvar\s+nie zmienia ustawień chronionych/, true],
+  ['kreator: Nucleus Connector ze strony zebra.com/setup', /Zebra Nucleus Connector dla Windows\*\* ze strony \*\*zebra\.com\/setup/, true],
+  ['kreator: opcja Enable TCP/IP Raw Ports', /Enable TCP\/IP Raw Ports/, true],
+  ['hasło trybu chronionego 14–128 znaków', /od 14 do 128 znaków/, true],
+  ['zakaz „za starej" wersji ZSU', /nie twierdź, że jego wersja jest za stara/, true],
+  ['odczyt trybu chronionego przez USB zostaje', /! U1 getvar "device\.protected_mode"/, true],
+]) sprawdz('prompt EU RED: ' + nazwa, wzor.test(sekcjaRed), oczekiwane, nazwa)
+
+// Prompt i baza wiedzy mają mówić to samo — jeśli któryś wpis zmieni procedurę, ten test to pokaże
+const wpisBloga = (slug) => {
+  const a = blog.indexOf(`slug: '${slug}'`)
+  if (a < 0) throw new Error(`Nie znaleziono wpisu ${slug} w lib/blog.ts`)
+  const b = blog.indexOf('\n    slug: ', a + 10)
+  return blog.slice(a, b < 0 ? undefined : b)
+}
+const wpisRed = wpisBloga('zebra-wymaga-hasla-dyrektywa-red-konfiguracja')
+const wpisPrintSecure = wpisBloga('zebra-printsecure-przewodnik-administratora-it')
+sprawdz('blog EU RED: opcja Enable TCP/IP Raw Ports', /Enable TCP\/IP Raw Ports/.test(wpisRed), true, 'wpis o EU RED')
+sprawdz('blog EU RED: Nucleus Connector ze strony zebra.com/setup', /Nucleus Connector[\s\S]{0,200}zebra\.com\/setup/.test(wpisRed), true, 'wpis o EU RED')
+sprawdz('blog PrintSecure: setvar nie zmienia ustawień chronionych',
+  /polecenie setvar nie zmienia ustawień chronionych/.test(wpisPrintSecure), true, 'wpis o PrintSecure')
+
+// --- runda 10: sterownik dla serii ZT200 (alert 22.10.2026) ------------------
+// ZDesigner v5 jest obowiązkowy tylko dla GK, GC, GT800 i LP/TLP 28xx. Zdania „v10 nie obsługuje
+// modeli sprzed Link-OS" prowadziły do wniosku, że ZT230 bez Link-OS potrzebuje v5, a Zebra
+// wymienia ZT210, ZT220 i ZT230 wśród drukarek obsługiwanych przez v10.
+for (const [nazwa, wzor] of [
+  ['v10 nie obsługuje modeli sprzed Link-OS', /\*\*ZDesigner v10 NIE obsługuje\*\* modeli sprzed Link-OS/],
+  ['modele sprzed Link-OS obsługuje v5', /modele sprzed Link-OS obsługuje \*\*ZDesigner v5\*\*/],
+]) sprawdz('blog: bez uogólnienia o Link-OS', wzor.test(blog), false, nazwa)
+const listaV10 = blog.slice(blog.indexOf('**ZDesigner v10 obsługuje:**'), blog.indexOf('**ZDesigner v10 NIE obsługuje**'))
+for (const model of ['ZT210', 'ZT220', 'ZT230'])
+  sprawdz('blog: model na liście ZDesigner v10', listaV10.length > 0 && new RegExp(`\\b${model}\\b`).test(listaV10), true, model)
+
+// --- runda 11: przycisk z procedury Recovery (alert 13.11.2026) ---------------
+// Instrukcja Zebry TC21/TC26 (Android 11, „Entering Android Recovery Manually") podaje jedno wejście
+// do Recovery: Restart i przytrzymanie PTT aż do wibracji. Klient nie znalazł PTT, a czat kazał mu
+// trzymać Volume Up, którego instrukcja w tej procedurze nie wymienia. Prompt ma zakazać takiej podmiany.
+const regulaPrzycisku = src.slice(src.indexOf('NIE ZGADUJ, CO JEST NAPISANE NA URZĄDZENIU'), src.indexOf('PAROWANIE SKANERÓW BEZPRZEWODOWYCH'))
+for (const [nazwa, wzor] of [
+  ['zakaz podmiany przycisku z procedury', /NIE podmieniaj go na inny przycisk/],
+  ['dotyczy Recovery i resetu', /procedurze serwisowej \(wejście do Recovery, reset\)/],
+  ['zdjęcie boków zamiast zgadywania', /poproś o zdjęcie obu boków\s+urządzenia/],
+  ['przykład z PTT i Volume Up', /nie widzi przycisku PTT, a Ty każesz przy restarcie trzymać Volume Up/],
+]) sprawdz('prompt: ' + nazwa, regulaPrzycisku.length > 0 && wzor.test(regulaPrzycisku), true, nazwa)
+
 // --- wynik -----------------------------------------------------------------
 console.log(`\nZaliczone: ${zaliczone}/${zaliczone + bledy.length}`)
 if (bledy.length) {
