@@ -126,6 +126,21 @@ sprawdzPokrycie('obietnica', 'Obiecał termin. Wykonamy diagnostykę 24-48h',
 sprawdzPokrycie('obietnica', 'Obiecał przyjazd technika. Diagnostyka trwa zwykle 24–48 h',
   `${CZAS_DIAGNOSTYKI} Jutro przyjedzie do Ciebie nasz technik.`, true)
 sprawdzPokrycie('obietnica', 'Obiecał przyjazd technika jutro.', '', true)
+// Standardowy czas naprawy 5–7 dni roboczych to zasada z promptu czatu, nie obietnica (17.11.2026,
+// prośba o wymianę głowicy: „obiecał konkretny czas realizacji" z pewnością 1,0 w dwóch powtórkach na trzy).
+// Inny konkretny czas naprawy, dzień tygodnia albo słowo obietnicy w odpowiedzi nadal przepuszczają zarzut.
+const CZAS_NAPRAWY = 'Wymianę głowicy wykonujemy w serwisie na oryginalnych częściach. Standardowy czas realizacji to zwykle 5–7 dni roboczych. Kurier odbierze drukarkę z podanego adresu.'
+sprawdzPokrycie('obietnica', 'Asystent obiecał konkretny czas realizacji naprawy, co jest niezgodne z zasadami. Standardowy czas realizacji to zwykle 5–7 dni roboczych.',
+  CZAS_NAPRAWY, false)
+sprawdzPokrycie('obietnica', 'Podał termin naprawy, a nie powinien podawać terminów.',
+  `Po akceptacji wyceny naprawa trwa standardowo 5–7 dni roboczych. ${CZAS_DIAGNOSTYKI}`, false)
+sprawdzPokrycie('obietnica', 'Obiecał czas naprawy 5–7 dni.',
+  'Naprawa trwa zwykle 5–7 dni roboczych, a tryb ekspresowy 24–48 h kosztuje 299 zł netto i wymaga wcześniejszego ustalenia z serwisem.', false)
+sprawdzPokrycie('obietnica', 'Obiecał czas naprawy.', 'Naprawa zajmie 2 dni robocze.', true)
+sprawdzPokrycie('obietnica', 'Obiecał termin realizacji.', `${CZAS_NAPRAWY} Drukarkę odeślemy do piątku.`, true)
+sprawdzPokrycie('obietnica', 'Obiecał czas realizacji naprawy.', 'Standardowo 5–7 dni roboczych, ale u Ciebie zrobimy to w 3 dni.', true)
+sprawdzPokrycie('obietnica', 'Obiecał czas realizacji naprawy.', 'Naprawimy drukarkę w 5–7 dni roboczych.', true)
+sprawdzPokrycie('obietnica', 'Obiecał czas naprawy i sprzęt zastępczy.', `${CZAS_NAPRAWY} Na ten czas wyślemy urządzenie zastępcze.`, true)
 // Typ zwrócony po angielsku nie może przepaść na filtrze listy typów
 for (const [we, wy] of [['cost_transport', 'koszt_transportu'], ['Koszt_transportu', 'koszt_transportu'], ['gwarancja', 'gwarancja']]) {
   if (normalizujTyp(we) === wy) pokrycieOk++
@@ -338,6 +353,9 @@ sprawdzWycene('wyrwane gniazdo w drugiej wiadomości', [PYTANIE_O_MODEL, WYCENA_
 sprawdzWycene('pęknięty ekran bez zdania o wycenie', [EKRAN_BEZ_ZASTRZEZENIA], false, ['terminal ma pęknięty ekran'])
 sprawdzWycene('zaprzeczenie uszkodzenia', [WYCENA_EKRANU], false, ['ekran nie jest pękniety, tylko nie reaguje na dotyk'])
 sprawdzWycene('uszkodzenie opisane dopiero po kwocie', [WYCENA_EKRANU, KROK_1], false, ['ekran nie reaguje na dotyk', 'aha, jest pekniety'])
+// Ułamane mocowanie wałka to lista (a) promptu czatu, więc widełki od razu są poprawne (17.11.2026, ZD421)
+const WYCENA_WALKA = 'Orientacyjnie wymiana wałka dociskowego z kołem zębatym to około 150–250 zł netto. To tylko wstępne, orientacyjne widełki — wiążącą wycenę podamy dopiero po diagnozie urządzenia w serwisie.'
+sprawdzWycene('ułamane mocowanie wałka', [PYTANIE_O_MODEL, WYCENA_WALKA], true, ['dzień dobry', 'w ZD421 ułamało się mocowanie wałka z kołem zębatym'])
 sprawdzWycene('objaw bez uszkodzenia mechanicznego', [WYCENA_EKRANU], false, ['ekran nie reaguje na dotyk'])
 // Rozpoznanie wariantu przy otwartej pokrywie i czyszczenie głowicy z wydrukiem konfiguracji, potem
 // widełki za głowicę ze zdaniem o wiążącej wycenie (alert 27.10.2026, ZD421d).
@@ -704,6 +722,34 @@ const PRZYPADKI = [
     ['jak zrobić reset fabryczny TC21 bez dostępu do ustawień', 'Bez dostępu do ustawień reset fabryczny robi się z ekranu System Recovery. Uwaga: reset fabryczny skasuje dane użytkownika z terminala.\n\nPrzytrzymaj Power i wybierz Restart, a gdy terminal zacznie się uruchamiać, przytrzymaj przycisk PTT, aż zawibruje i pokaże ekran System Recovery. Pojawił się?'],
     ['co to jest PTT', 'PTT to boczny przycisk Push-to-Talk — w TC21 jest na lewym boku terminala, nad lewym przyciskiem skanowania. Fabrycznie służy do komunikacji głosowej, a w tej procedurze otwiera menu Recovery. Przytrzymaj go podczas restartu, aż terminal zawibruje. Weszło?'],
     ['nie ma takiego przycisku', 'Przycisk PTT nie musi mieć napisu „PTT" i może wyglądać jak zwykły boczny przycisk. Patrząc na ekran, sprawdź lewy bok: potrzebny jest górny przycisk nad przyciskiem skanowania, nie sam przycisk skanowania. Zrób restart i trzymaj ten górny przycisk aż do wibracji. Jeśli dalej nie wchodzi, napisz, jakie przyciski są na lewym i na prawym boku.'],
+  ]},
+
+  // --- fałszywe alarmy z 17.11.2026 (rozmowy odtworzone, bez wypowiedzi klientów) ---
+
+  // Prośba o wymianę głowicy bez podanego modelu: czat nie podaje kwoty, prosi o model w zgłoszeniu
+  // i podaje standardowy czas naprawy 5–7 dni roboczych, który stoi w prompcie czatu. Oceniający zgłaszał
+  // „obietnica" („obiecał konkretny czas realizacji") z pewnością 1,0 i oceną 2/5.
+  { nazwa: 'wymiana głowicy: standardowy czas naprawy 5–7 dni', oczekiwany: null, bezZarzutow: true, tury: [
+    ['potrzebuję wymiany głowicy w drukarce zebra', 'Wymianę głowicy w drukarce Zebra wykonujemy w serwisie na oryginalnych częściach, z montażem i kalibracją po wymianie. Standardowy czas realizacji to zwykle 5–7 dni roboczych.\n\nOrientacyjne widełki zależą od modelu drukarki i rozdzielczości głowicy, więc model i numer seryjny z naklejki S/N wpisz w zgłoszeniu albo dołącz zdjęcie tej naklejki. Po modelu podamy właściwy rząd kosztów.\n\nKurier odbierze drukarkę z podanego adresu. Zgłoszenie założysz przyciskiem „Wyślij do serwisu” pod tą wiadomością. [SERIOUS_ISSUE]'],
+  ]},
+
+  // Ułamane mocowanie wałka z kołem zębatym to „mechanicznie uszkodzony wałek dociskowy” z listy (a)
+  // promptu czatu, więc serwis i widełki z cennika ZD421 od razu, ze zdaniem o wiążącej wycenie.
+  // Oceniający zgłaszał „wycena_przedwczesnie” dwa razy: „bez darmowych kroków” i „bez zdania o wiążącej
+  // wycenie”, choć to zdanie stało w odpowiedzi.
+  { nazwa: 'ZD421: ułamane mocowanie wałka, widełki od razu', oczekiwany: null, bezZarzutow: true, tury: [
+    ['dzień dobry', 'Dzień dobry! W czym mogę pomóc przy urządzeniu Zebra — drukarka, terminal czy skaner?'],
+    ['w ZD421 ułamało się mocowanie wałka z kołem zębatym, chcę oddać do serwisu', 'Ułamane mocowanie wałka w ZD421 to usterka mechaniczna, więc najlepiej wysłać drukarkę do serwisu.\n\nOrientacyjnie dla Zebra ZD421:\n- wymiana wałka dociskowego z kołem zębatym: około **150–250 zł netto**,\n- jeśli uszkodzone jest też mocowanie w mechanizmie, zakres naprawy potwierdzimy po oględzinach.\n\nTo tylko wstępne, orientacyjne widełki — wiążącą wycenę podamy dopiero po diagnozie urządzenia w serwisie i może się ona różnić od tej kwoty. Do kwot netto doliczany jest VAT 23%.\n\nKurier odbierze drukarkę z podanego adresu. Diagnostyka trwa zwykle 24–48 h i jest bezpłatna przy akceptacji naprawy, a przy rezygnacji koszt wynosi 99 zł netto. Zgłoszenie założysz przyciskiem „Wyślij do serwisu” pod tą wiadomością. [SERIOUS_ISSUE]'],
+  ]},
+
+  // Instrukcja ZC300 („Tools Menu”: Print sample cards, Select language, Clean printer; czyszczenie głowicy
+  // wacikiem z pianki ruchem na boki, 2–3 minuty schnięcia). Pas w stałym miejscu po dwóch czyszczeniach,
+  // potem widełki z cennika drukarek kart ze zdaniem o wiążącej wycenie i gwarancją na naszą naprawę.
+  // Oceniający zgłaszał „bledne_dane” („ZC300 nie ma opcji Clean printer”), „wycena_przedwczesnie” i „gwarancja”.
+  { nazwa: 'ZC300: pas po czyszczeniu z menu i wacikiem, widełki', oczekiwany: null, bezZarzutow: true, tury: [
+    ['ZC300 z drukiem dwustronnym: na czarno-białej stronie stały pionowy pasek, na wydruku próbnym też', 'Skoro pasek pojawia się też na wydruku próbnym, problem nie leży w projekcie karty ani w programie — zaczynamy od czyszczenia toru karty i głowicy.\n\nNa ZC300 uruchom czyszczenie z panelu LCD: **Tools → Clean printer**. Wyjmij taśmę i karty, a gdy drukarka poprosi, włóż kartę czyszczącą. Po zakończeniu włóż taśmę i karty z powrotem i wydrukuj ponownie kartę testową.\n\nPasek nadal jest?'],
+    ['jest', 'Wyczyśćmy jeszcze głowicę ręcznie, bo karta czyszcząca nie zawsze zbiera punktowy brud z elementów grzejnych.\n\nWyłącz ZC300, otwórz pokrywę i wyjmij kasetę z taśmą. Użyj **wacika z pianki** lekko zwilżonego alkoholem izopropylowym i przetrzyj linię głowicy **ruchem lewo–prawo wzdłuż elementów grzejnych**. Nie używaj bawełnianego wacika. Odczekaj 2–3 minuty, włóż taśmę i wydrukuj kartę testową.\n\nPasek zniknął?'],
+    ['nie zniknął', 'Skoro pasek jest w stałym miejscu także na wydruku próbnym i nie zniknął po czyszczeniu drukarki ani po ręcznym czyszczeniu głowicy, wygląda to na usterkę sprzętową — najczęściej zużytą głowicę albo problem w torze transportu karty.\n\nOrientacyjnie dla ZC300:\n- wymiana głowicy: około **580–1500 zł netto**\n- naprawa mechanizmu / toru transportu: około **350–850 zł netto**\n\nTo tylko wstępne, orientacyjne widełki — wiążącą wycenę podamy dopiero po diagnozie urządzenia w serwisie i może się ona różnić od tej kwoty.\n\nProponuję wysłać drukarkę do naszego serwisu. Kurier odbierze urządzenie z podanego adresu. Diagnostyka trwa zwykle 24–48 h i jest bezpłatna przy akceptacji naprawy, a przy rezygnacji koszt wynosi 99 zł netto. Po naprawie udzielamy 12 miesięcy gwarancji na wykonaną usługę i wymienione części. Zgłoszenie założysz przyciskiem „Wyślij do serwisu” pod tą wiadomością. [SERIOUS_ISSUE]'],
   ]},
 ]
 

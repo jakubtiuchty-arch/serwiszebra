@@ -271,6 +271,36 @@ const RE_CZAS_DIAGNOSTYKI = /diagnost\w*[^.]{0,40}?24\s*[-–]\s*48\s*h/i
 const RE_PRAWDZIWA_OBIETNICA = /technik|zastępcz|zwrot|(?<![a-ząćęłńóśźż])termin(?!al|olog)|jutro|dzisiaj|gwarantuj/i
 const RE_TERMIN_Z_PROMPTU = /(?:standardow\S*\s+)?termin\S*\s+5\s*[-–]\s*7\s+dni\s+roboczych/gi
 
+// Standardowy czas naprawy 5–7 dni roboczych prompt czatu podaje w opisie procesu naprawy
+// („Po akceptacji - naprawa (standardowo 5–7 dni roboczych…)") i we wzorze „DOBRZE". 17.11.2026
+// asystent przy prośbie o wymianę głowicy napisał „Standardowy czas realizacji to zwykle 5–7 dni
+// roboczych", a oceniający w dwóch powtórkach na trzy zgłosił „obietnicę konkretnego czasu
+// realizacji" z pewnością 1,0. Bramka wyżej obejmowała tylko zarzuty o czas diagnostyki.
+//
+// Zarzut o czas naprawy odrzucamy, gdy po usunięciu czasów z zasad serwisu (standardowa naprawa,
+// diagnostyka 24–48 h, tryb ekspresowy 24–48 h) w odpowiedziach nie zostaje ani słowo obietnicy,
+// ani inny konkretny czas: liczba dni lub godzin, dzień tygodnia, „do końca tygodnia".
+// Czas zasady musi stać przy słowie „standardowo", „zwykle", „zazwyczaj" albo „typowo".
+const RE_CZAS_NAPRAWY_W_ZARZUCIE = /(?:czas|termin)\S*\s+(?:realizacj|napraw)|5\s*[-–]\s*7\s+dni/i
+const RE_CZAS_NAPRAWY_Z_PROMPTU =
+  /(?:standardow|zwykl|zazwyczaj|typow)\S*(?:\s+\S+){0,4}?\s+5\s*[-–]\s*7\s+dni\s+roboczych/gi
+const RE_CZAS_DIAGNOSTYKI_WSZYSTKIE = new RegExp(RE_CZAS_DIAGNOSTYKI.source, 'gi')
+const RE_TRYB_EKSPRESOWY = /ekspres\S*[^.]{0,40}?24\s*[-–]\s*48\s*(?:h|godz\S*)/gi
+const RE_KONKRETNY_CZAS = new RegExp(
+  '(?<![a-ząćęłńóśźż])(?:(?:w|we|do|na|od)\\s+' +
+  '(?:poniedział(?:ek|ku)|wtor(?:ek|ku)|środ[ęay]|czwart(?:ek|ku)|piąt(?:ek|ku)|sobot[ęay]|niedziel[ęai])|' +
+  'do\\s+końca\\s+(?:dnia|tygodnia|miesiąca)|w\\s+(?:tym|przyszłym)\\s+tygodniu|pojutrz)|' +
+  '\\d+\\s*(?:[-–]\\s*\\d+\\s*)?(?:dni|dzie[ńn]|godz\\S*|h|tydz\\S*|tygod\\S*)(?![a-ząćęłńóśźż])', 'i')
+
+function obiecujeCzasNaprawy(tekstAsystenta: string): boolean {
+  const reszta = tekstAsystenta
+    .replace(RE_TERMIN_Z_PROMPTU, '')
+    .replace(RE_CZAS_NAPRAWY_Z_PROMPTU, '')
+    .replace(RE_CZAS_DIAGNOSTYKI_WSZYSTKIE, '')
+    .replace(RE_TRYB_EKSPRESOWY, '')
+  return RE_PRAWDZIWA_OBIETNICA.test(reszta) || RE_KONKRETNY_CZAS.test(reszta)
+}
+
 // Zarzut „zalecił reset fabryczny" wymaga, żeby asystent o resecie fabrycznym w ogóle pisał.
 // 7.10.2026 oceniający nazwał tak wyjęcie baterii w terminalu, który się nie włącza.
 const RE_RESET_FABRYCZNY = /reset\S*\s+(?:do\s+)?(?:ustawie\S*\s+)?fabryczn|factory\s+(?:reset|default)|ustawie\S*\s+fabryczn/i
@@ -287,6 +317,7 @@ export function zarzutMaPokrycie(typ: string, dlaczego: string, tekstAsystenta: 
   if (typ === 'gwarancja' && !/gwaranc/i.test(tekst.replace(RE_GWARANCJA_NA_NAPRAWE, ''))) return false
   if (typ === 'obietnica' && RE_CZAS_DIAGNOSTYKI.test(dlaczego || '') &&
     !RE_PRAWDZIWA_OBIETNICA.test(tekst.replace(RE_TERMIN_Z_PROMPTU, ''))) return false
+  if (typ === 'obietnica' && RE_CZAS_NAPRAWY_W_ZARZUCIE.test(dlaczego || '') && !obiecujeCzasNaprawy(tekst)) return false
   if (RE_RESET_FABRYCZNY.test(dlaczego || '') && !RE_RESET_FABRYCZNY.test(tekst)) return false
   return true
 }
