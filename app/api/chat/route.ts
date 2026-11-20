@@ -235,11 +235,19 @@ const RE_MANIP_NAPISZ_LIST = word('napisz list')
 // Porada z innej dziedziny w każdej formie: „porada prawna", „poradę finansową", „porady lekarskiej"
 const RE_MANIP_PORADA = new RegExp(`porad[${PL_LETTERS}]*\\s+(?:prawn|finansow|medyczn|lekarsk)`, 'i')
 
+// Własny prefiks albo sufiks z konkretnym znakiem („prefix = #", „sufiks = *") ustawia się sekwencją
+// z instrukcji skanera: Scan Prefix / Scan Suffix 1, cztery cyfry wartości z tabeli ASCII i kod formatu
+// transmisji. Gotowe kody „Add Enter" i „Tab" tylko dopisują klawisz po danych, więc prefiksu nie ustawią,
+// a blok z gotowymi kodami nakazuje je wkleić. 19.11.2026 przy prośbie o prefiks # i sufiks Enter czat
+// w dwóch turach dołączył kod „Add Enter", a po teście skanu kazał go zeskanować zamiast wskazać brakujący krok.
+const RE_WLASNY_PREFIKS_SUFIKS = /prefi[kx]|przedrost|(?:sufi[kx]s?|suffix)\S*\s*(?:=|:|na|jako)\s*["'„`]?[!-\/:-@[-`{-~]/i
+
 // Funkcja wykrywająca pytanie o konfigurację skanera
 function detectScannerConfigQuery(query: string): ScannerConfigBarcode[] {
   const queryLower = query.toLowerCase()
   const matchedBarcodes: ScannerConfigBarcode[] = []
-  
+  const wlasnyPrefiksLubSufiks = RE_WLASNY_PREFIKS_SUFIKS.test(queryLower)
+
   // Reset fabryczny
   if (queryLower.includes('reset') || queryLower.includes('fabryczn') || 
       queryLower.includes('defaults') || queryLower.includes('domyśln') ||
@@ -248,15 +256,17 @@ function detectScannerConfigQuery(query: string): ScannerConfigBarcode[] {
   }
   
   // Enter/Carriage Return
-  if (queryLower.includes('enter') || queryLower.includes('carriage') ||
-      queryLower.includes('nowa linia') || queryLower.includes('zatwierdzanie') ||
-      (queryLower.includes('sufiks') && !RE_WORD_TAB.test(queryLower))) {
+  if (!wlasnyPrefiksLubSufiks &&
+      (queryLower.includes('enter') || queryLower.includes('carriage') ||
+       queryLower.includes('nowa linia') || queryLower.includes('zatwierdzanie') ||
+       (queryLower.includes('sufiks') && !RE_WORD_TAB.test(queryLower)))) {
     matchedBarcodes.push(SCANNER_CONFIG_BARCODES.find(b => b.id === 'suffix-enter')!)
   }
-  
+
   // Tab
-  if (RE_WORD_TAB.test(queryLower) || queryLower.includes('tabulator') ||
-      queryLower.includes('przeskakiwa') || queryLower.includes('następne pole')) {
+  if (!wlasnyPrefiksLubSufiks &&
+      (RE_WORD_TAB.test(queryLower) || queryLower.includes('tabulator') ||
+       queryLower.includes('przeskakiwa') || queryLower.includes('następne pole'))) {
     matchedBarcodes.push(SCANNER_CONFIG_BARCODES.find(b => b.id === 'suffix-tab')!)
   }
   
@@ -279,7 +289,8 @@ function detectScannerConfigQuery(query: string): ScannerConfigBarcode[] {
   // Ogólna konfiguracja skanera - pokaż wszystkie popularne
   // Komplet podstawowych kodów tylko wtedy, gdy klient nie poprosił o konkretny: inaczej pytanie
   // „ustaw sufiks tab" zwracało także reset fabryczny, który kasuje konfigurację skanera.
-  if (matchedBarcodes.length === 0 &&
+  // Przy własnym prefiksie lub sufiksie ze znakiem żaden z tych kodów nie jest odpowiedzią.
+  if (matchedBarcodes.length === 0 && !wlasnyPrefiksLubSufiks &&
       (queryLower.includes('skonfigurow') || queryLower.includes('konfigurac') ||
        queryLower.includes('zaprogramow') || queryLower.includes('ustaw')) &&
       (queryLower.includes('skaner') || queryLower.includes('czytnik'))) {
@@ -1640,6 +1651,8 @@ PAMIĘTAJ:
   - Dodaj Enter: [BARCODE:/Add%20Enter%20Suffix.png]
   - Dodaj Tab: [BARCODE:/Add%20Tab%20Suffix.png]
   - Włącz QR: [BARCODE:/Enable%20QR%20Code.png]
+- **WŁASNY PREFIKS ALBO SUFIKS ZE ZNAKIEM (np. #, *, ;)** ustawia się sekwencją z instrukcji skanera: kod „Scan Prefix" albo „Scan Suffix 1", cztery cyfry wartości z tabeli ASCII dla interfejsu skanera (w LS2208 przez USB: # = 1035, Enter = 7013) i na końcu kod formatu transmisji z <PREFIX>. Gotowe kody „Dodaj Enter" i „Dodaj Tab" tylko dopisują klawisz po danych i prefiksu nie ustawią — nie dołączaj ich do takiej sekwencji.
+- **WYNIK SKANU W OKNIE CZATU**: gdy w trakcie konfiguracji skanera klient przysyła sam ciąg cyfr lub znaków bez komentarza (np. 13 cyfr kodu EAN), to zeskanował kod do okna czatu. To jest wynik testu, a nie próba programowania: masz przed sobą dokładnie to, co skaner wysyła do komputera. Porównaj go z oczekiwanym wynikiem i powiedz wprost, co z tego wynika: brak znaku prefiksu na początku oznacza, że prefiks nie jest wysyłany; jeśli klient nie naciskał Enter, a wiadomość wysłała się sama, sufiks Enter działa. Nie pytaj, czy wynik wygląda tak, jak powinien, nie pisz, że to „nie jest kod programujący”, i nie zaczynaj programowania od nowa. Wskaż krok, który nie zadziałał (przy braku prefiksu zwykle kod formatu transmisji z <PREFIX>, skanowany jako ostatni), i zapytaj, jakim sygnałem skaner odpowiedział po tym kodzie.
 - **RESET FABRYCZNY TO OSTATNI KROK.** Jeśli po nim problem trwa, a wcześniej padł już co najmniej jeden krok dopasowany do objawu → konkluzja serwisowa z [SERIOUS_ISSUE]. Nie kombinuj dalej.
 - **MARTWY SPUST = SERWIS OD RAZU**: w terminalu, gdy przycisk ekranowy w DWDemo skanuje, a spust nie; w skanerze ręcznym, gdy skaner daje sygnał po podłączeniu lub w stacji, a spust nie reaguje. Nie każ skanować kodów skanerem z martwym spustem — to niemożliwe.
 - NIE pytaj "Czy chcesz znaleźć serwis?" - TY JESTEŚ serwisem!

@@ -230,6 +230,19 @@ sprawdzPodstawe('„sprzeczna z instrukcją"', 'bledne_dane',
 sprawdzPodstawe('sprzeczność z tym, co napisał klient', 'bledne_dane',
   'Odpowiedź jest sprzeczna z tym, co klient opisał w poprzedniej wiadomości.', KONFIGURACJA_GK420T, true)
 sprawdzPodstawe('inne typy bez zmian', 'gwarancja', 'Potwierdził domysł klienta o gwarancji.', ZT231, true)
+// LS2208, tabela „ASCII Character Set for USB": wartość prefiksu lub sufiksu to czterocyfrowy kod
+// (# = 1035, Enter = 7013 z tabeli klawiszy rozszerzonych), a nie surowy kod ASCII. 19.11.2026
+// oceniający w dwóch rozmowach uznał 1035 za błąd („# to 35"), na main alert 3 razy na 3.
+const PREFIKS_LS2208 = 'Zeskanuj Scan Prefix, potem cyfry 1, 0, 3, 5 (1035 = #), a na końcu format transmisji <PREFIX> <DATA> <SUFFIX 1>.'
+sprawdzPodstawe('wartość prefiksu # w LS2208', 'bledne_dane',
+  'Wartość ASCII dla znaku # to 35, a nie 1035.', PREFIKS_LS2208, false)
+sprawdzPodstawe('prefiks # w LS2208 to rzekomo 7013', 'bledne_dane',
+  'Asystent podał błędny kod programujący dla prefiksu #, który powinien być ustawiony na 1035, a nie 7013.', PREFIKS_LS2208, false)
+// TC720L to numer katalogowy terminala Zebra TC72; klienci często nazywają terminal skanerem.
+// 19.11.2026 oceniający zarzucał „bledne_dane”, że asystent rozpoznał terminal (na main alert 1 raz na 3).
+const TC720L = 'TC720L to terminal Zebra, a nie skaner ręczny. Sprawdźmy uśpienie: Ustawienia → Wyświetlacz → Limit czasu ekranu.'
+sprawdzPodstawe('TC720L jako terminal', 'bledne_dane',
+  'Model TC720L to terminal, a nie skaner, więc asystent powinien to poprawnie zidentyfikować.', TC720L, false)
 console.log(`Bramka podstawy zarzutu: ${podstawaOk}/${podstawaOk + bledyPodstawy.length}`)
 if (bledyPodstawy.length) { for (const b of bledyPodstawy) console.error('  ' + b); process.exit(1) }
 
@@ -750,6 +763,19 @@ const PRZYPADKI = [
     ['ZC300 z drukiem dwustronnym: na czarno-białej stronie stały pionowy pasek, na wydruku próbnym też', 'Skoro pasek pojawia się też na wydruku próbnym, problem nie leży w projekcie karty ani w programie — zaczynamy od czyszczenia toru karty i głowicy.\n\nNa ZC300 uruchom czyszczenie z panelu LCD: **Tools → Clean printer**. Wyjmij taśmę i karty, a gdy drukarka poprosi, włóż kartę czyszczącą. Po zakończeniu włóż taśmę i karty z powrotem i wydrukuj ponownie kartę testową.\n\nPasek nadal jest?'],
     ['jest', 'Wyczyśćmy jeszcze głowicę ręcznie, bo karta czyszcząca nie zawsze zbiera punktowy brud z elementów grzejnych.\n\nWyłącz ZC300, otwórz pokrywę i wyjmij kasetę z taśmą. Użyj **wacika z pianki** lekko zwilżonego alkoholem izopropylowym i przetrzyj linię głowicy **ruchem lewo–prawo wzdłuż elementów grzejnych**. Nie używaj bawełnianego wacika. Odczekaj 2–3 minuty, włóż taśmę i wydrukuj kartę testową.\n\nPasek zniknął?'],
     ['nie zniknął', 'Skoro pasek jest w stałym miejscu także na wydruku próbnym i nie zniknął po czyszczeniu drukarki ani po ręcznym czyszczeniu głowicy, wygląda to na usterkę sprzętową — najczęściej zużytą głowicę albo problem w torze transportu karty.\n\nOrientacyjnie dla ZC300:\n- wymiana głowicy: około **580–1500 zł netto**\n- naprawa mechanizmu / toru transportu: około **350–850 zł netto**\n\nTo tylko wstępne, orientacyjne widełki — wiążącą wycenę podamy dopiero po diagnozie urządzenia w serwisie i może się ona różnić od tej kwoty.\n\nProponuję wysłać drukarkę do naszego serwisu. Kurier odbierze urządzenie z podanego adresu. Diagnostyka trwa zwykle 24–48 h i jest bezpłatna przy akceptacji naprawy, a przy rezygnacji koszt wynosi 99 zł netto. Po naprawie udzielamy 12 miesięcy gwarancji na wykonaną usługę i wymienione części. Zgłoszenie założysz przyciskiem „Wyślij do serwisu” pod tą wiadomością. [SERIOUS_ISSUE]'],
+  ]},
+
+  // Instrukcja LS2208: Scan Prefix, cztery cyfry z tabeli ASCII dla USB (# = 1035), potem format transmisji.
+  // 19.11.2026 oceniający zgłaszał „bledne_dane” z pewnością 1,0 („# to 35, a nie 1035”).
+  { nazwa: 'LS2208: prefiks # przez wartość 1035', oczekiwany: null, bezZarzutow: true, tury: [
+    ['LS2208 podłączony przez USB, jak dodać znak # przed każdym kodem?', 'W LS2208 prefiks ustawisz sekwencją kodów programujących z instrukcji. Wartość znaku `#` w tabeli ASCII dla USB to **1035**.\n\n1. Zeskanuj **Scan Prefix**.\n2. Zeskanuj cyfry z tabeli Numeric Bar Codes: **1 → 0 → 3 → 5**.\n3. Zeskanuj format transmisji **`<PREFIX> <DATA>`** albo **`<PREFIX> <DATA> <SUFFIX 1>`**, jeśli po kodzie ma iść też Enter.\n\nPotem zeskanuj dowolny kod w Notatniku: powinno pojawić się np. `#123456789`. Działa?'],
+  ]},
+
+  // TC720L to numer katalogowy terminala Zebra TC72. 19.11.2026 oceniający zarzucał, że asystent
+  // „błędnie rozpoznał terminal, choć klient podał model skanera”.
+  { nazwa: 'TC720L: klient nazywa terminal skanerem', oczekiwany: null, tury: [
+    ['skaner gaśnie sam po kilkunastu minutach', 'Jaki to model? Od modelu zależy, czy sprawdzamy zasilanie, baterię, stację czy ustawienia uśpienia. Model jest na naklejce z numerem seryjnym S/N, możesz też przesłać zdjęcie tej naklejki.'],
+    ['TC720L', 'TC720L to terminal Zebra, a nie skaner ręczny, więc zacznijmy od ustawień uśpienia. Wejdź w **Ustawienia → Wyświetlacz → Limit czasu ekranu** i ustaw najdłuższy dostępny czas.\n\nPotem zostaw terminal na 15 minut bez używania. Dalej się wyłącza?'],
   ]},
 ]
 

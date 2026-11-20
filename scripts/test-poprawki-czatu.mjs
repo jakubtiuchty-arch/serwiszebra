@@ -155,6 +155,36 @@ sprawdz('detectScannerConfigQuery(konkret)', idki('ustaw sufiks tab w skanerze D
 sprawdz('detectScannerConfigQuery(ogolne)', idki('jak skonfigurować skaner DS2208'),
   'set-defaults,suffix-enter,suffix-tab', 'jak skonfigurować skaner DS2208')
 
+// Własny prefiks albo sufiks ze znakiem: bez gotowych kodów Enter/Tab i bez kompletu podstawowego.
+// Te kody tylko dopisują klawisz po danych, a blok z gotowymi kodami nakazuje je wkleić (alert 19.11.2026:
+// kod „Add Enter" przy prośbie o prefiks # i sufiks Enter, potem podsunięty jeszcze raz po teście skanu).
+for (const z of [
+  'jak ustawić prefiks # w skanerze LS2208',
+  'LS2208 na USB: prefix = # oraz sufiks = enter',
+  'zaprogramuj czytnik: sufix = #, prefix = enter',
+  'ustaw sufiks = * w skanerze DS2208',
+  'jak dodać sufiks na ; w czytniku',
+  'chcę przedrostek przed każdym kodem w skanerze',
+]) sprawdz('detectScannerConfigQuery(własny prefiks/sufiks)', idki(z), '', z)
+
+// Sam Enter albo Tab po skanie nadal dostaje gotowy kod
+for (const [z, oczekiwane] of [
+  ['jak dodać enter po skanie w LS2208', 'suffix-enter'],
+  ['ustaw sufiks enter w skanerze', 'suffix-enter'],
+  ['ustaw sufiks = enter w skanerze', 'suffix-enter'],
+  ['chcę zatwierdzanie po każdym kodzie', 'suffix-enter'],
+  ['jak ustawić tabulator po skanie', 'suffix-tab'],
+]) sprawdz('detectScannerConfigQuery(sam Enter/Tab)', idki(z), oczekiwane, z)
+
+// Prompt: sekwencja własnego prefiksu i wynik skanu przysłany do okna czatu (alert 19.11.2026)
+for (const [nazwa, wzor] of [
+  ['sekwencja własnego prefiksu lub sufiksu', /WŁASNY PREFIKS ALBO SUFIKS ZE ZNAKIEM[^\n]*Scan Prefix[^\n]*formatu transmisji z <PREFIX>/],
+  ['wartości LS2208 z tabeli ASCII dla USB', /LS2208 przez USB: # = 1035, Enter = 7013/],
+  ['gotowe kody Enter/Tab nie ustawiają prefiksu', /„Dodaj Enter" i „Dodaj Tab" tylko dopisują klawisz po danych i prefiksu nie ustawią/],
+  ['wynik skanu to test, nie programowanie', /WYNIK SKANU W OKNIE CZATU[^\n]*wynik testu, a nie próba programowania/],
+  ['bez zaczynania programowania od nowa', /WYNIK SKANU W OKNIE CZATU[^\n]*nie zaczynaj programowania od nowa/],
+]) sprawdz('prompt: ' + nazwa, wzor.test(src), true, nazwa)
+
 // Filtr tematyczny krótkich wiadomości — ta sama pułapka, drugie miejsce w kodzie
 for (const z of [
   'ZT411 gubi się w kontekście VLAN',
