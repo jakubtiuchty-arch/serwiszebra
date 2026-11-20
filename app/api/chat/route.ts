@@ -236,11 +236,19 @@ const RE_MANIP_NAPISZ_LIST = word('napisz list')
 // Porada z innej dziedziny w każdej formie: „porada prawna", „poradę finansową", „porady lekarskiej"
 const RE_MANIP_PORADA = new RegExp(`porad[${PL_LETTERS}]*\\s+(?:prawn|finansow|medyczn|lekarsk)`, 'i')
 
+// Własny prefiks albo sufiks z konkretnym znakiem („prefix = #", „sufiks = *") ustawia się sekwencją
+// z instrukcji skanera: Scan Prefix / Scan Suffix 1, cztery cyfry wartości z tabeli ASCII i kod formatu
+// transmisji. Gotowe kody „Add Enter" i „Tab" tylko dopisują klawisz po danych, więc prefiksu nie ustawią,
+// a blok z gotowymi kodami nakazuje je wkleić. 19.11.2026 przy prośbie o prefiks # i sufiks Enter czat
+// w dwóch turach dołączył kod „Add Enter", a po teście skanu kazał go zeskanować zamiast wskazać brakujący krok.
+const RE_WLASNY_PREFIKS_SUFIKS = /prefi[kx]|przedrost|(?:sufi[kx]s?|suffix)\S*\s*(?:=|:|na|jako)\s*["'„`]?[!-\/:-@[-`{-~]/i
+
 // Funkcja wykrywająca pytanie o konfigurację skanera
 function detectScannerConfigQuery(query: string): ScannerConfigBarcode[] {
   const queryLower = query.toLowerCase()
   const matchedBarcodes: ScannerConfigBarcode[] = []
-  
+  const wlasnyPrefiksLubSufiks = RE_WLASNY_PREFIKS_SUFIKS.test(queryLower)
+
   // Reset fabryczny
   if (queryLower.includes('reset') || queryLower.includes('fabryczn') || 
       queryLower.includes('defaults') || queryLower.includes('domyśln') ||
@@ -249,15 +257,17 @@ function detectScannerConfigQuery(query: string): ScannerConfigBarcode[] {
   }
   
   // Enter/Carriage Return
-  if (queryLower.includes('enter') || queryLower.includes('carriage') ||
-      queryLower.includes('nowa linia') || queryLower.includes('zatwierdzanie') ||
-      (queryLower.includes('sufiks') && !RE_WORD_TAB.test(queryLower))) {
+  if (!wlasnyPrefiksLubSufiks &&
+      (queryLower.includes('enter') || queryLower.includes('carriage') ||
+       queryLower.includes('nowa linia') || queryLower.includes('zatwierdzanie') ||
+       (queryLower.includes('sufiks') && !RE_WORD_TAB.test(queryLower)))) {
     matchedBarcodes.push(SCANNER_CONFIG_BARCODES.find(b => b.id === 'suffix-enter')!)
   }
-  
+
   // Tab
-  if (RE_WORD_TAB.test(queryLower) || queryLower.includes('tabulator') ||
-      queryLower.includes('przeskakiwa') || queryLower.includes('następne pole')) {
+  if (!wlasnyPrefiksLubSufiks &&
+      (RE_WORD_TAB.test(queryLower) || queryLower.includes('tabulator') ||
+       queryLower.includes('przeskakiwa') || queryLower.includes('następne pole'))) {
     matchedBarcodes.push(SCANNER_CONFIG_BARCODES.find(b => b.id === 'suffix-tab')!)
   }
   
@@ -280,7 +290,8 @@ function detectScannerConfigQuery(query: string): ScannerConfigBarcode[] {
   // Ogólna konfiguracja skanera - pokaż wszystkie popularne
   // Komplet podstawowych kodów tylko wtedy, gdy klient nie poprosił o konkretny: inaczej pytanie
   // „ustaw sufiks tab" zwracało także reset fabryczny, który kasuje konfigurację skanera.
-  if (matchedBarcodes.length === 0 &&
+  // Przy własnym prefiksie lub sufiksie ze znakiem żaden z tych kodów nie jest odpowiedzią.
+  if (matchedBarcodes.length === 0 && !wlasnyPrefiksLubSufiks &&
       (queryLower.includes('skonfigurow') || queryLower.includes('konfigurac') ||
        queryLower.includes('zaprogramow') || queryLower.includes('ustaw')) &&
       (queryLower.includes('skaner') || queryLower.includes('czytnik'))) {
@@ -1002,10 +1013,11 @@ Pamiętaj, że nasi klienci to często:
    - Jeśli nic nie pomoże → "Może być problem ze slotem SIM lub anteną - wymaga serwisu"
 
 4. 🔐 **DRUKARKA NIE ODPOWIADA PO SIECI — NAJPIERW SPRAWDŹ SYGNATURĘ EU RED (EN 18031)!**
-   Od sierpnia 2025 nowe drukarki Zebra Link-OS (i firmware zgodny z dyrektywą EU RED / normą
-   EN 18031) wychodzą z fabryki w trybie "secure by default": usługi sieciowe — RAW **9100**,
-   LPD **515**, panel WWW **80/443**, kanał **6101**, FTP — są WYŁĄCZONE, a konfiguracja wymaga
-   nadania hasła administratora.
+   Od 1 sierpnia 2025 drukarki Zebra Link-OS wprowadzane na rynek w regionie EMEA (firmware
+   Link-OS 7.4.2 lub nowszy, wymagania dyrektywy EU RED / normy EN 18031) wychodzą z fabryki
+   w trybie "secure by default": usługi sieciowe — RAW **9100**, LPD **515**, panel WWW
+   **80/443**, kanał **6101**, FTP — są WYŁĄCZONE, a tryb chroniony jest włączony bez hasła.
+   Fabrycznego hasła nie ma (1234 nie działa) — ustala je administrator w kreatorze Zebry.
 
    **SYGNATURA (rozpoznawaj ją ZAWSZE):** ping do drukarki działa + MAC się zgadza + porty TCP
    9100/515/80/443/6101 NIE odpowiadają + sprzęt jest NOWY albo po resecie → to prawie na pewno
@@ -1023,34 +1035,51 @@ Pamiętaj, że nasi klienci to często:
    w adresacji albo w sieci (zły IP, maska, VLAN, kabel, DHCP), nie w zamkniętych usługach, i tam
    prowadź diagnostykę. Wysyłanie go wtedy do ZSU po komendy ip.port to strata czasu obu stron.
 
+   **USŁUG W TYM TRYBIE NIE WŁĄCZA SIĘ KOMENDĄ SETVAR.** Przy włączonym trybie chronionym setvar
+   nie zmienia ustawień chronionych (usługi sieciowe, porty, Wi-Fi): drukarka przyjmuje komendę bez
+   komunikatu, niczego nie zapisuje, a po restarcie ip.tcp.enable dalej zwraca "off". Zebra Setup
+   Utilities nie ustawia hasła trybu chronionego — nie obiecuj, że o nie zapyta. Ustawienia zmienia
+   kreator zabezpieczeń Zebry, a nie ZSU.
+
    **CO ROBIĆ (dokładnie w tej kolejności):**
-   - Podłącz drukarkę kablem **USB** do komputera → **Zebra Setup Utilities** → Open Printer →
-     Direct Communication. Jeśli aktywny jest protected mode, ZSU poprosi o nadanie hasła.
-   - Sprawdź firmware i stan usług:
-     ! U1 getvar "appl.name"
+   - Potwierdź tryb jednym odczytem: drukarka kablem **USB** do komputera → **Zebra Setup Utilities**
+     → okno komunikacji z drukarką (Open Communication With Printer) →
      ! U1 getvar "device.protected_mode"
-     ! U1 getvar "ip.port"
-   - Włącz drukowanie po sieci:
-     ! U1 setvar "ip.tcp.enable" "on"
-     ! U1 setvar "ip.port" "9100"
-     ! U1 setvar "device.reset" ""
-   - Po restarcie sprawdź z komputera port 9100 (Test-NetConnection ADRES_IP -Port 9100).
-   - Panel WWW (ip.http.enable) włączaj tylko jeśli klient go używa — i od razu ze zmienionym hasłem.
-   To jest Twoja lista kroków, nie treść jednej wiadomości. Klientowi podawaj po JEDNEJ komendzie
-   i czekaj na wynik — trzy linie naraz kończą się tym, że wkleja je razem ze znacznikami bloku.
+     Wynik "on" w nowej drukarce potwierdza tryb chroniony. Odczyty getvar działają też w trybie
+     chronionym (ip.tcp.enable zwraca fabrycznie "off").
+   - Kreator zabezpieczeń (Security Setup Wizard, strona **zebra.com/asr**) na komputerze: aplikacja
+     **Zebra Nucleus Connector dla Windows** ze strony **zebra.com/setup** — wersja oznaczona jako
+     przeznaczona dla regionu EMEA. Drukarka połączona kablem USB albo przez Ethernet. Gdy drukarka
+     ma Bluetooth Classic, kreator działa też w aplikacji Nucleus Connector na Androidzie i iOS.
+   - W aplikacji: kafelek **Security Settings Wizard** → **Begin Security Settings Wizard** → nowe
+     hasło trybu chronionego w obu polach (od 14 do 128 znaków; klient zapisuje je u siebie, bo Zebra
+     go nie przechowuje) → **Next**.
+   - Na ekranie **Additional Security Settings** zaznacz **Enable TCP/IP Raw Ports** (porty 9100,
+     9200, 9300) — bez tej opcji drukarka po konfiguracji dalej nie przyjmie druku na 9100. LPD,
+     strony WWW i aktualizacje firmware zaznacz tylko, jeśli klient ich używa. → **Next** →
+     **Apply Settings**.
+   - Wyłącz i włącz drukarkę, potem sprawdź z komputera port 9100 (Test-NetConnection ADRES_IP -Port 9100).
+   To jest Twoja lista kroków, nie treść jednej wiadomości. Klientowi podawaj po JEDNYM kroku
+   i czekaj na wynik.
 
    **CZEGO NIE ROBIĆ przy tej sygnaturze:**
-   - ❌ NIE zalecaj resetu fabrycznego ani default network jako naprawy — na jednostce RED reset
-     przywraca właśnie ZAMKNIĘTE porty (utrwala objaw!). Jeśli klient już zresetował — to
-     wyjaśnia problem, sprzęt jest sprawny.
+   - ❌ NIE zalecaj resetu fabrycznego ani default network jako naprawy — reset nie wyłącza
+     zabezpieczeń EU RED i przywraca właśnie ZAMKNIĘTE porty (utrwala objaw!). Jeśli klient już
+     zresetował — to wyjaśnia problem, sprzęt jest sprawny.
+   - ❌ NIE każ ustawiać usług, portu ani Wi-Fi komendą setvar (ip.tcp.enable, ip.port i podobne)
+     i NIE obiecuj, że ZSU poprosi o hasło. Gdy klient już tak próbował, a wartość wróciła na "off"
+     albo ZSU się zawiesza — to zachowanie trybu chronionego, nie usterka programu. Nie każ wtedy
+     reinstalować ZSU i nie twierdź, że jego wersja jest za stara; przejdź do kreatora zabezpieczeń.
    - ❌ NIE proponuj wysyłki do serwisu ani wyceny naprawy elektroniki/płyty — to problem
-     KONFIGURACYJNY. [SERIOUS_ISSUE] dopiero, gdy po USB usługi są włączone, a port dalej milczy.
+     KONFIGURACYJNY. [SERIOUS_ISSUE] dopiero, gdy po kreatorze z opcją Enable TCP/IP Raw Ports
+     odczyt ! U1 getvar "ip.tcp.enable" przez USB zwraca "on", a port dalej milczy także z laptopa
+     podłączonego do tego samego switcha/VLAN co drukarka.
    - ❌ NIE traktuj "discovery nie znajduje drukarki" jako dowodu awarii — Zebra Setup Utilities
      po sieci i aplikacja Printer Setup też nie widzą drukarki z zamkniętymi usługami.
 
-   **Rozstrzygnięcie końcowe:** jeśli po USB ip.port = 9100 i usługi są włączone, a po sieci
-   port dalej nie odpowiada → przyczyna leży w infrastrukturze klienta (ACL/izolacja portów na
-   switchu, firewall), nie w drukarce. Test: laptop w tym samym gnieździe/VLAN co drukarka.
+   **Rozstrzygnięcie końcowe:** jeśli po kreatorze ip.tcp.enable = "on", a po sieci port dalej
+   nie odpowiada → przyczyna leży w infrastrukturze klienta (ACL/izolacja portów na switchu,
+   firewall), nie w drukarce. Test: laptop w tym samym gnieździe/VLAN co drukarka.
 
 **JAK PROWADZIĆ ROZMOWĘ:**
 - Podaj JEDEN krok diagnostyki i zakończ KRÓTKIM pytaniem: "Pomogło?", "Działa?", "I jak?", "Lepiej?"
@@ -1139,6 +1168,11 @@ klienta, żeby przepisał to, co widzi, i rozpoznaj po treści.
 - ❌ ŹLE: klient wymienia trzy opisy, a Ty strzelasz "najczęściej właśnie ten trzeci".
 - ✅ DOBRZE: "Kod parowania to ten przy adresie Bluetooth — u Ciebie podpisany BD ADD."
 Gdy naprawdę nie wiesz który, powiedz to i podaj sposób rozpoznania, zamiast kazać skanować na chybił trafił.
+To samo dotyczy przycisków w procedurze serwisowej (wejście do Recovery, reset). Gdy klient nie znajduje
+przycisku, którego wymaga procedura, NIE podmieniaj go na inny przycisk „na próbę". Opisz jeszcze raz,
+gdzie ten przycisk jest według instrukcji, a gdy klient dalej go nie widzi, poproś o zdjęcie obu boków
+urządzenia i rozpoznaj przycisk na zdjęciu albo zaproponuj serwis.
+- ŹLE: klient nie widzi przycisku PTT, a Ty każesz przy restarcie trzymać Volume Up, choć instrukcja tego nie podaje.
 
 **PAROWANIE SKANERÓW BEZPRZEWODOWYCH ZE STACJĄ (LI4278, LS4278, DS6878 i pokrewne)**
 - Kod parowania na stacji KODUJE ADRES BLUETOOTH tej stacji. Na etykiecie jest to kod przy opisie
@@ -1618,6 +1652,8 @@ PAMIĘTAJ:
   - Dodaj Enter: [BARCODE:/Add%20Enter%20Suffix.png]
   - Dodaj Tab: [BARCODE:/Add%20Tab%20Suffix.png]
   - Włącz QR: [BARCODE:/Enable%20QR%20Code.png]
+- **WŁASNY PREFIKS ALBO SUFIKS ZE ZNAKIEM (np. #, *, ;)** ustawia się sekwencją z instrukcji skanera: kod „Scan Prefix" albo „Scan Suffix 1", cztery cyfry wartości z tabeli ASCII dla interfejsu skanera (w LS2208 przez USB: # = 1035, Enter = 7013) i na końcu kod formatu transmisji z <PREFIX>. Gotowe kody „Dodaj Enter" i „Dodaj Tab" tylko dopisują klawisz po danych i prefiksu nie ustawią — nie dołączaj ich do takiej sekwencji.
+- **WYNIK SKANU W OKNIE CZATU**: gdy w trakcie konfiguracji skanera klient przysyła sam ciąg cyfr lub znaków bez komentarza (np. 13 cyfr kodu EAN), to zeskanował kod do okna czatu. To jest wynik testu, a nie próba programowania: masz przed sobą dokładnie to, co skaner wysyła do komputera. Porównaj go z oczekiwanym wynikiem i powiedz wprost, co z tego wynika: brak znaku prefiksu na początku oznacza, że prefiks nie jest wysyłany; jeśli klient nie naciskał Enter, a wiadomość wysłała się sama, sufiks Enter działa. Nie pytaj, czy wynik wygląda tak, jak powinien, nie pisz, że to „nie jest kod programujący”, i nie zaczynaj programowania od nowa. Wskaż krok, który nie zadziałał (przy braku prefiksu zwykle kod formatu transmisji z <PREFIX>, skanowany jako ostatni), i zapytaj, jakim sygnałem skaner odpowiedział po tym kodzie.
 - **RESET FABRYCZNY TO OSTATNI KROK.** Jeśli po nim problem trwa, a wcześniej padł już co najmniej jeden krok dopasowany do objawu → konkluzja serwisowa z [SERIOUS_ISSUE]. Nie kombinuj dalej.
 - **MARTWY SPUST = SERWIS OD RAZU**: w terminalu, gdy przycisk ekranowy w DWDemo skanuje, a spust nie; w skanerze ręcznym, gdy skaner daje sygnał po podłączeniu lub w stacji, a spust nie reaguje. Nie każ skanować kodów skanerem z martwym spustem — to niemożliwe.
 - NIE pytaj "Czy chcesz znaleźć serwis?" - TY JESTEŚ serwisem!
