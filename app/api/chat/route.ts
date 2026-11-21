@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { searchBlogForAI } from '@/lib/blog'
 import { pobierzKomplet, naglowekKompletu, type KompletDokumentow } from '@/lib/manuals-full-text'
+import { getProductUrl } from '@/lib/shop-categories'
 
 /**
  * Wpis czarnej skrzynki (chat_logs.rag_sources). Przy wyszukiwaniu wektorowym: strona i podobieństwo.
@@ -871,6 +872,42 @@ async function searchManuals(query: string, modelsHint: string[] = [], rozmowa?:
   }
 }
 
+// === Numery katalogowe części i materiałów ze sklepu serwisu ===
+// 20.11.2026 klient wpisał sam numer taśmy do drukarki kart ZC350, a sklep serwisu ma tę taśmę
+// z własną kartą produktu. Stary wzorzec szukał w sklepie tylko numerów zaczynających się od P,
+// od BTRY- albo w formacie 1xxxxx-xxx, więc taśmy i karty (800300-…, 800350-…), karty czyszczące
+// (105999-…-01), zasilacze PWR-… i numery z literą na końcu (P1112640-017C) nie docierały do
+// wyszukiwania. Czat nie dostawał danych ze sklepu i odsyłał klienta szablonem do sklepu TAKMA.
+// Teraz kandydatem jest każdy ciąg, który wygląda jak numer katalogowy (cyfra i łącznik albo
+// P z co najmniej sześcioma cyframi), a o tym, czy to produkt sklepu, rozstrzyga dokładne
+// porównanie z kolumną sku w bazie. Cudzysłowy wewnątrz numeru usuwamy przed dopasowaniem,
+// bo numer bywa wklejany z cudzysłowem w środku, np. "800300"-321EM.
+function wykryjNumeryKatalogowe(tekst: string): string[] {
+  const bezCudzyslowow = (tekst || '').replace(/["'`„”“‘’«»]/g, '')
+  const kandydaci = bezCudzyslowow.match(
+    /(?<![A-Za-z0-9ąćęłńóśźżĄĆĘŁŃÓŚŹŻ-])(?:[A-Za-z0-9]+(?:-[A-Za-z0-9]+)+|P\d{6,})(?![A-Za-z0-9ąćęłńóśźżĄĆĘŁŃÓŚŹŻ-])/g) || []
+  const numery = kandydaci
+    .map((k) => k.toUpperCase())
+    .filter((k) => /\d/.test(k) && k.length >= 6)
+  return Array.from(new Set(numery)).slice(0, 40)
+}
+
+// Wiersz produktu dla bloku [SKLEP_PRODUKTY]. Cena 0 w tabeli products oznacza, że karta produktu
+// bierze cenę z bieżącej oferty dostawcy (lib/card-material-shop.ts). 21.11.2026 siedem taśm do ZC350
+// miało w bazie 0, a ich karty pokazywały cenę z oferty, więc bez tego warunku czat podałby „0,00 zł".
+function opisProduktuZeSklepu(
+  p: { sku: string; name: string; resolution_dpi?: number | null; price_brutto?: number | null },
+  adres: string,
+): string {
+  const dpi = p.resolution_dpi ? ` ${p.resolution_dpi} DPI` : ''
+  const brutto = Number(p.price_brutto) || 0
+  const cena = brutto > 0
+    ? `${brutto.toFixed(2).replace('.', ',')} zł brutto`
+    : 'cena: sprawdź aktualną cenę na karcie produktu'
+  return `${p.sku}: ${p.name}${dpi} — ${cena} — ${adres}`
+}
+// === Koniec: numery katalogowe ze sklepu serwisu ===
+
 const SYSTEM_PROMPT = `Jesteś AI asystentem serwisu "Serwis Zebra" prowadzonego przez TAKMA - oficjalnego, certyfikowanego Partnera Serwisowego Zebra Technologies (Zebra Premier Partner Repair Specialist).
 Od 2026 r. TAKMA ma też status Zebra Printer Repair Specialist – Card Printer, czyli autoryzację serwisową Zebra dla drukarek kart plastikowych (ZC100, ZC300, ZC350, ZXP). Szczegóły i certyfikat: https://www.serwis-zebry.pl/serwis-drukarek-kart-zebra
 
@@ -890,7 +927,8 @@ Jeśli klient pyta o ZAKUP, CENĘ, DOSTĘPNOŚĆ, ETYKIETY, AKCESORIA, OFERTĘ, 
 "W sprawach zakupu urządzeń, etykiet, akcesoriów i materiałów eksploatacyjnych zapraszam do sklepu TAKMA — autoryzowanego partnera Zebra: **[takma.com.pl](https://www.takma.com.pl)** lub telefonicznie: +48 601 619 898."
 
 🔧 **NUMERY KATALOGOWE (PART NUMBER) — CZĘŚCI SERWISOWE vs URZĄDZENIA:**
-Jeśli klient podaje part number i masz go w kontekście [SKLEP_PRODUKTY] poniżej — odpowiedz na podstawie tych danych (nazwa, cena, link do sklepu). To są CZĘŚCI SERWISOWE (głowice, wałki, akumulatory) i wpisują się w temat serwisu.
+Jeśli klient podaje part number i masz go w kontekście [SKLEP_PRODUKTY] poniżej — odpowiedz na podstawie tych danych (nazwa, cena, link do karty produktu). To są części serwisowe (głowice, wałki, akumulatory, zasilacze) oraz materiały do drukarek kart (taśmy, karty, karty czyszczące) z NASZEGO sklepu serwisu i wpisują się w temat serwisu.
+Ta zasada ma PIERWSZEŃSTWO przed szablonem odsyłającym do sklepu TAKMA: produktu z listy [SKLEP_PRODUKTY] NIE odsyłaj do TAKMA, także gdy to taśma albo inny materiał eksploatacyjny. Gdy klient podał sam numer bez pytania, podaj nazwę, cenę i link, a potem zapytaj, czy chodzi o zakup, czy o problem z tym produktem w urządzeniu.
 Jeśli klient podaje part number URZĄDZENIA (np. ZD4A042-30EE00EZ, TC52x-1234 itp.) — NIE DEKODUJ, NIE ZGADUJ! Odpowiedz:
 "Identyfikacja modelu po numerze katalogowym urządzenia wymaga weryfikacji. Skontaktuj się z TAKMA (**[takma.com.pl](https://www.takma.com.pl)**, tel. +48 601 619 898) — pomogą zidentyfikować urządzenie."
 
@@ -2075,21 +2113,24 @@ export async function POST(req: NextRequest) {
     // === KROK 2.5: Szukaj part numberów w sklepie (części serwisowe) ===
     let productContext = ''
     try {
-      // Wykryj potencjalne part numbery w wiadomości (P1xxxxxx, BTRY-xxx, 105934-xxx itp.)
-      const pnPatterns = lastUserMessage.match(/\b(P\d{6,}[-\d]*|BTRY-[A-Z0-9-]+|1\d{5}-\d{3})\b/gi)
-      if (pnPatterns && pnPatterns.length > 0) {
+      // Wykryj potencjalne numery katalogowe w wiadomości (opis wzorca przy wykryjNumeryKatalogowe)
+      const pnPatterns = wykryjNumeryKatalogowe(lastUserMessage)
+      if (pnPatterns.length > 0) {
         console.log('🔍 Wykryto potencjalne part numbery:', pnPatterns)
+        // Drukarki pomijamy: numer katalogowy urządzenia ma osobną regułę w prompcie.
         const { data: products } = await supabase
           .from('products')
-          .select('name, sku, price_brutto, product_type, device_model, resolution_dpi')
+          .select('name, sku, slug, price_brutto, product_type, device_model, resolution_dpi')
           .eq('is_active', true)
-          .in('sku', pnPatterns.map((pn: string) => pn.toUpperCase()))
+          .neq('product_type', 'drukarka')
+          .in('sku', pnPatterns)
 
         if (products && products.length > 0) {
           productContext = products.map(p => {
-            const dpi = p.resolution_dpi ? ` ${p.resolution_dpi} DPI` : ''
-            const price = p.price_brutto.toFixed(2).replace('.', ',')
-            return `${p.sku}: ${p.name}${dpi} — ${price} zł brutto — https://www.serwis-zebry.pl/sklep`
+            const sciezka = p.slug
+              ? getProductUrl({ slug: p.slug, product_type: p.product_type, device_model: p.device_model || '' })
+              : '/sklep'
+            return opisProduktuZeSklepu(p, `https://www.serwis-zebry.pl${sciezka}`)
           }).join('\n')
           console.log(`✅ Znaleziono ${products.length} produktów w sklepie`)
         }
@@ -2122,7 +2163,7 @@ export async function POST(req: NextRequest) {
 
     // Dodaj kontekst produktów ze sklepu (części serwisowe)
     if (productContext) {
-      enhancedSystemPrompt += `\n\n=== [SKLEP_PRODUKTY] CZĘŚCI SERWISOWE Z NASZEGO SKLEPU ===\n${productContext}\n\nKlient pytał o part number który MAMY W SKLEPIE. Podaj mu nazwę, cenę i link. To są oryginalne części serwisowe Zebra.`
+      enhancedSystemPrompt += `\n\n=== [SKLEP_PRODUKTY] CZĘŚCI I MATERIAŁY Z NASZEGO SKLEPU ===\n${productContext}\n\nKlient podał numer katalogowy, który MAMY W SKLEPIE SERWISU. Podaj nazwę, cenę i link do karty produktu. Gdy przy produkcie nie ma kwoty, nie podawaj ceny, tylko odeślij do karty produktu. NIE używaj szablonu odsyłającego do sklepu TAKMA. To są oryginalne części i materiały Zebra.`
     }
 
     // Dodaj kontekst z RAG (techniczne szczegóły z manuali)

@@ -636,6 +636,72 @@ for (const [nazwa, wzor] of [
   ['przykład z PTT i Volume Up', /nie widzi przycisku PTT, a Ty każesz przy restarcie trzymać Volume Up/],
 ]) sprawdz('prompt: ' + nazwa, regulaPrzycisku.length > 0 && wzor.test(regulaPrzycisku), true, nazwa)
 
+// --- runda 12: numery katalogowe materiałów ze sklepu serwisu (alert 20.11.2026) ---
+// Klient wpisał sam numer taśmy do drukarki kart ZC350, który sklep serwisu ma z własną kartą
+// produktu. Wzorzec znał tylko numery od P, od BTRY- i 1xxxxx-xxx, więc czat nie dostał danych
+// ze sklepu i odesłał klienta szablonem do sklepu TAKMA. Numer bywa wklejany z cudzysłowem w środku.
+const kodNumerow = ts.transpileModule(
+  wytnij('function wykryjNumeryKatalogowe', '// === Koniec: numery katalogowe ze sklepu serwisu ==='),
+  { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText
+const { wykryjNumeryKatalogowe, opisProduktuZeSklepu } = await import(`data:text/javascript,${encodeURIComponent(
+  kodNumerow + '\nexport { wykryjNumeryKatalogowe, opisProduktuZeSklepu }')}`)
+const maNumer = (tekst, numer) => wykryjNumeryKatalogowe(tekst).includes(numer)
+
+// Formaty numerów, które sklep serwisu ma w tabeli products (stan z 21.11.2026)
+for (const [tekst, numer] of [
+  ['"800300"-321EM', '800300-321EM'],
+  ['800350-320EM', '800350-320EM'],
+  ['taśma 800300-309em do zc300', '800300-309EM'],
+  ['czy macie „800350-360EM”?', '800350-360EM'],
+  ['800300-301', '800300-301'],
+  ['karta czyszcząca 105999-310-01', '105999-310-01'],
+  ['karty 104523-111', '104523-111'],
+  ['głowica 105934-037 do GK420d', '105934-037'],
+  ['P1080383-226', 'P1080383-226'],
+  ['moduł P1112640-017C', 'P1112640-017C'],
+  ['głowica P1004230.', 'P1004230'],
+  ['BTRY-MC93-STN-01', 'BTRY-MC93-STN-01'],
+  ['zasilacz PWR-BGA12V50W0WW', 'PWR-BGA12V50W0WW'],
+  ['ile kosztuje P1037974-010, a ile P1037974-011', 'P1037974-011'],
+]) sprawdz('wykryjNumeryKatalogowe: numer ze sklepu', maNumer(tekst, numer), true, tekst)
+
+// Nazwy modeli, krótkie liczby i zwykłe słowa to nie numery katalogowe
+for (const tekst of [
+  'drukarka ZD421 nie drukuje',
+  'czas naprawy 5-7 dni',
+  'diagnostyka 24-48 h',
+  'mam ZT411 i TC52',
+  'serwis-zebry nie działa',
+]) sprawdz('wykryjNumeryKatalogowe: brak numeru', wykryjNumeryKatalogowe(tekst).length, 0, tekst)
+sprawdz('wykryjNumeryKatalogowe: bez powtórzeń', wykryjNumeryKatalogowe('800350-320EM i 800350-320em').length, 1, 'powtórzony numer')
+
+// Cena 0 w bazie: karta produktu ma cenę z bieżącej oferty, czat nie może podać „0,00 zł"
+const wierszBezCeny = opisProduktuZeSklepu({ sku: '800350-320EM', name: 'Taśma KdO', price_brutto: 0 },
+  'https://www.serwis-zebry.pl/sklep/materialy-do-drukarek-kart/zebra-800350-320em')
+sprawdz('opisProduktuZeSklepu: bez kwoty przy cenie 0', /0,00\s*zł/.test(wierszBezCeny), false, wierszBezCeny)
+sprawdz('opisProduktuZeSklepu: odesłanie do karty przy cenie 0', /karcie produktu/.test(wierszBezCeny), true, wierszBezCeny)
+sprawdz('opisProduktuZeSklepu: link do karty produktu', wierszBezCeny.endsWith('/sklep/materialy-do-drukarek-kart/zebra-800350-320em'), true, wierszBezCeny)
+const wierszZCena = opisProduktuZeSklepu({ sku: 'P1112640-019', name: 'Głowica', resolution_dpi: 203, price_brutto: 627.29 }, 'https://www.serwis-zebry.pl/sklep/x')
+sprawdz('opisProduktuZeSklepu: kwota przy cenie z bazy', wierszZCena.includes('203 DPI — 627,29 zł brutto'), true, wierszZCena)
+
+// Trasa: stary wzorzec zniknął, drukarki dalej idą regułą o numerze urządzenia, link prowadzi do karty
+const krokSklepu = src.slice(src.indexOf('// === KROK 2.5'), src.indexOf('// === KROK 3'))
+sprawdz('trasa: stary wąski wzorzec numerów', /1\\d\{5\}-\\d\{3\}/.test(krokSklepu), false, 'KROK 2.5')
+sprawdz('trasa: wyszukiwanie przez wykryjNumeryKatalogowe', /wykryjNumeryKatalogowe\(lastUserMessage\)/.test(krokSklepu), true, 'KROK 2.5')
+sprawdz('trasa: drukarki poza blokiem sklepu', /\.neq\('product_type', 'drukarka'\)/.test(krokSklepu), true, 'KROK 2.5')
+sprawdz('trasa: link z getProductUrl', /getProductUrl\(/.test(krokSklepu), true, 'KROK 2.5')
+
+// Prompt: produkt z [SKLEP_PRODUKTY] ma pierwszeństwo przed szablonem sklepu TAKMA
+const regulaNumerow = src.slice(src.indexOf('NUMERY KATALOGOWE (PART NUMBER)'), src.indexOf('Jeśli klient podaje part number URZĄDZENIA'))
+for (const [nazwa, wzor] of [
+  ['pierwszeństwo przed szablonem TAKMA', /PIERWSZEŃSTWO przed szablonem odsyłającym do sklepu TAKMA/],
+  ['taśmy wśród produktów sklepu', /materiały do drukarek kart \(taśmy, karty, karty czyszczące\)/],
+  ['sam numer bez pytania', /Gdy klient podał sam numer bez pytania/],
+]) sprawdz('prompt: ' + nazwa, regulaNumerow.length > 0 && wzor.test(regulaNumerow), true, nazwa)
+const blokSklepu = src.slice(src.indexOf('=== [SKLEP_PRODUKTY]'), src.indexOf('// Dodaj kontekst z RAG'))
+sprawdz('blok [SKLEP_PRODUKTY]: zakaz szablonu TAKMA', /NIE używaj szablonu odsyłającego do sklepu TAKMA/.test(blokSklepu), true, 'blok sklepu')
+sprawdz('blok [SKLEP_PRODUKTY]: bez kwoty, gdy jej nie ma', /Gdy przy produkcie nie ma kwoty, nie podawaj ceny/.test(blokSklepu), true, 'blok sklepu')
+
 // --- wynik -----------------------------------------------------------------
 console.log(`\nZaliczone: ${zaliczone}/${zaliczone + bledy.length}`)
 if (bledy.length) {
