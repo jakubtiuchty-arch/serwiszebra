@@ -243,7 +243,18 @@ sprawdzPodstawe('prefiks # w LS2208 to rzekomo 7013', 'bledne_dane',
 const TC720L = 'TC720L to terminal Zebra, a nie skaner ręczny. Sprawdźmy uśpienie: Ustawienia → Wyświetlacz → Limit czasu ekranu.'
 sprawdzPodstawe('TC720L jako terminal', 'bledne_dane',
   'Model TC720L to terminal, a nie skaner, więc asystent powinien to poprawnie zidentyfikować.', TC720L, false)
-console.log(`Bramka podstawy zarzutu: ${podstawaOk}/${podstawaOk + bledyPodstawy.length}`)
+// Restart drukarki Link-OS komendą SGD device.reset wysłaną na port 9100. Zasada o drukarkach EU RED
+// zakazuje tylko włączania portu i usług sieciowych komendą setvar. 23.11.2026 oceniający w trzech
+// powtórkach na trzy zgłaszał „bledne_dane” z pewnością 1,0, bo „w trybie chronionym setvar nie włącza
+// usług sieciowych”, choć asystent niczego w sieci nie włączał.
+const RESTART_DEVICE_RESET = 'W skrypcie wystarczy zamienić komendę getvar na restart: $cmd=\'! U1 setvar "device.reset" ""\'. Przy restarcie drukarka zwykle nie odeśle odpowiedzi.'
+sprawdzPodstawe('device.reset a zasada EU RED', 'bledne_dane',
+  'Asystent podał nieprawidłową komendę do restartu drukarki, ponieważ w trybie chronionym (EU RED) komenda setvar nie włącza usług sieciowych.',
+  RESTART_DEVICE_RESET, false, '$cmd=\'! U1 setvar "device.reset" ""\';')
+sprawdzPodstawe('device.reset tylko dla Link-OS', 'bledne_dane',
+  'Asystent podał komendę do restartu, która jest poprawna tylko dla drukarek z Link-OS, a nie uwzględnił, że klient może mieć inną wersję.',
+  RESTART_DEVICE_RESET, false, '$cmd=\'! U1 setvar "device.reset" ""\';')
+console.log(`Bramka podstawy zarzutu:${podstawaOk}/${podstawaOk + bledyPodstawy.length}`)
 if (bledyPodstawy.length) { for (const b of bledyPodstawy) console.error('  ' + b); process.exit(1) }
 
 // Bramka odesłania do sklepu: szablon sklepu w odpowiedzi na prośbę o zakup to zasada czatu, nie odbicie
@@ -300,6 +311,11 @@ sprawdzZaprzeczenie('streszczony cytat, odpowiedź bez przeczenia o urządzeniu'
 sprawdzZaprzeczenie('urządzenie czegoś nie obsługuje', 'zaprzeczenie', 'ZD421 w tej wersji nie obsługuje Bluetooth, więc nie sparujesz jej z telefonem.', [BEZ_BLUETOOTH], true)
 sprawdzZaprzeczenie('urządzenie czegoś nie ma', 'zaprzeczenie', 'Ten model nie ma ruchomego czujnika, więc nie przesuniesz go pod znacznik.', [KABLE_DO_WYSYLKI, BRAK_CZUJNIKA], true)
 sprawdzZaprzeczenie('streszczony cytat, przeczenie w odpowiedzi', 'zaprzeczenie', 'Twierdzi, że drukarka nie ma Bluetooth.', [BEZ_BLUETOOTH], true)
+// Opis tego, jak drukarka zachowuje się podczas restartu, to nie przeczenie o urządzeniu. 23.11.2026 na main
+// oceniający zgłosił zdanie „drukarka zwykle nie odeśle odpowiedzi” jako „zaprzeczenie”.
+const BRAK_ODPOWIEDZI_PRZY_RESTARCIE = 'Przy restarcie drukarka zwykle nie odeśle odpowiedzi — po wysłaniu komendy może zamknąć połączenie albo przestać odpowiadać na chwilę. To normalne.'
+sprawdzZaprzeczenie('brak odpowiedzi drukarki przy restarcie', 'zaprzeczenie', 'Przy restarcie drukarka zwykle nie odeśle odpowiedzi', [BRAK_ODPOWIEDZI_PRZY_RESTARCIE], false)
+sprawdzZaprzeczenie('streszczony cytat o restarcie', 'zaprzeczenie', 'Asystent twierdzi, że drukarka nie odpowiada po restarcie.', [BRAK_ODPOWIEDZI_PRZY_RESTARCIE], false)
 sprawdzZaprzeczenie('inne typy bez zmian', 'bledne_dane', 'Standardowo nie trzeba dołączać kabli — wystarczy sama drukarka.', [KABLE_DO_WYSYLKI], true)
 console.log(`Bramka zaprzeczenia: ${zaprzeczenieOk}/${zaprzeczenieOk + bledyZaprzeczenia.length}`)
 if (bledyZaprzeczenia.length) { for (const b of bledyZaprzeczenia) console.error('  ' + b); process.exit(1) }
@@ -776,6 +792,26 @@ const PRZYPADKI = [
   { nazwa: 'TC720L: klient nazywa terminal skanerem', oczekiwany: null, tury: [
     ['skaner gaśnie sam po kilkunastu minutach', 'Jaki to model? Od modelu zależy, czy sprawdzamy zasilanie, baterię, stację czy ustawienia uśpienia. Model jest na naklejce z numerem seryjnym S/N, możesz też przesłać zdjęcie tej naklejki.'],
     ['TC720L', 'TC720L to terminal Zebra, a nie skaner ręczny, więc zacznijmy od ustawień uśpienia. Wejdź w **Ustawienia → Wyświetlacz → Limit czasu ekranu** i ustaw najdłuższy dostępny czas.\n\nPotem zostaw terminal na 15 minut bez używania. Dalej się wyłącza?'],
+  ]},
+
+  // --- fałszywe alarmy z 22–23.11.2026 (rozmowy odtworzone, bez wypowiedzi klientów) ---
+
+  // Tablet nie ładuje się przez USB-C. Dwa darmowe kroki (dioda ładowania, ponowne osadzenie baterii),
+  // potem klient widzi uszkodzony port, więc serwis bez kwoty za naprawę. Oceniający w trzech powtórkach
+  // na trzy zgłaszał „wycena_przedwczesnie” za opłatę 99 zł netto za diagnostykę, z oceną 2/5. Bramka kwoty
+  // odrzuca zarzut, a ocena musi wrócić nad próg, bo inaczej sesja trafia na listę do naprawy bez zarzutu.
+  { nazwa: 'ET65: uszkodzony port USB-C po dwóch krokach, serwis bez kwoty', oczekiwany: null, bezZarzutow: true, tury: [
+    ['tablet ET65 nie ładuje się przez USB-C', 'ET65 ładuje się przez USB-C, a dioda ładowania powinna pokazać stan zasilania.\n\nPodłącz tablet bezpośrednio do zasilacza USB-C i zostaw na 2–3 minuty bez poruszania wtyczką. Sprawdź diodę ładowania:\n\n- wolno miga na pomarańczowo — ładuje,\n- świeci na zielono — naładowany,\n- szybko miga na pomarańczowo lub czerwono — błąd ładowania,\n- nie świeci wcale — tablet nie dostaje zasilania przez USB-C.\n\nJaki jest stan diody po podłączeniu?'],
+    ['dioda nie świeci', 'Wygląda na to, że tablet nie dostaje zasilania przez USB-C albo połączenie baterii nie zadziałało.\n\nOdłącz ładowarkę, wyjmij baterię, włóż ją z powrotem i dociśnij, aż zatrzaski klikną. Potem podłącz ładowarkę USB-C jeszcze raz i odczekaj 2 minuty.\n\nDioda zaczęła migać albo świecić?'],
+    ['port USB-C jest widocznie uszkodzony', 'Widoczne uszkodzenie portu USB-C w ET65 wymaga naprawy serwisowej — tego nie da się bezpiecznie usunąć ustawieniami ani resetem. Port trzeba zweryfikować mechanicznie, a po naprawie sprawdzić ładowanie i szczelność urządzenia.\n\nTego modelu nie mam w cenniku orientacyjnym, więc nie chcę podawać kwoty na wyrost. Wycenę przygotujemy po diagnozie urządzenia w serwisie. Kurier odbierze tablet z podanego adresu. Diagnostyka trwa zwykle 24–48 h i jest bezpłatna przy akceptacji naprawy, a przy rezygnacji koszt wynosi 99 zł netto. Zgłoszenie założysz przyciskiem „Wyślij do serwisu” pod tą wiadomością. [SERIOUS_ISSUE]'],
+  ]},
+
+  // Skrypt PowerShell wysyła komendę SGD na port 9100. Asystent zamienia getvar na device.reset i uprzedza,
+  // że przy restarcie drukarka nie odeśle odpowiedzi. Na main oceniający zgłosił to zdanie jako „zaprzeczenie”,
+  // a na tym stosie zgłasza „bledne_dane” z pewnością 1,0, przykładając zasadę EU RED do komendy restartu.
+  { nazwa: 'Link-OS: restart device.reset w skrypcie na port 9100', oczekiwany: null, bezZarzutow: true, tury: [
+    ['jak przerobić komendę ze skryptu, żeby zrestartować drukarkę?', 'Podeślij proszę tę komendę oraz model drukarki Zebra — od modelu i języka komend zależy, czy restart robi się komendą SGD/ZPL, czy inaczej.\n\nJeśli to drukarka Zebra z Link-OS, restart zwykle wykonuje się taką jedną linią:\n\n```\n! U1 setvar "device.reset" ""\n```\n\nWklej swoją komendę, to powiem, czy da się ją bezpiecznie zmodyfikować.'],
+    ['$ip="IP"; $cmd=\'! U1 getvar "device.friendly_name"\'; $c=[Net.Sockets.TcpClient]::new(); $c.Connect($ip,9100); $s=$c.GetStream(); $b=[Text.Encoding]::ASCII.GetBytes($cmd+"`r`n"); $s.Write($b,0,$b.Length); $buf=New-Object byte[] 4096; $n=$s.Read($buf,0,$buf.Length); [Text.Encoding]::ASCII.GetString($buf,0,$n); $c.Close()', 'Tak — w Twoim skrypcie wystarczy zamienić komendę `getvar` na restart:\n\n```\n$ip="IP"; $cmd=\'! U1 setvar "device.reset" ""\'; $c=[Net.Sockets.TcpClient]::new(); $c.SendTimeout=3000; $c.Connect($ip,9100); $s=$c.GetStream(); $b=[Text.Encoding]::ASCII.GetBytes($cmd+"`r`n"); $s.Write($b,0,$b.Length); $c.Close()\n```\n\nPrzy restarcie drukarka zwykle nie odeśle odpowiedzi — po wysłaniu komendy może zamknąć połączenie albo przestać odpowiadać na chwilę. To normalne.\n\nPo około 30–60 sekundach sprawdź, czy drukarka wróciła na sieć. Działa?'],
   ]},
 ]
 
