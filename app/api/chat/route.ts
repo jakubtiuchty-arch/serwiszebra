@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { searchBlogForAI } from '@/lib/blog'
 import { pobierzKomplet, naglowekKompletu, type KompletDokumentow } from '@/lib/manuals-full-text'
-import { zglosAwarieCzatu } from '@/lib/chat-awarie'
+import { zglosAwarieCzatu, rozpoznajAwarie } from '@/lib/chat-awarie'
 
 /**
  * Wpis czarnej skrzynki (chat_logs.rag_sources). Przy wyszukiwaniu wektorowym: strona i podobieństwo.
@@ -2376,6 +2376,11 @@ ZRÓB DOKŁADNIE TAK - WKLEJ [BARCODE:...] W ODPOWIEDŹ!`
     console.error('Chat API error:', error)
     // Alarm od razu przy braku środków / odrzuconym kluczu; każde nieudane pytanie trafia do raportu
     await Promise.race([zglosAwarieCzatu({ err: error, sessionId, userMessage: lastUserMessage }), new Promise((r) => setTimeout(r, 5000))])
+    // Brak środków / odrzucony klucz: czat nie odpowie nikomu, dopóki ktoś nie zareaguje.
+    // „Spróbuj ponownie" nic by nie dało — front pokazuje wtedy telefon i przycisk zgłoszenia.
+    if (rozpoznajAwarie(error) !== 'inny') {
+      return NextResponse.json({ error: 'Chat unavailable', niedostepny: true }, { status: 503 })
+    }
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

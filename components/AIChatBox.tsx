@@ -64,6 +64,10 @@ function przyciskPoPoprzedniej(prev: Message[]): Pick<Message, 'ctaWillShow' | '
   return { ctaWillShow: zPrzyciskiem, repairPrefill: zPrzyciskiem ? poprzednia?.repairPrefill ?? null : null }
 }
 
+const KOMUNIKAT_NIEDOSTEPNY =
+  'Asystent jest chwilowo niedostępny — pracujemy nad tym. Zadzwoń do nas: **+48 601 619 898** ' +
+  'albo zgłoś urządzenie do naprawy przyciskiem poniżej. Opisz usterkę, a odezwiemy się z diagnozą.'
+
 const placeholders = [
   "Np. Drukarka pomija etykiety…",
   "Np. Skaner nie czyta kodów…",
@@ -537,7 +541,19 @@ export default function AIChatBox({ variant = 'floating' }: AIChatBoxProps) {
         }),
       })
 
-      if (!response.ok) throw new Error('API error')
+      if (!response.ok) {
+        const blad = await response.json().catch(() => null)
+        if (blad?.niedostepny === true) {
+          // Awaria po naszej stronie (brak środków / klucz API) — ponawianie nic nie da,
+          // więc zamiast „spróbuj ponownie" dajemy telefon i przycisk zgłoszenia
+          setMessages(prev => [
+            ...prev,
+            { role: 'assistant', content: KOMUNIKAT_NIEDOSTEPNY, ctaWillShow: true, repairPrefill: null },
+          ])
+          return
+        }
+        throw new Error('API error')
+      }
 
       const reader = response.body?.getReader()
       const decoder = new TextDecoder()
