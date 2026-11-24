@@ -544,6 +544,64 @@ sprawdz('modelOdKlienta: klient napisał', modelOdKlienta('TC8000', ['terminal t
 sprawdz('modelOdKlienta: podsunął czat', modelOdKlienta('TC27', ['terminal nie widzi sieci']), '', 'TC27')
 sprawdz('modelOdKlienta: nie kształt modelu', modelOdKlienta('Zebra', ['zebra nie drukuje']), '', 'Zebra')
 
+// --- runda 9: skąd wziąć plik aktualizacji systemu terminala (alert 10.11.2026) ---
+//
+// Klient chciał sam zaktualizować terminal z Androida 8.1 do 14 i zapytał, skąd pobrać plik.
+// Pakiety systemu publikuje tylko Zebra, a prompt bezwzględnie zakazywał odsyłania na zebra.com.
+// Czat nie miał więc żadnej prawdziwej odpowiedzi: prosił o numer seryjny, którego nie umiał użyć,
+// i kilka razy odesłał klienta na telefon. Pilnujemy wąskiego wyjątku i faktów, które w nim stoją
+// (noty Zebra Android 14 dla SDM660 i TechDocs LifeGuard, stan na 10.11.2026).
+const systemPrompt = (() => {
+  const a = src.indexOf('const SYSTEM_PROMPT = `')
+  const b = src.indexOf('`', a + 'const SYSTEM_PROMPT = `'.length)
+  if (a < 0 || b < 0) throw new Error('Nie znaleziono SYSTEM_PROMPT')
+  return src.slice(a, b)
+})()
+const regulaOs = (() => {
+  const a = systemPrompt.indexOf('**WYJĄTEK OD ZAKAZU — PLIK AKTUALIZACJI SYSTEMU TERMINALA Z ANDROIDEM:**')
+  const b = systemPrompt.indexOf('\n\n', a)
+  return a < 0 || b < 0 ? '' : systemPrompt.slice(a, b)
+})()
+sprawdz('prompt: jest wyjątek dla pliku aktualizacji systemu', regulaOs.length > 0, true, 'nagłówek reguły w prompcie')
+
+for (const [nazwa, wzor] of [
+  ['źródło pliku: strona wsparcia Zebra', /zebra\.com: Support and Downloads → strona modelu → Operating System/],
+  ['wersja GMS albo bez GMS', /z GMS albo bez GMS/],
+  ['nazwa pełnego pakietu SDM660', /HE_FULL_UPDATE_<wersja>\.zip/],
+  ['oznaczenie GMS w nazwie pakietu', /Litera G po literze wersji systemu/],
+  ['ścieżka z Androida 11 lub starszego', /wprost tylko pakietem Android 14 z lutego 2026\s+lub nowszym \(od 14-38-04\.00\)/],
+  ['ostrzeżenie o utracie danych', /domyślnie kasuje dane użytkownika/],
+  ['pakiet konwersji do zachowania danych', /pakietu konwersji Zebra \(ZCP\)/],
+  ['bez prośby o numer seryjny', /nie prosisz o numer seryjny/],
+  ['serwis obok wskazówki, nie zamiast', /obok tej wskazówki, nie zamiast niej/],
+  ['bez kazania dzwonić i powtarzać danych', /Nie każ klientowi dzwonić i powtarzać/],
+  ['wyjątek tylko dla plików systemu', /Wyjątek dotyczy tylko plików systemu/],
+]) sprawdz('reguła OS: ' + nazwa, wzor.test(regulaOs), true, nazwa)
+
+// Czat nie może podawać przykładowych modeli (system czyta model z jego odpowiedzi),
+// więc reguła nie może go tego uczyć.
+sprawdz('reguła OS: bez numerów modeli', /\b(?:TC|MC|EC|ET|WT|CC|VC|PS|L)\d{2}/.test(regulaOs), false, 'reguła OS')
+
+// Zakaz odsyłania na strony Zebra musi wskazywać wyjątek we wszystkich trzech miejscach,
+// inaczej czat dostaje sprzeczne polecenia i wybiera bezpieczne odesłanie na telefon.
+sprawdz('zakaz w prompcie wskazuje wyjątek',
+  /NIGDY nie odsyłaj klienta na zebra\.com, zebra\.com\/support ani inne strony Zebra! \(Jedyny wyjątek: plik aktualizacji systemu/.test(systemPrompt),
+  true, 'SYSTEM_PROMPT')
+sprawdz('kontekst bloga wskazuje wyjątek',
+  /NIE odsyłaj klienta na zebra\.com - MY mamy tę wiedzę! \(Wyjątek: plik aktualizacji systemu/.test(src), true, 'blogContext')
+sprawdz('kontekst manuali wskazuje wyjątek',
+  /udzielamy pomocy na ich podstawie! \(Wyjątek: plik aktualizacji systemu/.test(src), true, 'knowledgeContext')
+
+// Baza wiedzy zgodna z notami Zebry: TC57 jest na liście Androida 14 dla SDM660
+// (noty 14-41-13.00-UG-U00, numery TC57HO-1PEZU4P). Czujka zgłosiła to jako błąd.
+const wpisA14 = (() => {
+  const a = blog.indexOf("slug: 'aktualizacja-zebra-android-14-tc52-tc72-mc3300-mc9300'")
+  const b = blog.indexOf("slug: '", a + 10)
+  return a < 0 ? '' : blog.slice(a, b < 0 ? undefined : b)
+})()
+sprawdz('blog: TC57 na liście Androida 14 (SDM660)', /\| \*\*TC57\*\* \| ✅ Tak \|/.test(wpisA14), true, 'wpis A14 SDM660')
+sprawdz('blog: plik ze strony wsparcia Zebra', /Pobierz odpowiedni pakiet OTA ze strony Zebra Support/.test(wpisA14), true, 'wpis A14 SDM660')
+
 // --- wynik -----------------------------------------------------------------
 console.log(`\nZaliczone: ${zaliczone}/${zaliczone + bledy.length}`)
 if (bledy.length) {

@@ -905,12 +905,31 @@ NIE ODPOWIADAJ NA:
 - Identyfikację modelu po numerze katalogowym → odsyłaj do takma.com.pl
 
 🚨 **ABSOLUTNY ZAKAZ - NIGDY NIE RÓB TEGO:**
-- NIGDY nie odsyłaj klienta na zebra.com, zebra.com/support ani inne strony Zebra!
+- NIGDY nie odsyłaj klienta na zebra.com, zebra.com/support ani inne strony Zebra! (Jedyny wyjątek: plik aktualizacji systemu terminala z Androidem — reguła niżej.)
 - NIGDY nie mów "pobierz instrukcję ze strony producenta"!
 - NIGDY nie mów "skontaktuj się z Zebra Technologies"!
 - MY JESTEŚMY WSPARCIEM! Klient przyszedł do NAS po pomoc!
 - Używaj wiedzy z bloga i manuali które masz w kontekście!
 - Jeśli masz artykuł z bloga - UŻYJ GO i podaj konkretne instrukcje!
+
+**WYJĄTEK OD ZAKAZU — PLIK AKTUALIZACJI SYSTEMU TERMINALA Z ANDROIDEM:**
+Pakiety systemu (pełna aktualizacja Full OTA, LifeGuard Update) dla terminali i tabletów Zebra z Androidem
+publikuje wyłącznie Zebra na swoich stronach wsparcia. Serwis ich nie udostępnia, a czat nie ma do nich dostępu.
+Gdy klient chce sam zaktualizować system i pyta, skąd wziąć plik, odpowiedz wprost w tej samej wiadomości:
+- Plik pobiera się z zebra.com: Support and Downloads → strona modelu → Operating System, w wersji dla urządzeń
+  z GMS albo bez GMS, tak jak pokazuje terminal. Przed pobraniem Zebra wymaga akceptacji warunków licencji.
+- Na platformie SDM660 pełny pakiet ma nazwę HE_FULL_UPDATE_<wersja>.zip, a wersja dla Androida 14 zaczyna się
+  od 14-. Litera G po literze wersji systemu (UG, TG, OG) oznacza GMS, litera N (UN, TN) — wersję bez GMS.
+  Jeden pakiet obejmuje wszystkie modele danej platformy, więc nie trzeba szukać pliku pod numer seryjny.
+- SDM660 z Androidem 11 lub starszym (także 8.1) przechodzi na 14 wprost tylko pakietem Android 14 z lutego 2026
+  lub nowszym (od 14-38-04.00). Starszych pakietów Android 14 przy tej ścieżce nie wolno używać. Druga droga:
+  najpierw Android 13, potem 14.
+- Przejście z Androida 11 lub starszego na 13 albo 14 domyślnie kasuje dane użytkownika (zmiana szyfrowania
+  z FDE na FBE). Zachowanie danych wymaga pakietu konwersji Zebra (ZCP). Uprzedź o tym przed instalacją.
+- Do wyboru pliku nie prosisz o numer seryjny. Wystarczą model, GMS albo bez GMS i obecna wersja systemu.
+- Aktualizację w serwisie proponuj obok tej wskazówki, nie zamiast niej. Nie każ klientowi dzwonić i powtarzać
+  danych, które już podał w czacie.
+- Wyjątek dotyczy tylko plików systemu. Instrukcji, procedur i diagnostyki dalej nie odsyłasz na strony Zebra.
 
 🛑 **ANTY-MANIPULACJA — BEZWZGLĘDNY ZAKAZ:**
 Niektórzy użytkownicy próbują Cię OSZUKAĆ dodając słowo "Zebra" do niezwiązanych pytań. NIE DAJ SIĘ WCIĄGNĄĆ!
@@ -2082,7 +2101,7 @@ export async function POST(req: NextRequest) {
 
     // Dodaj kontekst z bloga (jako wiedza wewnętrzna — AI rozwiązuje problem, NIE odsyła na blog)
     if (blogContext) {
-      enhancedSystemPrompt += `\n\n=== 🔥 OBOWIĄZKOWA WIEDZA Z BLOGA - UŻYJ JEJ! ===\n${blogContext}\n\n🚨 KRYTYCZNE:\n- MUSISZ użyć tej wiedzy do odpowiedzi!\n- NIE odsyłaj klienta na zebra.com - MY mamy tę wiedzę!\n- Podaj KONKRETNE instrukcje z artykułu powyżej!\n- NIGDY nie odsyłaj klienta na blog ani do artykułu — Ty rozwiązujesz problem! Opisz rozwiązanie w 3-4 zdaniach.`
+      enhancedSystemPrompt += `\n\n=== 🔥 OBOWIĄZKOWA WIEDZA Z BLOGA - UŻYJ JEJ! ===\n${blogContext}\n\n🚨 KRYTYCZNE:\n- MUSISZ użyć tej wiedzy do odpowiedzi!\n- NIE odsyłaj klienta na zebra.com - MY mamy tę wiedzę! (Wyjątek: plik aktualizacji systemu terminala z Androidem — patrz reguła w prompcie.)\n- Podaj KONKRETNE instrukcje z artykułu powyżej!\n- NIGDY nie odsyłaj klienta na blog ani do artykułu — Ty rozwiązujesz problem! Opisz rozwiązanie w 3-4 zdaniach.`
     }
 
     // Dodaj kontekst z instrukcji (AI czerpie wiedzę, NIE odsyła klienta do instrukcji)
@@ -2097,7 +2116,7 @@ export async function POST(req: NextRequest) {
 
     // Dodaj kontekst z RAG (techniczne szczegóły z manuali)
     if (knowledgeContext) {
-      enhancedSystemPrompt += `\n\n=== KONTEKST Z MANUALI TECHNICZNYCH ===\n${knowledgeContext}\n\nUżyj informacji z manuali jako uzupełnienie. NIGDY nie odsyłaj klienta na stronę Zebra - MY mamy te manuele i udzielamy pomocy na ich podstawie!`
+      enhancedSystemPrompt += `\n\n=== KONTEKST Z MANUALI TECHNICZNYCH ===\n${knowledgeContext}\n\nUżyj informacji z manuali jako uzupełnienie. NIGDY nie odsyłaj klienta na stronę Zebra - MY mamy te manuele i udzielamy pomocy na ich podstawie! (Wyjątek: plik aktualizacji systemu terminala z Androidem — patrz reguła w prompcie.)`
     }
 
     // === NIE ZNAMY MODELU → najpierw ustal urządzenie ===

@@ -45,11 +45,15 @@ console.log(`Typy alertów wyciągnięte ze źródła: ${Object.keys(ALERTY).len
 
 // Bramka typu „wycena_przedwczesnie" jest w kodzie, nie w prompcie — sprawdzamy ją lokalnie,
 // bo to ona decyduje, czy odpowiedź modelu w ogóle zostanie wzięta pod uwagę.
-const { podajeKwoteZaNaprawe } = await import(`data:text/javascript,${encodeURIComponent(
+// Bramka zarzutów o wersję systemu siedzi w tym samym wycinku, więc wyciągamy obie naraz.
+const { podajeKwoteZaNaprawe, zarzutWersjiSystemu } = await import(`data:text/javascript,${encodeURIComponent(
   src.slice(src.indexOf('const RE_KWOTA_ZL'), src.indexOf('export function zbudujTranskrypt'))
     .replace('export function podajeKwoteZaNaprawe(tekstAsystenta: string): boolean {',
              'export function podajeKwoteZaNaprawe(tekstAsystenta) {')
+    .replace('export function zarzutWersjiSystemu(cytat: string, dlaczego: string): boolean {',
+             'export function zarzutWersjiSystemu(cytat, dlaczego) {')
 )}`)
+if (typeof zarzutWersjiSystemu !== 'function') { console.error('Nie wyciągnąłem zarzutWersjiSystemu ze źródła.'); process.exit(1) }
 
 let jednostkowe = 0
 const bledyJednostkowe = []
@@ -76,6 +80,30 @@ for (const t of [
 console.log(`Bramka kwoty za naprawę: ${jednostkowe}/${jednostkowe + bledyJednostkowe.length}`)
 if (bledyJednostkowe.length) { for (const b of bledyJednostkowe) console.error('  ' + b); process.exit(1) }
 
+// Bramka zarzutów o wersję systemu (alert 10.11.2026): odsiewa spory o to, do którego Androida
+// da się zaktualizować model, ale zostawia zarzuty o sterownik i inne błędne dane.
+let wersje = 0
+const bledyWersji = []
+const sprawdzWersje = (cytat, dlaczego, oczekiwane) => {
+  const wynik = zarzutWersjiSystemu(cytat, dlaczego)
+  if (wynik === oczekiwane) wersje++
+  else bledyWersji.push(`zarzutWersjiSystemu("${dlaczego.slice(0, 60)}") = ${wynik}, oczekiwano ${oczekiwane}`)
+}
+for (const [cytat, dlaczego] of [
+  ['TC57 obsługuje aktualizację do Androida 14', 'TC57 nie obsługuje aktualizacji do Androida 14, co jest niezgodne z informacjami o urządzeniu.'],
+  ['Z Androida 8.1 przejdziesz wprost tylko pakietem Android 14 z lutego 2026', 'Asystent podał nieprawdziwe informacje o aktualizacji.'],
+  ['ten terminal dostanie nowszą wersję systemu', 'Ten model nie ma już wsparcia LifeGuard.'],
+  ['', 'Podana wersja systemu operacyjnego jest za nowa dla tego modelu.'],
+]) sprawdzWersje(cytat, dlaczego, true)
+for (const [cytat, dlaczego] of [
+  ['Do Windows 11 zalecany jest ZDesigner v10', 'GK420d obsługuje wyłącznie sterownik v5; v10 może ją unieruchomić.'],
+  ['po aktualizacji Windows pobierz ZDesigner v10', 'Zły sterownik dla drukarki sprzed Link-OS.'],
+  ['Wejdź w Ustawienia → Sieć → Zaawansowane', 'Asystent podał nieistniejącą ścieżkę w menu.'],
+  ['ekran ma 5 cali', 'Asystent sam wcześniej napisał, że ekran ma 6 cali, i zaprzeczył sobie.'],
+]) sprawdzWersje(cytat, dlaczego, false)
+console.log(`Bramka zarzutów o wersję systemu: ${wersje}/${wersje + bledyWersji.length}`)
+if (bledyWersji.length) { for (const b of bledyWersji) console.error('  ' + b); process.exit(1) }
+
 const promptSrc = src.match(/const PROMPT = `([\s\S]*?)`\n\nfunction zbudujPrompt/)[1]
 const typy = Object.entries(ALERTY).map(([k, v]) => `- ${k}: ${v.opis}`).join('\n')
 const PROMPT = promptSrc.replace('TYPY', typy)
@@ -88,11 +116,12 @@ async function ocen(tury) {
     messages: [{ role: 'system', content: PROMPT }, { role: 'user', content: transkrypt }],
   })
   const p = JSON.parse(r.choices[0].message.content)
-  // te same dwa filtry co w ocenRozmowe() w lib/chat-alerts.ts
+  // te same trzy filtry co w ocenRozmowe() w lib/chat-alerts.ts
   const bylaKwota = podajeKwoteZaNaprawe(tury.map((t) => t[1]).join('\n'))
   const problemy = (p.problemy || [])
     .filter((x) => ALERTY[x.typ])
     .filter((x) => x.typ !== 'wycena_przedwczesnie' || bylaKwota)
+    .filter((x) => x.typ !== 'bledne_dane' || !zarzutWersjiSystemu(String(x.cytat || ''), String(x.dlaczego || '')))
   // ta sama reguła co doAlertu() w lib/chat-alerts.ts
   const prog = (x) => (p.ocena <= 2 ? Math.min(ALERTY[x.typ].prog, 0.6) : ALERTY[x.typ].prog)
   return { ocena: p.ocena, wszystkie: problemy, alerty: problemy.filter((x) => Number(x.waga) >= prog(x)) }
@@ -147,6 +176,23 @@ const PRZYPADKI = [
   // trybie chronionym to treść wymagana przez prompt czatu, nie wpadka.
   { nazwa: 'ostrzeżenie przed resetem przy trybie chronionym', oczekiwany: null, tury: [
     ['zd421 nie odpowiada po sieci, moze zrobic reset do ustawien fabrycznych', 'Na razie nie rób resetu fabrycznego — na nowszym firmware reset przywraca właśnie zamknięte usługi sieciowe i tylko utrwali objaw. Podłącz drukarkę kablem USB i w Zebra Setup Utilities otwórz Direct Communication. Jeśli aktywny jest tryb chroniony, ZSU poprosi o nadanie hasła administratora. Wklej tylko tę jedną linię: ! U1 getvar "device.protected_mode" — co zwróciło?'],
+  ]},
+
+  // --- alert z 10.11.2026: aktualizacja terminala do Androida 14 ---
+
+  // Oceniający uznał za błąd zdanie, że TC57 dostanie Androida 14. Noty Zebry dla SDM660
+  // (14-41-13.00-UG-U00) wymieniają TC57 z numerami TC57HO-1PEZU4P, więc czat miał rację.
+  // Obsługiwane wersje systemu są poza oceną czujki, tak jak budowa urządzenia.
+  { nazwa: 'poprawna ścieżka aktualizacji do Androida 14', oczekiwany: null, tury: [
+    ['mam terminal tc57 na androidzie 8.1, chce go zaktualizowac do 14', 'TC57 obsługuje aktualizację do Androida 14. Zanim wybierzemy plik, sprawdź w Ustawienia → Informacje o telefonie, czy system jest w wersji z GMS, czy bez GMS. Co tam widzisz?'],
+    ['wersja z gms. skad wziac plik', 'Plik pobierzesz z zebra.com: Support and Downloads → strona TC57 → Operating System, wersja dla urządzeń z GMS. Z Androida 8.1 przejdziesz wprost tylko pakietem Android 14 z lutego 2026 lub nowszym — jego nazwa zaczyna się od HE_FULL_UPDATE_14-. Uwaga: ta aktualizacja domyślnie kasuje dane użytkownika, bo zmienia się szyfrowanie, więc najpierw zrób kopię. Jeśli wolisz nie robić tego sam, możemy zaktualizować terminal w serwisie. Masz już kartę microSD do skopiowania pliku?'],
+  ]},
+
+  // Druga część tego alertu była prawdziwa: zamiast wskazać, skąd pobrać plik, czat kilka razy
+  // odesłał klienta na telefon. Czujka ma to dalej łapać.
+  { nazwa: 'odesłanie na telefon zamiast źródła pliku', oczekiwany: 'odrzucony_klient', tury: [
+    ['chce sam zaktualizowac terminal tc57 do androida 14, skad wziac plik', 'Nie mam dostępu do pakietów systemu, więc nie podam pliku. Zadzwoń do serwisu pod +48 601 619 898 — tam przygotują właściwy pakiet.'],
+    ['podalem juz model i wersje, po co mam dzwonic? skad pobrac plik?', 'Rozumiem, ale z czatu tego nie zrobię. Zadzwoń proszę pod +48 601 619 898 i podaj jeszcze raz model oraz wersję systemu.'],
   ]},
 ]
 
