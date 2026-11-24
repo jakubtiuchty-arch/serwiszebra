@@ -43,13 +43,16 @@ const brakujace = wUnii.filter((t) => !ALERTY[t])
 if (brakujace.length) { console.error('Typy z TypAlertu nieobecne w wyciągniętych progach:', brakujace.join(', ')); process.exit(1) }
 console.log(`Typy alertów wyciągnięte ze źródła: ${Object.keys(ALERTY).length}\n`)
 
-// Bramka typu „wycena_przedwczesnie" jest w kodzie, nie w prompcie — sprawdzamy ją lokalnie,
-// bo to ona decyduje, czy odpowiedź modelu w ogóle zostanie wzięta pod uwagę.
-const { podajeKwoteZaNaprawe } = await import(`data:text/javascript,${encodeURIComponent(
+// Bramki typów „wycena_przedwczesnie" i „bledne_dane" (wersja sterownika) są w kodzie, nie w prompcie —
+// sprawdzamy je lokalnie, bo to one decydują, czy odpowiedź modelu w ogóle zostanie wzięta pod uwagę.
+const { podajeKwoteZaNaprawe, zarzutSterownikaMaPodstawe } = await import(`data:text/javascript,${encodeURIComponent(
   src.slice(src.indexOf('const RE_KWOTA_ZL'), src.indexOf('export function zbudujTranskrypt'))
     .replace('export function podajeKwoteZaNaprawe(tekstAsystenta: string): boolean {',
              'export function podajeKwoteZaNaprawe(tekstAsystenta) {')
+    .replace('export function zarzutSterownikaMaPodstawe(zarzut: string, tekstAsystenta: string): boolean {',
+             'export function zarzutSterownikaMaPodstawe(zarzut, tekstAsystenta) {')
 )}`)
+if (typeof zarzutSterownikaMaPodstawe !== 'function') { console.error('Nie wyciągnąłem zarzutSterownikaMaPodstawe ze źródła.'); process.exit(1) }
 
 let jednostkowe = 0
 const bledyJednostkowe = []
@@ -76,6 +79,28 @@ for (const t of [
 console.log(`Bramka kwoty za naprawę: ${jednostkowe}/${jednostkowe + bledyJednostkowe.length}`)
 if (bledyJednostkowe.length) { for (const b of bledyJednostkowe) console.error('  ' + b); process.exit(1) }
 
+// Bramka zarzutu o sterowniku: zarzut o wersji ZDesigner przechodzi tylko wtedy, gdy asystent zalecił v10
+// w rozmowie o modelu, który wymaga v5 (10.11.2026: fałszywy alarm przy v10 dla ZD220t).
+let sterownikOk = 0
+const sprawdzSterownik = (zarzut, tekst, oczekiwane) => {
+  const wynik = zarzutSterownikaMaPodstawe(zarzut, tekst)
+  if (wynik === oczekiwane) sterownikOk++
+  else bledyJednostkowe.push(`zarzutSterownikaMaPodstawe("${zarzut.slice(0, 50)}", "${tekst.slice(0, 50)}") = ${wynik}, oczekiwano ${oczekiwane}`)
+}
+const ZARZUT_V5 = 'Do Zebra ZD220t użyj sterownika ZDesigner v10.\nZebra ZD220t wymaga sterownika ZDesigner v5, a nie v10.'
+// v10 dla drukarek serii ZD, w tym bez Link-OS, to nie jest błąd
+sprawdzSterownik(ZARZUT_V5, 'Zwykle używamy ZDesigner v10 dla nowszych drukarek Link-OS, a ZDesigner v5 dla starszych modeli.\nDo Zebra ZD220t użyj sterownika ZDesigner v10.', false)
+sprawdzSterownik('Do Zebra ZD230d użyj sterownika ZDesigner v10.', 'Do Zebra ZD230d użyj sterownika ZDesigner v10.', false)
+// v10 przy modelu sprzed Link-OS to prawdziwa wpadka i musi przejść dalej
+sprawdzSterownik('Do Windows 11 zalecany jest ZDesigner v10, obsługuje też GK420d.', 'Tak — GK420d działa z Windows 11. Do Windows 11 zalecany jest ZDesigner v10, obsługuje też starsze modele typu GK420d.', true)
+sprawdzSterownik('Zalecił v10 do drukarki TLP 2844.', 'Do TLP 2844 pobierz ZDesigner v10.', true)
+sprawdzSterownik('Zalecił v10 do GC420t.', 'Dla GC420t najlepszy będzie sterownik v 10.', true)
+// zarzut, który nie dotyczy wersji sterownika, bramka przepuszcza bez zmian
+sprawdzSterownik('Podał zły parametr szerokości etykiety.', 'Ustaw szerokość 104 mm.', true)
+sprawdzSterownik('Podał zły zasilacz: 24 V 5 A zamiast 24 V 2,5 A.', 'Do ZD421 użyj zasilacza 24 V 5 A.', true)
+console.log(`Bramka zarzutu o sterowniku: ${sterownikOk}/7`)
+if (bledyJednostkowe.length) { for (const b of bledyJednostkowe) console.error('  ' + b); process.exit(1) }
+
 const promptSrc = src.match(/const PROMPT = `([\s\S]*?)`\n\nfunction zbudujPrompt/)[1]
 const typy = Object.entries(ALERTY).map(([k, v]) => `- ${k}: ${v.opis}`).join('\n')
 const PROMPT = promptSrc.replace('TYPY', typy)
@@ -88,11 +113,14 @@ async function ocen(tury) {
     messages: [{ role: 'system', content: PROMPT }, { role: 'user', content: transkrypt }],
   })
   const p = JSON.parse(r.choices[0].message.content)
-  // te same dwa filtry co w ocenRozmowe() w lib/chat-alerts.ts
-  const bylaKwota = podajeKwoteZaNaprawe(tury.map((t) => t[1]).join('\n'))
+  // te same filtry co w ocenRozmowe() w lib/chat-alerts.ts
+  const tekstAsystenta = tury.map((t) => t[1]).join('\n')
+  const bylaKwota = podajeKwoteZaNaprawe(tekstAsystenta)
   const problemy = (p.problemy || [])
     .filter((x) => ALERTY[x.typ])
     .filter((x) => x.typ !== 'wycena_przedwczesnie' || bylaKwota)
+    .filter((x) => x.typ !== 'bledne_dane' ||
+      zarzutSterownikaMaPodstawe(`${x.cytat || ''}\n${x.dlaczego || ''}`, tekstAsystenta))
   // ta sama reguła co doAlertu() w lib/chat-alerts.ts
   const prog = (x) => (p.ocena <= 2 ? Math.min(ALERTY[x.typ].prog, 0.6) : ALERTY[x.typ].prog)
   return { ocena: p.ocena, wszystkie: problemy, alerty: problemy.filter((x) => Number(x.waga) >= prog(x)) }
@@ -147,6 +175,20 @@ const PRZYPADKI = [
   // trybie chronionym to treść wymagana przez prompt czatu, nie wpadka.
   { nazwa: 'ostrzeżenie przed resetem przy trybie chronionym', oczekiwany: null, tury: [
     ['zd421 nie odpowiada po sieci, moze zrobic reset do ustawien fabrycznych', 'Na razie nie rób resetu fabrycznego — na nowszym firmware reset przywraca właśnie zamknięte usługi sieciowe i tylko utrwali objaw. Podłącz drukarkę kablem USB i w Zebra Setup Utilities otwórz Direct Communication. Jeśli aktywny jest tryb chroniony, ZSU poprosi o nadanie hasła administratora. Wklej tylko tę jedną linię: ! U1 getvar "device.protected_mode" — co zwróciło?'],
+  ]},
+
+  // --- fałszywy alarm z 10.11.2026 ---
+
+  // Oceniający uznał, że ZD220t wymaga ZDesigner v5, bo drukarka nie ma Link-OS. To nieprawda:
+  // ZD220 i ZD230 są na liście modeli obsługiwanych przez ZDesigner v10 (noty wydania sterownika
+  // 10.6.26.28275, który udostępnia /api/downloads/zdesigner-v10). Reguła o sterownikach mówiła
+  // „v10 obsługuje drukarki Link-OS", więc model sam dopisywał, że drukarka bez Link-OS potrzebuje v5.
+  { nazwa: 'poprawny sterownik v10 do ZD220t', oczekiwany: null, tury: [
+    ['jaki sterownik do zebry', 'Do jakiego urządzenia Zebra potrzebujesz sterownika — wpisz model z naklejki z numerem seryjnym S/N albo wyślij zdjęcie tej naklejki. Jeśli chodzi o Windows 11: zwykle używamy ZDesigner v10 dla nowszych drukarek Link-OS, a ZDesigner v5 dla starszych modeli.'],
+    ['drukarka zd220t, windows 11', 'Do Zebra ZD220t użyj sterownika ZDesigner v10. Pobierzesz go tutaj: Sterowniki Zebra (/sterowniki). Instaluj najlepiej tak: uruchom instalator jako administrator → wybierz Install Printer → podłącz drukarkę USB dopiero, gdy instalator o to poprosi.'],
+  ]},
+  { nazwa: 'poprawny sterownik v10 do ZD230d', oczekiwany: null, tury: [
+    ['zd230d, ktory sterownik zdesigner wybrac', 'Do Zebra ZD230d użyj sterownika ZDesigner v10. Uruchom instalator jako administrator i podłącz drukarkę USB dopiero, gdy instalator o to poprosi.'],
   ]},
 ]
 

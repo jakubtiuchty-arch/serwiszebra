@@ -50,7 +50,7 @@ interface DefinicjaAlertu {
  */
 export const ALERTY: Record<TypAlertu, DefinicjaAlertu> = {
   bledne_dane: {
-    opis: 'Podał nieprawdziwe dane o urządzeniu: parametr, ścieżkę w menu, wersję sterownika albo oprogramowania. Zalecenie sterownika ZDesigner v10 dla drukarki sprzed Link-OS (GK420d, GK420t, GC420d, GC420t, GT800, LP2844, TLP2844) jest zawsze błędem — te modele obsługuje wyłącznie v5. UWAGA: nie masz instrukcji serwisowych, więc NIE oceniaj z własnej pamięci, jak zbudowane jest urządzenie ani ile trwa dana operacja. Zgłoś ten typ tylko wtedy, gdy błąd wynika wprost z reguł podanych Ci wyżej albo gdy sam asystent zaprzecza sobie w tej samej rozmowie. Domysł typu „chyba ten podzespół jest osobny" albo „ten czas wydaje mi się zbyt optymistyczny" to NIE jest podstawa do alertu',
+    opis: 'Podał nieprawdziwe dane o urządzeniu: parametr, ścieżkę w menu, wersję sterownika albo oprogramowania. Zalecenie sterownika ZDesigner v10 dla drukarki sprzed Link-OS (GK420d, GK420t, GC420d, GC420t, GT800, LP2844, TLP2844) jest zawsze błędem — te modele obsługuje wyłącznie v5. Zalecenie v10 dla drukarki serii ZD, także ZD220d, ZD220t, ZD230d i ZD230t, jest poprawne i NIE jest błędem. UWAGA: nie masz instrukcji serwisowych, więc NIE oceniaj z własnej pamięci, jak zbudowane jest urządzenie ani ile trwa dana operacja. Zgłoś ten typ tylko wtedy, gdy błąd wynika wprost z reguł podanych Ci wyżej albo gdy sam asystent zaprzecza sobie w tej samej rozmowie. Domysł typu „chyba ten podzespół jest osobny" albo „ten czas wydaje mi się zbyt optymistyczny" to NIE jest podstawa do alertu',
     prog: 0.9,
     waga: 'krytyczny',
   },
@@ -152,8 +152,11 @@ Zasady, które obowiązują asystenta:
   serwisu było słuszne i gdy kwotę opisano słowem „orientacyjnie".
 - Asystent nie twierdzi, że urządzenie czegoś nie ma, chyba że ma to wprost w instrukcji.
 - Asystent nie obiecuje terminów, przyjazdu technika ani sprzętu zastępczego.
-- Sterowniki: ZDesigner v10 obsługuje drukarki Link-OS (serie ZD, ZT, ZQ, ZC). Modele sprzed Link-OS —
-  GK420d, GK420t, GC420d, GC420t, GT800, LP2844, TLP2844 — wymagają ZDesigner v5; v10 potrafi je unieruchomić.
+- Sterowniki: ZDesigner v10 obsługuje drukarki etykiet z językiem ZPL: wszystkie modele serii ZD, serię ZT
+  oraz ZQ310, ZQ320 i modele ZQ5xx i ZQ6xx. Dotyczy to także ZD220d, ZD220t, ZD230d i ZD230t — nie mają Link-OS,
+  ale są na liście modeli obsługiwanych przez v10. Zalecenie v10 dla tych drukarek jest poprawne i NIE jest błędem.
+  Brak Link-OS w drukarce serii ZD nie oznacza, że potrzebuje ona v5. Modele sprzed Link-OS — GK420d, GK420t, GC420d, GC420t,
+  GT800, LP2844, TLP2844 — wymagają ZDesigner v5; v10 potrafi je unieruchomić.
 - Gotowa odmowa „jestem asystentem specjalizującym się wyłącznie w urządzeniach Zebra" jest na miejscu tylko
   wtedy, gdy klient naprawdę pisze o czymś innym niż sprzęt, usterka, wysyłka do serwisu czy zakup urządzenia.
 - Asystent ma nie zalecać resetu fabrycznego drukarki, która nie odpowiada po sieci, i ma uprzedzić, że przy
@@ -166,7 +169,8 @@ CZEGO NIE ZGŁASZAĆ — to są twarde filtry, zastosuj je do KAŻDEGO problemu,
    Twierdzenia o tym, który podzespół jest wbudowany w który, co zawiera kaseta, wkład albo moduł, jak
    przebiega procedura, ile trwa operacja i jakie wartości są typowe — SĄ POZA TWOJĄ OCENĄ. Nawet jeśli
    masz silne przekonanie, że asystent się myli, nie zgłaszaj tego. Jedyne fakty techniczne, które wolno
-   Ci rozstrzygać, to wersje sterownika ZDesigner wypisane wyżej.
+   Ci rozstrzygać, to wersje sterownika ZDesigner — i to wyłącznie według reguły o sterownikach wypisanej
+   wyżej, nie według własnej pamięci. Zalecenie v10 jest błędem tylko dla modelu z listy modeli wymagających v5.
    Przykłady, których NIE WOLNO zgłaszać: „ta rolka nie jest częścią kasety", „ten czas odpowiedzi jest
    zbyt optymistyczny", „ta komenda może nie działać na każdym firmware", „ten parametr zwraca co innego".
 2. NIE ZGŁASZASZ BRAKU ZDANIA, KTÓRE W ODPOWIEDZI JEST. Zanim napiszesz, że asystent czegoś nie dodał,
@@ -236,6 +240,31 @@ export function podajeKwoteZaNaprawe(tekstAsystenta: string): boolean {
   return false
 }
 
+/**
+ * Czy zarzut o wersji sterownika ZDesigner ma podstawę w regule czujki.
+ *
+ * Jedyny błąd sterownika, który oceniający może stwierdzić, to zalecenie ZDesigner v10 dla modelu
+ * sprzed Link-OS (GK420d, GK420t, GC420d, GC420t, GT800, LP2844, TLP2844). Mimo tej reguły
+ * oceniający zgłaszał v10 dla ZD220t i ZD230t jako błąd (10.11.2026), choć ZD220 i ZD230 są na
+ * liście modeli obsługiwanych przez v10 w notach wydania sterownika 10.6.26.28275. Wystarczyło, że
+ * asystent napisał wcześniej ogólnie „v10 dla drukarek Link-OS, v5 dla starszych”, a model brał
+ * brak Link-OS w ZD220 za sprzeczność. Dopisywanie wyjątków do promptu nie pomagało: każde kolejne
+ * zdanie o Link-OS jeszcze bardziej mieszało modelowi. Dlatego warunek konieczny sprawdzamy w kodzie,
+ * tak jak przy kwocie za naprawę.
+ *
+ * Zarzut, który nie dotyczy wersji sterownika, przechodzi bez zmian.
+ */
+// Bez spacji po „v”, żeby napięcie typu „24 V 5 A” nie uchodziło za wersję sterownika.
+const RE_WERSJA_STEROWNIKA = /zdesigner|\bv(?:5|10)\b/i
+const RE_ZALECENIE_V10 = /\bv\s?10\b/i
+const RE_MODEL_TYLKO_V5 = /\b(?:gk|gc)\s?420|\bgt\s?800|\bt?lp\s?2844/i
+
+export function zarzutSterownikaMaPodstawe(zarzut: string, tekstAsystenta: string): boolean {
+  if (!RE_WERSJA_STEROWNIKA.test(zarzut || '')) return true
+  const tekst = tekstAsystenta || ''
+  return RE_ZALECENIE_V10.test(tekst) && RE_MODEL_TYLKO_V5.test(tekst)
+}
+
 export function zbudujTranskrypt(tury: Tura[]): string {
   return tury
     .map((t, i) => {
@@ -265,11 +294,15 @@ export async function ocenRozmowe(tury: Tura[]): Promise<OcenaRozmowy | null> {
     const kategoria = KATEGORIE.includes(parsed.kategoria) ? parsed.kategoria : 'other'
     const ocena = Number.isFinite(parsed.ocena) ? Math.min(5, Math.max(1, Math.round(parsed.ocena))) : 3
     // Bez kwoty za naprawę w całej rozmowie typ „wycena_przedwczesnie" nie ma o czym mówić.
-    const bylaKwota = podajeKwoteZaNaprawe(tury.map((t) => t.ai_response || '').join('\n'))
+    const tekstAsystenta = tury.map((t) => t.ai_response || '').join('\n')
+    const bylaKwota = podajeKwoteZaNaprawe(tekstAsystenta)
 
     const problemy: ZnalezionyProblem[] = (Array.isArray(parsed.problemy) ? parsed.problemy : [])
       .filter((p: any) => p && typeof p.typ === 'string' && (p.typ as TypAlertu) in ALERTY)
       .filter((p: any) => p.typ !== 'wycena_przedwczesnie' || bylaKwota)
+      // Zarzut o sterowniku tylko wtedy, gdy asystent zalecił v10 przy modelu, który wymaga v5.
+      .filter((p: any) => p.typ !== 'bledne_dane' ||
+        zarzutSterownikaMaPodstawe(`${p.cytat || ''}\n${p.dlaczego || ''}`, tekstAsystenta))
       .map((p: any) => ({
         typ: p.typ as TypAlertu,
         waga: Math.min(1, Math.max(0, Number(p.waga) || 0)),
