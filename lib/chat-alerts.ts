@@ -166,6 +166,10 @@ Zasady, które obowiązują asystenta:
 - Drukarki EU RED: przy włączonym trybie chronionym komenda setvar nie włącza portu ani usług sieciowych,
   a Zebra Setup Utilities nie pyta o hasło. Błędem jest kazać włączać port lub usługi komendą setvar,
   obiecywać monit o hasło w ZSU albo twierdzić, że wersja ZSU klienta jest za stara.
+- Drukarki EU RED (kupione w regionie EMEA od 1.08.2025) nie mają fabrycznego hasła trybu chronionego ani PIN-u
+  panelu: 1234 w nich nie działa, a hasło i PIN ustawia kreator zabezpieczeń Zebry (Nucleus Connector).
+  W pozostałych drukarkach Link-OS z wyświetlaczem domyślny PIN panelu to 1234. Zdanie, że hasło albo PIN
+  nie jest ustawione fabrycznie, jest zgodne z zasadami i NIE jest problemem.
 
 CZEGO NIE ZGŁASZAĆ — to są twarde filtry, zastosuj je do KAŻDEGO problemu, zanim trafi do wyniku:
 
@@ -363,17 +367,37 @@ const LITERY = 'a-ząćęłńóśźż'
  * choć Zebra wymienia ZT230 wśród drukarek obsługiwanych przez v10. Po przepisaniu reguły na
  * zamkniętą listę modeli dalej zgłaszał „błąd" przy poprawnym zaleceniu v10 dla ZT230,
  * z uzasadnieniem przeczącym samemu sobie.
+ *
+ * Zarzut wobec zdania, że drukarka nie ma fabrycznego hasła ani PIN-u panelu (1234 nie działa),
+ * odpada, gdy asystent właśnie to napisał. W egzemplarzach EU RED tak podaje instrukcja Zebry
+ * (ZQ610/620/630 Plus, Tools → Password Protect: hasło i PIN „initially undefined", w pozostałych
+ * drukarkach PIN 1234) i wpis zebra-wymaga-hasla-dyrektywa-red-konfiguracja. 23.11.2026 oceniający
+ * zgłosił to zdanie przy ZQ620 Plus, bo „nie ma tego w instrukcji", a bramka przepuściła zarzut,
+ * bo w tej samej odpowiedzi stała obietnica monitu o hasło w ZSU. Zarzut wymierzony w tę obietnicę
+ * (uzasadnienie o ZSU albo setvar) dalej przechodzi.
  */
 const RE_TEMAT_STEROWNIKA = /zdesigner|sterownik\S*\s+v\s?(?:5|10)\b|wersj\S*\s+sterownik/i
 const RE_V10 = /\bv\s?10\b/i
 const RE_MODEL_TYLKO_V5 = /\b(?:G[KC]\s?420[dt]?|GT\s?800|T?LP\s?2844)\b/i
 const RE_TEMAT_EU_RED = /setvar|zsu|setup utilities|hasł|wersj|chronion|protected/i
 // Kroki, których prompt czatu zakazuje przy trybie chronionym (sekcja o EU RED od 9.10.2026).
+// Zdanie z przeczeniem („ZSU nie poprosi o hasło", „nie wyświetli monitu") nie jest obietnicą monitu.
 const RE_BLEDNA_PROCEDURA_EU_RED = [
   /setvar\s+"(?:ip|internal_wired|wlan)\./i,
-  /(?:zsu|setup utilities)[\s\S]{0,160}?(?:poprosi|zapyta|prośb|monit)[^.]{0,40}hasł/i,
+  /(?:zsu|setup utilities)[\s\S]{0,160}?(?<!\bnie\s+(?:\S+\s+){0,2})(?:poprosi|zapyta|prośb|monit)[^.]{0,40}hasł/i,
   /(?:zsu|setup utilities)[^.]{0,80}(?:star(?:[aąyeę]|sz)|przestarzał|nieaktualn)|najnowsz\S*\s+wersj\S*\s+(?:zsu|zebra setup)/i,
 ]
+// Opisy do zarzutu przepisanego w przepiszZarzutOBrakuHasla(), w kolejności wzorców powyżej.
+const OPIS_BLEDNEJ_PROCEDURY_EU_RED = [
+  'Każe włączać port lub usługi sieciowe komendą setvar, a w trybie chronionym (EU RED) setvar ich nie zmienia; robi to kreator zabezpieczeń Zebry.',
+  'Obiecuje monit o hasło w Zebra Setup Utilities, a ZSU nie ustawia hasła trybu chronionego ani PIN-u panelu; ustawia je kreator zabezpieczeń Zebry (Nucleus Connector).',
+  'Twierdzi, że wersja ZSU klienta jest za stara, a w trybie chronionym (EU RED) przyczyną nie jest wersja programu.',
+]
+// Zdanie o braku fabrycznego hasła lub PIN-u panelu: „hasło nie jest fabrycznie ustawione",
+// „PIN panelu nie jest ustawiony fabrycznie", „nie ma hasła fabrycznego", „1234 nie działa".
+const RE_BRAK_HASLA_FABRYCZNEGO =
+  /(?:hasł|\bpin)[^.]{0,60}?nie\s+(?:jest|są|został\S*|ma)\s+(?:\S+\s+){0,2}?(?:fabryczn|domyśln)|(?:nie\s+ma|brak\S*|bez)\s+(?:\S+\s+){0,2}?(?:(?:fabryczn|domyśln)\S*\s+(?:hasł|pin\b)|(?:hasł|pin\b)\S*\s+(?:fabryczn|domyśln))|1234[^.]{0,40}?nie\s+(?:działa|zadziała|przechodzi)/i
+const RE_ZARZUT_O_ZSU_LUB_SETVAR = /setvar|zsu|setup utilities/i
 // „Sprzeczne" znaczy tu: asystent przeczy sam sobie albo temu, co napisał klient. „Sprzeczne z zasadami",
 // „z instrukcją" czy „z dokumentacją" to ocena z pamięci oceniającego, a nie odwołanie do rozmowy.
 // 5.11.2026 tak brzmiało uzasadnienie zarzutu wobec odpowiedzi o kablach przy wysyłce, zgodnej z FAQ
@@ -391,8 +415,47 @@ export function zarzutMaPodstawe(typ: string, dlaczego: string, cytat: string, t
   if (RE_TEMAT_STEROWNIKA.test(uzasadnienie)) {
     return RE_V10.test(tekstAsystenta || '') && RE_MODEL_TYLKO_V5.test(`${tekstAsystenta || ''}\n${tekstKlienta || ''}`)
   }
+  if (RE_BRAK_HASLA_FABRYCZNEGO.test(tekstAsystenta || '') && zarzutPrzeciwBrakowiHasla(uzasadnienie, cytat)) return false
   const blednaProcedura = RE_BLEDNA_PROCEDURA_EU_RED.some((re) => re.test(tekstAsystenta || ''))
   return blednaProcedura && RE_TEMAT_EU_RED.test(`${uzasadnienie} ${cytat || ''}`)
+}
+
+// Czy zarzut podważa zdanie o braku fabrycznego hasła lub PIN-u. Zarzut o ZSU albo setvar dotyczy
+// procedury, nie tego zdania. Cytat liczy się tylko wtedy, gdy sam nie zawiera błędnej procedury:
+// cała odpowiedź wklejona jako cytat nie może zdjąć prawdziwego zarzutu o monit w ZSU.
+function zarzutPrzeciwBrakowiHasla(uzasadnienie: string, cytat: string): boolean {
+  if (RE_ZARZUT_O_ZSU_LUB_SETVAR.test(uzasadnienie || '')) return false
+  const wCytacie = cytat || ''
+  const cytatOBrakuHasla = RE_BRAK_HASLA_FABRYCZNEGO.test(wCytacie) && !RE_BLEDNA_PROCEDURA_EU_RED.some((re) => re.test(wCytacie))
+  return RE_BRAK_HASLA_FABRYCZNEGO.test(uzasadnienie || '') || cytatOBrakuHasla
+}
+
+/**
+ * Zarzut wobec prawdziwego zdania o braku fabrycznego hasła przepisujemy na błędną procedurę EU RED,
+ * jeśli ta stoi w odpowiedzi asystenta. 23.11.2026 (ZQ620 Plus, hasło przy Load Defaults) oceniający
+ * w trzech powtórkach na trzy wskazał zdanie o braku hasła, a obietnicy monitu o hasło w ZSU z tej
+ * samej odpowiedzi nie zgłosił, mimo reguły w prompcie. Sama bramka odrzuciłaby wtedy zarzut i błąd
+ * z rozmowy zostałby bez alertu. Waga 1: naruszenie reguły potwierdza wzorzec w kodzie, a prompt
+ * czujki nazywa takie kroki zawsze błędem.
+ */
+export function przepiszZarzutOBrakuHasla<T extends { typ: string; dlaczego?: unknown; cytat?: unknown; tura?: unknown; waga?: unknown }>(
+  p: T, odpowiedzi: string[]): T {
+  if (p.typ !== 'bledne_dane' || !zarzutPrzeciwBrakowiHasla(String(p.dlaczego || ''), String(p.cytat || ''))) return p
+  const wskazana = Number(p.tura) - 1
+  const kolejnosc = [wskazana, ...odpowiedzi.map((_, i) => i).filter((i) => i !== wskazana)]
+  for (const i of kolejnosc) {
+    const tekst = odpowiedzi[i]
+    if (!tekst) continue
+    for (let w = 0; w < RE_BLEDNA_PROCEDURA_EU_RED.length; w++) {
+      const m = RE_BLEDNA_PROCEDURA_EU_RED[w].exec(tekst)
+      if (!m) continue
+      const poczatek = Math.max(tekst.lastIndexOf('.', m.index - 1), tekst.lastIndexOf('\n', m.index)) + 1
+      const koniec = tekst.indexOf('.', m.index + m[0].length)
+      const cytat = tekst.slice(poczatek, koniec < 0 ? undefined : koniec + 1).trim()
+      return { ...p, tura: i + 1, waga: 1, cytat, dlaczego: OPIS_BLEDNEJ_PROCEDURY_EU_RED[w] }
+    }
+  }
+  return p
 }
 
 /**
@@ -652,6 +715,7 @@ export async function ocenRozmowe(tury: Tura[]): Promise<OcenaRozmowy | null> {
       .filter((p: any) => p && typeof p.typ === 'string')
       .map((p: any) => ({ ...p, typ: normalizujTyp(p.typ) }))
       .filter((p: any) => (p.typ as TypAlertu) in ALERTY)
+      .map((p: any) => przepiszZarzutOBrakuHasla(p, odpowiedzi))
     const przyjete = znane
       .filter((p: any) => p.typ !== 'wycena_przedwczesnie' || (bylaKwota && !wycenaPoZasadach))
       .filter((p: any) => zarzutMaPokrycie(p.typ, `${p.dlaczego || ''} ${p.cytat || ''}`, tekstAsystenta))

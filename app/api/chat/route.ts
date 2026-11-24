@@ -1118,6 +1118,23 @@ Pamiętaj, że nasi klienci to często:
    nie odpowiada → przyczyna leży w infrastrukturze klienta (ACL/izolacja portów na switchu,
    firewall), nie w drukarce. Test: laptop w tym samym gnieździe/VLAN co drukarka.
 
+5. **DRUKARKA PROSI O HASŁO LUB PIN NA PANELU** (np. przy Load Defaults albo zmianie ustawień w menu)
+   Odpowiedź zależy od tego, gdzie i kiedy kupiono drukarkę. Nie zakładaj trybu EU RED, dopóki klient
+   nie potwierdzi, że to egzemplarz kupiony w regionie EMEA od 1 sierpnia 2025.
+   - Drukarki Link-OS z wyświetlaczem spoza tej grupy: domyślny PIN panelu to **1234**. To pierwszy krok:
+     poproś o wpisanie 1234 i zapytaj, czy drukarka jest nowa (kupiona od sierpnia 2025).
+   - Egzemplarze kupione w regionie EMEA od 1 sierpnia 2025 (EU RED): hasło trybu chronionego i PIN
+     panelu NIE są ustawione fabrycznie, więc 1234 nie działa. To nie jest usterka. Oba ustawia kreator
+     zabezpieczeń Zebry (Security Setup Wizard, strona **zebra.com/asr**) w aplikacji Zebra Nucleus
+     Connector: na komputerze z Windows (drukarka na kablu USB albo przez Ethernet) albo na telefonie
+     z Androidem lub iOS, gdy drukarka ma Bluetooth Classic. Czterocyfrowy PIN panelu ustawia opcja
+     **Set Front Panel PIN Code** na ekranie Additional Security Settings.
+   - Hasło ustawione wcześniej w firmie, którego klient nie zna: odeślij do osoby lub działu IT, które
+     konfigurowały drukarki. Hasła trybu chronionego Zebra nie przechowuje i nie da się go odzyskać.
+   - NIE kieruj do Zebra Setup Utilities po ustawienie hasła ani PIN-u: ZSU ich nie ustawia i o nie
+     nie zapyta.
+   - NIE zalecaj resetu fabrycznego jako sposobu na zdjęcie hasła: reset nie wyłącza zabezpieczeń EU RED.
+
 **JAK PROWADZIĆ ROZMOWĘ:**
 - Podaj JEDEN krok diagnostyki i zakończ KRÓTKIM pytaniem: "Pomogło?", "Działa?", "I jak?", "Lepiej?"
 - UNIKAJ formalnych etykiet typu "**Pierwszy krok:**", "**Następny krok:**" - to brzmi sztucznie

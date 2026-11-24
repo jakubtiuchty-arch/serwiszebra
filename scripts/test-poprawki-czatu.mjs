@@ -702,6 +702,33 @@ const blokSklepu = src.slice(src.indexOf('=== [SKLEP_PRODUKTY]'), src.indexOf('/
 sprawdz('blok [SKLEP_PRODUKTY]: zakaz szablonu TAKMA', /NIE używaj szablonu odsyłającego do sklepu TAKMA/.test(blokSklepu), true, 'blok sklepu')
 sprawdz('blok [SKLEP_PRODUKTY]: bez kwoty, gdy jej nie ma', /Gdy przy produkcie nie ma kwoty, nie podawaj ceny/.test(blokSklepu), true, 'blok sklepu')
 
+// --- runda 13: hasło lub PIN na panelu drukarki Link-OS (alert 23.11.2026) ---------
+// ZQ620 Plus poprosiła o hasło przy Load Defaults. Czat słusznie napisał, że egzemplarz EU RED nie ma
+// fabrycznego hasła, ale posłał klienta do ZSU po monit o hasło, którego ZSU nie wyświetla, i nie podał
+// PIN-u 1234 dla pozostałych egzemplarzy. Prompt nie miał reguły o haśle na panelu, tylko o sieci.
+// Instrukcja ZQ610/620/630 Plus (Tools → Password Protect): w EMEA od 1.08.2025 hasło trybu chronionego
+// i PIN panelu „initially undefined", w pozostałych drukarkach PIN 1234.
+const sekcjaPin = (() => {
+  const a = src.indexOf('**DRUKARKA PROSI O HASŁO LUB PIN NA PANELU**')
+  const b = src.indexOf('**JAK PROWADZIĆ ROZMOWĘ:**', a)
+  if (a < 0 || b < 0) throw new Error('Nie znaleziono sekcji o haśle i PIN-ie panelu w prompcie')
+  return src.slice(a, b)
+})()
+for (const [nazwa, wzor, oczekiwane] of [
+  ['domyślny PIN 1234 poza EU RED', /domyślny PIN panelu to \*\*1234\*\*/, true],
+  ['EU RED: brak fabrycznego hasła i PIN-u', /hasło trybu chronionego i PIN\s+panelu NIE są ustawione fabrycznie/, true],
+  ['EU RED dopiero po potwierdzeniu regionu i daty', /Nie zakładaj trybu EU RED, dopóki klient\s+nie potwierdzi/, true],
+  ['PIN w kreatorze: Set Front Panel PIN Code', /\*\*Set Front Panel PIN Code\*\*/, true],
+  ['kreator w aplikacji Nucleus Connector', /Zebra Nucleus\s+Connector/, true],
+  ['ZSU nie ustawia hasła ani PIN-u', /ZSU ich nie ustawia/, true],
+  ['brak zapowiedzi monitu o hasło w ZSU', /ZSU poprosi|poprosi o nadanie hasła/, false],
+  ['reset nie zdejmuje hasła', /reset nie wyłącza zabezpieczeń EU RED/, true],
+]) sprawdz('prompt PIN panelu: ' + nazwa, wzor.test(sekcjaPin), oczekiwane, nazwa)
+// Prompt i baza wiedzy mają mówić to samo o haśle i PIN-ie egzemplarzy EU RED
+sprawdz('blog EU RED: drukarka nie ma hasła fabrycznego', /Drukarka nie ma hasła fabrycznego/.test(wpisRed), true, 'wpis o EU RED')
+sprawdz('blog EU RED: 1234 nie działa', /hasło \*\*1234\*\*[^.]*nie działa/.test(wpisRed), true, 'wpis o EU RED')
+sprawdz('blog EU RED: opcja Set Front Panel PIN Code', /Set Front Panel PIN Code/.test(wpisRed), true, 'wpis o EU RED')
+
 // --- wynik -----------------------------------------------------------------
 console.log(`\nZaliczone: ${zaliczone}/${zaliczone + bledy.length}`)
 if (bledy.length) {

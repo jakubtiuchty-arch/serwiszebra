@@ -55,6 +55,7 @@ const kodBramek = ts.transpileModule(
 const {
   podajeKwoteZaNaprawe, zarzutMaPokrycie, normalizujTyp, zarzutMaPodstawe, wycenaZgodnaZZasadami, ocenaPoBramce,
   doTranskryptu, zbudujTranskrypt, zarzutOdrzuceniaMaPodstawe, zaprzeczenieMaPodstawe, kosztTransportuMaPodstawe,
+  przepiszZarzutOBrakuHasla,
 } = await import(`data:text/javascript,${encodeURIComponent(kodBramek)}`)
 
 let jednostkowe = 0
@@ -254,8 +255,65 @@ sprawdzPodstawe('device.reset a zasada EU RED', 'bledne_dane',
 sprawdzPodstawe('device.reset tylko dla Link-OS', 'bledne_dane',
   'Asystent podał komendę do restartu, która jest poprawna tylko dla drukarek z Link-OS, a nie uwzględnił, że klient może mieć inną wersję.',
   RESTART_DEVICE_RESET, false, '$cmd=\'! U1 setvar "device.reset" ""\';')
+// Instrukcja ZQ610/620/630 Plus (Tools → Password Protect): w egzemplarzach z EMEA od 1.08.2025 hasło trybu
+// chronionego i PIN panelu nie są ustawione fabrycznie, w pozostałych PIN to 1234. 23.11.2026 oceniający
+// zgłosił zdanie o braku fabrycznego hasła jako „bledne_dane”, bo „nie ma tego w instrukcji”, a bramka
+// przepuściła zarzut przez obietnicę monitu o hasło w ZSU, która stała w tej samej odpowiedzi.
+const PIN_RED_Z_MONITEM = 'W ZQ620 Plus kupionej w EMEA od sierpnia 2025 domyślne 1234 nie działa, bo hasło administratora nie jest fabrycznie ustawione. Uruchom Zebra Setup Utilities i otwórz Direct Communication. Jeśli tryb chroniony jest aktywny, program powinien poprosić o nadanie hasła administratora.'
+const PIN_RED_POPRAWNIE = 'Jeśli to egzemplarz kupiony w EMEA od sierpnia 2025, PIN panelu nie jest ustawiony fabrycznie, więc 1234 nie działa. PIN ustawia kreator zabezpieczeń w aplikacji Zebra Nucleus Connector, opcja Set Front Panel PIN Code.'
+sprawdzPodstawe('brak fabrycznego hasła obok monitu w ZSU', 'bledne_dane',
+  'Asystent nie powinien twierdzić, że hasło administratora nie jest fabrycznie ustawione, ponieważ nie ma tego w instrukcji.', PIN_RED_Z_MONITEM, false)
+sprawdzPodstawe('brak fabrycznego hasła, zarzut ogólny z cytatem zdania', 'bledne_dane', 'Podał nieprawdziwą informację o haśle administratora.',
+  PIN_RED_Z_MONITEM, false, 'domyślne 1234 nie działa, bo hasło administratora nie jest fabrycznie ustawione')
+sprawdzPodstawe('„fabryczny PIN 1234” przy poprawnej procedurze', 'bledne_dane',
+  'Drukarka ZQ620 Plus ma fabryczny PIN 1234, więc twierdzenie, że PIN panelu nie jest ustawiony fabrycznie, jest błędne.', PIN_RED_POPRAWNIE, false)
+sprawdzPodstawe('monit w ZSU obok zdania o braku hasła', 'bledne_dane',
+  'Obiecuje, że Zebra Setup Utilities poprosi o nadanie hasła.', PIN_RED_Z_MONITEM, true)
+sprawdzPodstawe('monit w ZSU, cała odpowiedź w cytacie', 'bledne_dane',
+  'Błędna procedura ustawienia hasła w trybie chronionym.', PIN_RED_Z_MONITEM, true, PIN_RED_Z_MONITEM)
+// Prompt czatu każe mówić, że ZSU o hasło nie zapyta. Zdanie z przeczeniem to nie obietnica monitu.
+const ZSU_BEZ_MONITU = 'Zebra Setup Utilities nie poprosi o hasło trybu chronionego. Zebra Setup Utilities nie wyświetli też monitu o hasło przy zmianie ustawień.'
+sprawdzPodstawe('„ZSU nie poprosi o hasło”', 'bledne_dane', 'Obiecuje, że Zebra Setup Utilities poprosi o nadanie hasła.', ZSU_BEZ_MONITU, false)
 console.log(`Bramka podstawy zarzutu:${podstawaOk}/${podstawaOk + bledyPodstawy.length}`)
 if (bledyPodstawy.length) { for (const b of bledyPodstawy) console.error('  ' + b); process.exit(1) }
+
+// Zarzut wobec prawdziwego zdania o braku fabrycznego hasła przepisujemy na błędną procedurę EU RED z tej
+// samej rozmowy. 23.11.2026 oceniający wskazał trzy razy na trzy zdanie o braku hasła przy ZQ620 Plus,
+// a obietnicy monitu o hasło w ZSU z tej samej odpowiedzi nie zgłosił.
+let przepisanieOk = 0
+const bledyPrzepisania = []
+const sprawdzPrzepisanie = (nazwa, wynik, oczekiwane) => {
+  if (wynik === oczekiwane) przepisanieOk++
+  else bledyPrzepisania.push(`przepiszZarzutOBrakuHasla(${nazwa}) = ${JSON.stringify(wynik)}, oczekiwano ${JSON.stringify(oczekiwane)}`)
+}
+const ZARZUT_O_BRAK_HASLA = { typ: 'bledne_dane', waga: 0.8, tura: 2,
+  cytat: 'domyślne 1234 nie działa, bo hasło administratora nie jest fabrycznie ustawione',
+  dlaczego: 'Asystent błędnie stwierdził, że hasło administratora nie jest fabrycznie ustawione w ZQ620 Plus.' }
+const ODPOWIEDZI_Z_MONITEM = ['Na ZQ620 Plus wejdź: Home → Tools → Load Defaults → Factory.', PIN_RED_Z_MONITEM]
+const przepisany = przepiszZarzutOBrakuHasla(ZARZUT_O_BRAK_HASLA, ODPOWIEDZI_Z_MONITEM)
+sprawdzPrzepisanie('uzasadnienie o monicie w ZSU', /Zebra Setup Utilities/.test(przepisany.dlaczego), true)
+sprawdzPrzepisanie('cytat ze zdaniem o monicie', /poprosić o nadanie hasła/.test(przepisany.cytat), true)
+sprawdzPrzepisanie('cytat bez zdania o braku hasła', /fabrycznie ustawione/.test(przepisany.cytat), false)
+sprawdzPrzepisanie('tura odpowiedzi z monitem', przepisany.tura, 2)
+sprawdzPrzepisanie('waga nad progiem', przepisany.waga, 1)
+sprawdzPrzepisanie('przepisany zarzut przechodzi bramkę podstawy',
+  zarzutMaPodstawe(przepisany.typ, przepisany.dlaczego, przepisany.cytat, ODPOWIEDZI_Z_MONITEM.join('\n')), true)
+sprawdzPrzepisanie('monit w innej turze niż wskazana',
+  przepiszZarzutOBrakuHasla({ ...ZARZUT_O_BRAK_HASLA, tura: 1 }, ODPOWIEDZI_Z_MONITEM).tura, 2)
+// Bez błędnej procedury zarzut zostaje bez zmian, a bramka podstawy go odrzuca
+const bezProcedury = przepiszZarzutOBrakuHasla(ZARZUT_O_BRAK_HASLA, [PIN_RED_POPRAWNIE])
+sprawdzPrzepisanie('poprawna procedura: zarzut bez zmian', bezProcedury, ZARZUT_O_BRAK_HASLA)
+sprawdzPrzepisanie('poprawna procedura: bramka odrzuca',
+  zarzutMaPodstawe(bezProcedury.typ, bezProcedury.dlaczego, bezProcedury.cytat, PIN_RED_POPRAWNIE), false)
+sprawdzPrzepisanie('przeczenie „ZSU nie poprosi”: zarzut bez zmian',
+  przepiszZarzutOBrakuHasla(ZARZUT_O_BRAK_HASLA, [`${PIN_RED_POPRAWNIE} ${ZSU_BEZ_MONITU}`]), ZARZUT_O_BRAK_HASLA)
+// Inne zarzuty i inne typy nie są przepisywane
+const zarzutOMonicie = { ...ZARZUT_O_BRAK_HASLA, dlaczego: 'Obiecuje, że Zebra Setup Utilities poprosi o hasło.' }
+sprawdzPrzepisanie('zarzut o monit w ZSU bez zmian', przepiszZarzutOBrakuHasla(zarzutOMonicie, ODPOWIEDZI_Z_MONITEM), zarzutOMonicie)
+const zarzutGwarancji = { ...ZARZUT_O_BRAK_HASLA, typ: 'gwarancja' }
+sprawdzPrzepisanie('inny typ bez zmian', przepiszZarzutOBrakuHasla(zarzutGwarancji, ODPOWIEDZI_Z_MONITEM), zarzutGwarancji)
+console.log(`Przepisanie zarzutu o braku hasła: ${przepisanieOk}/${przepisanieOk + bledyPrzepisania.length}`)
+if (bledyPrzepisania.length) { for (const b of bledyPrzepisania) console.error('  ' + b); process.exit(1) }
 
 // Bramka odesłania do sklepu: szablon sklepu w odpowiedzi na prośbę o zakup to zasada czatu, nie odbicie
 // klienta (28.10.2026, prośba o odklejak do ZD220d). Szablon w środku diagnozy albo po opisie usterki
@@ -450,6 +508,7 @@ async function ocen(tury) {
   const znane = (p.problemy || [])
     .map((x) => ({ ...x, typ: normalizujTyp(x.typ) }))
     .filter((x) => ALERTY[x.typ])
+    .map((x) => przepiszZarzutOBrakuHasla(x, odpowiedzi))
   const problemy = znane
     .filter((x) => x.typ !== 'wycena_przedwczesnie' || (bylaKwota && !wycenaPoZasadach))
     .filter((x) => zarzutMaPokrycie(x.typ, `${x.dlaczego || ''} ${x.cytat || ''}`, odpowiedzi.join('\n')))
@@ -812,6 +871,24 @@ const PRZYPADKI = [
   { nazwa: 'Link-OS: restart device.reset w skrypcie na port 9100', oczekiwany: null, bezZarzutow: true, tury: [
     ['jak przerobić komendę ze skryptu, żeby zrestartować drukarkę?', 'Podeślij proszę tę komendę oraz model drukarki Zebra — od modelu i języka komend zależy, czy restart robi się komendą SGD/ZPL, czy inaczej.\n\nJeśli to drukarka Zebra z Link-OS, restart zwykle wykonuje się taką jedną linią:\n\n```\n! U1 setvar "device.reset" ""\n```\n\nWklej swoją komendę, to powiem, czy da się ją bezpiecznie zmodyfikować.'],
     ['$ip="IP"; $cmd=\'! U1 getvar "device.friendly_name"\'; $c=[Net.Sockets.TcpClient]::new(); $c.Connect($ip,9100); $s=$c.GetStream(); $b=[Text.Encoding]::ASCII.GetBytes($cmd+"`r`n"); $s.Write($b,0,$b.Length); $buf=New-Object byte[] 4096; $n=$s.Read($buf,0,$buf.Length); [Text.Encoding]::ASCII.GetString($buf,0,$n); $c.Close()', 'Tak — w Twoim skrypcie wystarczy zamienić komendę `getvar` na restart:\n\n```\n$ip="IP"; $cmd=\'! U1 setvar "device.reset" ""\'; $c=[Net.Sockets.TcpClient]::new(); $c.SendTimeout=3000; $c.Connect($ip,9100); $s=$c.GetStream(); $b=[Text.Encoding]::ASCII.GetBytes($cmd+"`r`n"); $s.Write($b,0,$b.Length); $c.Close()\n```\n\nPrzy restarcie drukarka zwykle nie odeśle odpowiedzi — po wysłaniu komendy może zamknąć połączenie albo przestać odpowiadać na chwilę. To normalne.\n\nPo około 30–60 sekundach sprawdź, czy drukarka wróciła na sieć. Działa?'],
+  ]},
+
+  // --- alert z 23.11.2026: hasło na panelu ZQ620 Plus przy Load Defaults (rozmowy odtworzone, bez wypowiedzi klientów) ---
+
+  // Odpowiedź według reguły z 24.11.2026: najpierw PIN 1234, a przy egzemplarzu EU RED brak fabrycznego
+  // hasła i PIN-u oraz kreator zabezpieczeń. Zdanie o braku fabrycznego hasła oceniający zgłaszał jako błąd.
+  { nazwa: 'ZQ620 Plus: PIN panelu, egzemplarz EU RED, kreator zabezpieczeń', oczekiwany: null, bezZarzutow: true, tury: [
+    ['nie mogę zrobić resetu drukarki', 'Jaki to model drukarki Zebra i jaki reset chcesz zrobić: ustawień drukarki, ustawień sieci czy pełny reset fabryczny?'],
+    ['zq620 plus', 'Na ekranie ZQ620 Plus wejdź: **Home → Tools → Load Defaults → Factory** i zatwierdź **OK**. Jeśli drukarka poprosi o PIN albo hasło, napisz, co dokładnie pokazuje ekran.\n\nUdało się wejść w Load Defaults?'],
+    ['pyta o hasło', 'Wpisz **1234** — to domyślny PIN panelu w drukarkach Link-OS. Wyjątek to egzemplarze kupione w regionie EMEA od sierpnia 2025 (EU RED): tam PIN panelu i hasło trybu chronionego nie są ustawione fabrycznie, więc 1234 nie zadziała.\n\nPrzyjęło 1234?'],
+    ['nie przyjmuje, drukarka kupiona w tym roku', 'To zachowanie egzemplarza EU RED, a nie usterka. PIN panelu ustawia kreator zabezpieczeń Zebry: zainstaluj na komputerze z Windows aplikację **Zebra Nucleus Connector** w wersji dla regionu EMEA ze strony **zebra.com/setup**, podłącz drukarkę kablem USB i uruchom **Security Settings Wizard**. PIN ustawisz opcją **Set Front Panel PIN Code**.\n\nMasz pod ręką komputer z Windows?'],
+  ]},
+  // Prawdziwa wpadka z tej samej rozmowy: odesłanie do ZSU po monit o hasło, którego ZSU nie wyświetla.
+  // Zdanie o braku fabrycznego hasła jest prawdziwe, więc alert ma zapalić obietnica monitu w ZSU.
+  { nazwa: 'ZQ620 Plus: PIN panelu, obietnica monitu o hasło w ZSU', oczekiwany: 'bledne_dane', tury: [
+    ['nie mogę zrobić resetu drukarki', 'Jaki to model drukarki Zebra i jaki reset chcesz zrobić: ustawień drukarki, ustawień sieci czy pełny reset fabryczny?'],
+    ['zq620 plus', 'Na ekranie ZQ620 Plus wejdź: **Home → Tools → Load Defaults → Factory** i zatwierdź **OK**. Jeśli drukarka poprosi o PIN albo hasło, napisz, co dokładnie pokazuje ekran.\n\nUdało się wejść w Load Defaults?'],
+    ['drukarka chce hasła', 'To nie musi być awaria. W ZQ620 Plus z nowszym firmware/trybem EU RED domyślne **1234** często nie działa, bo hasło administratora nie jest fabrycznie ustawione — ustawia się je przy pierwszej konfiguracji.\n\nPodłącz drukarkę kablem **USB** do komputera, uruchom **Zebra Setup Utilities**, wybierz drukarkę i otwórz **Open Printer / Direct Communication**. Jeśli tryb chroniony jest aktywny, program powinien poprosić o nadanie hasła administratora.\n\nPojawia się okno ustawienia hasła, czy od razu błąd?'],
   ]},
 ]
 
