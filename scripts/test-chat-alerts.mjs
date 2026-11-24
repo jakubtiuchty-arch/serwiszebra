@@ -890,6 +890,14 @@ const PRZYPADKI = [
     ['zq620 plus', 'Na ekranie ZQ620 Plus wejdź: **Home → Tools → Load Defaults → Factory** i zatwierdź **OK**. Jeśli drukarka poprosi o PIN albo hasło, napisz, co dokładnie pokazuje ekran.\n\nUdało się wejść w Load Defaults?'],
     ['drukarka chce hasła', 'To nie musi być awaria. W ZQ620 Plus z nowszym firmware/trybem EU RED domyślne **1234** często nie działa, bo hasło administratora nie jest fabrycznie ustawione — ustawia się je przy pierwszej konfiguracji.\n\nPodłącz drukarkę kablem **USB** do komputera, uruchom **Zebra Setup Utilities**, wybierz drukarkę i otwórz **Open Printer / Direct Communication**. Jeśli tryb chroniony jest aktywny, program powinien poprosić o nadanie hasła administratora.\n\nPojawia się okno ustawienia hasła, czy od razu błąd?'],
   ]},
+
+  // Uchwyt rolki, który nie sprężynuje, to uszkodzenie mechaniczne: czat kieruje do serwisu od razu, bez kwoty
+  // za naprawę, ze zdaniami o odbiorze i diagnostyce. 24.11.2026 oceniający cztery razy na cztery wziął opłatę
+  // 99 zł netto za diagnostykę za wycenę naprawy i dał ocenę 2/5. Bramka kwoty odrzuca ten zarzut,
+  // a ocenaPoBramce() podnosi ocenę do 3/5. Na main ocena 2/5 zostaje i sesja trafia na listę bez zarzutu.
+  { nazwa: 'drukarka: uchwyt rolki nie sprężynuje, serwis od razu bez kwoty', oczekiwany: null, bezZarzutow: true, tury: [
+    ['w drukarce jeden z dwóch sprężynujących uchwytów rolki etykiet nie sprężynuje i rolka nie trzyma się na miejscu', 'To wygląda na uszkodzenie mechanizmu prowadzenia rolki albo sprężynującego uchwytu nośnika. Tego elementu nie warto na siłę doginać ani blokować prowizorycznie, bo może pogorszyć prowadzenie etykiet i doprowadzić do zacięć albo uszkodzenia czujnika/nośnika.\n\nProponuję wysłać drukarkę do serwisu w celu weryfikacji mechanizmu podtrzymującego rolkę. Kurier odbierze urządzenie z podanego adresu. Diagnostyka trwa zwykle 24–48 h i jest bezpłatna przy akceptacji naprawy, a przy rezygnacji koszt wynosi 99 zł netto. Po diagnozie podamy wiążącą wycenę naprawy.\n\nModel i numer seryjny znajdują się na naklejce z S/N na drukarce; można je wpisać w zgłoszeniu albo przesłać zdjęcie naklejki. Zgłoszenie można założyć przyciskiem „Wyślij do serwisu” pod tą wiadomością. [SERIOUS_ISSUE]'],
+  ]},
 ]
 
 let ok = 0
