@@ -882,10 +882,19 @@ async function searchManuals(query: string, modelsHint: string[] = [], rozmowa?:
 // P z co najmniej sześcioma cyframi), a o tym, czy to produkt sklepu, rozstrzyga dokładne
 // porównanie z kolumną sku w bazie. Cudzysłowy wewnątrz numeru usuwamy przed dopasowaniem,
 // bo numer bywa wklejany z cudzysłowem w środku, np. "800300"-321EM.
+// 25.11.2026 numer drukarki przyszedł ze spacją po łączniku („ZD4A043- D0EE00EZ”) i wzorzec go
+// nie widział. Spację tylko po jednej stronie łącznika traktujemy jak literówkę w numerze. Łącznik
+// ze spacjami po obu stronach to myślnik w zdaniu, więc tamtych fragmentów nie sklejamy.
 function wykryjNumeryKatalogowe(tekst: string): string[] {
   const bezCudzyslowow = (tekst || '').replace(/["'`„”“‘’«»]/g, '')
-  const kandydaci = bezCudzyslowow.match(
-    /(?<![A-Za-z0-9ąćęłńóśźżĄĆĘŁŃÓŚŹŻ-])(?:[A-Za-z0-9]+(?:-[A-Za-z0-9]+)+|P\d{6,})(?![A-Za-z0-9ąćęłńóśźżĄĆĘŁŃÓŚŹŻ-])/g) || []
+  const sklejone = bezCudzyslowow
+    .replace(/([A-Za-z0-9])-[ \t]+(?=[A-Za-z0-9])/g, '$1-')
+    .replace(/([A-Za-z0-9])[ \t]+-(?=[A-Za-z0-9])/g, '$1-')
+  const wzorzec = /(?<![A-Za-z0-9ąćęłńóśźżĄĆĘŁŃÓŚŹŻ-])(?:[A-Za-z0-9]+(?:-[A-Za-z0-9]+)+|P\d{6,})(?![A-Za-z0-9ąćęłńóśźżĄĆĘŁŃÓŚŹŻ-])/g
+  const kandydaci = [
+    ...(bezCudzyslowow.match(wzorzec) || []),
+    ...(sklejone === bezCudzyslowow ? [] : sklejone.match(wzorzec) || []),
+  ]
   const numery = kandydaci
     .map((k) => k.toUpperCase())
     .filter((k) => /\d/.test(k) && k.length >= 6)
@@ -908,6 +917,53 @@ function opisProduktuZeSklepu(
 }
 // === Koniec: numery katalogowe ze sklepu serwisu ===
 
+// === Numery katalogowe urządzeń z katalogu sklepu serwisu ===
+// 25.11.2026 klient wpisał numer katalogowy drukarki, żeby ustalić jej wersję. Prompt kazał przy
+// każdym numerze urządzenia odpowiadać szablonem „skontaktuj się z TAKMA”, więc czat podał ten sam
+// szablon trzy razy z rzędu, także na wprost zadane pytanie o model, i nie wrócił do diagnozy.
+// Tymczasem tabela products ma przy każdej drukarce listę jej wersji (attributes.variants: numer
+// katalogowy, rozdzielczość, łączność). Numer z tej listy to dane z naszego katalogu, a nie
+// dekodowanie, więc czat może podać model i wersję. Szablon zostaje dla numerów spoza katalogu
+// i pada najwyżej raz w rozmowie.
+const SZABLON_NUMERU_URZADZENIA = 'Identyfikacja modelu po numerze katalogowym urządzenia wymaga weryfikacji'
+
+type WersjaZKatalogu = { pn: string; model: string; nazwa: string; wersja: string }
+
+function znajdzWersjeUrzadzen(
+  numery: string[],
+  urzadzenia: Array<{ name: string; sku?: string | null; device_model?: string | null; attributes?: any }>,
+): WersjaZKatalogu[] {
+  const szukane = new Set(numery.map((n) => n.toUpperCase()))
+  const dodane = new Set<string>()
+  const wynik: WersjaZKatalogu[] = []
+  for (const u of urzadzenia || []) {
+    const model = (u.device_model || '').trim() || u.name
+    const warianty: any[] = Array.isArray(u.attributes?.variants) ? u.attributes.variants : []
+    for (const w of warianty) {
+      const pn = String(w?.pn || '').toUpperCase()
+      if (!pn || !szukane.has(pn) || dodane.has(pn)) continue
+      dodane.add(pn)
+      wynik.push({ pn, model, nazwa: u.name, wersja: String(w?.label || '').trim() })
+    }
+    const sku = String(u.sku || '').toUpperCase()
+    if (sku && szukane.has(sku) && !dodane.has(sku)) {
+      dodane.add(sku)
+      wynik.push({ pn: sku, model, nazwa: u.name, wersja: '' })
+    }
+  }
+  return wynik
+}
+
+function opisWersjiUrzadzenia(w: WersjaZKatalogu): string {
+  return `${w.pn}: ${w.nazwa} (model ${w.model})${w.wersja ? `, wersja: ${w.wersja}` : ''}`
+}
+
+function szablonNumeruJuzPadl(messages: any[]): boolean {
+  return (Array.isArray(messages) ? messages : []).some((m: any) =>
+    m?.role === 'assistant' && typeof m.content === 'string' && m.content.includes(SZABLON_NUMERU_URZADZENIA))
+}
+// === Koniec: numery katalogowe urządzeń ===
+
 const SYSTEM_PROMPT = `Jesteś AI asystentem serwisu "Serwis Zebra" prowadzonego przez TAKMA - oficjalnego, certyfikowanego Partnera Serwisowego Zebra Technologies (Zebra Premier Partner Repair Specialist).
 Od 2026 r. TAKMA ma też status Zebra Printer Repair Specialist – Card Printer, czyli autoryzację serwisową Zebra dla drukarek kart plastikowych (ZC100, ZC300, ZC350, ZXP). Szczegóły i certyfikat: https://www.serwis-zebry.pl/serwis-drukarek-kart-zebra
 
@@ -929,8 +985,11 @@ Jeśli klient pyta o ZAKUP, CENĘ, DOSTĘPNOŚĆ, ETYKIETY, AKCESORIA, OFERTĘ, 
 🔧 **NUMERY KATALOGOWE (PART NUMBER) — CZĘŚCI SERWISOWE vs URZĄDZENIA:**
 Jeśli klient podaje part number i masz go w kontekście [SKLEP_PRODUKTY] poniżej — odpowiedz na podstawie tych danych (nazwa, cena, link do karty produktu). To są części serwisowe (głowice, wałki, akumulatory, zasilacze) oraz materiały do drukarek kart (taśmy, karty, karty czyszczące) z NASZEGO sklepu serwisu i wpisują się w temat serwisu.
 Ta zasada ma PIERWSZEŃSTWO przed szablonem odsyłającym do sklepu TAKMA: produktu z listy [SKLEP_PRODUKTY] NIE odsyłaj do TAKMA, także gdy to taśma albo inny materiał eksploatacyjny. Gdy klient podał sam numer bez pytania, podaj nazwę, cenę i link, a potem zapytaj, czy chodzi o zakup, czy o problem z tym produktem w urządzeniu.
-Jeśli klient podaje part number URZĄDZENIA (np. ZD4A042-30EE00EZ, TC52x-1234 itp.) — NIE DEKODUJ, NIE ZGADUJ! Odpowiedz:
+Jeśli klient podaje part number URZĄDZENIA (np. ZD4A042-30EE00EZ, TC52x-1234 itp.):
+- Gdy ten numer jest w bloku [URZADZENIE_Z_NUMERU] poniżej, podaj model i wersję z tego bloku. To dane z katalogu naszego sklepu serwisu, a nie dekodowanie numeru. Potem wróć do problemu klienta.
+- Gdy numeru tam nie ma — NIE DEKODUJ, NIE ZGADUJ! Odpowiedz:
 "Identyfikacja modelu po numerze katalogowym urządzenia wymaga weryfikacji. Skontaktuj się z TAKMA (**[takma.com.pl](https://www.takma.com.pl)**, tel. +48 601 619 898) — pomogą zidentyfikować urządzenie."
+- Ten szablon podajesz w rozmowie NAJWYŻEJ RAZ. Gdy już padł, nie powtarzaj go, także gdy klient wpisze numer jeszcze raz albo zapyta o model wprost. Pracuj na modelu, który klient podał (choćby sama seria bez wersji). Wersję pomóż ustalić ze zdjęcia naklejki z numerem seryjnym albo samego urządzenia (nie zgaduj, gdzie jest naklejka ani jak są opisane jej pola), a potem wróć do objawu.
 
 ✅ **TO SĄ TEMATY ZEBRA (ODPOWIADAJ NA NIE!):**
 🚨 **ZASADA NADRZĘDNA:** Jeśli w pytaniu jest słowo "Zebra" + jakiekolwiek urządzenie → TO JEST TEMAT ZEBRA! POMAGAJ!
@@ -950,7 +1009,7 @@ Lista tematów SERWISOWYCH Zebra (TYLKO TE):
 NIE ODPOWIADAJ NA:
 - Pytania o zakup, cenę, dostępność urządzeń → odsyłaj do takma.com.pl
 - Pytania o etykiety, ribbony, materiały eksploatacyjne → odsyłaj do takma.com.pl
-- Identyfikację modelu po numerze katalogowym → odsyłaj do takma.com.pl
+- Identyfikację modelu po numerze katalogowym spoza bloku [URZADZENIE_Z_NUMERU] → odsyłaj do takma.com.pl (najwyżej raz w rozmowie)
 
 🚨 **ABSOLUTNY ZAKAZ - NIGDY NIE RÓB TEGO:**
 - NIGDY nie odsyłaj klienta na zebra.com, zebra.com/support ani inne strony Zebra!
@@ -1134,6 +1193,29 @@ Pamiętaj, że nasi klienci to często:
    - NIE kieruj do Zebra Setup Utilities po ustawienie hasła ani PIN-u: ZSU ich nie ustawia i o nie
      nie zapyta.
    - NIE zalecaj resetu fabrycznego jako sposobu na zdjęcie hasła: reset nie wyłącza zabezpieczeń EU RED.
+
+6. **SNMPv3 NA DRUKARKACH LINK-OS** (włączenie SNMPv3, użytkownik tylko do odczytu, hasła SNMPv3)
+   SNMPv3 jest w Link-OS od wersji 7.0. Konfiguruje się go operacją JSON, a nie komendami setvar.
+   - Zmienne ip.snmpv3.enable, ip.snmpv3.admin.name, ip.snmpv3.monitor.name oraz auth_protocol
+     i priv_protocol obu użytkowników są TYLKO DO ODCZYTU (getvar). Komenda setvar na nich niczego nie
+     ustawia. Nie podawaj ich w setvar ani w plikach do wysłania na drukarki.
+   - Warunek: włączony tryb chroniony z ustawionym hasłem administratora trybu chronionego. Bez tego
+     hasła drukarka odrzuca operację kodem 107. W egzemplarzach EU RED hasło ustawia kreator
+     zabezpieczeń z punktu 4.
+   - Są dwa konta: admin z dostępem "read-write" i monitor z dostępem "read-only". Użytkownika tworzy,
+     zmienia i usuwa operacja "setup-snmpv3-user". Wzór dla użytkownika tylko do odczytu (wielkie litery
+     klient zastępuje swoimi danymi, "username":"admin" w części authentication to login trybu chronionego):
+     {}{"protect":{"authentication":{"username":"admin","password":"HASLO_TRYBU_CHRONIONEGO","type":"basic"},"operation":"setup-snmpv3-user","setup-snmpv3-user":{"action":"create","access":"read-only","username":"NAZWA_UZYTKOWNIKA","auth-passphrase":"HASLO_AUTH","auth-protocol":"SHA","priv-passphrase":"HASLO_PRIV","priv-protocol":"AES"}}}
+   - auth-passphrase, auth-protocol (SHA albo MD5), priv-passphrase i priv-protocol (AES albo DES) to pola
+     tej operacji JSON, a nie zmienne SGD. Nie składaj z nich nazw w rodzaju ip.snmpv3.monitor.auth-passphrase.
+   - SNMPv3 włącza się sam po utworzeniu pierwszego użytkownika i wyłącza się, gdy nie ma żadnego. Osobnej
+     komendy włączenia nie trzeba. Zmiany działają po resecie sieci albo drukarki.
+   - Kody odpowiedzi: 107 — hasło trybu chronionego nie zostało ustawione, 307 i 309 — za krótkie hasło uwierzytelniania
+     albo szyfrowania, 319 — użytkownik już istnieje. Operacja "update" zmienia tylko hasła i protokoły.
+     Nazwę albo poziom dostępu zmienia się przez "delete" i ponowne "create".
+   - Nie przypisuj zmiennym ani polom skutków, których nie ma w tym opisie ani w kontekście.
+     ❌ ŹLE: „setvar "ip.snmpv3.admin.name" "" sprawia, że nie powstaje użytkownik administracyjny".
+     ✅ DOBRZE: „Zmienne ip.snmpv3 tylko pokazują stan. Użytkownika monitor tworzy operacja setup-snmpv3-user".
 
 **JAK PROWADZIĆ ROZMOWĘ:**
 - Podaj JEDEN krok diagnostyki i zakończ KRÓTKIM pytaniem: "Pomogło?", "Działa?", "I jak?", "Lepiej?"
@@ -2134,7 +2216,7 @@ export async function POST(req: NextRequest) {
       const pnPatterns = wykryjNumeryKatalogowe(lastUserMessage)
       if (pnPatterns.length > 0) {
         console.log('🔍 Wykryto potencjalne part numbery:', pnPatterns)
-        // Drukarki pomijamy: numer katalogowy urządzenia ma osobną regułę w prompcie.
+        // Drukarki pomijamy: numer katalogowy urządzenia obsługuje KROK 2.6 i blok [URZADZENIE_Z_NUMERU].
         const { data: products } = await supabase
           .from('products')
           .select('name, sku, slug, price_brutto, product_type, device_model, resolution_dpi')
@@ -2154,6 +2236,28 @@ export async function POST(req: NextRequest) {
       }
     } catch (err: any) {
       console.error('⚠️ Błąd wyszukiwania produktów:', err.message)
+    }
+
+    // === KROK 2.6: numer katalogowy urządzenia → model i wersja z katalogu sklepu serwisu ===
+    // Szukamy we wszystkich wiadomościach klienta, nie tylko w ostatniej: klient podaje numer raz,
+    // a o model pyta albo objaw opisuje w kolejnych turach. Opis przy znajdzWersjeUrzadzen.
+    let deviceContext = ''
+    try {
+      const numeryWRozmowie = wykryjNumeryKatalogowe(userMessagesFrom(messages).join('\n'))
+      if (numeryWRozmowie.length > 0) {
+        const { data: urzadzenia } = await supabase
+          .from('products')
+          .select('name, sku, device_model, attributes')
+          .eq('is_active', true)
+          .eq('product_type', 'drukarka')
+        const wersje = znajdzWersjeUrzadzen(numeryWRozmowie, urzadzenia || [])
+        if (wersje.length > 0) {
+          deviceContext = wersje.map(opisWersjiUrzadzenia).join('\n')
+          console.log(`✅ Numer urządzenia w katalogu sklepu: ${wersje.map((w) => w.pn).join(', ')}`)
+        }
+      }
+    } catch (err: any) {
+      console.error('⚠️ Błąd wyszukiwania wersji urządzeń:', err.message)
     }
 
     // === KROK 3: Zbuduj kontekst dla AI ===
@@ -2181,6 +2285,15 @@ export async function POST(req: NextRequest) {
     // Dodaj kontekst produktów ze sklepu (części serwisowe)
     if (productContext) {
       enhancedSystemPrompt += `\n\n=== [SKLEP_PRODUKTY] CZĘŚCI I MATERIAŁY Z NASZEGO SKLEPU ===\n${productContext}\n\nKlient podał numer katalogowy, który MAMY W SKLEPIE SERWISU. Podaj nazwę, cenę i link do karty produktu. Gdy przy produkcie nie ma kwoty, nie podawaj ceny, tylko odeślij do karty produktu. NIE używaj szablonu odsyłającego do sklepu TAKMA. To są oryginalne części i materiały Zebra.`
+    }
+
+    // Model i wersja urządzenia z katalogu sklepu serwisu (numer katalogowy podany przez klienta)
+    if (deviceContext) {
+      enhancedSystemPrompt += `\n\n=== [URZADZENIE_Z_NUMERU] MODEL Z KATALOGU SKLEPU SERWISU ===\n${deviceContext}\n\nKlient podał numer katalogowy urządzenia, który jest w katalogu naszego sklepu serwisu. Podaj model i wersję z tego wiersza. To dane z katalogu, a nie dekodowanie numeru, więc NIE używaj szablonu odsyłającego do TAKMA w sprawie identyfikacji. Nie podawaj ceny ani linku do sklepu. Potem wróć do problemu klienta: zapytaj o objaw albo prowadź dalej diagnozę.`
+    } else if (szablonNumeruJuzPadl(messages)) {
+      // Prompt pozwala na ten szablon najwyżej raz. Przypomnienie w turze, w której już padł, bo model
+      // chętnie powtarza szablon słowo w słowo, gdy klient wpisze numer drugi raz (alert 25.11.2026).
+      enhancedSystemPrompt += `\n\n=== SZABLON O NUMERZE KATALOGOWYM JUŻ PADŁ ===\nW tej rozmowie już odesłałeś klienta do TAKMA w sprawie numeru katalogowego urządzenia. NIE powtarzaj tego szablonu ani jego treści. Pracuj na modelu, który klient podał (choćby sama seria bez wersji). Wersję pomóż ustalić bez numeru katalogowego: poproś o zdjęcie naklejki z numerem seryjnym albo samego urządzenia. Nie zgaduj, gdzie jest naklejka ani jak są opisane jej pola. Jeśli wersji dalej nie da się ustalić, przejdź do objawu i powiedz wprost, że wskazówki są ogólne dla tej serii.`
     }
 
     // Dodaj kontekst z RAG (techniczne szczegóły z manuali)

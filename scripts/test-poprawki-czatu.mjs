@@ -729,6 +729,108 @@ sprawdz('blog EU RED: drukarka nie ma hasła fabrycznego', /Drukarka nie ma has�
 sprawdz('blog EU RED: 1234 nie działa', /hasło \*\*1234\*\*[^.]*nie działa/.test(wpisRed), true, 'wpis o EU RED')
 sprawdz('blog EU RED: opcja Set Front Panel PIN Code', /Set Front Panel PIN Code/.test(wpisRed), true, 'wpis o EU RED')
 
+// --- runda 14: numer katalogowy urządzenia i SNMPv3 (alerty 24–25.11.2026) ----------
+// a) Klient wpisał numer katalogowy drukarki ze spacją po łączniku, żeby ustalić wersję. Czat trzy razy
+//    odpowiedział tym samym szablonem „skontaktuj się z TAKMA”, także na wprost zadane pytanie o model.
+//    Wzorzec nie widział numeru ze spacją, prompt kazał podawać szablon przy każdym numerze urządzenia,
+//    a katalog sklepu serwisu (products.attributes.variants) ma ten numer z modelem i wersją.
+for (const [tekst, numer] of [
+  ['part nr ZD4A043- D0EE00EZ', 'ZD4A043-D0EE00EZ'],
+  ['ZD4A043 -D0EE00EZ', 'ZD4A043-D0EE00EZ'],
+  ['ZD4A043-D0EE00EZ', 'ZD4A043-D0EE00EZ'],
+]) sprawdz('wykryjNumeryKatalogowe: numer ze spacją przy łączniku', maNumer(tekst, numer), true, tekst)
+for (const tekst of [
+  'ZD421 - drukarka nie drukuje',
+  'czas naprawy 5 - 7 dni',
+]) sprawdz('wykryjNumeryKatalogowe: myślnik w zdaniu to nie numer', wykryjNumeryKatalogowe(tekst).length, 0, tekst)
+sprawdz('wykryjNumeryKatalogowe: zwykły numer bez zmian',
+  wykryjNumeryKatalogowe('taśma 800300-309em do zc300').join(','), '800300-309EM', 'numer bez spacji')
+
+const kodUrzadzen = ts.transpileModule(
+  wytnij('const SZABLON_NUMERU_URZADZENIA', '// === Koniec: numery katalogowe urządzeń ==='),
+  { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText
+const { znajdzWersjeUrzadzen, opisWersjiUrzadzenia, szablonNumeruJuzPadl, SZABLON_NUMERU_URZADZENIA } =
+  await import(`data:text/javascript,${encodeURIComponent(
+    kodUrzadzen + '\nexport { znajdzWersjeUrzadzen, opisWersjiUrzadzenia, szablonNumeruJuzPadl, SZABLON_NUMERU_URZADZENIA }')}`)
+
+// Wycinek katalogu w kształcie z tabeli products (stan z 25.11.2026)
+const katalog = [
+  { name: 'Drukarka etykiet Zebra ZD421d', sku: 'ZD4A042-D0EM00EZ', device_model: 'ZD421d', attributes: { variants: [
+    { pn: 'ZD4A042-D0EM00EZ', dpi: 203, label: '203 dpi, USB' },
+    { pn: 'ZD4A043-D0EE00EZ', dpi: 300, label: '300 dpi, USB + Ethernet' },
+  ] } },
+  { name: 'Drukarka etykiet Zebra ZD421t', sku: 'ZD4A042-30EM00EZ', device_model: 'ZD421t', attributes: { variants: [] } },
+  { name: 'Drukarka bez wersji', sku: 'XX', device_model: null, attributes: null },
+]
+const trafienie = znajdzWersjeUrzadzen(wykryjNumeryKatalogowe('part nr ZD4A043- D0EE00EZ'), katalog)
+sprawdz('znajdzWersjeUrzadzen: wersja z listy wariantów', trafienie.length, 1, 'ZD4A043-D0EE00EZ')
+sprawdz('znajdzWersjeUrzadzen: model z katalogu', trafienie[0]?.model, 'ZD421d', 'ZD4A043-D0EE00EZ')
+sprawdz('opisWersjiUrzadzenia: model i wersja w wierszu', trafienie[0] ? opisWersjiUrzadzenia(trafienie[0]) : '',
+  'ZD4A043-D0EE00EZ: Drukarka etykiet Zebra ZD421d (model ZD421d), wersja: 300 dpi, USB + Ethernet', 'wiersz bloku')
+sprawdz('znajdzWersjeUrzadzen: numer główny produktu bez listy wariantów',
+  znajdzWersjeUrzadzen(['zd4a042-30em00ez'], katalog)[0]?.model, 'ZD421t', 'ZD4A042-30EM00EZ')
+sprawdz('znajdzWersjeUrzadzen: numer i w wariantach, i jako sku tylko raz',
+  znajdzWersjeUrzadzen(['ZD4A042-D0EM00EZ'], katalog).length, 1, 'ZD4A042-D0EM00EZ')
+sprawdz('znajdzWersjeUrzadzen: numer spoza katalogu', znajdzWersjeUrzadzen(['ZD4A099-D0EE00EZ'], katalog).length, 0, 'ZD4A099-D0EE00EZ')
+sprawdz('znajdzWersjeUrzadzen: pusty katalog', znajdzWersjeUrzadzen(['ZD4A043-D0EE00EZ'], null).length, 0, 'null')
+
+const szablon = 'Identyfikacja modelu po numerze katalogowym urządzenia wymaga weryfikacji. Skontaktuj się z TAKMA.'
+sprawdz('szablonNumeruJuzPadl: szablon w odpowiedzi asystenta',
+  szablonNumeruJuzPadl([{ role: 'user', content: 'numer' }, { role: 'assistant', content: szablon }]), true, 'asystent')
+sprawdz('szablonNumeruJuzPadl: brak szablonu',
+  szablonNumeruJuzPadl([{ role: 'assistant', content: 'To wygląda na numer seryjny.' }]), false, 'inna odpowiedź')
+sprawdz('szablonNumeruJuzPadl: tekst klienta się nie liczy',
+  szablonNumeruJuzPadl([{ role: 'user', content: szablon }]), false, 'klient')
+sprawdz('prompt: szablon zgodny ze stałą SZABLON_NUMERU_URZADZENIA',
+  src.slice(src.indexOf('const SYSTEM_PROMPT')).includes(SZABLON_NUMERU_URZADZENIA), true, 'SYSTEM_PROMPT')
+
+const regulaUrzadzen = src.slice(src.indexOf('Jeśli klient podaje part number URZĄDZENIA'), src.indexOf('TO SĄ TEMATY ZEBRA'))
+for (const [nazwa, wzor] of [
+  ['model z bloku [URZADZENIE_Z_NUMERU]', /Gdy ten numer jest w bloku \[URZADZENIE_Z_NUMERU\]/],
+  ['szablon najwyżej raz', /Ten szablon podajesz w rozmowie NAJWYŻEJ RAZ/],
+  ['bez powtórki także przy pytaniu o model', /także gdy klient wpisze numer jeszcze raz albo zapyta o model wprost/],
+]) sprawdz('prompt numer urządzenia: ' + nazwa, regulaUrzadzen.length > 0 && wzor.test(regulaUrzadzen), true, nazwa)
+const krokUrzadzen = src.slice(src.indexOf('// === KROK 2.6'), src.indexOf('// === KROK 3'))
+sprawdz('trasa: numery z całej rozmowy klienta', /wykryjNumeryKatalogowe\(userMessagesFrom\(messages\)\.join/.test(krokUrzadzen), true, 'KROK 2.6')
+sprawdz('trasa: tylko aktywne drukarki', /\.eq\('is_active', true\)[\s\S]*\.eq\('product_type', 'drukarka'\)/.test(krokUrzadzen), true, 'KROK 2.6')
+const blokUrzadzenia = src.slice(src.indexOf('=== [URZADZENIE_Z_NUMERU]'), src.indexOf('// Dodaj kontekst z RAG'))
+for (const [nazwa, wzor] of [
+  ['bez szablonu TAKMA przy numerze z katalogu', /NIE używaj szablonu odsyłającego do TAKMA w sprawie identyfikacji/],
+  ['bez ceny i linku', /Nie podawaj ceny ani linku do sklepu/],
+  ['przypomnienie, gdy szablon już padł', /szablonNumeruJuzPadl\(messages\)[\s\S]*NIE powtarzaj tego szablonu/],
+]) sprawdz('trasa: ' + nazwa, blokUrzadzenia.length > 0 && wzor.test(blokUrzadzenia), true, nazwa)
+
+// b) Klient pytał, jak włączyć SNMPv3 i użytkownika tylko do odczytu w drukarce przemysłowej z Link-OS 7.5.
+//    Czat złożył plik z komend setvar na zmiennych ip.snmpv3.* i dopisał skutek, którego nigdzie nie ma:
+//    „pusta nazwa admina sprawia, że nie tworzysz użytkownika administracyjnego”. Prompt i baza wiedzy nie
+//    miały nic o SNMPv3. Według Link-OS 7.0 Release Notes zmienne ip.snmpv3.* służą tylko do odczytu,
+//    a według PrintSecure Printer Administration Guide (P1099957-12EN, s. 63–67) użytkowników tworzy
+//    operacja JSON setup-snmpv3-user w trybie chronionym, a SNMPv3 włącza się sam po utworzeniu
+//    pierwszego użytkownika.
+const sekcjaSnmp = (() => {
+  const a = src.indexOf('**SNMPv3 NA DRUKARKACH LINK-OS**')
+  const b = src.indexOf('**JAK PROWADZIĆ ROZMOWĘ:**', a)
+  if (a < 0 || b < 0) throw new Error('Nie znaleziono sekcji o SNMPv3 w prompcie')
+  return src.slice(a, b)
+})()
+for (const [nazwa, wzor, oczekiwane] of [
+  ['zmienne ip.snmpv3 tylko do odczytu', /są TYLKO DO ODCZYTU \(getvar\)/, true],
+  ['setvar na nich niczego nie ustawia', /Komenda setvar na nich niczego nie\s+ustawia/, true],
+  ['warunek: hasło trybu chronionego, kod 107', /Bez tego\s+hasła drukarka odrzuca operację kodem 107/, true],
+  ['operacja setup-snmpv3-user', /"operation":"setup-snmpv3-user"/, true],
+  ['monitor = read-only, admin = read-write', /admin z dostępem "read-write" i monitor z dostępem "read-only"/, true],
+  ['wzór tworzy użytkownika tylko do odczytu', /"action":"create","access":"read-only"/, true],
+  ['pola passphrase to nie zmienne SGD', /to pola\s+tej operacji JSON, a nie zmienne SGD/, true],
+  ['SNMPv3 włącza się sam po utworzeniu użytkownika', /SNMPv3 włącza się sam po utworzeniu pierwszego użytkownika/, true],
+  ['brak setvar na początku linii', /^\s*! U1 setvar/m, false],
+  ['brak komendy setvar włączającej SNMPv3', /setvar "ip\.snmpv3\.enable" "on"/, false],
+  ['przykład błędu ze skutkiem pustej nazwy admina', /❌ ŹLE: „setvar "ip\.snmpv3\.admin\.name" ""/, true],
+]) sprawdz('prompt SNMPv3: ' + nazwa, wzor.test(sekcjaSnmp), oczekiwane, nazwa)
+const wzorJson = sekcjaSnmp.match(/\{\}(\{"protect".*\}\})\s*$/m)
+let jsonPoprawny = false
+try { jsonPoprawny = Boolean(wzorJson && JSON.parse(wzorJson[1]).protect['setup-snmpv3-user'].access === 'read-only') } catch {}
+sprawdz('prompt SNMPv3: wzór operacji to poprawny JSON', jsonPoprawny, true, wzorJson?.[1] || 'brak wzoru')
+
 // --- wynik -----------------------------------------------------------------
 console.log(`\nZaliczone: ${zaliczone}/${zaliczone + bledy.length}`)
 if (bledy.length) {
