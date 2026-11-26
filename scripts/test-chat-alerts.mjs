@@ -274,6 +274,27 @@ sprawdzPodstawe('monit w ZSU, cała odpowiedź w cytacie', 'bledne_dane',
 // Prompt czatu każe mówić, że ZSU o hasło nie zapyta. Zdanie z przeczeniem to nie obietnica monitu.
 const ZSU_BEZ_MONITU = 'Zebra Setup Utilities nie poprosi o hasło trybu chronionego. Zebra Setup Utilities nie wyświetli też monitu o hasło przy zmianie ustawień.'
 sprawdzPodstawe('„ZSU nie poprosi o hasło”', 'bledne_dane', 'Obiecuje, że Zebra Setup Utilities poprosi o nadanie hasła.', ZSU_BEZ_MONITU, false)
+// Tryb chroniony i SNMPv3 (PrintSecure Printer Administration Guide P1099957-12EN, s. 11 i 58–67):
+// device.protected_mode i ip.snmpv3.* służą tylko do odczytu, tryb włącza operacja JSON setup,
+// a użytkownika SNMPv3 tworzy operacja setup-snmpv3-user. 26.11.2026 czat kazał włączyć tryb chroniony
+// komendą setvar na device.protected_mode, a bramka tego kroku nie znała. Oceniający zarzucał przy tym
+// z pamięci, że hasło administratora ustawia setvar.
+const TRYB_SETVAR = 'W Direct Communication wklej jedną linię:\n\n! U1 setvar "device.protected_mode" "on"\n\nPo włączeniu zmiana ustawień sieci będzie wymagała hasła administratora.'
+const TRYB_POPRAWNIE = 'Trybu chronionego nie włącza setvar na zmiennej device.protected_mode, ta zmienna tylko pokazuje stan. Tryb włącza operacja setup, która ustawia hasło administratora:\n\n{}{"protect":{"authentication":{"username":"admin","password":"","type":"basic"},"operation":"setup","setup":{"username":"admin","password":"NOWE_HASLO_ADMINA"}}}\n\nJaki status zwróciła drukarka?'
+const SNMP_SETVAR = 'Plik do wysłania na drukarki:\n! U1 setvar "ip.snmpv3.monitor.name" "monitor_ro"\n! U1 setvar "ip.snmpv3.enable" "on"'
+const SNMP_POPRAWNIE = 'Zmienne ip.snmpv3 tylko pokazują stan, setvar na nich niczego nie ustawi. Użytkownika tylko do odczytu tworzy operacja setup-snmpv3-user z hasłem trybu chronionego.'
+sprawdzPodstawe('setvar na device.protected_mode', 'bledne_dane',
+  'Trybu chronionego nie włącza się komendą setvar, tylko operacją JSON setup.', TRYB_SETVAR, true)
+sprawdzPodstawe('setvar na device.protected_mode, zarzut o trybie bez słowa setvar', 'bledne_dane',
+  'Asystent podał nieprawidłowy sposób włączenia trybu chronionego.', TRYB_SETVAR, true)
+sprawdzPodstawe('„hasło ustawia setvar” przy operacji setup', 'bledne_dane',
+  'Asystent podał nieprawdziwe informacje, ponieważ hasło administratora można ustawić komendą setvar.', TRYB_POPRAWNIE, false)
+sprawdzPodstawe('zdanie z przeczeniem o setvar na device.protected_mode', 'bledne_dane',
+  'Asystent powinien podać komendę setvar, która włącza tryb chroniony.', TRYB_POPRAWNIE, false)
+sprawdzPodstawe('setvar na ip.snmpv3, zarzut o SNMPv3 bez słowa setvar', 'bledne_dane',
+  'Użytkownika SNMPv3 tworzy operacja setup-snmpv3-user, a nie zmiana zmiennych ip.snmpv3.', SNMP_SETVAR, true)
+sprawdzPodstawe('„brak pól haseł SNMPv3 to ograniczenie firmware” przy operacji JSON', 'bledne_dane',
+  'Asystent powinien zaznaczyć, że brak zmiennych haseł SNMPv3 może wynikać z ograniczeń firmware.', SNMP_POPRAWNIE, false)
 console.log(`Bramka podstawy zarzutu:${podstawaOk}/${podstawaOk + bledyPodstawy.length}`)
 if (bledyPodstawy.length) { for (const b of bledyPodstawy) console.error('  ' + b); process.exit(1) }
 
@@ -312,6 +333,16 @@ const zarzutOMonicie = { ...ZARZUT_O_BRAK_HASLA, dlaczego: 'Obiecuje, że Zebra 
 sprawdzPrzepisanie('zarzut o monit w ZSU bez zmian', przepiszZarzutOBrakuHasla(zarzutOMonicie, ODPOWIEDZI_Z_MONITEM), zarzutOMonicie)
 const zarzutGwarancji = { ...ZARZUT_O_BRAK_HASLA, typ: 'gwarancja' }
 sprawdzPrzepisanie('inny typ bez zmian', przepiszZarzutOBrakuHasla(zarzutGwarancji, ODPOWIEDZI_Z_MONITEM), zarzutGwarancji)
+// Zarzut wobec zdania o braku hasła w egzemplarzu EU RED dostaje opis błędnego kroku z tej samej
+// odpowiedzi: setvar na device.protected_mode albo na ip.snmpv3, każdy z własnym opisem.
+const przepisanyTryb = przepiszZarzutOBrakuHasla({ ...ZARZUT_O_BRAK_HASLA, tura: 1 },
+  [`W egzemplarzu EU RED hasło trybu chronionego nie jest fabrycznie ustawione. ${TRYB_SETVAR}`])
+sprawdzPrzepisanie('setvar na device.protected_mode: opis o operacji setup',
+  /device\.protected_mode/.test(przepisanyTryb.dlaczego) && /operacja JSON setup/.test(przepisanyTryb.dlaczego), true)
+sprawdzPrzepisanie('setvar na device.protected_mode: cytat z komendą', /setvar "device\.protected_mode"/.test(przepisanyTryb.cytat), true)
+const przepisanySnmp = przepiszZarzutOBrakuHasla({ ...ZARZUT_O_BRAK_HASLA, tura: 1 },
+  [`W egzemplarzu EU RED hasło trybu chronionego nie jest fabrycznie ustawione. ${SNMP_SETVAR}`])
+sprawdzPrzepisanie('setvar na ip.snmpv3: opis o setup-snmpv3-user', /setup-snmpv3-user/.test(przepisanySnmp.dlaczego), true)
 console.log(`Przepisanie zarzutu o braku hasła: ${przepisanieOk}/${przepisanieOk + bledyPrzepisania.length}`)
 if (bledyPrzepisania.length) { for (const b of bledyPrzepisania) console.error('  ' + b); process.exit(1) }
 
@@ -897,6 +928,25 @@ const PRZYPADKI = [
   // a ocenaPoBramce() podnosi ocenę do 3/5. Na main ocena 2/5 zostaje i sesja trafia na listę bez zarzutu.
   { nazwa: 'drukarka: uchwyt rolki nie sprężynuje, serwis od razu bez kwoty', oczekiwany: null, bezZarzutow: true, tury: [
     ['w drukarce jeden z dwóch sprężynujących uchwytów rolki etykiet nie sprężynuje i rolka nie trzyma się na miejscu', 'To wygląda na uszkodzenie mechanizmu prowadzenia rolki albo sprężynującego uchwytu nośnika. Tego elementu nie warto na siłę doginać ani blokować prowizorycznie, bo może pogorszyć prowadzenie etykiet i doprowadzić do zacięć albo uszkodzenia czujnika/nośnika.\n\nProponuję wysłać drukarkę do serwisu w celu weryfikacji mechanizmu podtrzymującego rolkę. Kurier odbierze urządzenie z podanego adresu. Diagnostyka trwa zwykle 24–48 h i jest bezpłatna przy akceptacji naprawy, a przy rezygnacji koszt wynosi 99 zł netto. Po diagnozie podamy wiążącą wycenę naprawy.\n\nModel i numer seryjny znajdują się na naklejce z S/N na drukarce; można je wpisać w zgłoszeniu albo przesłać zdjęcie naklejki. Zgłoszenie można założyć przyciskiem „Wyślij do serwisu” pod tą wiadomością. [SERIOUS_ISSUE]'],
+  ]},
+
+  // --- alert z 26.11.2026: tryb chroniony i SNMPv3 komendami (rozmowy odtworzone, bez wypowiedzi klientów) ---
+
+  // Prawdziwa wpadka: czat włączał tryb chroniony komendą setvar na device.protected_mode, która służy
+  // tylko do odczytu. Tryb włącza operacja JSON setup, która ustawia hasło administratora.
+  { nazwa: 'ZT610: tryb chroniony komendą setvar na device.protected_mode', oczekiwany: 'bledne_dane', tury: [
+    ['jak włączyć tryb chroniony w zt610 komendą?', 'W Zebra Setup Utilities → **Open Printer** → **Direct Communication** wklej jedną linię:\n\n```\n! U1 setvar "device.protected_mode" "on"\n```\n\nPo włączeniu trybu chronionego zmiana ustawień sieci będzie wymagała hasła administratora. Przyjęło?'],
+  ]},
+  // Odpowiedź według punktu 7 promptu czatu: operacja setup, zmienna device.protected_mode tylko do odczytu.
+  { nazwa: 'ZT610: tryb chroniony operacją setup, bez setvar', oczekiwany: null, bezZarzutow: true, tury: [
+    ['jak włączyć tryb chroniony w zt610 komendą?', 'Tryb chroniony włącza ustawienie hasła administratora operacją JSON **setup**. Zmienna device.protected_mode tylko pokazuje stan, więc setvar na niej niczego nie włączy.\n\nW Zebra Setup Utilities → **Open Printer** → **Direct Communication** wyślij jedną linię, z własnym hasłem w miejscu NOWE_HASLO_ADMINA (od 14 do 128 znaków):\n\n```\n{}{"protect":{"authentication":{"username":"admin","password":"","type":"basic"},"operation":"setup","setup":{"username":"admin","password":"NOWE_HASLO_ADMINA"}}}\n```\n\nDrukarka powinna odpowiedzieć {"protect":{"status":0,"operation":"setup"}}. Jaki status zwróciła?'],
+  ]},
+  // Plik z setvar na ip.snmpv3.* tu nie stoi: oceniający zgłaszał go 3 razy na 6, a zdanie o tych zmiennych
+  // w prompcie czujki podnosiło to do 6 na 6, ale obniżało alarm o monicie w ZSU z 10 na 10 do 1 na 10.
+  // Krok z setvar na ip.snmpv3 sprawdza bramka podstawy wyżej.
+  // Odpowiedź według punktów 6 i 7: najpierw setup z hasłem, potem setup-snmpv3-user z tym hasłem.
+  { nazwa: 'Link-OS: plik z operacjami setup i setup-snmpv3-user', oczekiwany: null, bezZarzutow: true, tury: [
+    ['potrzebuję pliku z poleceniami na kilka drukarek: tryb chroniony i użytkownik snmpv3 tylko do odczytu', 'Zmienne ip.snmpv3 i device.protected_mode tylko pokazują stan, więc w pliku nie ma komend setvar. Najpierw operacja **setup** ustawia hasło administratora i włącza tryb chroniony, potem operacja **setup-snmpv3-user** z tym hasłem tworzy użytkownika tylko do odczytu. Wielkie litery zastąp swoimi danymi:\n\n```\n{}{"protect":{"authentication":{"username":"admin","password":"","type":"basic"},"operation":"setup","setup":{"username":"admin","password":"HASLO_ADMINA"}}}\n{}{"protect":{"authentication":{"username":"admin","password":"HASLO_ADMINA","type":"basic"},"operation":"setup-snmpv3-user","setup-snmpv3-user":{"action":"create","access":"read-only","username":"NAZWA_UZYTKOWNIKA","auth-passphrase":"HASLO_AUTH","auth-protocol":"SHA","priv-passphrase":"HASLO_PRIV","priv-protocol":"AES"}}}\n```\n\nSNMPv3 włączy się sam po utworzeniu użytkownika. Sprawdź plik najpierw na jednej drukarce. Jakie statusy zwróciła?'],
   ]},
 ]
 

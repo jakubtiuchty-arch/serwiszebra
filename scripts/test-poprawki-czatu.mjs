@@ -831,6 +831,56 @@ let jsonPoprawny = false
 try { jsonPoprawny = Boolean(wzorJson && JSON.parse(wzorJson[1]).protect['setup-snmpv3-user'].access === 'read-only') } catch {}
 sprawdz('prompt SNMPv3: wzór operacji to poprawny JSON', jsonPoprawny, true, wzorJson?.[1] || 'brak wzoru')
 
+// --- runda 15: włączenie trybu chronionego komendą (alert 26.11.2026) ----------------
+// Klient pytał, jaką komendą włączyć tryb chroniony w drukarce przemysłowej Link-OS, a potem o plik
+// z poleceniami na wiele drukarek z użytkownikiem SNMPv3 tylko do odczytu. Czat podał setvar na zmiennej
+// device.protected_mode, a w pliku ustawił ją na końcu, po setvar na ip.snmpv3.*. Prompt pokazywał tę
+// zmienną tylko w odczycie getvar i nie mówił, jak włącza się tryb chroniony. Według PrintSecure Printer
+// Administration Guide (P1099957-12EN, s. 11, 58–62 i 109) device.protected_mode służy tylko do odczytu,
+// tryb włącza operacja JSON setup, która ustawia hasło administratora, a ustawienia chronione zmienia
+// operacja set. Wpis zebra-printsecure-przewodnik-administratora-it w lib/blog.ts mówi to samo.
+const sekcjaTryb = (() => {
+  const a = src.indexOf('**TRYB CHRONIONY W DRUKARKACH LINK-OS KOMENDĄ**')
+  const b = src.indexOf('**JAK PROWADZIĆ ROZMOWĘ:**', a)
+  if (a < 0 || b < 0) throw new Error('Nie znaleziono sekcji o trybie chronionym w prompcie')
+  return src.slice(a, b)
+})()
+for (const [nazwa, wzor, oczekiwane] of [
+  ['device.protected_mode tylko do odczytu', /device\.protected_mode i device\.protected_mode_allowed służą TYLKO DO ODCZYTU/, true],
+  ['setvar na nich niczego nie włącza', /Setvar na nich niczego nie włącza/, true],
+  ['tryb włącza operacja setup z hasłem', /Tryb chroniony włącza ustawienie hasła administratora operacją "setup"/, true],
+  ['puste hasło w authentication przy pierwszym ustawieniu', /pole\s+password w części authentication jest puste/, true],
+  ['hasło od 14 do 128 znaków ASCII', /od 14 do 128 drukowalnych znaków ASCII/, true],
+  ['kod 107: najpierw hasło', /107 — najpierw trzeba ustawić hasło/, true],
+  ['EU RED: pierwsze hasło operacją setup albo kreatorem', /Pierwsze hasło ustawia w nich\s+ta sama operacja "setup" albo kreator zabezpieczeń/, true],
+  ['ustawienia chronione operacją set', /ustawienia chronione \(sieć, zabezpieczenia\) zmienia operacja "set" z hasłem/, true],
+  ['wyłączenie przez configure-one', /"configure-one" z "protected-mode-allowed":"no"/, true],
+  ['kolejność w pliku: setup przed poleceniami z hasłem', /najpierw "setup" z hasłem, potem polecenia z tym hasłem/, true],
+  ['brak setvar na początku linii', /^\s*! U1 setvar/m, false],
+]) sprawdz('prompt tryb chroniony: ' + nazwa, wzor.test(sekcjaTryb), oczekiwane, nazwa)
+const wzoryTrybu = [...sekcjaTryb.matchAll(/^\s*\{\}(\{"protect".*\}\})\s*$/gm)].map((m) => {
+  try { return JSON.parse(m[1]).protect } catch { return null }
+})
+sprawdz('prompt tryb chroniony: dwa wzory, oba to poprawny JSON', wzoryTrybu.length === 2 && wzoryTrybu.every(Boolean), true,
+  `${wzoryTrybu.length} wzorów`)
+const [wzorSetup, wzorSet] = wzoryTrybu
+sprawdz('prompt tryb chroniony: wzór setup z pustym hasłem i użytkownikiem admin',
+  wzorSetup?.operation === 'setup' && wzorSetup.authentication.password === '' && wzorSetup.setup.username === 'admin', true, 'setup')
+sprawdz('prompt tryb chroniony: wzór set z hasłem administratora',
+  wzorSet?.operation === 'set' && wzorSet.authentication.password !== '' && typeof wzorSet.set === 'object', true, 'set')
+// Nigdzie w prompcie nie może stać gotowa komenda setvar z wartością na zmiennych tylko do odczytu
+const promptCzatu = src.slice(src.indexOf('const SYSTEM_PROMPT'))
+sprawdz('prompt: brak setvar z wartością na device.protected_mode',
+  /setvar\s+"device\.protected_mode(?:_allowed)?"\s+"/.test(promptCzatu), false, 'SYSTEM_PROMPT')
+sprawdz('prompt EU RED: device.protected_mode tylko do odczytu', /Ta zmienna służy tylko do odczytu \(punkt 7\)/.test(sekcjaRed), true, 'punkt 4')
+sprawdz('prompt SNMPv3: hasło z operacji setup, setup przed setup-snmpv3-user',
+  /Hasło ustawia operacja "setup" z punktu 7[\s\S]{0,200}"setup" stoi więc przed\s+"setup-snmpv3-user"/.test(sekcjaSnmp), true, 'punkt 6')
+// Prompt i baza wiedzy mają mówić to samo o włączaniu trybu chronionego
+sprawdz('blog PrintSecure: hasło operacją setup', /"operation":"setup"/.test(wpisPrintSecure), true, 'wpis o PrintSecure')
+sprawdz('blog PrintSecure: hasło od 14 do 128 znaków', /od 14 do 128 znaków/.test(wpisPrintSecure), true, 'wpis o PrintSecure')
+sprawdz('blog: brak setvar z wartością na device.protected_mode',
+  /setvar\s+"device\.protected_mode(?:_allowed)?"\s+"/.test(blog), false, 'lib/blog.ts')
+
 // --- wynik -----------------------------------------------------------------
 console.log(`\nZaliczone: ${zaliczone}/${zaliczone + bledy.length}`)
 if (bledy.length) {

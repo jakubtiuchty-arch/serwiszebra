@@ -379,16 +379,25 @@ const LITERY = 'a-ząćęłńóśźż'
 const RE_TEMAT_STEROWNIKA = /zdesigner|sterownik\S*\s+v\s?(?:5|10)\b|wersj\S*\s+sterownik/i
 const RE_V10 = /\bv\s?10\b/i
 const RE_MODEL_TYLKO_V5 = /\b(?:G[KC]\s?420[dt]?|GT\s?800|T?LP\s?2844)\b/i
-const RE_TEMAT_EU_RED = /setvar|zsu|setup utilities|hasł|wersj|chronion|protected/i
+const RE_TEMAT_EU_RED = /setvar|zsu|setup utilities|hasł|wersj|chronion|protected|snmp/i
 // Kroki, których prompt czatu zakazuje przy trybie chronionym (sekcja o EU RED od 9.10.2026).
 // Zdanie z przeczeniem („ZSU nie poprosi o hasło", „nie wyświetli monitu") nie jest obietnicą monitu.
+// Zmienne device.protected_mode i ip.snmpv3.* służą tylko do odczytu (PrintSecure Printer Administration
+// Guide P1099957-12EN, s. 11 i 58–67; punkty 6 i 7 promptu czatu). Wzorce wymagają komendy z wartością,
+// więc zdanie „setvar na zmiennej device.protected_mode niczego nie włączy" ich nie zapala. 26.11.2026 czat
+// kazał włączyć tryb chroniony komendą setvar na device.protected_mode, a bramka nie znała tego kroku.
+// Wzorzec SNMPv3 stoi przed ogólnym ip., żeby przepisany zarzut dostał właściwy opis.
 const RE_BLEDNA_PROCEDURA_EU_RED = [
+  /setvar\s+"ip\.snmpv3\.[^"]*"\s+"/i,
+  /setvar\s+"device\.protected_mode(?:_allowed)?"\s+"/i,
   /setvar\s+"(?:ip|internal_wired|wlan)\./i,
   /(?:zsu|setup utilities)[\s\S]{0,160}?(?<!\bnie\s+(?:\S+\s+){0,2})(?:poprosi|zapyta|prośb|monit)[^.]{0,40}hasł/i,
   /(?:zsu|setup utilities)[^.]{0,80}(?:star(?:[aąyeę]|sz)|przestarzał|nieaktualn)|najnowsz\S*\s+wersj\S*\s+(?:zsu|zebra setup)/i,
 ]
 // Opisy do zarzutu przepisanego w przepiszZarzutOBrakuHasla(), w kolejności wzorców powyżej.
 const OPIS_BLEDNEJ_PROCEDURY_EU_RED = [
+  'Każe ustawiać SNMPv3 komendą setvar na zmiennych ip.snmpv3, które służą tylko do odczytu; użytkownika SNMPv3 tworzy operacja JSON setup-snmpv3-user w trybie chronionym.',
+  'Każe włączać tryb chroniony komendą setvar na device.protected_mode, a ta zmienna służy tylko do odczytu; tryb chroniony włącza operacja JSON setup, która ustawia hasło administratora.',
   'Każe włączać port lub usługi sieciowe komendą setvar, a w trybie chronionym (EU RED) setvar ich nie zmienia; robi to kreator zabezpieczeń Zebry.',
   'Obiecuje monit o hasło w Zebra Setup Utilities, a ZSU nie ustawia hasła trybu chronionego ani PIN-u panelu; ustawia je kreator zabezpieczeń Zebry (Nucleus Connector).',
   'Twierdzi, że wersja ZSU klienta jest za stara, a w trybie chronionym (EU RED) przyczyną nie jest wersja programu.',
