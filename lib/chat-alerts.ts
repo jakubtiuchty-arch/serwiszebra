@@ -618,19 +618,31 @@ const RE_USZKODZENIE_EWIDENTNE = new RegExp(
   `(?:z|po|u|od)[łl]ama[nłl]|zgni(?:ec|ót|ot)|rozchwian)`, 'i')
 // Polecenie czynności przy urządzeniu albo w programie, także w formie „sprawdźmy", „zróbmy".
 // Bez „podaj", „przepisz" i „prześlij": prośba o model albo zdjęcie naklejki nie jest krokiem.
+// „Zmniejsz", „obniż" i „zwiększ" to zmiana ustawień druku, np. zaczernienia albo prędkości
+// (26.11.2026, przegrzanie głowicy ZD421t: rada o niższym zaczernieniu nie liczyła się jako krok).
 const RE_POLECENIE = new RegExp(
   `(?<![${LITERY}])(?:sprawdź|wyjmij|włóż|wsuń|otwórz|zamknij|naciśnij|przytrzymaj|wyłącz|włącz|podłącz|odłącz|podepnij|` +
   `przetrzyj|wyczyść|załóż|przewiń|obróć|przesuń|uruchom|zrestartuj|wejdź|kliknij|wybierz|ustaw|zmień|wklej|wpisz|` +
   `wydrukuj|zeskanuj|zrób|odczekaj|dociśnij|wymień|spróbuj|użyj|puść|zainstaluj|pobierz|zaznacz|przełącz|obejrzyj|` +
-  `zdejmij|połącz|wykonaj)(?:my)?(?![${LITERY}])`, 'i')
+  `zdejmij|połącz|wykonaj|zmniejsz|obniż|zwiększ)(?:my)?(?![${LITERY}])`, 'i')
 const RE_PYTANIE_O_MODEL = /model|naklejk|S\/N|numer\S* seryjn|tabliczk|zdjęci/i
+// „Sprawdź wariant: ZD421d, ZD421t czy ZD421c" to pytanie o oznaczenie z naklejki, a nie krok przy
+// urządzeniu (26.11.2026: takie zdanie liczyło się jako krok, więc bramka mogła uznać wycenę po jednym
+// prawdziwym kroku za zgodną z zasadami). W zdaniu o wariancie samo „sprawdź" nie wystarcza. Inne
+// polecenie zostaje krokiem, np. „Otwórz pokrywę i sprawdź, który wariant masz".
+const RE_WARIANT = new RegExp(`(?<![${LITERY}])wariant`, 'i')
+const RE_SPRAWDZ = new RegExp(`(?<![${LITERY}])sprawdź(?:my)?(?![${LITERY}])`, 'gi')
 const RE_ZASTRZEZENIE_WYCENY = new RegExp(
   `(?:wiążąc|ostateczn)[${LITERY}]*\\s+wycen|wycen[${LITERY}]*[^.]{0,60}po\\s+diagnoz`, 'i')
 
 function maKrok(odpowiedz: string): boolean {
   return (odpowiedz || '')
     .split(/(?<=[.!?:])\s+|\n+/)
-    .some((zdanie) => RE_POLECENIE.test(zdanie) && !RE_PYTANIE_O_MODEL.test(zdanie))
+    .some((zdanie) => {
+      if (RE_PYTANIE_O_MODEL.test(zdanie)) return false
+      const polecenia = RE_WARIANT.test(zdanie) ? zdanie.replace(RE_SPRAWDZ, '') : zdanie
+      return RE_POLECENIE.test(polecenia)
+    })
 }
 
 export function wycenaZgodnaZZasadami(odpowiedzi: string[], wiadomosciKlienta: string[] = []): boolean {

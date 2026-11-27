@@ -881,6 +881,30 @@ sprawdz('blog PrintSecure: hasło od 14 do 128 znaków', /od 14 do 128 znaków/.
 sprawdz('blog: brak setvar z wartością na device.protected_mode',
   /setvar\s+"device\.protected_mode(?:_allowed)?"\s+"/.test(blog), false, 'lib/blog.ts')
 
+// --- runda 15: numer katalogowy ZD421t w osobnej wiadomości (alert 26.11.2026) ------------
+// Klient na pytanie o wariant ZD421 wpisał sam numer katalogowy drukarki ZD421t, 300 dpi, USB.
+// Produkcja nie miała jeszcze KROKU 2.6 z rundy 14, więc czat odesłał klienta szablonem do TAKMA.
+// Numer jest w katalogu sklepu serwisu (stan z 27.11.2026), a ZD421d ma numer o tym samym początku.
+// Pilnujemy, żeby numer z wiadomości złożonej z samego numeru trafił do bloku z właściwym modelem.
+const katalogZD421 = [
+  { name: 'Drukarka etykiet Zebra ZD421d', sku: 'ZD4A042-D0EM00EZ', device_model: 'ZD421d', attributes: { variants: [
+    { pn: 'ZD4A043-D0EM00EZ', dpi: 300, label: '300 dpi, USB' },
+  ] } },
+  { name: 'Drukarka etykiet Zebra ZD421t', sku: 'ZD4A042-30EM00EZ', device_model: 'ZD421t', attributes: { variants: [
+    { pn: 'ZD4A042-30EM00EZ', dpi: 203, label: '203 dpi, USB' },
+    { pn: 'ZD4A043-30EM00EZ', dpi: 300, label: '300 dpi, USB' },
+  ] } },
+]
+const wiadomosciZD421t = ['STATUS i PAUSE migają na czerwono na zmianę', 'ZD421', 'ZD4A043-30EM00EZ', 'ZD421t']
+const numeryZD421t = wykryjNumeryKatalogowe(wiadomosciZD421t.join('\n'))
+sprawdz('wykryjNumeryKatalogowe: sam numer w osobnej wiadomości', numeryZD421t.includes('ZD4A043-30EM00EZ'), true, 'ZD4A043-30EM00EZ')
+sprawdz('wykryjNumeryKatalogowe: nazwa modelu bez łącznika to nie numer', numeryZD421t.join(','), 'ZD4A043-30EM00EZ', wiadomosciZD421t.join(' | '))
+const trafienieZD421t = znajdzWersjeUrzadzen(numeryZD421t, katalogZD421)
+sprawdz('znajdzWersjeUrzadzen: ZD421t, a nie ZD421d o podobnym numerze',
+  trafienieZD421t.map((w) => w.model).join(','), 'ZD421t', 'ZD4A043-30EM00EZ')
+sprawdz('opisWersjiUrzadzenia: ZD421t 300 dpi w wierszu bloku', trafienieZD421t[0] ? opisWersjiUrzadzenia(trafienieZD421t[0]) : '',
+  'ZD4A043-30EM00EZ: Drukarka etykiet Zebra ZD421t (model ZD421t), wersja: 300 dpi, USB', 'wiersz bloku')
+
 // --- wynik -----------------------------------------------------------------
 console.log(`\nZaliczone: ${zaliczone}/${zaliczone + bledy.length}`)
 if (bledy.length) {

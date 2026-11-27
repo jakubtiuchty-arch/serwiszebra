@@ -152,6 +152,13 @@ const WYJECIE_BATERII = 'Sprawdźmy najprostszy reset z odcięciem zasilania. Wy
 sprawdzPokrycie('bledne_dane', 'Asystent nie powinien zalecać resetu fabrycznego urządzenia, które się nie włącza.', WYJECIE_BATERII, false)
 sprawdzPokrycie('bledne_dane', 'Zalecił reset do ustawień fabrycznych jako naprawę drukarki EU RED.',
   'Zrób reset do ustawień fabrycznych, a potem sprawdź port 9100.', true)
+// Zdanie o diagnostyce bezpłatnej przy akceptacji naprawy to zasada serwisu, a nie obietnica
+// bezpłatnej naprawy ani słowo o gwarancji (alert 26.11.2026, ZC300 z rwącą się taśmą)
+const WYSYLKA_ZC300 = 'Orientacyjnie dla ZC300 naprawa mechanizmu to około 350–850 zł netto. To tylko wstępne, orientacyjne widełki — wiążącą wycenę podamy dopiero po diagnozie urządzenia w serwisie i może się ona różnić od tej kwoty. Kurier odbierze drukarkę z podanego adresu. Diagnostyka trwa zwykle 24–48 h i jest bezpłatna przy akceptacji naprawy, a przy rezygnacji kosztuje 99 zł netto. Zgłoszenie założysz przyciskiem „Wyślij do serwisu” pod tą wiadomością. [SERIOUS_ISSUE]'
+sprawdzPokrycie('gwarancja', 'Asystent zasugerował, że diagnostyka jest bezpłatna przy akceptacji naprawy, co może sugerować bezpłatną naprawę, co jest niezgodne z zasadami.',
+  WYSYLKA_ZC300, false)
+sprawdzPokrycie('gwarancja', 'Obiecał bezpłatną naprawę w ramach gwarancji.',
+  `${WYSYLKA_ZC300} Naprawa będzie bezpłatna, bo drukarka jest na gwarancji.`, true)
 console.log(`Bramka tematu zarzutu: ${pokrycieOk}/${pokrycieOk + bledyPokrycia.length}`)
 if (bledyPokrycia.length) { for (const b of bledyPokrycia) console.error('  ' + b); process.exit(1) }
 
@@ -481,6 +488,34 @@ const WARIANT_ZD421 = 'Otwórz pokrywę i sprawdź, czy w środku jest mechanizm
 const CZYSZCZENIE_ZD421 = 'Wyłącz drukarkę, otwórz pokrywę i wyczyść głowicę pisakiem czyszczącym Zebra. Odczekaj minutę i wydrukuj konfigurację: przytrzymaj FEED + CANCEL przez 2 sekundy. Pasek dalej jest?'
 const WYCENA_GLOWICY = 'Orientacyjnie wymiana głowicy to 330–530 zł netto. To tylko wstępne, orientacyjne widełki — wiążącą wycenę podamy dopiero po diagnozie urządzenia w serwisie.'
 sprawdzWycene('ZD421d: wariant i czyszczenie przed kwotą za głowicę', [WARIANT_ZD421, CZYSZCZENIE_ZD421, WYCENA_GLOWICY], true)
+// Prośba o wariant z naklejki to pytanie o model, nie krok przy urządzeniu (alert 26.11.2026, ZD421t).
+// Polecenie inne niż „sprawdź" w zdaniu o wariancie dalej jest krokiem.
+const PYTANIE_O_WARIANT = 'OK — sprawdź proszę jeszcze wariant: **ZD421d**, **ZD421t** czy **ZD421c**.\n\nTo ważne, bo przy ZD421t/ZD421c część czerwonych sekwencji dotyczy ribbonu/kartridża, a przy ZD421d nie. Jaki wariant jest na naklejce?'
+sprawdzWycene('pytanie o wariant z naklejki to nie krok', [PYTANIE_O_MODEL, PYTANIE_O_WARIANT, KROK_1, WYCENA_Z_ZASTRZEZENIEM], false)
+sprawdzWycene('wariant przy otwartej pokrywie to krok',
+  ['Otwórz pokrywę i sprawdź, który wariant masz: z mechanizmem taśmy czy bez.', KROK_1, WYCENA_Z_ZASTRZEZENIEM], true)
+sprawdzWycene('zmniejszenie zaczernienia to krok',
+  [KROK_1, 'Zmniejsz Zaczernienie o 3 stopnie albo obniż prędkość druku.', WYCENA_Z_ZASTRZEZENIEM], true)
+// Cała rozmowa z alertu 26.11.2026: ZD421t, przegrzanie głowicy wraca po ostygnięciu. Kroki przed
+// kwotą to ostygnięcie i niższe zaczernienie lub prędkość, a pytania o model i wariant się nie liczą.
+const ROZMOWA_ZD421T = [
+  'Podaj proszę dokładny model drukarki z naklejki z numerem S/N albo wyślij zdjęcie tej naklejki — układ kontrolek STATUS/PAUSE różni się między seriami i od tego zależy interpretacja błędu.',
+  'To wygląda na numer seryjny, ale potrzebuję jeszcze oznaczenia modelu z tej samej naklejki — zwykle jest osobno jako model albo part number.\n\nPrzepisz proszę oznaczenie modelu z naklejki albo wyślij zdjęcie całej naklejki z S/N, wtedy zinterpretuję sekwencję kontrolek.',
+  PYTANIE_O_WARIANT,
+  'Drukarka o tym numerze katalogowym to Zebra ZD421t, 300 dpi, USB. Opisz proszę, kiedy zapalają się kontrolki.',
+  'OK, przy **ZD421t** czerwony **STATUS** razem z czerwonym **PAUSE** najczęściej oznacza zatrzymanie z powodu temperatury głowicy.\n\nWyłącz drukarkę przyciskiem zasilania, odczekaj **10 minut** przy otwartej pokrywie, potem zamknij pokrywę do kliknięcia i włącz ponownie.\nCzy po starcie **STATUS** robi się zielony?',
+  'Super — czyli to było zatrzymanie po przegrzaniu głowicy. Jeśli wróci przy dłuższym wydruku, zmniejsz **Zaczernienie/Darkness** albo prędkość druku, bo zbyt agresywne ustawienia grzeją głowicę.',
+  'Skoro problem wrócił po ostygnięciu, traktujemy to już jako usterkę wymagającą serwisu — najczęściej do sprawdzenia jest głowica drukująca, jej połączenie albo sterowanie temperaturą.\n\nOrientacyjny rząd kosztów dla ZD421t:\n- wymiana głowicy: **330–530 zł netto**\n\nTo tylko wstępne, orientacyjne widełki — wiążącą wycenę podamy dopiero po diagnozie urządzenia w serwisie i może się ona różnić od tej kwoty.\n\nKurier odbierze drukarkę z podanego adresu. Diagnostyka trwa zwykle 24–48 h i jest bezpłatna przy akceptacji naprawy, a przy rezygnacji kosztuje 99 zł netto. [SERIOUS_ISSUE]',
+]
+sprawdzWycene('ZD421t: ostygnięcie i niższe zaczernienie przed kwotą za głowicę', ROZMOWA_ZD421T, true)
+sprawdzWycene('ZD421t: bez rady o zaczernieniu zostaje jeden krok', ROZMOWA_ZD421T.filter((_, i) => i !== 5), false)
+// Rozmowa z alertu 26.11.2026: ZC300 rwie taśmę, trzy kroki przy drukarce przed widełkami za mechanizm
+sprawdzWycene('ZC300: wydruk testowy, czyszczenie i tor karty przed kwotą', [
+  'Otwórz pokrywę, wyjmij kasetę z taśmą i jeśli taśma jest zerwana, sklej jej koniec do rolki odbierającej. Potem z panelu drukarki uruchom wydruk testowy bez komputera. Czy na tym wydruku też rwie taśmę?',
+  'Uruchom czyszczenie drukarki: wyjmij karty i kasetę z taśmą i włóż kartę czyszczącą do szczeliny podawania ręcznego. Dalej rwie taśmę?',
+  'Wyłącz drukarkę, otwórz pokrywę, wyjmij kasetę z taśmą i wszystkie karty. Sprawdź, czy w środku nie ma kawałka zerwanej taśmy. Potem włóż jedną prostą, czystą kartę i taśmę, puść test z panelu. Dalej rwie?',
+  WYSYLKA_ZC300,
+], true)
 console.log(`Bramka wyceny po krokach: ${wycenaOk}/${wycenaOk + bledyWyceny.length}`)
 if (bledyWyceny.length) { for (const b of bledyWyceny) console.error('  ' + b); process.exit(1) }
 
