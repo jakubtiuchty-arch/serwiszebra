@@ -4,7 +4,10 @@ import { sendEmail } from '@/lib/email/resend'
 import {
   generateReportHtml,
   generateEmptyReportHtml,
+  generateFailuresReportHtml,
   cleanAiText,
+  pytan,
+  type ChatReportAwaria,
   type ChatReportSession,
   type ChatReportTurn,
 } from '@/lib/email/chat-report'
@@ -76,8 +79,36 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: error.message }, { status: 500 })
     }
 
+    // Pytania, na które asystent nie odpowiedział (błąd OpenAI) — nie ma ich w chat_logs.
+    // 14–21.10.2026 przez brak środków na koncie OpenAI raport pokazywał „brak rozmów”, a czat nie działał.
+    let awarie: ChatReportAwaria[] = []
+    const { data: awarieDane, error: awarieError } = await supabase
+      .from('chat_awarie')
+      .select('created_at, rodzaj, user_message, session_id')
+      .gte('created_at', from.toISOString())
+      .lt('created_at', to.toISOString())
+      .order('created_at', { ascending: true })
+    if (awarieError) {
+      console.warn('Nie udało się pobrać chat_awarie (raport bez pytań bez odpowiedzi):', awarieError.message)
+    } else {
+      awarie = (awarieDane || []) as ChatReportAwaria[]
+    }
+
     const dateLabel = formatDate(from)
     const dryRun = req.nextUrl.searchParams.get('dry') === '1'
+
+    if ((!logs || logs.length === 0) && awarie.length > 0) {
+      const html = generateFailuresReportHtml(dateLabel, awarie, ADMIN_URL)
+      if (dryRun) return new NextResponse(html, { headers: { 'Content-Type': 'text/html; charset=utf-8' } })
+
+      const result = await sendEmail({
+        to: REPORT_EMAIL,
+        subject: `Asystent AI — ${dateLabel} — ${pytan(awarie.length)} bez odpowiedzi (błąd OpenAI)`,
+        html,
+      })
+      if (!result.success) return NextResponse.json({ error: 'Email send failed' }, { status: 500 })
+      return NextResponse.json({ message: 'Raport wysłany (pytania bez odpowiedzi)', date: dateLabel, awarie: awarie.length })
+    }
 
     if (!logs || logs.length === 0) {
       const html = generateEmptyReportHtml(dateLabel, ADMIN_URL)
@@ -127,13 +158,14 @@ export async function GET(req: NextRequest) {
       ragTurns,
       seriousIssues,
       adminUrl: ADMIN_URL,
+      awarie,
     })
 
     if (dryRun) return new NextResponse(html, { headers: { 'Content-Type': 'text/html; charset=utf-8' } })
 
     const result = await sendEmail({
       to: REPORT_EMAIL,
-      subject: `Asystent AI — ${dateLabel} — ${sessions.length} rozmów, ${totalTurns} pytań`,
+      subject: `Asystent AI — ${dateLabel} — ${sessions.length} rozmów, ${totalTurns} pytań${awarie.length ? ` — ${pytan(awarie.length)} bez odpowiedzi` : ''}`,
       html,
     })
 
@@ -148,6 +180,7 @@ export async function GET(req: NextRequest) {
       sessions: sessions.length,
       turns: totalTurns,
       seriousIssues,
+      awarie: awarie.length,
     })
   } catch (error: any) {
     console.error('CRON error:', error)

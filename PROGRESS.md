@@ -4,6 +4,14 @@ Checkpoint postępu prac. Najnowszy wpis na górze. Po każdym etapie/buildzie d
 
 ---
 
+## 2026-11-03 — alarm „czat AI nie odpowiada” (brak środków OpenAI) + pytania bez odpowiedzi w raporcie
+
+- **Przyczyna**: dwa razy skończyły się środki na koncie OpenAI (14–21.10 i od 30.10). Czat zwracał klientom błąd, nieudane pytania nie trafiały do `chat_logs`, a wieczorny raport pokazywał „brak rozmów”.
+- **Kod**: `lib/chat-awarie.ts` — rozpoznanie błędu (429 `insufficient_quota` / `credit_balance_exhausted` → brak środków, 401 → klucz API; zwykły limit na minutę to „inny”), zapis każdego nieudanego pytania w `chat_awarie`, mail od razu na jakub.tiuchty@takma.com.pl, kolejny najwcześniej po 3 h; początek awarii liczony od ostatniej udanej odpowiedzi. Szablon `lib/email/alarm-czatu.ts`. `app/api/chat/route.ts` woła alarm w obu blokach catch (limit 5 s). Raport `chat-report` pokazuje pytania bez odpowiedzi (temat „… bez odpowiedzi (błąd OpenAI)”).
+- **Baza**: `supabase-chat-awarie.sql` — do uruchomienia w Supabase. Bez tabeli alarm i tak idzie, ale przy każdym nieudanym pytaniu.
+- **Koszty OpenAI 21–30.10 ($19,91, Admin API)**: Codex (klucz `Codex_X`, gpt-6-astra) ok. $12,20, czat gpt-5.5 $7,16 (cache 85% w rozmowach), gpt-4o-mini $0,37. Wszystkie klucze w jednym projekcie i jednym saldzie. Klucz administratora: `~/.config/openai/admin.env`.
+- TODO: SQL w Supabase; doładowanie + auto recharge w OpenAI; po doładowaniu test czatu na produkcji.
+
 ## 2026-09-24 — wpłaty Stripe nie zapisywały się w bazie (19–24.09), podwójna płatność, strefa płatności
 
 - **Przyczyna**: commit 9c4ba75 (19.09, opis „Czat: badge…”) zmienił status po płatności z `w_naprawie` na `oplacone` w webhooku Stripe i `confirm-payment`. Ograniczenie `repair_requests_status_check` nie znało `oplacone` → UPDATE odrzucony, webhook logował błąd i odpowiadał 200, `confirm-payment` zwracał 500. Trzy zgłoszenia opłacone w Stripe zostały w bazie jako „wycena / processing”; jeden klient zapłacił drugi raz po 2,5 min (panel dalej pokazywał przycisk płatności, a `create-payment-intent` tworzył nową płatność).

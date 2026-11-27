@@ -49,7 +49,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
   // Najpierw materiały innego rodzaju (do taśmy karty i czyszczenie), potem zamienniki tego samego rodzaju.
   // Z każdego rodzaju pierwszy jest materiał na start — karta 0,76 mm, a nie cienka 0,25 mm
   const start = (pn: string) => { const i = NA_START.indexOf(pn); return i === -1 ? NA_START.length : i }
-  const zgodne = materialy.filter(m => m.pn !== p.pn && m.models.some(model => p.models.includes(model))).sort((a, b) => start(a.pn) - start(b.pn))
+  // Przy remisie najpierw materiały tej samej serii (taśma 800350 → inne 800350), wspólne dla całej serii ZC na końcu
+  const wspolny = (m: { models: string[] }) => Number(m.models.length >= 3)
+  const zgodne = materialy.filter(m => m.pn !== p.pn && m.models.some(model => p.models.includes(model))).sort((a, b) => start(a.pn) - start(b.pn) || wspolny(a) - wspolny(b))
   const powiazane = [
     ...zgodne.filter(m => m.kind !== p.kind).filter((m, i, all) => all.findIndex(x => x.kind === m.kind) === i),
     ...zgodne.filter(m => m.kind === p.kind),

@@ -6,6 +6,7 @@ import { trescKarty } from '@/lib/device-content'
 import { MODELE_SKLEPU, type KlasaSlug } from '@/lib/modele-sklepu'
 import type { DeviceVariant } from '@/components/shop/DevicePurchasePanel'
 import { gtinyDlaPN } from '@/lib/gtin-drukarek'
+import { deviceUrl } from '@/lib/device-url'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -105,6 +106,9 @@ const KLASA_ETYKIETA: Record<KlasaSlug, string> = {
 
 /** 952 = Artykuły biurowe > Sprzęt biurowy > Drukarki do etykiet (ta sama kategoria co w feedzie takmy) */
 const KATEGORIA_DRUKAREK = '952'
+/** 500106 = Elektronika > Drukowanie, kopiowanie, skanowanie i faksowanie > Drukarki, kopiarki i faksy.
+    Drukarki kart nie są drukarkami etykiet, a taksonomia Google nie ma dla nich węższej kategorii */
+const KATEGORIA_DRUKAREK_KART = '500106'
 
 interface DbDrukarka {
   name: string
@@ -132,14 +136,19 @@ async function ofertyDrukarek(supabaseUrl: string, supabaseKey: string) {
   let pominiete = 0
 
   for (const d of drukarki) {
+    // Zdjęcie przypisane do wersji (zestaw startowy: drukarka, taśma, karty) nie trafia do
+    // ofert samej drukarki — pokazywałoby rzeczy, których w jej pudełku nie ma
+    const zdjeciaWersji = new Set((d.attributes?.variants || []).map((v) => v.zdjecie).filter(Boolean))
     const zdjecia = [trescKarty(d.slug)?.zdjecieGlowne, ...(d.image_urls || [])]
       .filter((s): s is string => !!s)
       .filter((s, i, a) => a.indexOf(s) === i)
+      .filter((s) => !zdjeciaWersji.has(s))
     if (zdjecia.length === 0) {
       pominiete += d.attributes?.variants?.length || 0
       continue
     }
     const klasa = klasy.get(d.slug)
+    const kartowa = deviceUrl(d.slug).startsWith('/sklep/drukarki-kart-zebra/')
     const opisModelu = stripHtml(d.description || d.name)
 
     for (const v of d.attributes?.variants || []) {
@@ -156,7 +165,13 @@ async function ofertyDrukarek(supabaseUrl: string, supabaseKey: string) {
       const czesci = [d.name, dpi && !v.label.includes('dpi') ? dpi : null, v.label].filter(Boolean)
       const tytul = `${czesci.join(', ')} (${v.pn})`
       const opis = truncate(`${opisModelu} Wersja: ${v.label} (${v.pn}).`, 4900)
-      const link = `${SITE_URL}/sklep/drukarki-etykiet/${d.slug}?pn=${encodeURIComponent(v.pn)}`
+      // deviceUrl: drukarki kart mają własną ścieżkę /sklep/drukarki-kart-zebra/ — pod
+      // /sklep/drukarki-etykiet/ trafiały na przekierowanie (wcześniej na duplikat strony)
+      const link = `${SITE_URL}${deviceUrl(d.slug)}?pn=${encodeURIComponent(v.pn)}`
+      // Oferta zestawu startowego otwiera się zdjęciem całego pudełka — Google zaleca, by
+      // tytuł, opis i zdjęcie opisywały cały zestaw. `is_bundle` celowo pominięte: QuikCard
+      // to zestaw producenta z własnym PN i GTIN, a Google każe go wtedy nie podawać.
+      const zdjeciaOferty = v.zdjecie ? [v.zdjecie, ...zdjecia] : zdjecia
 
       const lines = [
         '    <item>',
@@ -164,8 +179,8 @@ async function ofertyDrukarek(supabaseUrl: string, supabaseKey: string) {
         `      <title>${escapeXml(truncate(tytul, 150))}</title>`,
         `      <description>${escapeXml(opis)}</description>`,
         `      <link>${escapeXml(link)}</link>`,
-        `      <g:image_link>${escapeXml(SITE_URL + zdjecia[0])}</g:image_link>`,
-        ...zdjecia.slice(1, 11).map((z) => `      <g:additional_image_link>${escapeXml(SITE_URL + z)}</g:additional_image_link>`),
+        `      <g:image_link>${escapeXml(SITE_URL + zdjeciaOferty[0])}</g:image_link>`,
+        ...zdjeciaOferty.slice(1, 11).map((z) => `      <g:additional_image_link>${escapeXml(SITE_URL + z)}</g:additional_image_link>`),
         `      <g:price>${stan.brutto.toFixed(2)} PLN</g:price>`,
         `      <g:availability>${naStanie ? 'in_stock' : 'out_of_stock'}</g:availability>`,
         `      <g:brand>Zebra</g:brand>`,
@@ -174,9 +189,10 @@ async function ofertyDrukarek(supabaseUrl: string, supabaseKey: string) {
         ...gtinyDlaPN(v.pn).filter(isValidGtin).map((g) => `      <g:gtin>${g}</g:gtin>`),
         `      <g:condition>new</g:condition>`,
         `      <g:item_group_id>${escapeXml(d.device_model || d.slug)}</g:item_group_id>`,
-        `      <g:google_product_category>${KATEGORIA_DRUKAREK}</g:google_product_category>`,
+        `      <g:google_product_category>${kartowa ? KATEGORIA_DRUKAREK_KART : KATEGORIA_DRUKAREK}</g:google_product_category>`,
       ]
       if (klasa) lines.push(`      <g:product_type>${escapeXml(KLASA_ETYKIETA[klasa])}</g:product_type>`)
+      else if (kartowa) lines.push(`      <g:product_type>Drukarki kart Zebra</g:product_type>`)
       lines.push('    </item>')
       items.push(lines.join('\n'))
     }

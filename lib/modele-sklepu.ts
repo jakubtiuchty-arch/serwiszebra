@@ -57,6 +57,7 @@ export const MODELE_SKLEPU: ModelSklepu[] = [
 export const MODELE_KART: ModelSklepu[] = [
   { slug: 'zebra-zc100', model: 'ZC100', kluczInstrukcji: 'ZC100', klasa: 'biurkowe', sciezka: '/sklep/drukarki-kart-zebra' },
   { slug: 'zebra-zc300', model: 'ZC300', kluczInstrukcji: 'ZC300', klasa: 'biurkowe', sciezka: '/sklep/drukarki-kart-zebra' },
+  { slug: 'zebra-zc350', model: 'ZC350', kluczInstrukcji: 'ZC350', klasa: 'biurkowe', sciezka: '/sklep/drukarki-kart-zebra' },
 ]
 
 export const URL_KART = '/sklep/drukarki-etykiet'

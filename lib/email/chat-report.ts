@@ -27,6 +27,14 @@ export interface ChatReportSession {
   turns: ChatReportTurn[]
 }
 
+/** Pytanie, na które asystent nie odpowiedział z powodu błędu OpenAI (tabela chat_awarie) */
+export interface ChatReportAwaria {
+  created_at: string
+  rodzaj: 'brak_srodkow' | 'klucz_api' | 'inny'
+  user_message: string | null
+  session_id: string | null
+}
+
 export interface ChatReportData {
   dateLabel: string
   sessions: ChatReportSession[]
@@ -34,6 +42,7 @@ export interface ChatReportData {
   ragTurns: number
   seriousIssues: number
   adminUrl: string
+  awarie?: ChatReportAwaria[]
 }
 
 const esc = (s: string) =>
@@ -42,6 +51,38 @@ const esc = (s: string) =>
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
+
+const TZ = 'Europe/Warsaw'
+
+const OPIS_AWARII: Record<ChatReportAwaria['rodzaj'], string> = {
+  brak_srodkow: 'brak środków na koncie OpenAI',
+  klucz_api: 'odrzucony klucz API',
+  inny: 'inny błąd',
+}
+
+/** „1 pytanie”, „2 pytania”, „5 pytań”, „12 pytań”, „22 pytania” */
+export function pytan(n: number): string {
+  const r10 = n % 10
+  const r100 = n % 100
+  if (n === 1) return '1 pytanie'
+  if (r10 >= 2 && r10 <= 4 && !(r100 >= 12 && r100 <= 14)) return `${n} pytania`
+  return `${n} pytań`
+}
+
+/** Lista pytań bez odpowiedzi: godzina, przyczyna, treść */
+function awarieListaHtml(awarie: ChatReportAwaria[]): string {
+  return awarie
+    .map((a) => {
+      const godzina = new Date(a.created_at).toLocaleTimeString('pl-PL', { hour: '2-digit', minute: '2-digit', timeZone: TZ })
+      const tresc = (a.user_message || '').trim()
+      return `
+      <tr><td style="padding:10px 0 0">
+        <div style="font-size:11px;color:${MUTED};margin-bottom:5px">${esc(godzina)} · ${esc(OPIS_AWARII[a.rodzaj] || OPIS_AWARII.inny)}</div>
+        <div style="background:#ffffff;border:1px solid ${BORDER};border-radius:10px;padding:10px 13px;font-size:14px;color:#0f172a;line-height:1.55">${tresc ? esc(tresc).replace(/\n/g, '<br>') : '(brak treści)'}</div>
+      </td></tr>`
+    })
+    .join('')
+}
 
 /** Usuwa znaczniki sterujące i blok metadanych — klient ich nie widział, więc w raporcie też nie powinny być */
 export function cleanAiText(text: string): string {
@@ -97,6 +138,21 @@ export function generateEmptyReportHtml(dateLabel: string, adminUrl: string): st
   return shell(dateLabel, 'Brak rozmów', inner, adminUrl)
 }
 
+/**
+ * Dzień bez udanych rozmów, ale z pytaniami, na które asystent nie odpowiedział.
+ * 14–21.10.2026 taki dzień raportowaliśmy jako „brak rozmów”, a czat nie działał.
+ */
+export function generateFailuresReportHtml(dateLabel: string, awarie: ChatReportAwaria[], adminUrl: string): string {
+  const inner = `
+    <tr><td style="padding:24px 28px 0">
+      <div style="font-size:15px;color:#111827;font-weight:600">Asystent nie odpowiedział na ${esc(pytan(awarie.length))} z powodu błędu OpenAI.</div>
+    </td></tr>
+    <tr><td style="padding:8px 28px 24px">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${awarieListaHtml(awarie)}</table>
+    </td></tr>`
+  return shell(dateLabel, 'Pytania bez odpowiedzi', inner, adminUrl)
+}
+
 function statCell(value: string, label: string, color = '#111827') {
   return `<td width="25%" style="padding:14px 8px;text-align:center;border-right:1px solid ${BORDER}">
     <div style="font-size:22px;font-weight:700;color:${color};line-height:1.2">${esc(value)}</div>
@@ -130,8 +186,22 @@ function turnHtml(t: ChatReportTurn): string {
 }
 
 export function generateReportHtml(data: ChatReportData): string {
-  const { dateLabel, sessions, totalTurns, ragTurns, seriousIssues, adminUrl } = data
+  const { dateLabel, sessions, totalTurns, ragTurns, seriousIssues, adminUrl, awarie = [] } = data
   const ragPercent = totalTurns ? Math.round((ragTurns / totalTurns) * 100) : 0
+
+  // Pełna ramka zamiast paska z lewej — ma rzucać się w oczy przed statystykami
+  const ostrzezenie = awarie.length
+    ? `
+  <tr><td style="padding:20px 28px 0">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #fecaca;border-radius:12px;background:#fef2f2">
+      <tr><td style="padding:14px 16px 14px">
+        <div style="font-size:14px;font-weight:700;color:#b91c1c">Pytania bez odpowiedzi</div>
+        <div style="font-size:14px;color:#7f1d1d;margin-top:4px;line-height:1.5">Asystent nie odpowiedział na ${esc(pytan(awarie.length))} z powodu błędu OpenAI.</div>
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${awarieListaHtml(awarie)}</table>
+      </td></tr>
+    </table>
+  </td></tr>`
+    : ''
 
   const stats = `
   <tr><td style="padding:20px 28px 0">
@@ -171,5 +241,5 @@ export function generateReportHtml(data: ChatReportData): string {
     .join('')
 
   const headline = `${sessions.length} ${sessions.length === 1 ? 'rozmowa' : sessions.length < 5 ? 'rozmowy' : 'rozmów'} z asystentem`
-  return shell(dateLabel, headline, stats + conversations, adminUrl)
+  return shell(dateLabel, headline, ostrzezenie + stats + conversations, adminUrl)
 }

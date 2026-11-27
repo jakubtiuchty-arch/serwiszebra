@@ -1,11 +1,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
-import { Check, Package, ShoppingCart } from 'lucide-react'
-import PowiadomODostepnosci from './PowiadomODostepnosci'
-import { useCartStore } from '@/lib/cart-store'
+import KafelekAkcesorium from './KafelekAkcesorium'
 
 export interface AkcesoriumProduktu {
   id: string
@@ -40,9 +37,6 @@ interface Stan {
   dostepne: number
 }
 
-const zl = (v: number) =>
-  v.toLocaleString('pl-PL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-
 /** Typy, które rozszerzają możliwości drukarki — kupuje się je razem z nią */
 const OPCJE = ['gilotyna', 'dyspenser', 'modul', 'akumulator']
 
@@ -70,10 +64,8 @@ export default function DeviceAccessories({
   kontekst = 'karta-produktu',
   model,
 }: Props) {
-  const addItem = useCartStore((s) => s.addItem)
   const [dpi, setDpi] = useState(domyslneDpi)
   const [stany, setStany] = useState<Record<string, Stan>>({})
-  const [dodane, setDodane] = useState<string | null>(null)
 
   useEffect(() => {
     let anulowane = false
@@ -129,25 +121,6 @@ export default function DeviceAccessories({
   const czesciPierwsze =
     czesci.length > 0 && (kontekst === 'instrukcja' || opcje.length === 0)
 
-  const dodaj = (p: AkcesoriumProduktu) => {
-    const s = stany[p.sku]
-    addItem({
-      id: p.id,
-      productId: p.id,
-      name: p.name,
-      slug: p.slug,
-      sku: p.sku,
-      price: s?.netto ?? p.price,
-      price_brutto: s?.brutto ?? p.price_brutto,
-      product_type: p.product_type,
-      stock: s?.dostepne ?? 1,
-      image: p.image_url || undefined,
-      resolution_dpi: p.resolution_dpi,
-    })
-    setDodane(p.sku)
-    setTimeout(() => setDodane(null), 2000)
-  }
-
   /** Wybór rozdzielczości części — ten sam element przy nagłówku sekcji i bloku. */
   const PrzelacznikDpi = () => (
     <div
@@ -174,70 +147,34 @@ export default function DeviceAccessories({
   const Kafelek = ({ p }: { p: AkcesoriumProduktu }) => {
     const s = stany[p.sku]
     return (
-      <li className="flex gap-3 rounded-lg border border-gray-200 p-3">
-        <Link
-          href={p.url}
-          // Bez zdjęcia link miałby pustą nazwę dostępną (ikona jest dekoracyjna)
-          aria-label={p.name}
-          className="relative h-24 w-24 flex-shrink-0 self-center overflow-hidden rounded-md bg-white sm:h-28 sm:w-28"
-        >
-          {p.image_url ? (
-            <Image src={p.image_url} alt={p.name} fill sizes="112px" className="object-contain p-1" />
-          ) : (
-            /* Pusta ramka wygląda jak błąd ładowania — lepiej pokazać, czym to jest */
-            <span className="flex h-full w-full items-center justify-center rounded-md bg-gray-50 text-gray-300">
-              <Package className="h-8 w-8" />
-            </span>
-          )}
-        </Link>
-        <div className="min-w-0 flex-1">
-          <p className="text-[11px] uppercase tracking-wide text-gray-500">
-            {NAZWY_TYPOW[p.product_type] || p.product_type}
-            {p.resolution_dpi ? ` · ${p.resolution_dpi} dpi` : ''}
-          </p>
-          <Link
-            href={p.url}
-            className="block text-sm font-medium leading-snug text-gray-900 hover:underline"
-          >
-            {p.name.replace(/\s*-\s*[A-Z0-9-]+$/, '')}
-          </Link>
-          <p className="mt-0.5 font-mono text-[11px] text-gray-500">{p.sku}</p>
-          <div className="mt-2 flex flex-wrap items-end justify-between gap-x-3 gap-y-1.5">
-            <span className="leading-tight">
-              <span className="block text-sm font-semibold text-gray-900">
-                {s ? `${zl(s.netto)} zł` : '…'}
-                <span className="ml-1 text-xs font-normal text-gray-500">netto</span>
-              </span>
-              {s && s.brutto > 0 && (
-                <span className="block text-xs text-gray-500">{zl(s.brutto)} zł brutto</span>
-              )}
-            </span>
-            {s && s.dostepne === 0 ? (
-              /* Brak na magazynach — zamiast martwego koszyka droga „Powiadom" */
-              <PowiadomODostepnosci sku={p.sku} nazwa={p.name} url={p.url} />
-            ) : (
-              <button
-                type="button"
-                onClick={() => dodaj(p)}
-                disabled={!s}
-                className="inline-flex items-center gap-1.5 rounded-lg bg-[#A8F000] px-3 py-2 text-xs font-semibold text-gray-900 transition hover:bg-[#96D800] disabled:cursor-not-allowed disabled:opacity-40"
-              >
-                {dodane === p.sku ? (
-                  <>
-                    <Check className="h-3.5 w-3.5" />
-                    Dodano
-                  </>
-                ) : (
-                  <>
-                    <ShoppingCart className="h-3.5 w-3.5" />
-                    Do koszyka
-                  </>
-                )}
-              </button>
-            )}
-          </div>
-        </div>
-      </li>
+      <KafelekAkcesorium
+        href={p.url}
+        nazwa={p.name.replace(/\s*-\s*[A-Z0-9-]+$/, '')}
+        nazwaPelna={p.name}
+        etykieta={`${NAZWY_TYPOW[p.product_type] || p.product_type}${p.resolution_dpi ? ` · ${p.resolution_dpi} dpi` : ''}`}
+        pn={p.sku}
+        obraz={p.image_url}
+        netto={s ? s.netto : null}
+        brutto={s ? s.brutto : null}
+        brakNaMagazynie={!!s && s.dostepne === 0}
+        doKoszyka={
+          s
+            ? {
+                id: p.id,
+                productId: p.id,
+                name: p.name,
+                slug: p.slug,
+                sku: p.sku,
+                price: s.netto,
+                price_brutto: s.brutto,
+                product_type: p.product_type,
+                stock: s.dostepne,
+                image: p.image_url || undefined,
+                resolution_dpi: p.resolution_dpi,
+              }
+            : null
+        }
+      />
     )
   }
 
@@ -309,10 +246,6 @@ export default function DeviceAccessories({
         </h2>
         {czesciPierwsze && dostepneDpi.length > 1 && <PrzelacznikDpi />}
       </div>
-
-      <p aria-live="polite" className="sr-only">
-        {dodane ? `Dodano ${dodane} do koszyka` : ''}
-      </p>
 
       {kontekst === 'instrukcja' && (
         <p className="mb-4 text-sm text-gray-600">

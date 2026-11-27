@@ -456,6 +456,8 @@ export default async function DevicePage({
             stanyPoczatkowe={stanyDlaKomponentow}
             wybranyPnStart={wybranyPn}
             rekomendowanyPn={tresc?.rekomendowanyPn}
+            serwis="etykiety"
+            model={product.device_model}
           />
 
           {tresc && (

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { deviceUrl } from '@/lib/device-url'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useCartStore } from '@/lib/cart-store'
@@ -165,7 +166,7 @@ export default function KoszykPage() {
                             </div>
                             <div className="flex-1 min-w-0">
                               <Link
-                                href={item.product_type === 'drukarka' ? `/sklep/drukarki-etykiet/${item.slug}` : `/sklep/${item.slug}`}
+                                href={item.product_type === 'drukarka' ? deviceUrl(item.slug) : `/sklep/${item.slug}`}
                                 className="text-sm font-semibold text-gray-900 hover:text-gray-700 transition-colors line-clamp-2"
                               >
                                 {item.name}
@@ -247,7 +248,7 @@ export default function KoszykPage() {
                             </div>
                             <div className="flex-1 min-w-0">
                               <Link
-                                href={item.product_type === 'drukarka' ? `/sklep/drukarki-etykiet/${item.slug}` : `/sklep/${item.slug}`}
+                                href={item.product_type === 'drukarka' ? deviceUrl(item.slug) : `/sklep/${item.slug}`}
                                 className="text-sm font-semibold text-gray-900 hover:text-gray-700 transition-colors line-clamp-2"
                               >
                                 {item.name}

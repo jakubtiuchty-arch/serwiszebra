@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { deviceUrl } from '@/lib/device-url'
 import { pobierzStany, stanDlaPN } from '@/lib/stock-server'
 import { trescKarty } from '@/lib/device-content'
 
@@ -29,6 +30,8 @@ interface WariantDb {
   label: string
   dpi?: number
   cechy?: Record<string, string>
+  /** Własne zdjęcie wersji — zestaw startowy drukarki kart z taśmą i kartami */
+  zdjecie?: string
 }
 
 interface DrukarkaDb {
@@ -63,7 +66,8 @@ export async function GET() {
 
     const tresc = trescKarty(d.slug)
     const zdjecie = tresc?.zdjecieGlowne || d.image_urls?.[0]
-    const kartaUrl = `${SITE}/sklep/drukarki-etykiet/${d.slug}`
+    // deviceUrl: drukarki kart mają własną ścieżkę /sklep/drukarki-kart-zebra/
+    const kartaUrl = `${SITE}${deviceUrl(d.slug)}`
 
     return warianty.map((v) => {
       const stan = stanDlaPN(stany, v.pn)
@@ -80,7 +84,8 @@ export async function GET() {
         description: d.description || '',
         url: `${kartaUrl}?pn=${encodeURIComponent(v.pn)}`,
         brand: 'Zebra',
-        ...(zdjecie ? { image_url: `${SITE}${zdjecie}` } : {}),
+        // Zestaw startowy pokazuje pudełko z taśmą i kartami, nie samą drukarkę
+        ...(v.zdjecie || zdjecie ? { image_url: `${SITE}${v.zdjecie || zdjecie}` } : {}),
         ...(cena ? { price: `${cena.toFixed(2)} PLN` } : {}),
         availability: naStanie ? 'in_stock' : 'out_of_stock',
         // Grupowanie wariantów — bez tego każdy numer katalogowy jest osobnym
@@ -95,7 +100,10 @@ export async function GET() {
         // sprzętu sprowadzanego przez brokerów z projektów na inne rynki
         seller_name: 'TAKMA — Autoryzowany Serwis Zebra',
         seller_url: SITE,
-        warranty: '24 miesiące, serwis gwarancyjny na miejscu',
+        // Drukarki kart Zebra (PN serii ZC) mają 3 lata gwarancji producenta na drukarkę i głowicę
+        warranty: warianty.length > 0 && warianty.every((w) => /^ZC\d{2}-/.test(w.pn))
+          ? '3 lata na drukarkę i głowicę, serwis gwarancyjny na miejscu'
+          : '24 miesiące, serwis gwarancyjny na miejscu',
         is_eligible_search: true,
         is_eligible_checkout: naStanie,
       }

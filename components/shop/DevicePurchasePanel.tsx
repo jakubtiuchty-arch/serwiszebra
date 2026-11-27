@@ -6,6 +6,7 @@ import { Loader2, ShoppingCart, Phone } from 'lucide-react'
 import { terminDostawy } from '@/lib/delivery-date'
 import { trackPhoneClick } from '@/lib/analytics'
 import DeviceEnquiryModal from './DeviceEnquiryModal'
+import BanerSerwisu, { type RodzajSerwisu } from './BanerSerwisu'
 
 const TELEFON = '+48601619898'
 
@@ -27,6 +28,13 @@ export interface DeviceVariant {
    * cechy, które realnie różnicują warianty.
    */
   cechy?: Record<string, string>
+  /**
+   * Własne zdjęcie wersji, gdy pudełko różni się od samej drukarki — zestaw startowy
+   * drukarki kart z taśmą i kartami. Musi być też w galerii karty (`image_urls`):
+   * panel przełącza się na nie po wyborze wersji, a feed Merchant, schemat i koszyk
+   * pokazują je przy tej wersji zamiast zdjęcia samej drukarki.
+   */
+  zdjecie?: string
 }
 
 /** Cena i stan jednego numeru katalogowego, policzone serwerowo */
@@ -59,6 +67,11 @@ interface DevicePurchasePanelProps {
   zaladowane?: boolean
   /** Aktualnie wybrany numer katalogowy */
   wybranyPn?: string
+  /** Baner autoryzowanego serwisu zamiast dopisku pod ikonami — tylko drukarki
+   *  (kart i etykiet); karta bez tego pola, np. terminala, dostaje sam dopisek */
+  serwis?: RodzajSerwisu
+  /** Model do zdania o naprawach w banerze, np. „ZC300” */
+  model?: string | null
 }
 
 const zl = (v: number) =>
@@ -86,6 +99,8 @@ export default function DevicePurchasePanel({
   stany = {},
   zaladowane = false,
   wybranyPn,
+  serwis,
+  model,
 }: DevicePurchasePanelProps) {
   // Wejście z adresu wariantu (`?pn=`) ma od razu pokazywać JEGO cenę i stan,
   // a nie najtańszą wersję, której klient wcale nie wybierał
@@ -121,9 +136,24 @@ export default function DevicePurchasePanel({
     .map((v) => v.pn)
     .sort((a, b) => (ceny(a) || Infinity) - (ceny(b) || Infinity))[0]
 
-  const [foto, setFoto] = useState(0)
+  /** Indeks zdjęcia wybranej wersji w galerii; -1, gdy wersja nie ma własnego */
+  const zdjecieWersji = (p: string | null) => {
+    const z = p ? variants.find((v) => v.pn === p)?.zdjecie : undefined
+    return z ? images.indexOf(z) : -1
+  }
+  // Wejście z `?pn=` zestawu otwiera galerię od razu na zdjęciu zestawu
+  const [foto, setFoto] = useState(() => Math.max(zdjecieWersji(wybrany), 0))
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
+
+  // Wybór wersji z własnym zdjęciem (zestaw startowy) pokazuje jej pudełko; powrót do
+  // samej drukarki zdejmuje zdjęcie zestawu, ale nie rusza zdjęcia wybranego ręcznie
+  useEffect(() => {
+    const i = zdjecieWersji(wybrany)
+    if (i >= 0) setFoto(i)
+    else setFoto((f) => (variants.some((v) => v.zdjecie && v.zdjecie === images[f]) ? 0 : f))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [wybrany])
 
   const s = stany[pn]
   const stockPL = s?.stockPL ?? 0
@@ -321,7 +351,9 @@ export default function DevicePurchasePanel({
               height={24}
               className="mx-auto h-6 w-6"
             />
-            <span className="mt-1 block text-[11px] font-semibold text-gray-900">Gwarancja {variants.length > 0 && variants.every(v => /^ZC(11|31|32)-/.test(v.pn)) ? 36 : 24} mies.</span>
+            {/* Drukarki kart Zebra (PN serii ZC: ZC100, ZC300, ZC350) mają 3 lata gwarancji producenta
+                na drukarkę i głowicę; drukarki etykiet 24 miesiące */}
+            <span className="mt-1 block text-[11px] font-semibold text-gray-900">Gwarancja {variants.length > 0 && variants.every(v => /^ZC\d{2}-/.test(v.pn)) ? '3 lata' : '24 mies.'}</span>
             <span className="block text-[10px] text-gray-500">naprawy w naszym serwisie</span>
           </li>
         </ul>
@@ -331,10 +363,14 @@ export default function DevicePurchasePanel({
             wsparcia gwarancyjnego producenta w Polsce. Klient widzi wyłącznie
             dwie liczby i nie wie, że porównuje różne rzeczy; to zdanie nazywa
             różnicę, nie atakując nikogo. */}
-        <p className="mt-3 border-t border-gray-100 pt-3 text-[11px] leading-relaxed text-gray-500">
-          Sprzęt pochodzi z oficjalnej dystrybucji Zebry. Gwarancję i późniejsze naprawy
-          prowadzimy w naszym serwisie, na oryginalnych częściach.
-        </p>
+        {serwis ? (
+          <BanerSerwisu rodzaj={serwis} model={model} />
+        ) : (
+          <p className="mt-3 border-t border-gray-100 pt-3 text-[11px] leading-relaxed text-gray-500">
+            Sprzęt pochodzi z oficjalnej dystrybucji Zebry. Gwarancję i późniejsze naprawy
+            prowadzimy w naszym serwisie, na oryginalnych częściach.
+          </p>
+        )}
         </div>
 
         {/* Pod ramką, nie w niej: zakup to jedna ścieżka, pytanie to druga.

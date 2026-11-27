@@ -15,8 +15,10 @@ import {
   Loader2,
   ShoppingBag,
   CreditCard,
-  FileText
+  FileText,
+  Search
 } from 'lucide-react'
+import { normalizujNip, nipPoprawny } from '@/lib/nip'
 
 import { zdjecieWKoszyku } from '@/lib/product-images'
 
@@ -64,6 +66,47 @@ export default function ZamowieniePage() {
     notes: '',
     acceptTerms: false
   })
+
+  /** Stan przycisku „Pobierz z GUS" — komunikat pod polem NIP */
+  const [rejestr, setRejestr] = useState<{ stan: 'bezczynny' | 'laduje' | 'ok' | 'blad'; komunikat?: string }>({ stan: 'bezczynny' })
+
+  /**
+   * Nazwa firmy i adres z rejestru po NIP (GUS BIR albo Biała lista VAT — patrz lib/dane-firmy).
+   * Nazwę wstawiamy zawsze, bo po to klient kliknął. Adres tylko wtedy, gdy pola adresu są
+   * puste — inaczej nadpisalibyśmy wpisany już adres dostawy adresem siedziby.
+   */
+  const pobierzZRejestru = async () => {
+    const nip = normalizujNip(formData.nip)
+    if (!nipPoprawny(nip)) {
+      setRejestr({ stan: 'blad', komunikat: 'Sprawdź NIP — numer jest niepoprawny.' })
+      return
+    }
+    setRejestr({ stan: 'laduje' })
+    try {
+      const res = await fetch(`/api/firma-po-nip?nip=${nip}`)
+      const dane = await res.json()
+      if (!res.ok) {
+        setRejestr({ stan: 'blad', komunikat: dane.error || 'Nie udało się pobrać danych. Wpisz je ręcznie.' })
+        return
+      }
+      const adresPusty = !formData.street && !formData.houseNumber && !formData.postalCode && !formData.city
+      setFormData(prev => ({
+        ...prev,
+        companyName: dane.nazwa,
+        ...(adresPusty
+          ? { street: dane.ulica, houseNumber: dane.nrDomu, apartmentNumber: dane.nrLokalu, postalCode: dane.kodPocztowy, city: dane.miasto }
+          : {}),
+      }))
+      setRejestr({
+        stan: 'ok',
+        komunikat: adresPusty
+          ? 'Wstawiliśmy nazwę firmy i adres z rejestru. Sprawdź je przed złożeniem zamówienia.'
+          : 'Wstawiliśmy nazwę firmy z rejestru. Wpisany adres zostawiliśmy bez zmian.',
+      })
+    } catch {
+      setRejestr({ stan: 'blad', komunikat: 'Rejestr nie odpowiada. Wpisz dane ręcznie.' })
+    }
+  }
 
   const subtotalNetto = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
   const subtotalBrutto = items.reduce((sum, item) => sum + item.price_brutto * item.quantity, 0)
@@ -438,6 +481,53 @@ export default function ZamowieniePage() {
                   </h2>
                   
                   <div className="space-y-3 sm:space-y-4">
+                    {/* NIP na samej górze: klient wpisuje numer i pobiera nazwę oraz adres,
+                        zamiast przepisywać całość ręcznie */}
+                    <div>
+                      <label htmlFor="zamowienie-nip" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
+                        NIP *
+                      </label>
+                      <div className="flex gap-2">
+                        <input
+                          id="zamowienie-nip"
+                          type="text"
+                          name="nip"
+                          value={formData.nip}
+                          onChange={handleChange}
+                          onKeyDown={(e) => {
+                            // Enter w polu NIP pobiera dane, zamiast wysyłać formularz
+                            if (e.key === 'Enter') {
+                              e.preventDefault()
+                              pobierzZRejestru()
+                            }
+                          }}
+                          required
+                          inputMode="numeric"
+                          aria-describedby="zamowienie-nip-status"
+                          className="min-w-0 flex-1 px-3 sm:px-4 py-2.5 sm:py-3 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                          placeholder="np. 1234567890"
+                        />
+                        <button
+                          type="button"
+                          onClick={pobierzZRejestru}
+                          disabled={rejestr.stan === 'laduje'}
+                          className="inline-flex flex-shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-lg bg-gray-900 px-3 sm:px-4 text-sm font-semibold text-white transition hover:bg-gray-800 disabled:opacity-60"
+                        >
+                          {rejestr.stan === 'laduje' ? <Loader2 className="h-4 w-4 animate-spin" /> : <Search className="h-4 w-4" />}
+                          Pobierz z GUS
+                        </button>
+                      </div>
+                      <p
+                        id="zamowienie-nip-status"
+                        aria-live="polite"
+                        className={`mt-1.5 text-xs ${rejestr.stan === 'blad' ? 'text-red-600' : rejestr.stan === 'ok' ? 'text-green-700' : 'text-gray-500'}`}
+                      >
+                        {rejestr.stan === 'laduje'
+                          ? 'Pobieramy dane firmy…'
+                          : rejestr.komunikat || 'Wpisz NIP i kliknij „Pobierz z GUS” — uzupełnimy nazwę firmy i adres.'}
+                      </p>
+                    </div>
+                    
                     <div>
                       <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                         Nazwa firmy *
@@ -450,22 +540,6 @@ export default function ZamowieniePage() {
                         required
                         className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="np. ABC Sp. z o.o."
-                      />
-                    </div>
-                    
-                    <div>
-                      <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
-                        NIP *
-                      </label>
-                      <input
-                        type="text"
-                        name="nip"
-                        value={formData.nip}
-                        onChange={handleChange}
-                        required
-                        inputMode="numeric"
-                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="np. 1234567890"
                       />
                     </div>
                     
