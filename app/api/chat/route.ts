@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { searchBlogForAI } from '@/lib/blog'
 import { pobierzKomplet, naglowekKompletu, type KompletDokumentow } from '@/lib/manuals-full-text'
+import { getProductUrl } from '@/lib/shop-categories'
 import { zglosAwarieCzatu, rozpoznajAwarie } from '@/lib/chat-awarie'
 
 /**
@@ -236,11 +237,19 @@ const RE_MANIP_NAPISZ_LIST = word('napisz list')
 // Porada z innej dziedziny w każdej formie: „porada prawna", „poradę finansową", „porady lekarskiej"
 const RE_MANIP_PORADA = new RegExp(`porad[${PL_LETTERS}]*\\s+(?:prawn|finansow|medyczn|lekarsk)`, 'i')
 
+// Własny prefiks albo sufiks z konkretnym znakiem („prefix = #", „sufiks = *") ustawia się sekwencją
+// z instrukcji skanera: Scan Prefix / Scan Suffix 1, cztery cyfry wartości z tabeli ASCII i kod formatu
+// transmisji. Gotowe kody „Add Enter" i „Tab" tylko dopisują klawisz po danych, więc prefiksu nie ustawią,
+// a blok z gotowymi kodami nakazuje je wkleić. 19.11.2026 przy prośbie o prefiks # i sufiks Enter czat
+// w dwóch turach dołączył kod „Add Enter", a po teście skanu kazał go zeskanować zamiast wskazać brakujący krok.
+const RE_WLASNY_PREFIKS_SUFIKS = /prefi[kx]|przedrost|(?:sufi[kx]s?|suffix)\S*\s*(?:=|:|na|jako)\s*["'„`]?[!-\/:-@[-`{-~]/i
+
 // Funkcja wykrywająca pytanie o konfigurację skanera
 function detectScannerConfigQuery(query: string): ScannerConfigBarcode[] {
   const queryLower = query.toLowerCase()
   const matchedBarcodes: ScannerConfigBarcode[] = []
-  
+  const wlasnyPrefiksLubSufiks = RE_WLASNY_PREFIKS_SUFIKS.test(queryLower)
+
   // Reset fabryczny
   if (queryLower.includes('reset') || queryLower.includes('fabryczn') || 
       queryLower.includes('defaults') || queryLower.includes('domyśln') ||
@@ -249,15 +258,17 @@ function detectScannerConfigQuery(query: string): ScannerConfigBarcode[] {
   }
   
   // Enter/Carriage Return
-  if (queryLower.includes('enter') || queryLower.includes('carriage') ||
-      queryLower.includes('nowa linia') || queryLower.includes('zatwierdzanie') ||
-      (queryLower.includes('sufiks') && !RE_WORD_TAB.test(queryLower))) {
+  if (!wlasnyPrefiksLubSufiks &&
+      (queryLower.includes('enter') || queryLower.includes('carriage') ||
+       queryLower.includes('nowa linia') || queryLower.includes('zatwierdzanie') ||
+       (queryLower.includes('sufiks') && !RE_WORD_TAB.test(queryLower)))) {
     matchedBarcodes.push(SCANNER_CONFIG_BARCODES.find(b => b.id === 'suffix-enter')!)
   }
-  
+
   // Tab
-  if (RE_WORD_TAB.test(queryLower) || queryLower.includes('tabulator') ||
-      queryLower.includes('przeskakiwa') || queryLower.includes('następne pole')) {
+  if (!wlasnyPrefiksLubSufiks &&
+      (RE_WORD_TAB.test(queryLower) || queryLower.includes('tabulator') ||
+       queryLower.includes('przeskakiwa') || queryLower.includes('następne pole'))) {
     matchedBarcodes.push(SCANNER_CONFIG_BARCODES.find(b => b.id === 'suffix-tab')!)
   }
   
@@ -280,7 +291,8 @@ function detectScannerConfigQuery(query: string): ScannerConfigBarcode[] {
   // Ogólna konfiguracja skanera - pokaż wszystkie popularne
   // Komplet podstawowych kodów tylko wtedy, gdy klient nie poprosił o konkretny: inaczej pytanie
   // „ustaw sufiks tab" zwracało także reset fabryczny, który kasuje konfigurację skanera.
-  if (matchedBarcodes.length === 0 &&
+  // Przy własnym prefiksie lub sufiksie ze znakiem żaden z tych kodów nie jest odpowiedzią.
+  if (matchedBarcodes.length === 0 && !wlasnyPrefiksLubSufiks &&
       (queryLower.includes('skonfigurow') || queryLower.includes('konfigurac') ||
        queryLower.includes('zaprogramow') || queryLower.includes('ustaw')) &&
       (queryLower.includes('skaner') || queryLower.includes('czytnik'))) {
@@ -861,6 +873,98 @@ async function searchManuals(query: string, modelsHint: string[] = [], rozmowa?:
   }
 }
 
+// === Numery katalogowe części i materiałów ze sklepu serwisu ===
+// 20.11.2026 klient wpisał sam numer taśmy do drukarki kart ZC350, a sklep serwisu ma tę taśmę
+// z własną kartą produktu. Stary wzorzec szukał w sklepie tylko numerów zaczynających się od P,
+// od BTRY- albo w formacie 1xxxxx-xxx, więc taśmy i karty (800300-…, 800350-…), karty czyszczące
+// (105999-…-01), zasilacze PWR-… i numery z literą na końcu (P1112640-017C) nie docierały do
+// wyszukiwania. Czat nie dostawał danych ze sklepu i odsyłał klienta szablonem do sklepu TAKMA.
+// Teraz kandydatem jest każdy ciąg, który wygląda jak numer katalogowy (cyfra i łącznik albo
+// P z co najmniej sześcioma cyframi), a o tym, czy to produkt sklepu, rozstrzyga dokładne
+// porównanie z kolumną sku w bazie. Cudzysłowy wewnątrz numeru usuwamy przed dopasowaniem,
+// bo numer bywa wklejany z cudzysłowem w środku, np. "800300"-321EM.
+// 25.11.2026 numer drukarki przyszedł ze spacją po łączniku („ZD4A043- D0EE00EZ”) i wzorzec go
+// nie widział. Spację tylko po jednej stronie łącznika traktujemy jak literówkę w numerze. Łącznik
+// ze spacjami po obu stronach to myślnik w zdaniu, więc tamtych fragmentów nie sklejamy.
+function wykryjNumeryKatalogowe(tekst: string): string[] {
+  const bezCudzyslowow = (tekst || '').replace(/["'`„”“‘’«»]/g, '')
+  const sklejone = bezCudzyslowow
+    .replace(/([A-Za-z0-9])-[ \t]+(?=[A-Za-z0-9])/g, '$1-')
+    .replace(/([A-Za-z0-9])[ \t]+-(?=[A-Za-z0-9])/g, '$1-')
+  const wzorzec = /(?<![A-Za-z0-9ąćęłńóśźżĄĆĘŁŃÓŚŹŻ-])(?:[A-Za-z0-9]+(?:-[A-Za-z0-9]+)+|P\d{6,})(?![A-Za-z0-9ąćęłńóśźżĄĆĘŁŃÓŚŹŻ-])/g
+  const kandydaci = [
+    ...(bezCudzyslowow.match(wzorzec) || []),
+    ...(sklejone === bezCudzyslowow ? [] : sklejone.match(wzorzec) || []),
+  ]
+  const numery = kandydaci
+    .map((k) => k.toUpperCase())
+    .filter((k) => /\d/.test(k) && k.length >= 6)
+  return Array.from(new Set(numery)).slice(0, 40)
+}
+
+// Wiersz produktu dla bloku [SKLEP_PRODUKTY]. Cena 0 w tabeli products oznacza, że karta produktu
+// bierze cenę z bieżącej oferty dostawcy (lib/card-material-shop.ts). 21.11.2026 siedem taśm do ZC350
+// miało w bazie 0, a ich karty pokazywały cenę z oferty, więc bez tego warunku czat podałby „0,00 zł".
+function opisProduktuZeSklepu(
+  p: { sku: string; name: string; resolution_dpi?: number | null; price_brutto?: number | null },
+  adres: string,
+): string {
+  const dpi = p.resolution_dpi ? ` ${p.resolution_dpi} DPI` : ''
+  const brutto = Number(p.price_brutto) || 0
+  const cena = brutto > 0
+    ? `${brutto.toFixed(2).replace('.', ',')} zł brutto`
+    : 'cena: sprawdź aktualną cenę na karcie produktu'
+  return `${p.sku}: ${p.name}${dpi} — ${cena} — ${adres}`
+}
+// === Koniec: numery katalogowe ze sklepu serwisu ===
+
+// === Numery katalogowe urządzeń z katalogu sklepu serwisu ===
+// 25.11.2026 klient wpisał numer katalogowy drukarki, żeby ustalić jej wersję. Prompt kazał przy
+// każdym numerze urządzenia odpowiadać szablonem „skontaktuj się z TAKMA”, więc czat podał ten sam
+// szablon trzy razy z rzędu, także na wprost zadane pytanie o model, i nie wrócił do diagnozy.
+// Tymczasem tabela products ma przy każdej drukarce listę jej wersji (attributes.variants: numer
+// katalogowy, rozdzielczość, łączność). Numer z tej listy to dane z naszego katalogu, a nie
+// dekodowanie, więc czat może podać model i wersję. Szablon zostaje dla numerów spoza katalogu
+// i pada najwyżej raz w rozmowie.
+const SZABLON_NUMERU_URZADZENIA = 'Identyfikacja modelu po numerze katalogowym urządzenia wymaga weryfikacji'
+
+type WersjaZKatalogu = { pn: string; model: string; nazwa: string; wersja: string }
+
+function znajdzWersjeUrzadzen(
+  numery: string[],
+  urzadzenia: Array<{ name: string; sku?: string | null; device_model?: string | null; attributes?: any }>,
+): WersjaZKatalogu[] {
+  const szukane = new Set(numery.map((n) => n.toUpperCase()))
+  const dodane = new Set<string>()
+  const wynik: WersjaZKatalogu[] = []
+  for (const u of urzadzenia || []) {
+    const model = (u.device_model || '').trim() || u.name
+    const warianty: any[] = Array.isArray(u.attributes?.variants) ? u.attributes.variants : []
+    for (const w of warianty) {
+      const pn = String(w?.pn || '').toUpperCase()
+      if (!pn || !szukane.has(pn) || dodane.has(pn)) continue
+      dodane.add(pn)
+      wynik.push({ pn, model, nazwa: u.name, wersja: String(w?.label || '').trim() })
+    }
+    const sku = String(u.sku || '').toUpperCase()
+    if (sku && szukane.has(sku) && !dodane.has(sku)) {
+      dodane.add(sku)
+      wynik.push({ pn: sku, model, nazwa: u.name, wersja: '' })
+    }
+  }
+  return wynik
+}
+
+function opisWersjiUrzadzenia(w: WersjaZKatalogu): string {
+  return `${w.pn}: ${w.nazwa} (model ${w.model})${w.wersja ? `, wersja: ${w.wersja}` : ''}`
+}
+
+function szablonNumeruJuzPadl(messages: any[]): boolean {
+  return (Array.isArray(messages) ? messages : []).some((m: any) =>
+    m?.role === 'assistant' && typeof m.content === 'string' && m.content.includes(SZABLON_NUMERU_URZADZENIA))
+}
+// === Koniec: numery katalogowe urządzeń ===
+
 const SYSTEM_PROMPT = `Jesteś AI asystentem serwisu "Serwis Zebra" prowadzonego przez TAKMA - oficjalnego, certyfikowanego Partnera Serwisowego Zebra Technologies (Zebra Premier Partner Repair Specialist).
 Od 2026 r. TAKMA ma też status Zebra Printer Repair Specialist – Card Printer, czyli autoryzację serwisową Zebra dla drukarek kart plastikowych (ZC100, ZC300, ZC350, ZXP). Szczegóły i certyfikat: https://www.serwis-zebry.pl/serwis-drukarek-kart-zebra
 
@@ -880,9 +984,13 @@ Jeśli klient pyta o ZAKUP, CENĘ, DOSTĘPNOŚĆ, ETYKIETY, AKCESORIA, OFERTĘ, 
 "W sprawach zakupu urządzeń, etykiet, akcesoriów i materiałów eksploatacyjnych zapraszam do sklepu TAKMA — autoryzowanego partnera Zebra: **[takma.com.pl](https://www.takma.com.pl)** lub telefonicznie: +48 601 619 898."
 
 🔧 **NUMERY KATALOGOWE (PART NUMBER) — CZĘŚCI SERWISOWE vs URZĄDZENIA:**
-Jeśli klient podaje part number i masz go w kontekście [SKLEP_PRODUKTY] poniżej — odpowiedz na podstawie tych danych (nazwa, cena, link do sklepu). To są CZĘŚCI SERWISOWE (głowice, wałki, akumulatory) i wpisują się w temat serwisu.
-Jeśli klient podaje part number URZĄDZENIA (np. ZD4A042-30EE00EZ, TC52x-1234 itp.) — NIE DEKODUJ, NIE ZGADUJ! Odpowiedz:
+Jeśli klient podaje part number i masz go w kontekście [SKLEP_PRODUKTY] poniżej — odpowiedz na podstawie tych danych (nazwa, cena, link do karty produktu). To są części serwisowe (głowice, wałki, akumulatory, zasilacze) oraz materiały do drukarek kart (taśmy, karty, karty czyszczące) z NASZEGO sklepu serwisu i wpisują się w temat serwisu.
+Ta zasada ma PIERWSZEŃSTWO przed szablonem odsyłającym do sklepu TAKMA: produktu z listy [SKLEP_PRODUKTY] NIE odsyłaj do TAKMA, także gdy to taśma albo inny materiał eksploatacyjny. Gdy klient podał sam numer bez pytania, podaj nazwę, cenę i link, a potem zapytaj, czy chodzi o zakup, czy o problem z tym produktem w urządzeniu.
+Jeśli klient podaje part number URZĄDZENIA (np. ZD4A042-30EE00EZ, TC52x-1234 itp.):
+- Gdy ten numer jest w bloku [URZADZENIE_Z_NUMERU] poniżej, podaj model i wersję z tego bloku. To dane z katalogu naszego sklepu serwisu, a nie dekodowanie numeru. Potem wróć do problemu klienta.
+- Gdy numeru tam nie ma — NIE DEKODUJ, NIE ZGADUJ! Odpowiedz:
 "Identyfikacja modelu po numerze katalogowym urządzenia wymaga weryfikacji. Skontaktuj się z TAKMA (**[takma.com.pl](https://www.takma.com.pl)**, tel. +48 601 619 898) — pomogą zidentyfikować urządzenie."
+- Ten szablon podajesz w rozmowie NAJWYŻEJ RAZ. Gdy już padł, nie powtarzaj go, także gdy klient wpisze numer jeszcze raz albo zapyta o model wprost. Pracuj na modelu, który klient podał (choćby sama seria bez wersji). Wersję pomóż ustalić ze zdjęcia naklejki z numerem seryjnym albo samego urządzenia (nie zgaduj, gdzie jest naklejka ani jak są opisane jej pola), a potem wróć do objawu.
 
 ✅ **TO SĄ TEMATY ZEBRA (ODPOWIADAJ NA NIE!):**
 🚨 **ZASADA NADRZĘDNA:** Jeśli w pytaniu jest słowo "Zebra" + jakiekolwiek urządzenie → TO JEST TEMAT ZEBRA! POMAGAJ!
@@ -902,7 +1010,7 @@ Lista tematów SERWISOWYCH Zebra (TYLKO TE):
 NIE ODPOWIADAJ NA:
 - Pytania o zakup, cenę, dostępność urządzeń → odsyłaj do takma.com.pl
 - Pytania o etykiety, ribbony, materiały eksploatacyjne → odsyłaj do takma.com.pl
-- Identyfikację modelu po numerze katalogowym → odsyłaj do takma.com.pl
+- Identyfikację modelu po numerze katalogowym spoza bloku [URZADZENIE_Z_NUMERU] → odsyłaj do takma.com.pl (najwyżej raz w rozmowie)
 
 🚨 **ABSOLUTNY ZAKAZ - NIGDY NIE RÓB TEGO:**
 - NIGDY nie odsyłaj klienta na zebra.com, zebra.com/support ani inne strony Zebra!
@@ -1002,10 +1110,11 @@ Pamiętaj, że nasi klienci to często:
    - Jeśli nic nie pomoże → "Może być problem ze slotem SIM lub anteną - wymaga serwisu"
 
 4. 🔐 **DRUKARKA NIE ODPOWIADA PO SIECI — NAJPIERW SPRAWDŹ SYGNATURĘ EU RED (EN 18031)!**
-   Od sierpnia 2025 nowe drukarki Zebra Link-OS (i firmware zgodny z dyrektywą EU RED / normą
-   EN 18031) wychodzą z fabryki w trybie "secure by default": usługi sieciowe — RAW **9100**,
-   LPD **515**, panel WWW **80/443**, kanał **6101**, FTP — są WYŁĄCZONE, a konfiguracja wymaga
-   nadania hasła administratora.
+   Od 1 sierpnia 2025 drukarki Zebra Link-OS wprowadzane na rynek w regionie EMEA (firmware
+   Link-OS 7.4.2 lub nowszy, wymagania dyrektywy EU RED / normy EN 18031) wychodzą z fabryki
+   w trybie "secure by default": usługi sieciowe — RAW **9100**, LPD **515**, panel WWW
+   **80/443**, kanał **6101**, FTP — są WYŁĄCZONE, a tryb chroniony jest włączony bez hasła.
+   Fabrycznego hasła nie ma (1234 nie działa) — ustala je administrator w kreatorze Zebry.
 
    **SYGNATURA (rozpoznawaj ją ZAWSZE):** ping do drukarki działa + MAC się zgadza + porty TCP
    9100/515/80/443/6101 NIE odpowiadają + sprzęt jest NOWY albo po resecie → to prawie na pewno
@@ -1023,34 +1132,121 @@ Pamiętaj, że nasi klienci to często:
    w adresacji albo w sieci (zły IP, maska, VLAN, kabel, DHCP), nie w zamkniętych usługach, i tam
    prowadź diagnostykę. Wysyłanie go wtedy do ZSU po komendy ip.port to strata czasu obu stron.
 
+   **USŁUG W TYM TRYBIE NIE WŁĄCZA SIĘ KOMENDĄ SETVAR.** Przy włączonym trybie chronionym setvar
+   nie zmienia ustawień chronionych (usługi sieciowe, porty, Wi-Fi): drukarka przyjmuje komendę bez
+   komunikatu, niczego nie zapisuje, a po restarcie ip.tcp.enable dalej zwraca "off". Zebra Setup
+   Utilities nie ustawia hasła trybu chronionego — nie obiecuj, że o nie zapyta. Ustawienia zmienia
+   kreator zabezpieczeń Zebry, a nie ZSU.
+
    **CO ROBIĆ (dokładnie w tej kolejności):**
-   - Podłącz drukarkę kablem **USB** do komputera → **Zebra Setup Utilities** → Open Printer →
-     Direct Communication. Jeśli aktywny jest protected mode, ZSU poprosi o nadanie hasła.
-   - Sprawdź firmware i stan usług:
-     ! U1 getvar "appl.name"
+   - Potwierdź tryb jednym odczytem: drukarka kablem **USB** do komputera → **Zebra Setup Utilities**
+     → okno komunikacji z drukarką (Open Communication With Printer) →
      ! U1 getvar "device.protected_mode"
-     ! U1 getvar "ip.port"
-   - Włącz drukowanie po sieci:
-     ! U1 setvar "ip.tcp.enable" "on"
-     ! U1 setvar "ip.port" "9100"
-     ! U1 setvar "device.reset" ""
-   - Po restarcie sprawdź z komputera port 9100 (Test-NetConnection ADRES_IP -Port 9100).
-   - Panel WWW (ip.http.enable) włączaj tylko jeśli klient go używa — i od razu ze zmienionym hasłem.
-   To jest Twoja lista kroków, nie treść jednej wiadomości. Klientowi podawaj po JEDNEJ komendzie
-   i czekaj na wynik — trzy linie naraz kończą się tym, że wkleja je razem ze znacznikami bloku.
+     Wynik "on" w nowej drukarce potwierdza tryb chroniony. Ta zmienna służy tylko do odczytu (punkt 7).
+     Odczyty getvar działają też w trybie chronionym (ip.tcp.enable zwraca fabrycznie "off").
+   - Kreator zabezpieczeń (Security Setup Wizard, strona **zebra.com/asr**) na komputerze: aplikacja
+     **Zebra Nucleus Connector dla Windows** ze strony **zebra.com/setup** — wersja oznaczona jako
+     przeznaczona dla regionu EMEA. Drukarka połączona kablem USB albo przez Ethernet. Gdy drukarka
+     ma Bluetooth Classic, kreator działa też w aplikacji Nucleus Connector na Androidzie i iOS.
+   - W aplikacji: kafelek **Security Settings Wizard** → **Begin Security Settings Wizard** → nowe
+     hasło trybu chronionego w obu polach (od 14 do 128 znaków; klient zapisuje je u siebie, bo Zebra
+     go nie przechowuje) → **Next**.
+   - Na ekranie **Additional Security Settings** zaznacz **Enable TCP/IP Raw Ports** (porty 9100,
+     9200, 9300) — bez tej opcji drukarka po konfiguracji dalej nie przyjmie druku na 9100. LPD,
+     strony WWW i aktualizacje firmware zaznacz tylko, jeśli klient ich używa. → **Next** →
+     **Apply Settings**.
+   - Wyłącz i włącz drukarkę, potem sprawdź z komputera port 9100 (Test-NetConnection ADRES_IP -Port 9100).
+   To jest Twoja lista kroków, nie treść jednej wiadomości. Klientowi podawaj po JEDNYM kroku
+   i czekaj na wynik.
 
    **CZEGO NIE ROBIĆ przy tej sygnaturze:**
-   - ❌ NIE zalecaj resetu fabrycznego ani default network jako naprawy — na jednostce RED reset
-     przywraca właśnie ZAMKNIĘTE porty (utrwala objaw!). Jeśli klient już zresetował — to
-     wyjaśnia problem, sprzęt jest sprawny.
+   - ❌ NIE zalecaj resetu fabrycznego ani default network jako naprawy — reset nie wyłącza
+     zabezpieczeń EU RED i przywraca właśnie ZAMKNIĘTE porty (utrwala objaw!). Jeśli klient już
+     zresetował — to wyjaśnia problem, sprzęt jest sprawny.
+   - ❌ NIE każ ustawiać usług, portu ani Wi-Fi komendą setvar (ip.tcp.enable, ip.port i podobne)
+     i NIE obiecuj, że ZSU poprosi o hasło. Gdy klient już tak próbował, a wartość wróciła na "off"
+     albo ZSU się zawiesza — to zachowanie trybu chronionego, nie usterka programu. Nie każ wtedy
+     reinstalować ZSU i nie twierdź, że jego wersja jest za stara; przejdź do kreatora zabezpieczeń.
    - ❌ NIE proponuj wysyłki do serwisu ani wyceny naprawy elektroniki/płyty — to problem
-     KONFIGURACYJNY. [SERIOUS_ISSUE] dopiero, gdy po USB usługi są włączone, a port dalej milczy.
+     KONFIGURACYJNY. [SERIOUS_ISSUE] dopiero, gdy po kreatorze z opcją Enable TCP/IP Raw Ports
+     odczyt ! U1 getvar "ip.tcp.enable" przez USB zwraca "on", a port dalej milczy także z laptopa
+     podłączonego do tego samego switcha/VLAN co drukarka.
    - ❌ NIE traktuj "discovery nie znajduje drukarki" jako dowodu awarii — Zebra Setup Utilities
      po sieci i aplikacja Printer Setup też nie widzą drukarki z zamkniętymi usługami.
 
-   **Rozstrzygnięcie końcowe:** jeśli po USB ip.port = 9100 i usługi są włączone, a po sieci
-   port dalej nie odpowiada → przyczyna leży w infrastrukturze klienta (ACL/izolacja portów na
-   switchu, firewall), nie w drukarce. Test: laptop w tym samym gnieździe/VLAN co drukarka.
+   **Rozstrzygnięcie końcowe:** jeśli po kreatorze ip.tcp.enable = "on", a po sieci port dalej
+   nie odpowiada → przyczyna leży w infrastrukturze klienta (ACL/izolacja portów na switchu,
+   firewall), nie w drukarce. Test: laptop w tym samym gnieździe/VLAN co drukarka.
+
+5. **DRUKARKA PROSI O HASŁO LUB PIN NA PANELU** (np. przy Load Defaults albo zmianie ustawień w menu)
+   Odpowiedź zależy od tego, gdzie i kiedy kupiono drukarkę. Nie zakładaj trybu EU RED, dopóki klient
+   nie potwierdzi, że to egzemplarz kupiony w regionie EMEA od 1 sierpnia 2025.
+   - Drukarki Link-OS z wyświetlaczem spoza tej grupy: domyślny PIN panelu to **1234**. To pierwszy krok:
+     poproś o wpisanie 1234 i zapytaj, czy drukarka jest nowa (kupiona od sierpnia 2025).
+   - Egzemplarze kupione w regionie EMEA od 1 sierpnia 2025 (EU RED): hasło trybu chronionego i PIN
+     panelu NIE są ustawione fabrycznie, więc 1234 nie działa. To nie jest usterka. Oba ustawia kreator
+     zabezpieczeń Zebry (Security Setup Wizard, strona **zebra.com/asr**) w aplikacji Zebra Nucleus
+     Connector: na komputerze z Windows (drukarka na kablu USB albo przez Ethernet) albo na telefonie
+     z Androidem lub iOS, gdy drukarka ma Bluetooth Classic. Czterocyfrowy PIN panelu ustawia opcja
+     **Set Front Panel PIN Code** na ekranie Additional Security Settings.
+   - Hasło ustawione wcześniej w firmie, którego klient nie zna: odeślij do osoby lub działu IT, które
+     konfigurowały drukarki. Hasła trybu chronionego Zebra nie przechowuje i nie da się go odzyskać.
+   - NIE kieruj do Zebra Setup Utilities po ustawienie hasła ani PIN-u: ZSU ich nie ustawia i o nie
+     nie zapyta.
+   - NIE zalecaj resetu fabrycznego jako sposobu na zdjęcie hasła: reset nie wyłącza zabezpieczeń EU RED.
+
+6. **SNMPv3 NA DRUKARKACH LINK-OS** (włączenie SNMPv3, użytkownik tylko do odczytu, hasła SNMPv3)
+   SNMPv3 jest w Link-OS od wersji 7.0. Konfiguruje się go operacją JSON, a nie komendami setvar.
+   - Zmienne ip.snmpv3.enable, ip.snmpv3.admin.name, ip.snmpv3.monitor.name oraz auth_protocol
+     i priv_protocol obu użytkowników są TYLKO DO ODCZYTU (getvar). Komenda setvar na nich niczego nie
+     ustawia. Nie podawaj ich w setvar ani w plikach do wysłania na drukarki.
+   - Warunek: włączony tryb chroniony z ustawionym hasłem administratora trybu chronionego. Bez tego
+     hasła drukarka odrzuca operację kodem 107. Hasło ustawia operacja "setup" z punktu 7, a w egzemplarzach
+     EU RED także kreator zabezpieczeń z punktu 4. W pliku z poleceniami "setup" stoi więc przed
+     "setup-snmpv3-user".
+   - Są dwa konta: admin z dostępem "read-write" i monitor z dostępem "read-only". Użytkownika tworzy,
+     zmienia i usuwa operacja "setup-snmpv3-user". Wzór dla użytkownika tylko do odczytu (wielkie litery
+     klient zastępuje swoimi danymi, "username":"admin" w części authentication to login trybu chronionego):
+     {}{"protect":{"authentication":{"username":"admin","password":"HASLO_TRYBU_CHRONIONEGO","type":"basic"},"operation":"setup-snmpv3-user","setup-snmpv3-user":{"action":"create","access":"read-only","username":"NAZWA_UZYTKOWNIKA","auth-passphrase":"HASLO_AUTH","auth-protocol":"SHA","priv-passphrase":"HASLO_PRIV","priv-protocol":"AES"}}}
+   - auth-passphrase, auth-protocol (SHA albo MD5), priv-passphrase i priv-protocol (AES albo DES) to pola
+     tej operacji JSON, a nie zmienne SGD. Nie składaj z nich nazw w rodzaju ip.snmpv3.monitor.auth-passphrase.
+   - SNMPv3 włącza się sam po utworzeniu pierwszego użytkownika i wyłącza się, gdy nie ma żadnego. Osobnej
+     komendy włączenia nie trzeba. Zmiany działają po resecie sieci albo drukarki.
+   - Kody odpowiedzi: 107 — hasło trybu chronionego nie zostało ustawione, 307 i 309 — za krótkie hasło uwierzytelniania
+     albo szyfrowania, 319 — użytkownik już istnieje. Operacja "update" zmienia tylko hasła i protokoły.
+     Nazwę albo poziom dostępu zmienia się przez "delete" i ponowne "create".
+   - Nie przypisuj zmiennym ani polom skutków, których nie ma w tym opisie ani w kontekście.
+     ❌ ŹLE: „setvar "ip.snmpv3.admin.name" "" sprawia, że nie powstaje użytkownik administracyjny".
+     ✅ DOBRZE: „Zmienne ip.snmpv3 tylko pokazują stan. Użytkownika monitor tworzy operacja setup-snmpv3-user".
+
+7. **TRYB CHRONIONY W DRUKARKACH LINK-OS KOMENDĄ** (jak włączyć tryb chroniony, ustawić albo zmienić hasło
+   administratora, zmienić ustawienie chronione, przygotować plik z poleceniami na wiele drukarek)
+   Trybem chronionym sterują polecenia JSON "protect", a nie komendy setvar.
+   - Zmienne device.protected_mode i device.protected_mode_allowed służą TYLKO DO ODCZYTU (getvar, wyniki
+     "on" albo "off" i "yes" albo "no"). Setvar na nich niczego nie włącza. Nie podawaj ich w setvar ani
+     w plikach do wysłania na drukarki.
+   - Tryb chroniony włącza ustawienie hasła administratora operacją "setup". Gdy hasła jeszcze nie ma, pole
+     password w części authentication jest puste. Wzór (wielkie litery klient zastępuje swoim hasłem):
+     {}{"protect":{"authentication":{"username":"admin","password":"","type":"basic"},"operation":"setup","setup":{"username":"admin","password":"NOWE_HASLO_ADMINA"}}}
+   - Hasło ma od 14 do 128 drukowalnych znaków ASCII. Jedyny użytkownik to admin. Hasło idzie w poleceniu
+     jawnym tekstem, więc Zebra zaleca wysyłać je bezpiecznym kanałem albo w wydzielonej sieci do konfiguracji.
+   - Odpowiedź {"protect":{"status":0,"operation":"setup"}} oznacza, że hasło jest ustawione, a odczyt
+     ! U1 getvar "device.protected_mode" zwraca wtedy "on". Inne kody: 100 i 101 — zła nazwa użytkownika
+     albo hasło, 102 — polecenie chronione, drukarka go nie wykona, 107 — najpierw trzeba ustawić hasło,
+     302 i 303 — hasło za krótkie albo za długie, 304 — niedozwolone znaki w haśle.
+   - Zmiana hasła: ta sama operacja "setup", a w części authentication obecne hasło.
+   - Egzemplarze EU RED mają tryb chroniony włączony fabrycznie, bez hasła. Pierwsze hasło ustawia w nich
+     ta sama operacja "setup" albo kreator zabezpieczeń z punktu 4.
+   - Przy włączonym trybie ustawienia chronione (sieć, zabezpieczenia) zmienia operacja "set" z hasłem:
+     {}{"protect":{"authentication":{"username":"admin","password":"HASLO_ADMINA","type":"basic"},"operation":"set","set":{"wlan.essid":"NAZWA_SIECI"}}}
+     Zwykły setvar na ustawieniu chronionym niczego wtedy nie zmienia. Ustawień druku, np. zaczernienia,
+     tryb chroniony nie blokuje.
+   - Wyłączenie trybu: operacja "configure-one" z "protected-mode-allowed":"no", ponowne włączenie: "yes".
+     Hasło zostaje w drukarce.
+   - Plik z poleceniami na wiele drukarek: najpierw "setup" z hasłem, potem polecenia z tym hasłem w części
+     authentication ("set", "setup-snmpv3-user" z punktu 6). Bez ustawionego hasła drukarka odrzuca je kodem 107.
+   - ❌ ŹLE: „Tryb chroniony włączysz komendą setvar na zmiennej device.protected_mode".
+     ✅ DOBRZE: „Tryb chroniony włącza operacja setup, która ustawia hasło administratora. Zmienna device.protected_mode tylko pokazuje stan".
 
 **JAK PROWADZIĆ ROZMOWĘ:**
 - Podaj JEDEN krok diagnostyki i zakończ KRÓTKIM pytaniem: "Pomogło?", "Działa?", "I jak?", "Lepiej?"
@@ -1139,6 +1335,11 @@ klienta, żeby przepisał to, co widzi, i rozpoznaj po treści.
 - ❌ ŹLE: klient wymienia trzy opisy, a Ty strzelasz "najczęściej właśnie ten trzeci".
 - ✅ DOBRZE: "Kod parowania to ten przy adresie Bluetooth — u Ciebie podpisany BD ADD."
 Gdy naprawdę nie wiesz który, powiedz to i podaj sposób rozpoznania, zamiast kazać skanować na chybił trafił.
+To samo dotyczy przycisków w procedurze serwisowej (wejście do Recovery, reset). Gdy klient nie znajduje
+przycisku, którego wymaga procedura, NIE podmieniaj go na inny przycisk „na próbę". Opisz jeszcze raz,
+gdzie ten przycisk jest według instrukcji, a gdy klient dalej go nie widzi, poproś o zdjęcie obu boków
+urządzenia i rozpoznaj przycisk na zdjęciu albo zaproponuj serwis.
+- ŹLE: klient nie widzi przycisku PTT, a Ty każesz przy restarcie trzymać Volume Up, choć instrukcja tego nie podaje.
 
 **PAROWANIE SKANERÓW BEZPRZEWODOWYCH ZE STACJĄ (LI4278, LS4278, DS6878 i pokrewne)**
 - Kod parowania na stacji KODUJE ADRES BLUETOOTH tej stacji. Na etykiecie jest to kod przy opisie
@@ -1618,6 +1819,8 @@ PAMIĘTAJ:
   - Dodaj Enter: [BARCODE:/Add%20Enter%20Suffix.png]
   - Dodaj Tab: [BARCODE:/Add%20Tab%20Suffix.png]
   - Włącz QR: [BARCODE:/Enable%20QR%20Code.png]
+- **WŁASNY PREFIKS ALBO SUFIKS ZE ZNAKIEM (np. #, *, ;)** ustawia się sekwencją z instrukcji skanera: kod „Scan Prefix" albo „Scan Suffix 1", cztery cyfry wartości z tabeli ASCII dla interfejsu skanera (w LS2208 przez USB: # = 1035, Enter = 7013) i na końcu kod formatu transmisji z <PREFIX>. Gotowe kody „Dodaj Enter" i „Dodaj Tab" tylko dopisują klawisz po danych i prefiksu nie ustawią — nie dołączaj ich do takiej sekwencji.
+- **WYNIK SKANU W OKNIE CZATU**: gdy w trakcie konfiguracji skanera klient przysyła sam ciąg cyfr lub znaków bez komentarza (np. 13 cyfr kodu EAN), to zeskanował kod do okna czatu. To jest wynik testu, a nie próba programowania: masz przed sobą dokładnie to, co skaner wysyła do komputera. Porównaj go z oczekiwanym wynikiem i powiedz wprost, co z tego wynika: brak znaku prefiksu na początku oznacza, że prefiks nie jest wysyłany; jeśli klient nie naciskał Enter, a wiadomość wysłała się sama, sufiks Enter działa. Nie pytaj, czy wynik wygląda tak, jak powinien, nie pisz, że to „nie jest kod programujący”, i nie zaczynaj programowania od nowa. Wskaż krok, który nie zadziałał (przy braku prefiksu zwykle kod formatu transmisji z <PREFIX>, skanowany jako ostatni), i zapytaj, jakim sygnałem skaner odpowiedział po tym kodzie.
 - **RESET FABRYCZNY TO OSTATNI KROK.** Jeśli po nim problem trwa, a wcześniej padł już co najmniej jeden krok dopasowany do objawu → konkluzja serwisowa z [SERIOUS_ISSUE]. Nie kombinuj dalej.
 - **MARTWY SPUST = SERWIS OD RAZU**: w terminalu, gdy przycisk ekranowy w DWDemo skanuje, a spust nie; w skanerze ręcznym, gdy skaner daje sygnał po podłączeniu lub w stacji, a spust nie reaguje. Nie każ skanować kodów skanerem z martwym spustem — to niemożliwe.
 - NIE pytaj "Czy chcesz znaleźć serwis?" - TY JESTEŚ serwisem!
@@ -2045,27 +2248,52 @@ export async function POST(req: NextRequest) {
     // === KROK 2.5: Szukaj part numberów w sklepie (części serwisowe) ===
     let productContext = ''
     try {
-      // Wykryj potencjalne part numbery w wiadomości (P1xxxxxx, BTRY-xxx, 105934-xxx itp.)
-      const pnPatterns = lastUserMessage.match(/\b(P\d{6,}[-\d]*|BTRY-[A-Z0-9-]+|1\d{5}-\d{3})\b/gi)
-      if (pnPatterns && pnPatterns.length > 0) {
+      // Wykryj potencjalne numery katalogowe w wiadomości (opis wzorca przy wykryjNumeryKatalogowe)
+      const pnPatterns = wykryjNumeryKatalogowe(lastUserMessage)
+      if (pnPatterns.length > 0) {
         console.log('🔍 Wykryto potencjalne part numbery:', pnPatterns)
+        // Drukarki pomijamy: numer katalogowy urządzenia obsługuje KROK 2.6 i blok [URZADZENIE_Z_NUMERU].
         const { data: products } = await supabase
           .from('products')
-          .select('name, sku, price_brutto, product_type, device_model, resolution_dpi')
+          .select('name, sku, slug, price_brutto, product_type, device_model, resolution_dpi')
           .eq('is_active', true)
-          .in('sku', pnPatterns.map((pn: string) => pn.toUpperCase()))
+          .neq('product_type', 'drukarka')
+          .in('sku', pnPatterns)
 
         if (products && products.length > 0) {
           productContext = products.map(p => {
-            const dpi = p.resolution_dpi ? ` ${p.resolution_dpi} DPI` : ''
-            const price = p.price_brutto.toFixed(2).replace('.', ',')
-            return `${p.sku}: ${p.name}${dpi} — ${price} zł brutto — https://www.serwis-zebry.pl/sklep`
+            const sciezka = p.slug
+              ? getProductUrl({ slug: p.slug, product_type: p.product_type, device_model: p.device_model || '' })
+              : '/sklep'
+            return opisProduktuZeSklepu(p, `https://www.serwis-zebry.pl${sciezka}`)
           }).join('\n')
           console.log(`✅ Znaleziono ${products.length} produktów w sklepie`)
         }
       }
     } catch (err: any) {
       console.error('⚠️ Błąd wyszukiwania produktów:', err.message)
+    }
+
+    // === KROK 2.6: numer katalogowy urządzenia → model i wersja z katalogu sklepu serwisu ===
+    // Szukamy we wszystkich wiadomościach klienta, nie tylko w ostatniej: klient podaje numer raz,
+    // a o model pyta albo objaw opisuje w kolejnych turach. Opis przy znajdzWersjeUrzadzen.
+    let deviceContext = ''
+    try {
+      const numeryWRozmowie = wykryjNumeryKatalogowe(userMessagesFrom(messages).join('\n'))
+      if (numeryWRozmowie.length > 0) {
+        const { data: urzadzenia } = await supabase
+          .from('products')
+          .select('name, sku, device_model, attributes')
+          .eq('is_active', true)
+          .eq('product_type', 'drukarka')
+        const wersje = znajdzWersjeUrzadzen(numeryWRozmowie, urzadzenia || [])
+        if (wersje.length > 0) {
+          deviceContext = wersje.map(opisWersjiUrzadzenia).join('\n')
+          console.log(`✅ Numer urządzenia w katalogu sklepu: ${wersje.map((w) => w.pn).join(', ')}`)
+        }
+      }
+    } catch (err: any) {
+      console.error('⚠️ Błąd wyszukiwania wersji urządzeń:', err.message)
     }
 
     // === KROK 3: Zbuduj kontekst dla AI ===
@@ -2092,7 +2320,16 @@ export async function POST(req: NextRequest) {
 
     // Dodaj kontekst produktów ze sklepu (części serwisowe)
     if (productContext) {
-      enhancedSystemPrompt += `\n\n=== [SKLEP_PRODUKTY] CZĘŚCI SERWISOWE Z NASZEGO SKLEPU ===\n${productContext}\n\nKlient pytał o part number który MAMY W SKLEPIE. Podaj mu nazwę, cenę i link. To są oryginalne części serwisowe Zebra.`
+      enhancedSystemPrompt += `\n\n=== [SKLEP_PRODUKTY] CZĘŚCI I MATERIAŁY Z NASZEGO SKLEPU ===\n${productContext}\n\nKlient podał numer katalogowy, który MAMY W SKLEPIE SERWISU. Podaj nazwę, cenę i link do karty produktu. Gdy przy produkcie nie ma kwoty, nie podawaj ceny, tylko odeślij do karty produktu. NIE używaj szablonu odsyłającego do sklepu TAKMA. To są oryginalne części i materiały Zebra.`
+    }
+
+    // Model i wersja urządzenia z katalogu sklepu serwisu (numer katalogowy podany przez klienta)
+    if (deviceContext) {
+      enhancedSystemPrompt += `\n\n=== [URZADZENIE_Z_NUMERU] MODEL Z KATALOGU SKLEPU SERWISU ===\n${deviceContext}\n\nKlient podał numer katalogowy urządzenia, który jest w katalogu naszego sklepu serwisu. Podaj model i wersję z tego wiersza. To dane z katalogu, a nie dekodowanie numeru, więc NIE używaj szablonu odsyłającego do TAKMA w sprawie identyfikacji. Nie podawaj ceny ani linku do sklepu. Potem wróć do problemu klienta: zapytaj o objaw albo prowadź dalej diagnozę.`
+    } else if (szablonNumeruJuzPadl(messages)) {
+      // Prompt pozwala na ten szablon najwyżej raz. Przypomnienie w turze, w której już padł, bo model
+      // chętnie powtarza szablon słowo w słowo, gdy klient wpisze numer drugi raz (alert 25.11.2026).
+      enhancedSystemPrompt += `\n\n=== SZABLON O NUMERZE KATALOGOWYM JUŻ PADŁ ===\nW tej rozmowie już odesłałeś klienta do TAKMA w sprawie numeru katalogowego urządzenia. NIE powtarzaj tego szablonu ani jego treści. Pracuj na modelu, który klient podał (choćby sama seria bez wersji). Wersję pomóż ustalić bez numeru katalogowego: poproś o zdjęcie naklejki z numerem seryjnym albo samego urządzenia. Nie zgaduj, gdzie jest naklejka ani jak są opisane jej pola. Jeśli wersji dalej nie da się ustalić, przejdź do objawu i powiedz wprost, że wskazówki są ogólne dla tej serii.`
     }
 
     // Dodaj kontekst z RAG (techniczne szczegóły z manuali)

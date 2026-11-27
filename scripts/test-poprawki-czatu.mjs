@@ -155,6 +155,36 @@ sprawdz('detectScannerConfigQuery(konkret)', idki('ustaw sufiks tab w skanerze D
 sprawdz('detectScannerConfigQuery(ogolne)', idki('jak skonfigurować skaner DS2208'),
   'set-defaults,suffix-enter,suffix-tab', 'jak skonfigurować skaner DS2208')
 
+// Własny prefiks albo sufiks ze znakiem: bez gotowych kodów Enter/Tab i bez kompletu podstawowego.
+// Te kody tylko dopisują klawisz po danych, a blok z gotowymi kodami nakazuje je wkleić (alert 19.11.2026:
+// kod „Add Enter" przy prośbie o prefiks # i sufiks Enter, potem podsunięty jeszcze raz po teście skanu).
+for (const z of [
+  'jak ustawić prefiks # w skanerze LS2208',
+  'LS2208 na USB: prefix = # oraz sufiks = enter',
+  'zaprogramuj czytnik: sufix = #, prefix = enter',
+  'ustaw sufiks = * w skanerze DS2208',
+  'jak dodać sufiks na ; w czytniku',
+  'chcę przedrostek przed każdym kodem w skanerze',
+]) sprawdz('detectScannerConfigQuery(własny prefiks/sufiks)', idki(z), '', z)
+
+// Sam Enter albo Tab po skanie nadal dostaje gotowy kod
+for (const [z, oczekiwane] of [
+  ['jak dodać enter po skanie w LS2208', 'suffix-enter'],
+  ['ustaw sufiks enter w skanerze', 'suffix-enter'],
+  ['ustaw sufiks = enter w skanerze', 'suffix-enter'],
+  ['chcę zatwierdzanie po każdym kodzie', 'suffix-enter'],
+  ['jak ustawić tabulator po skanie', 'suffix-tab'],
+]) sprawdz('detectScannerConfigQuery(sam Enter/Tab)', idki(z), oczekiwane, z)
+
+// Prompt: sekwencja własnego prefiksu i wynik skanu przysłany do okna czatu (alert 19.11.2026)
+for (const [nazwa, wzor] of [
+  ['sekwencja własnego prefiksu lub sufiksu', /WŁASNY PREFIKS ALBO SUFIKS ZE ZNAKIEM[^\n]*Scan Prefix[^\n]*formatu transmisji z <PREFIX>/],
+  ['wartości LS2208 z tabeli ASCII dla USB', /LS2208 przez USB: # = 1035, Enter = 7013/],
+  ['gotowe kody Enter/Tab nie ustawiają prefiksu', /„Dodaj Enter" i „Dodaj Tab" tylko dopisują klawisz po danych i prefiksu nie ustawią/],
+  ['wynik skanu to test, nie programowanie', /WYNIK SKANU W OKNIE CZATU[^\n]*wynik testu, a nie próba programowania/],
+  ['bez zaczynania programowania od nowa', /WYNIK SKANU W OKNIE CZATU[^\n]*nie zaczynaj programowania od nowa/],
+]) sprawdz('prompt: ' + nazwa, wzor.test(src), true, nazwa)
+
 // Filtr tematyczny krótkich wiadomości — ta sama pułapka, drugie miejsce w kodzie
 for (const z of [
   'ZT411 gubi się w kontekście VLAN',
@@ -543,6 +573,337 @@ for (const [model, typ] of [['MC27', 'terminal'], ['HC100', 'drukarka'], ['HC50'
 sprawdz('modelOdKlienta: klient napisał', modelOdKlienta('TC8000', ['terminal tc 8000 nie widzi sieci']), 'TC8000', 'TC8000')
 sprawdz('modelOdKlienta: podsunął czat', modelOdKlienta('TC27', ['terminal nie widzi sieci']), '', 'TC27')
 sprawdz('modelOdKlienta: nie kształt modelu', modelOdKlienta('Zebra', ['zebra nie drukuje']), '', 'Zebra')
+
+// --- runda 9: drukarki EU RED — kreator zabezpieczeń zamiast setvar (alerty 5.10.2026) ---
+// Dwie rozmowy o nowej ZD421 trwały 34 i 40 tur bez rozwiązania. Prompt prowadził klienta przez
+// setvar "ip.tcp.enable" i "ip.port" w ZSU i zapowiadał, że ZSU poprosi o hasło. W trybie chronionym
+// setvar nie zmienia ustawień chronionych, więc wartość wracała na "off", a monit o hasło się nie
+// pojawiał. Czat uznał wtedy ZSU za „za stary" i odesłał klienta do reinstalacji. Porty włącza się
+// kreatorem zabezpieczeń Zebry (Nucleus Connector, opcja Enable TCP/IP Raw Ports) — tak opisuje
+// to wpis zebra-wymaga-hasla-dyrektywa-red-konfiguracja w lib/blog.ts.
+const sekcjaRed = (() => {
+  const a = src.indexOf('**DRUKARKA NIE ODPOWIADA PO SIECI')
+  const b = src.indexOf('**JAK PROWADZIĆ ROZMOWĘ:**', a)
+  if (a < 0 || b < 0) throw new Error('Nie znaleziono sekcji o drukarkach EU RED w prompcie')
+  return src.slice(a, b)
+})()
+for (const [nazwa, wzor, oczekiwane] of [
+  ['brak komend setvar na liście kroków', /^\s*! U1 setvar/m, false],
+  ['brak zapowiedzi monitu o hasło w ZSU', /protected mode, ZSU poprosi|poprosi o nadanie hasła/, false],
+  ['setvar nie zmienia ustawień chronionych', /setvar\s+nie zmienia ustawień chronionych/, true],
+  ['kreator: Nucleus Connector ze strony zebra.com/setup', /Zebra Nucleus Connector dla Windows\*\* ze strony \*\*zebra\.com\/setup/, true],
+  ['kreator: opcja Enable TCP/IP Raw Ports', /Enable TCP\/IP Raw Ports/, true],
+  ['hasło trybu chronionego 14–128 znaków', /od 14 do 128 znaków/, true],
+  ['zakaz „za starej" wersji ZSU', /nie twierdź, że jego wersja jest za stara/, true],
+  ['odczyt trybu chronionego przez USB zostaje', /! U1 getvar "device\.protected_mode"/, true],
+]) sprawdz('prompt EU RED: ' + nazwa, wzor.test(sekcjaRed), oczekiwane, nazwa)
+
+// Prompt i baza wiedzy mają mówić to samo — jeśli któryś wpis zmieni procedurę, ten test to pokaże
+const wpisBloga = (slug) => {
+  const a = blog.indexOf(`slug: '${slug}'`)
+  if (a < 0) throw new Error(`Nie znaleziono wpisu ${slug} w lib/blog.ts`)
+  const b = blog.indexOf('\n    slug: ', a + 10)
+  return blog.slice(a, b < 0 ? undefined : b)
+}
+const wpisRed = wpisBloga('zebra-wymaga-hasla-dyrektywa-red-konfiguracja')
+const wpisPrintSecure = wpisBloga('zebra-printsecure-przewodnik-administratora-it')
+sprawdz('blog EU RED: opcja Enable TCP/IP Raw Ports', /Enable TCP\/IP Raw Ports/.test(wpisRed), true, 'wpis o EU RED')
+sprawdz('blog EU RED: Nucleus Connector ze strony zebra.com/setup', /Nucleus Connector[\s\S]{0,200}zebra\.com\/setup/.test(wpisRed), true, 'wpis o EU RED')
+sprawdz('blog PrintSecure: setvar nie zmienia ustawień chronionych',
+  /polecenie setvar nie zmienia ustawień chronionych/.test(wpisPrintSecure), true, 'wpis o PrintSecure')
+
+// --- runda 10: sterownik dla serii ZT200 (alert 22.10.2026) ------------------
+// ZDesigner v5 jest obowiązkowy tylko dla GK, GC, GT800 i LP/TLP 28xx. Zdania „v10 nie obsługuje
+// modeli sprzed Link-OS" prowadziły do wniosku, że ZT230 bez Link-OS potrzebuje v5, a Zebra
+// wymienia ZT210, ZT220 i ZT230 wśród drukarek obsługiwanych przez v10.
+for (const [nazwa, wzor] of [
+  ['v10 nie obsługuje modeli sprzed Link-OS', /\*\*ZDesigner v10 NIE obsługuje\*\* modeli sprzed Link-OS/],
+  ['modele sprzed Link-OS obsługuje v5', /modele sprzed Link-OS obsługuje \*\*ZDesigner v5\*\*/],
+]) sprawdz('blog: bez uogólnienia o Link-OS', wzor.test(blog), false, nazwa)
+const listaV10 = blog.slice(blog.indexOf('**ZDesigner v10 obsługuje:**'), blog.indexOf('**ZDesigner v10 NIE obsługuje**'))
+for (const model of ['ZT210', 'ZT220', 'ZT230'])
+  sprawdz('blog: model na liście ZDesigner v10', listaV10.length > 0 && new RegExp(`\\b${model}\\b`).test(listaV10), true, model)
+
+// --- runda 11: przycisk z procedury Recovery (alert 13.11.2026) ---------------
+// Instrukcja Zebry TC21/TC26 (Android 11, „Entering Android Recovery Manually") podaje jedno wejście
+// do Recovery: Restart i przytrzymanie PTT aż do wibracji. Klient nie znalazł PTT, a czat kazał mu
+// trzymać Volume Up, którego instrukcja w tej procedurze nie wymienia. Prompt ma zakazać takiej podmiany.
+const regulaPrzycisku = src.slice(src.indexOf('NIE ZGADUJ, CO JEST NAPISANE NA URZĄDZENIU'), src.indexOf('PAROWANIE SKANERÓW BEZPRZEWODOWYCH'))
+for (const [nazwa, wzor] of [
+  ['zakaz podmiany przycisku z procedury', /NIE podmieniaj go na inny przycisk/],
+  ['dotyczy Recovery i resetu', /procedurze serwisowej \(wejście do Recovery, reset\)/],
+  ['zdjęcie boków zamiast zgadywania', /poproś o zdjęcie obu boków\s+urządzenia/],
+  ['przykład z PTT i Volume Up', /nie widzi przycisku PTT, a Ty każesz przy restarcie trzymać Volume Up/],
+]) sprawdz('prompt: ' + nazwa, regulaPrzycisku.length > 0 && wzor.test(regulaPrzycisku), true, nazwa)
+
+// --- runda 12: numery katalogowe materiałów ze sklepu serwisu (alert 20.11.2026) ---
+// Klient wpisał sam numer taśmy do drukarki kart ZC350, który sklep serwisu ma z własną kartą
+// produktu. Wzorzec znał tylko numery od P, od BTRY- i 1xxxxx-xxx, więc czat nie dostał danych
+// ze sklepu i odesłał klienta szablonem do sklepu TAKMA. Numer bywa wklejany z cudzysłowem w środku.
+const kodNumerow = ts.transpileModule(
+  wytnij('function wykryjNumeryKatalogowe', '// === Koniec: numery katalogowe ze sklepu serwisu ==='),
+  { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText
+const { wykryjNumeryKatalogowe, opisProduktuZeSklepu } = await import(`data:text/javascript,${encodeURIComponent(
+  kodNumerow + '\nexport { wykryjNumeryKatalogowe, opisProduktuZeSklepu }')}`)
+const maNumer = (tekst, numer) => wykryjNumeryKatalogowe(tekst).includes(numer)
+
+// Formaty numerów, które sklep serwisu ma w tabeli products (stan z 21.11.2026)
+for (const [tekst, numer] of [
+  ['"800300"-321EM', '800300-321EM'],
+  ['800350-320EM', '800350-320EM'],
+  ['taśma 800300-309em do zc300', '800300-309EM'],
+  ['czy macie „800350-360EM”?', '800350-360EM'],
+  ['800300-301', '800300-301'],
+  ['karta czyszcząca 105999-310-01', '105999-310-01'],
+  ['karty 104523-111', '104523-111'],
+  ['głowica 105934-037 do GK420d', '105934-037'],
+  ['P1080383-226', 'P1080383-226'],
+  ['moduł P1112640-017C', 'P1112640-017C'],
+  ['głowica P1004230.', 'P1004230'],
+  ['BTRY-MC93-STN-01', 'BTRY-MC93-STN-01'],
+  ['zasilacz PWR-BGA12V50W0WW', 'PWR-BGA12V50W0WW'],
+  ['ile kosztuje P1037974-010, a ile P1037974-011', 'P1037974-011'],
+]) sprawdz('wykryjNumeryKatalogowe: numer ze sklepu', maNumer(tekst, numer), true, tekst)
+
+// Nazwy modeli, krótkie liczby i zwykłe słowa to nie numery katalogowe
+for (const tekst of [
+  'drukarka ZD421 nie drukuje',
+  'czas naprawy 5-7 dni',
+  'diagnostyka 24-48 h',
+  'mam ZT411 i TC52',
+  'serwis-zebry nie działa',
+]) sprawdz('wykryjNumeryKatalogowe: brak numeru', wykryjNumeryKatalogowe(tekst).length, 0, tekst)
+sprawdz('wykryjNumeryKatalogowe: bez powtórzeń', wykryjNumeryKatalogowe('800350-320EM i 800350-320em').length, 1, 'powtórzony numer')
+
+// Cena 0 w bazie: karta produktu ma cenę z bieżącej oferty, czat nie może podać „0,00 zł"
+const wierszBezCeny = opisProduktuZeSklepu({ sku: '800350-320EM', name: 'Taśma KdO', price_brutto: 0 },
+  'https://www.serwis-zebry.pl/sklep/materialy-do-drukarek-kart/zebra-800350-320em')
+sprawdz('opisProduktuZeSklepu: bez kwoty przy cenie 0', /0,00\s*zł/.test(wierszBezCeny), false, wierszBezCeny)
+sprawdz('opisProduktuZeSklepu: odesłanie do karty przy cenie 0', /karcie produktu/.test(wierszBezCeny), true, wierszBezCeny)
+sprawdz('opisProduktuZeSklepu: link do karty produktu', wierszBezCeny.endsWith('/sklep/materialy-do-drukarek-kart/zebra-800350-320em'), true, wierszBezCeny)
+const wierszZCena = opisProduktuZeSklepu({ sku: 'P1112640-019', name: 'Głowica', resolution_dpi: 203, price_brutto: 627.29 }, 'https://www.serwis-zebry.pl/sklep/x')
+sprawdz('opisProduktuZeSklepu: kwota przy cenie z bazy', wierszZCena.includes('203 DPI — 627,29 zł brutto'), true, wierszZCena)
+
+// Trasa: stary wzorzec zniknął, drukarki dalej idą regułą o numerze urządzenia, link prowadzi do karty
+const krokSklepu = src.slice(src.indexOf('// === KROK 2.5'), src.indexOf('// === KROK 3'))
+sprawdz('trasa: stary wąski wzorzec numerów', /1\\d\{5\}-\\d\{3\}/.test(krokSklepu), false, 'KROK 2.5')
+sprawdz('trasa: wyszukiwanie przez wykryjNumeryKatalogowe', /wykryjNumeryKatalogowe\(lastUserMessage\)/.test(krokSklepu), true, 'KROK 2.5')
+sprawdz('trasa: drukarki poza blokiem sklepu', /\.neq\('product_type', 'drukarka'\)/.test(krokSklepu), true, 'KROK 2.5')
+sprawdz('trasa: link z getProductUrl', /getProductUrl\(/.test(krokSklepu), true, 'KROK 2.5')
+
+// Prompt: produkt z [SKLEP_PRODUKTY] ma pierwszeństwo przed szablonem sklepu TAKMA
+const regulaNumerow = src.slice(src.indexOf('NUMERY KATALOGOWE (PART NUMBER)'), src.indexOf('Jeśli klient podaje part number URZĄDZENIA'))
+for (const [nazwa, wzor] of [
+  ['pierwszeństwo przed szablonem TAKMA', /PIERWSZEŃSTWO przed szablonem odsyłającym do sklepu TAKMA/],
+  ['taśmy wśród produktów sklepu', /materiały do drukarek kart \(taśmy, karty, karty czyszczące\)/],
+  ['sam numer bez pytania', /Gdy klient podał sam numer bez pytania/],
+]) sprawdz('prompt: ' + nazwa, regulaNumerow.length > 0 && wzor.test(regulaNumerow), true, nazwa)
+const blokSklepu = src.slice(src.indexOf('=== [SKLEP_PRODUKTY]'), src.indexOf('// Dodaj kontekst z RAG'))
+sprawdz('blok [SKLEP_PRODUKTY]: zakaz szablonu TAKMA', /NIE używaj szablonu odsyłającego do sklepu TAKMA/.test(blokSklepu), true, 'blok sklepu')
+sprawdz('blok [SKLEP_PRODUKTY]: bez kwoty, gdy jej nie ma', /Gdy przy produkcie nie ma kwoty, nie podawaj ceny/.test(blokSklepu), true, 'blok sklepu')
+
+// --- runda 13: hasło lub PIN na panelu drukarki Link-OS (alert 23.11.2026) ---------
+// ZQ620 Plus poprosiła o hasło przy Load Defaults. Czat słusznie napisał, że egzemplarz EU RED nie ma
+// fabrycznego hasła, ale posłał klienta do ZSU po monit o hasło, którego ZSU nie wyświetla, i nie podał
+// PIN-u 1234 dla pozostałych egzemplarzy. Prompt nie miał reguły o haśle na panelu, tylko o sieci.
+// Instrukcja ZQ610/620/630 Plus (Tools → Password Protect): w EMEA od 1.08.2025 hasło trybu chronionego
+// i PIN panelu „initially undefined", w pozostałych drukarkach PIN 1234.
+const sekcjaPin = (() => {
+  const a = src.indexOf('**DRUKARKA PROSI O HASŁO LUB PIN NA PANELU**')
+  const b = src.indexOf('**JAK PROWADZIĆ ROZMOWĘ:**', a)
+  if (a < 0 || b < 0) throw new Error('Nie znaleziono sekcji o haśle i PIN-ie panelu w prompcie')
+  return src.slice(a, b)
+})()
+for (const [nazwa, wzor, oczekiwane] of [
+  ['domyślny PIN 1234 poza EU RED', /domyślny PIN panelu to \*\*1234\*\*/, true],
+  ['EU RED: brak fabrycznego hasła i PIN-u', /hasło trybu chronionego i PIN\s+panelu NIE są ustawione fabrycznie/, true],
+  ['EU RED dopiero po potwierdzeniu regionu i daty', /Nie zakładaj trybu EU RED, dopóki klient\s+nie potwierdzi/, true],
+  ['PIN w kreatorze: Set Front Panel PIN Code', /\*\*Set Front Panel PIN Code\*\*/, true],
+  ['kreator w aplikacji Nucleus Connector', /Zebra Nucleus\s+Connector/, true],
+  ['ZSU nie ustawia hasła ani PIN-u', /ZSU ich nie ustawia/, true],
+  ['brak zapowiedzi monitu o hasło w ZSU', /ZSU poprosi|poprosi o nadanie hasła/, false],
+  ['reset nie zdejmuje hasła', /reset nie wyłącza zabezpieczeń EU RED/, true],
+]) sprawdz('prompt PIN panelu: ' + nazwa, wzor.test(sekcjaPin), oczekiwane, nazwa)
+// Prompt i baza wiedzy mają mówić to samo o haśle i PIN-ie egzemplarzy EU RED
+sprawdz('blog EU RED: drukarka nie ma hasła fabrycznego', /Drukarka nie ma hasła fabrycznego/.test(wpisRed), true, 'wpis o EU RED')
+sprawdz('blog EU RED: 1234 nie działa', /hasło \*\*1234\*\*[^.]*nie działa/.test(wpisRed), true, 'wpis o EU RED')
+sprawdz('blog EU RED: opcja Set Front Panel PIN Code', /Set Front Panel PIN Code/.test(wpisRed), true, 'wpis o EU RED')
+
+// --- runda 14: numer katalogowy urządzenia i SNMPv3 (alerty 24–25.11.2026) ----------
+// a) Klient wpisał numer katalogowy drukarki ze spacją po łączniku, żeby ustalić wersję. Czat trzy razy
+//    odpowiedział tym samym szablonem „skontaktuj się z TAKMA”, także na wprost zadane pytanie o model.
+//    Wzorzec nie widział numeru ze spacją, prompt kazał podawać szablon przy każdym numerze urządzenia,
+//    a katalog sklepu serwisu (products.attributes.variants) ma ten numer z modelem i wersją.
+for (const [tekst, numer] of [
+  ['part nr ZD4A043- D0EE00EZ', 'ZD4A043-D0EE00EZ'],
+  ['ZD4A043 -D0EE00EZ', 'ZD4A043-D0EE00EZ'],
+  ['ZD4A043-D0EE00EZ', 'ZD4A043-D0EE00EZ'],
+]) sprawdz('wykryjNumeryKatalogowe: numer ze spacją przy łączniku', maNumer(tekst, numer), true, tekst)
+for (const tekst of [
+  'ZD421 - drukarka nie drukuje',
+  'czas naprawy 5 - 7 dni',
+]) sprawdz('wykryjNumeryKatalogowe: myślnik w zdaniu to nie numer', wykryjNumeryKatalogowe(tekst).length, 0, tekst)
+sprawdz('wykryjNumeryKatalogowe: zwykły numer bez zmian',
+  wykryjNumeryKatalogowe('taśma 800300-309em do zc300').join(','), '800300-309EM', 'numer bez spacji')
+
+const kodUrzadzen = ts.transpileModule(
+  wytnij('const SZABLON_NUMERU_URZADZENIA', '// === Koniec: numery katalogowe urządzeń ==='),
+  { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText
+const { znajdzWersjeUrzadzen, opisWersjiUrzadzenia, szablonNumeruJuzPadl, SZABLON_NUMERU_URZADZENIA } =
+  await import(`data:text/javascript,${encodeURIComponent(
+    kodUrzadzen + '\nexport { znajdzWersjeUrzadzen, opisWersjiUrzadzenia, szablonNumeruJuzPadl, SZABLON_NUMERU_URZADZENIA }')}`)
+
+// Wycinek katalogu w kształcie z tabeli products (stan z 25.11.2026)
+const katalog = [
+  { name: 'Drukarka etykiet Zebra ZD421d', sku: 'ZD4A042-D0EM00EZ', device_model: 'ZD421d', attributes: { variants: [
+    { pn: 'ZD4A042-D0EM00EZ', dpi: 203, label: '203 dpi, USB' },
+    { pn: 'ZD4A043-D0EE00EZ', dpi: 300, label: '300 dpi, USB + Ethernet' },
+  ] } },
+  { name: 'Drukarka etykiet Zebra ZD421t', sku: 'ZD4A042-30EM00EZ', device_model: 'ZD421t', attributes: { variants: [] } },
+  { name: 'Drukarka bez wersji', sku: 'XX', device_model: null, attributes: null },
+]
+const trafienie = znajdzWersjeUrzadzen(wykryjNumeryKatalogowe('part nr ZD4A043- D0EE00EZ'), katalog)
+sprawdz('znajdzWersjeUrzadzen: wersja z listy wariantów', trafienie.length, 1, 'ZD4A043-D0EE00EZ')
+sprawdz('znajdzWersjeUrzadzen: model z katalogu', trafienie[0]?.model, 'ZD421d', 'ZD4A043-D0EE00EZ')
+sprawdz('opisWersjiUrzadzenia: model i wersja w wierszu', trafienie[0] ? opisWersjiUrzadzenia(trafienie[0]) : '',
+  'ZD4A043-D0EE00EZ: Drukarka etykiet Zebra ZD421d (model ZD421d), wersja: 300 dpi, USB + Ethernet', 'wiersz bloku')
+sprawdz('znajdzWersjeUrzadzen: numer główny produktu bez listy wariantów',
+  znajdzWersjeUrzadzen(['zd4a042-30em00ez'], katalog)[0]?.model, 'ZD421t', 'ZD4A042-30EM00EZ')
+sprawdz('znajdzWersjeUrzadzen: numer i w wariantach, i jako sku tylko raz',
+  znajdzWersjeUrzadzen(['ZD4A042-D0EM00EZ'], katalog).length, 1, 'ZD4A042-D0EM00EZ')
+sprawdz('znajdzWersjeUrzadzen: numer spoza katalogu', znajdzWersjeUrzadzen(['ZD4A099-D0EE00EZ'], katalog).length, 0, 'ZD4A099-D0EE00EZ')
+sprawdz('znajdzWersjeUrzadzen: pusty katalog', znajdzWersjeUrzadzen(['ZD4A043-D0EE00EZ'], null).length, 0, 'null')
+
+const szablon = 'Identyfikacja modelu po numerze katalogowym urządzenia wymaga weryfikacji. Skontaktuj się z TAKMA.'
+sprawdz('szablonNumeruJuzPadl: szablon w odpowiedzi asystenta',
+  szablonNumeruJuzPadl([{ role: 'user', content: 'numer' }, { role: 'assistant', content: szablon }]), true, 'asystent')
+sprawdz('szablonNumeruJuzPadl: brak szablonu',
+  szablonNumeruJuzPadl([{ role: 'assistant', content: 'To wygląda na numer seryjny.' }]), false, 'inna odpowiedź')
+sprawdz('szablonNumeruJuzPadl: tekst klienta się nie liczy',
+  szablonNumeruJuzPadl([{ role: 'user', content: szablon }]), false, 'klient')
+sprawdz('prompt: szablon zgodny ze stałą SZABLON_NUMERU_URZADZENIA',
+  src.slice(src.indexOf('const SYSTEM_PROMPT')).includes(SZABLON_NUMERU_URZADZENIA), true, 'SYSTEM_PROMPT')
+
+const regulaUrzadzen = src.slice(src.indexOf('Jeśli klient podaje part number URZĄDZENIA'), src.indexOf('TO SĄ TEMATY ZEBRA'))
+for (const [nazwa, wzor] of [
+  ['model z bloku [URZADZENIE_Z_NUMERU]', /Gdy ten numer jest w bloku \[URZADZENIE_Z_NUMERU\]/],
+  ['szablon najwyżej raz', /Ten szablon podajesz w rozmowie NAJWYŻEJ RAZ/],
+  ['bez powtórki także przy pytaniu o model', /także gdy klient wpisze numer jeszcze raz albo zapyta o model wprost/],
+]) sprawdz('prompt numer urządzenia: ' + nazwa, regulaUrzadzen.length > 0 && wzor.test(regulaUrzadzen), true, nazwa)
+const krokUrzadzen = src.slice(src.indexOf('// === KROK 2.6'), src.indexOf('// === KROK 3'))
+sprawdz('trasa: numery z całej rozmowy klienta', /wykryjNumeryKatalogowe\(userMessagesFrom\(messages\)\.join/.test(krokUrzadzen), true, 'KROK 2.6')
+sprawdz('trasa: tylko aktywne drukarki', /\.eq\('is_active', true\)[\s\S]*\.eq\('product_type', 'drukarka'\)/.test(krokUrzadzen), true, 'KROK 2.6')
+const blokUrzadzenia = src.slice(src.indexOf('=== [URZADZENIE_Z_NUMERU]'), src.indexOf('// Dodaj kontekst z RAG'))
+for (const [nazwa, wzor] of [
+  ['bez szablonu TAKMA przy numerze z katalogu', /NIE używaj szablonu odsyłającego do TAKMA w sprawie identyfikacji/],
+  ['bez ceny i linku', /Nie podawaj ceny ani linku do sklepu/],
+  ['przypomnienie, gdy szablon już padł', /szablonNumeruJuzPadl\(messages\)[\s\S]*NIE powtarzaj tego szablonu/],
+]) sprawdz('trasa: ' + nazwa, blokUrzadzenia.length > 0 && wzor.test(blokUrzadzenia), true, nazwa)
+
+// b) Klient pytał, jak włączyć SNMPv3 i użytkownika tylko do odczytu w drukarce przemysłowej z Link-OS 7.5.
+//    Czat złożył plik z komend setvar na zmiennych ip.snmpv3.* i dopisał skutek, którego nigdzie nie ma:
+//    „pusta nazwa admina sprawia, że nie tworzysz użytkownika administracyjnego”. Prompt i baza wiedzy nie
+//    miały nic o SNMPv3. Według Link-OS 7.0 Release Notes zmienne ip.snmpv3.* służą tylko do odczytu,
+//    a według PrintSecure Printer Administration Guide (P1099957-12EN, s. 63–67) użytkowników tworzy
+//    operacja JSON setup-snmpv3-user w trybie chronionym, a SNMPv3 włącza się sam po utworzeniu
+//    pierwszego użytkownika.
+const sekcjaSnmp = (() => {
+  const a = src.indexOf('**SNMPv3 NA DRUKARKACH LINK-OS**')
+  const b = src.indexOf('**JAK PROWADZIĆ ROZMOWĘ:**', a)
+  if (a < 0 || b < 0) throw new Error('Nie znaleziono sekcji o SNMPv3 w prompcie')
+  return src.slice(a, b)
+})()
+for (const [nazwa, wzor, oczekiwane] of [
+  ['zmienne ip.snmpv3 tylko do odczytu', /są TYLKO DO ODCZYTU \(getvar\)/, true],
+  ['setvar na nich niczego nie ustawia', /Komenda setvar na nich niczego nie\s+ustawia/, true],
+  ['warunek: hasło trybu chronionego, kod 107', /Bez tego\s+hasła drukarka odrzuca operację kodem 107/, true],
+  ['operacja setup-snmpv3-user', /"operation":"setup-snmpv3-user"/, true],
+  ['monitor = read-only, admin = read-write', /admin z dostępem "read-write" i monitor z dostępem "read-only"/, true],
+  ['wzór tworzy użytkownika tylko do odczytu', /"action":"create","access":"read-only"/, true],
+  ['pola passphrase to nie zmienne SGD', /to pola\s+tej operacji JSON, a nie zmienne SGD/, true],
+  ['SNMPv3 włącza się sam po utworzeniu użytkownika', /SNMPv3 włącza się sam po utworzeniu pierwszego użytkownika/, true],
+  ['brak setvar na początku linii', /^\s*! U1 setvar/m, false],
+  ['brak komendy setvar włączającej SNMPv3', /setvar "ip\.snmpv3\.enable" "on"/, false],
+  ['przykład błędu ze skutkiem pustej nazwy admina', /❌ ŹLE: „setvar "ip\.snmpv3\.admin\.name" ""/, true],
+]) sprawdz('prompt SNMPv3: ' + nazwa, wzor.test(sekcjaSnmp), oczekiwane, nazwa)
+const wzorJson = sekcjaSnmp.match(/\{\}(\{"protect".*\}\})\s*$/m)
+let jsonPoprawny = false
+try { jsonPoprawny = Boolean(wzorJson && JSON.parse(wzorJson[1]).protect['setup-snmpv3-user'].access === 'read-only') } catch {}
+sprawdz('prompt SNMPv3: wzór operacji to poprawny JSON', jsonPoprawny, true, wzorJson?.[1] || 'brak wzoru')
+
+// --- runda 15: włączenie trybu chronionego komendą (alert 26.11.2026) ----------------
+// Klient pytał, jaką komendą włączyć tryb chroniony w drukarce przemysłowej Link-OS, a potem o plik
+// z poleceniami na wiele drukarek z użytkownikiem SNMPv3 tylko do odczytu. Czat podał setvar na zmiennej
+// device.protected_mode, a w pliku ustawił ją na końcu, po setvar na ip.snmpv3.*. Prompt pokazywał tę
+// zmienną tylko w odczycie getvar i nie mówił, jak włącza się tryb chroniony. Według PrintSecure Printer
+// Administration Guide (P1099957-12EN, s. 11, 58–62 i 109) device.protected_mode służy tylko do odczytu,
+// tryb włącza operacja JSON setup, która ustawia hasło administratora, a ustawienia chronione zmienia
+// operacja set. Wpis zebra-printsecure-przewodnik-administratora-it w lib/blog.ts mówi to samo.
+const sekcjaTryb = (() => {
+  const a = src.indexOf('**TRYB CHRONIONY W DRUKARKACH LINK-OS KOMENDĄ**')
+  const b = src.indexOf('**JAK PROWADZIĆ ROZMOWĘ:**', a)
+  if (a < 0 || b < 0) throw new Error('Nie znaleziono sekcji o trybie chronionym w prompcie')
+  return src.slice(a, b)
+})()
+for (const [nazwa, wzor, oczekiwane] of [
+  ['device.protected_mode tylko do odczytu', /device\.protected_mode i device\.protected_mode_allowed służą TYLKO DO ODCZYTU/, true],
+  ['setvar na nich niczego nie włącza', /Setvar na nich niczego nie włącza/, true],
+  ['tryb włącza operacja setup z hasłem', /Tryb chroniony włącza ustawienie hasła administratora operacją "setup"/, true],
+  ['puste hasło w authentication przy pierwszym ustawieniu', /pole\s+password w części authentication jest puste/, true],
+  ['hasło od 14 do 128 znaków ASCII', /od 14 do 128 drukowalnych znaków ASCII/, true],
+  ['kod 107: najpierw hasło', /107 — najpierw trzeba ustawić hasło/, true],
+  ['EU RED: pierwsze hasło operacją setup albo kreatorem', /Pierwsze hasło ustawia w nich\s+ta sama operacja "setup" albo kreator zabezpieczeń/, true],
+  ['ustawienia chronione operacją set', /ustawienia chronione \(sieć, zabezpieczenia\) zmienia operacja "set" z hasłem/, true],
+  ['wyłączenie przez configure-one', /"configure-one" z "protected-mode-allowed":"no"/, true],
+  ['kolejność w pliku: setup przed poleceniami z hasłem', /najpierw "setup" z hasłem, potem polecenia z tym hasłem/, true],
+  ['brak setvar na początku linii', /^\s*! U1 setvar/m, false],
+]) sprawdz('prompt tryb chroniony: ' + nazwa, wzor.test(sekcjaTryb), oczekiwane, nazwa)
+const wzoryTrybu = [...sekcjaTryb.matchAll(/^\s*\{\}(\{"protect".*\}\})\s*$/gm)].map((m) => {
+  try { return JSON.parse(m[1]).protect } catch { return null }
+})
+sprawdz('prompt tryb chroniony: dwa wzory, oba to poprawny JSON', wzoryTrybu.length === 2 && wzoryTrybu.every(Boolean), true,
+  `${wzoryTrybu.length} wzorów`)
+const [wzorSetup, wzorSet] = wzoryTrybu
+sprawdz('prompt tryb chroniony: wzór setup z pustym hasłem i użytkownikiem admin',
+  wzorSetup?.operation === 'setup' && wzorSetup.authentication.password === '' && wzorSetup.setup.username === 'admin', true, 'setup')
+sprawdz('prompt tryb chroniony: wzór set z hasłem administratora',
+  wzorSet?.operation === 'set' && wzorSet.authentication.password !== '' && typeof wzorSet.set === 'object', true, 'set')
+// Nigdzie w prompcie nie może stać gotowa komenda setvar z wartością na zmiennych tylko do odczytu
+const promptCzatu = src.slice(src.indexOf('const SYSTEM_PROMPT'))
+sprawdz('prompt: brak setvar z wartością na device.protected_mode',
+  /setvar\s+"device\.protected_mode(?:_allowed)?"\s+"/.test(promptCzatu), false, 'SYSTEM_PROMPT')
+sprawdz('prompt EU RED: device.protected_mode tylko do odczytu', /Ta zmienna służy tylko do odczytu \(punkt 7\)/.test(sekcjaRed), true, 'punkt 4')
+sprawdz('prompt SNMPv3: hasło z operacji setup, setup przed setup-snmpv3-user',
+  /Hasło ustawia operacja "setup" z punktu 7[\s\S]{0,200}"setup" stoi więc przed\s+"setup-snmpv3-user"/.test(sekcjaSnmp), true, 'punkt 6')
+// Prompt i baza wiedzy mają mówić to samo o włączaniu trybu chronionego
+sprawdz('blog PrintSecure: hasło operacją setup', /"operation":"setup"/.test(wpisPrintSecure), true, 'wpis o PrintSecure')
+sprawdz('blog PrintSecure: hasło od 14 do 128 znaków', /od 14 do 128 znaków/.test(wpisPrintSecure), true, 'wpis o PrintSecure')
+sprawdz('blog: brak setvar z wartością na device.protected_mode',
+  /setvar\s+"device\.protected_mode(?:_allowed)?"\s+"/.test(blog), false, 'lib/blog.ts')
+
+// --- runda 15: numer katalogowy ZD421t w osobnej wiadomości (alert 26.11.2026) ------------
+// Klient na pytanie o wariant ZD421 wpisał sam numer katalogowy drukarki ZD421t, 300 dpi, USB.
+// Produkcja nie miała jeszcze KROKU 2.6 z rundy 14, więc czat odesłał klienta szablonem do TAKMA.
+// Numer jest w katalogu sklepu serwisu (stan z 27.11.2026), a ZD421d ma numer o tym samym początku.
+// Pilnujemy, żeby numer z wiadomości złożonej z samego numeru trafił do bloku z właściwym modelem.
+const katalogZD421 = [
+  { name: 'Drukarka etykiet Zebra ZD421d', sku: 'ZD4A042-D0EM00EZ', device_model: 'ZD421d', attributes: { variants: [
+    { pn: 'ZD4A043-D0EM00EZ', dpi: 300, label: '300 dpi, USB' },
+  ] } },
+  { name: 'Drukarka etykiet Zebra ZD421t', sku: 'ZD4A042-30EM00EZ', device_model: 'ZD421t', attributes: { variants: [
+    { pn: 'ZD4A042-30EM00EZ', dpi: 203, label: '203 dpi, USB' },
+    { pn: 'ZD4A043-30EM00EZ', dpi: 300, label: '300 dpi, USB' },
+  ] } },
+]
+const wiadomosciZD421t = ['STATUS i PAUSE migają na czerwono na zmianę', 'ZD421', 'ZD4A043-30EM00EZ', 'ZD421t']
+const numeryZD421t = wykryjNumeryKatalogowe(wiadomosciZD421t.join('\n'))
+sprawdz('wykryjNumeryKatalogowe: sam numer w osobnej wiadomości', numeryZD421t.includes('ZD4A043-30EM00EZ'), true, 'ZD4A043-30EM00EZ')
+sprawdz('wykryjNumeryKatalogowe: nazwa modelu bez łącznika to nie numer', numeryZD421t.join(','), 'ZD4A043-30EM00EZ', wiadomosciZD421t.join(' | '))
+const trafienieZD421t = znajdzWersjeUrzadzen(numeryZD421t, katalogZD421)
+sprawdz('znajdzWersjeUrzadzen: ZD421t, a nie ZD421d o podobnym numerze',
+  trafienieZD421t.map((w) => w.model).join(','), 'ZD421t', 'ZD4A043-30EM00EZ')
+sprawdz('opisWersjiUrzadzenia: ZD421t 300 dpi w wierszu bloku', trafienieZD421t[0] ? opisWersjiUrzadzenia(trafienieZD421t[0]) : '',
+  'ZD4A043-30EM00EZ: Drukarka etykiet Zebra ZD421t (model ZD421t), wersja: 300 dpi, USB', 'wiersz bloku')
 
 // --- wynik -----------------------------------------------------------------
 console.log(`\nZaliczone: ${zaliczone}/${zaliczone + bledy.length}`)

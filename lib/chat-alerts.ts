@@ -50,7 +50,7 @@ interface DefinicjaAlertu {
  */
 export const ALERTY: Record<TypAlertu, DefinicjaAlertu> = {
   bledne_dane: {
-    opis: 'Podał nieprawdziwe dane o urządzeniu: parametr, ścieżkę w menu, wersję sterownika albo oprogramowania. Zalecenie sterownika ZDesigner v10 dla drukarki sprzed Link-OS (GK420d, GK420t, GC420d, GC420t, GT800, LP2844, TLP2844) jest zawsze błędem — te modele obsługuje wyłącznie v5. UWAGA: nie masz instrukcji serwisowych, więc NIE oceniaj z własnej pamięci, jak zbudowane jest urządzenie ani ile trwa dana operacja. Zgłoś ten typ tylko wtedy, gdy błąd wynika wprost z reguł podanych Ci wyżej albo gdy sam asystent zaprzecza sobie w tej samej rozmowie. Domysł typu „chyba ten podzespół jest osobny" albo „ten czas wydaje mi się zbyt optymistyczny" to NIE jest podstawa do alertu',
+    opis: 'Podał nieprawdziwe dane o urządzeniu: parametr, ścieżkę w menu, wersję sterownika albo oprogramowania. Przy sterownikach jedynym błędem jest zalecenie ZDesigner v10 dla modelu GK420d, GK420t, GC420d, GC420t, GT800, LP2844 albo TLP2844 — te modele obsługuje wyłącznie v5. Tak samo zawsze błędem jest przy drukarce w trybie chronionym (EU RED) kazać włączać port lub usługi sieciowe komendą setvar, obiecywać monit o hasło w Zebra Setup Utilities albo twierdzić, że wersja ZSU klienta jest za stara. UWAGA: nie masz instrukcji serwisowych, więc NIE oceniaj z własnej pamięci, jak zbudowane jest urządzenie ani ile trwa dana operacja. Zgłoś ten typ tylko wtedy, gdy błąd wynika wprost z reguł podanych Ci wyżej albo gdy sam asystent zaprzecza sobie w tej samej rozmowie. Domysł typu „chyba ten podzespół jest osobny" albo „ten czas wydaje mi się zbyt optymistyczny" to NIE jest podstawa do alertu',
     prog: 0.9,
     waga: 'krytyczny',
   },
@@ -140,6 +140,8 @@ Zasady, które obowiązują asystenta:
 - Gwarancja producenta: 12 miesięcy na urządzenie, 6–12 miesięcy na głowicę zależnie od modelu i przy
   oryginalnych materiałach, 12 miesięcy na baterię. O tym, czy naprawa jest gwarancyjna, decyduje serwis
   po oględzinach. Asystentowi nie wolno potwierdzać domysłu klienta ani obiecywać bezpłatnej naprawy.
+- Gwarancja serwisu: na wykonaną naprawę 12 miesięcy, na usługę i wymienione części (regulamin, §7).
+  To osobna gwarancja, nie producenta. Zdanie o niej jest prawdziwe i dozwolone.
 - O kosztach transportu asystent nie pisze nic. Jedyne dozwolone zdanie: kurier odbierze urządzenie
   z podanego adresu. Opłata 99 zł netto za diagnostykę przy rezygnacji z naprawy jest prawdziwa i dozwolona.
 - Zanim padnie cena naprawy, asystent ma wyczerpać darmowe kroki, które klient wykona przy urządzeniu.
@@ -152,13 +154,22 @@ Zasady, które obowiązują asystenta:
   serwisu było słuszne i gdy kwotę opisano słowem „orientacyjnie".
 - Asystent nie twierdzi, że urządzenie czegoś nie ma, chyba że ma to wprost w instrukcji.
 - Asystent nie obiecuje terminów, przyjazdu technika ani sprzętu zastępczego.
-- Sterowniki: ZDesigner v10 obsługuje drukarki Link-OS (serie ZD, ZT, ZQ, ZC). Modele sprzed Link-OS —
-  GK420d, GK420t, GC420d, GC420t, GT800, LP2844, TLP2844 — wymagają ZDesigner v5; v10 potrafi je unieruchomić.
+- Sterowniki: modele GK420d, GK420t, GC420d, GC420t, GT800, LP2844 i TLP2844 wymagają ZDesigner v5 — v10 potrafi je
+  unieruchomić. Pozostałe drukarki etykiet Zebra, także ZT210, ZT220 i ZT230, obsługuje ZDesigner v10 i jego zalecenie
+  jest poprawne. Nie wyprowadzaj wersji sterownika z tego, czy model ma Link-OS.
 - Gotowa odmowa „jestem asystentem specjalizującym się wyłącznie w urządzeniach Zebra" jest na miejscu tylko
   wtedy, gdy klient naprawdę pisze o czymś innym niż sprzęt, usterka, wysyłka do serwisu czy zakup urządzenia.
 - Asystent ma nie zalecać resetu fabrycznego drukarki, która nie odpowiada po sieci, i ma uprzedzić, że przy
   włączonym trybie chronionym konfiguracja wymaga hasła administratora. Jedno i drugie jest zgodne z zasadami
-  i NIE jest problemem.
+  i NIE jest problemem. Zgodne z zasadami jest też nazwanie trybu „secure by default" (EU RED), gdy klient
+  potwierdził, że ping przechodzi, a port 9100 nie odpowiada, oraz skierowanie do aplikacji Nucleus Connector.
+- Drukarki EU RED: przy włączonym trybie chronionym komenda setvar nie włącza portu ani usług sieciowych,
+  a Zebra Setup Utilities nie pyta o hasło. Błędem jest kazać włączać port lub usługi komendą setvar,
+  obiecywać monit o hasło w ZSU albo twierdzić, że wersja ZSU klienta jest za stara.
+- Drukarki EU RED (kupione w regionie EMEA od 1.08.2025) nie mają fabrycznego hasła trybu chronionego ani PIN-u
+  panelu: 1234 w nich nie działa, a hasło i PIN ustawia kreator zabezpieczeń Zebry (Nucleus Connector).
+  W pozostałych drukarkach Link-OS z wyświetlaczem domyślny PIN panelu to 1234. Zdanie, że hasło albo PIN
+  nie jest ustawione fabrycznie, jest zgodne z zasadami i NIE jest problemem.
 
 CZEGO NIE ZGŁASZAĆ — to są twarde filtry, zastosuj je do KAŻDEGO problemu, zanim trafi do wyniku:
 
@@ -166,7 +177,7 @@ CZEGO NIE ZGŁASZAĆ — to są twarde filtry, zastosuj je do KAŻDEGO problemu,
    Twierdzenia o tym, który podzespół jest wbudowany w który, co zawiera kaseta, wkład albo moduł, jak
    przebiega procedura, ile trwa operacja i jakie wartości są typowe — SĄ POZA TWOJĄ OCENĄ. Nawet jeśli
    masz silne przekonanie, że asystent się myli, nie zgłaszaj tego. Jedyne fakty techniczne, które wolno
-   Ci rozstrzygać, to wersje sterownika ZDesigner wypisane wyżej.
+   Ci rozstrzygać, to wersje sterownika ZDesigner i zasady o drukarkach EU RED wypisane wyżej.
    Przykłady, których NIE WOLNO zgłaszać: „ta rolka nie jest częścią kasety", „ten czas odpowiedzi jest
    zbyt optymistyczny", „ta komenda może nie działać na każdym firmware", „ten parametr zwraca co innego".
 2. NIE ZGŁASZASZ BRAKU ZDANIA, KTÓRE W ODPOWIEDZI JEST. Zanim napiszesz, że asystent czegoś nie dodał,
@@ -236,11 +247,459 @@ export function podajeKwoteZaNaprawe(tekstAsystenta: string): boolean {
   return false
 }
 
+/**
+ * Czy zarzut dotyczy czegoś, o czym asystent w ogóle pisał.
+ *
+ * Nie da się podać złego sterownika, nie wspominając o sterowniku, ani źle opisać gwarancji,
+ * nie pisząc o gwarancji. Oceniający mimo to przypisywał takie zarzuty rozmowom, w których
+ * temat nie padł (22.09.2026: „powinien wskazać ZDesigner v5" przy uszkodzonym zasilaczu,
+ * „modele niezgodne z ZDesigner v10" przy rozmowie o programie do legitymacji, „sugeruje brak
+ * gwarancji" w rozmowie bez słowa o gwarancji). Reguła o sterownikach stoi w prompcie, więc
+ * model dopasowuje ją na siłę — sprawdzamy to w kodzie, jak kwotę za naprawę.
+ */
+const RE_ZDESIGNER_W_ZARZUCIE = /zdesigner|sterownik\w* v ?(?:5|10)\b/i
+const RE_STEROWNIK_U_ASYSTENTA = /zdesigner|\bv ?(?:5|10)\b/i
+
+// Czas diagnostyki 24–48 h to zasada serwisu, którą prompt czatu każe podawać przy każdej
+// propozycji wysyłki. Oceniający mimo wyjątku w opisie typu brał go za „obietnicę" (23.09.2026,
+// pętla restartu terminala: ocena 2/5, więc próg 0,6 i mail o zdaniu zgodnym z regulaminem).
+//
+// Prawdziwej obietnicy szukamy w odpowiedziach asystenta, a nie w uzasadnieniu oceniającego.
+// 27.10.2026 oceniający przy cytacie „Diagnostyka trwa zwykle 24–48 h" pisał raz „obiecał czas
+// diagnostyki", a raz to samo z dopiskiem „nie powinien podawać konkretnych terminów". Słowo
+// „terminów" przepuszczało zarzut, więc o mailu decydowało sformułowanie uzasadnienia: w powtórkach
+// tej samej rozmowy alert wychodził 6 razy na 8. Obiecać technika, sprzęt zastępczy albo datę
+// naprawy można tylko słowami, które stoją w odpowiedzi. „Termin" bez „terminala" i „terminologii".
+// Standardowy termin 5–7 dni roboczych to wzór „DOBRZE" z promptu czatu, więc go pomijamy.
+const RE_CZAS_DIAGNOSTYKI = /diagnost\w*[^.]{0,40}?24\s*[-–]\s*48\s*h/i
+const RE_PRAWDZIWA_OBIETNICA = /technik|zastępcz|zwrot|(?<![a-ząćęłńóśźż])termin(?!al|olog)|jutro|dzisiaj|gwarantuj/i
+const RE_TERMIN_Z_PROMPTU = /(?:standardow\S*\s+)?termin\S*\s+5\s*[-–]\s*7\s+dni\s+roboczych/gi
+
+// Standardowy czas naprawy 5–7 dni roboczych prompt czatu podaje w opisie procesu naprawy
+// („Po akceptacji - naprawa (standardowo 5–7 dni roboczych…)") i we wzorze „DOBRZE". 17.11.2026
+// asystent przy prośbie o wymianę głowicy napisał „Standardowy czas realizacji to zwykle 5–7 dni
+// roboczych", a oceniający w dwóch powtórkach na trzy zgłosił „obietnicę konkretnego czasu
+// realizacji" z pewnością 1,0. Bramka wyżej obejmowała tylko zarzuty o czas diagnostyki.
+//
+// Zarzut o czas naprawy odrzucamy, gdy po usunięciu czasów z zasad serwisu (standardowa naprawa,
+// diagnostyka 24–48 h, tryb ekspresowy 24–48 h) w odpowiedziach nie zostaje ani słowo obietnicy,
+// ani inny konkretny czas: liczba dni lub godzin, dzień tygodnia, „do końca tygodnia".
+// Czas zasady musi stać przy słowie „standardowo", „zwykle", „zazwyczaj" albo „typowo".
+const RE_CZAS_NAPRAWY_W_ZARZUCIE = /(?:czas|termin)\S*\s+(?:realizacj|napraw)|5\s*[-–]\s*7\s+dni/i
+const RE_CZAS_NAPRAWY_Z_PROMPTU =
+  /(?:standardow|zwykl|zazwyczaj|typow)\S*(?:\s+\S+){0,4}?\s+5\s*[-–]\s*7\s+dni\s+roboczych/gi
+const RE_CZAS_DIAGNOSTYKI_WSZYSTKIE = new RegExp(RE_CZAS_DIAGNOSTYKI.source, 'gi')
+const RE_TRYB_EKSPRESOWY = /ekspres\S*[^.]{0,40}?24\s*[-–]\s*48\s*(?:h|godz\S*)/gi
+const RE_KONKRETNY_CZAS = new RegExp(
+  '(?<![a-ząćęłńóśźż])(?:(?:w|we|do|na|od)\\s+' +
+  '(?:poniedział(?:ek|ku)|wtor(?:ek|ku)|środ[ęay]|czwart(?:ek|ku)|piąt(?:ek|ku)|sobot[ęay]|niedziel[ęai])|' +
+  'do\\s+końca\\s+(?:dnia|tygodnia|miesiąca)|w\\s+(?:tym|przyszłym)\\s+tygodniu|pojutrz)|' +
+  '\\d+\\s*(?:[-–]\\s*\\d+\\s*)?(?:dni|dzie[ńn]|godz\\S*|h|tydz\\S*|tygod\\S*)(?![a-ząćęłńóśźż])', 'i')
+
+function obiecujeCzasNaprawy(tekstAsystenta: string): boolean {
+  const reszta = tekstAsystenta
+    .replace(RE_TERMIN_Z_PROMPTU, '')
+    .replace(RE_CZAS_NAPRAWY_Z_PROMPTU, '')
+    .replace(RE_CZAS_DIAGNOSTYKI_WSZYSTKIE, '')
+    .replace(RE_TRYB_EKSPRESOWY, '')
+  return RE_PRAWDZIWA_OBIETNICA.test(reszta) || RE_KONKRETNY_CZAS.test(reszta)
+}
+
+// Zarzut „zalecił reset fabryczny" wymaga, żeby asystent o resecie fabrycznym w ogóle pisał.
+// 7.10.2026 oceniający nazwał tak wyjęcie baterii w terminalu, który się nie włącza.
+const RE_RESET_FABRYCZNY = /reset\S*\s+(?:do\s+)?(?:ustawie\S*\s+)?fabryczn|factory\s+(?:reset|default)|ustawie\S*\s+fabryczn/i
+
+// 12 miesięcy gwarancji na naszą naprawę to regulamin serwisu (§7), a prompt czatu każe to zdanie
+// podawać przy propozycji wysyłki. Oceniający brał je za gwarancję producenta „bez pokrycia"
+// (13.10.2026, pęknięty ekran terminala). Zarzut o gwarancję musi mieć oparcie w czymś innym.
+const RE_GWARANCJA_NA_NAPRAWE =
+  /12[\s-]*miesi[eę]c\S*\s+gwarancj\S*\s+na\s+(?:wykonan\S*\s+)?(?:usług|napraw)\S*(?:\s+i\s+wymienion\S*\s+częś\S*)?/gi
+
+export function zarzutMaPokrycie(typ: string, dlaczego: string, tekstAsystenta: string): boolean {
+  const tekst = tekstAsystenta || ''
+  if (RE_ZDESIGNER_W_ZARZUCIE.test(dlaczego || '') && !RE_STEROWNIK_U_ASYSTENTA.test(tekst)) return false
+  if (typ === 'gwarancja' && !/gwaranc/i.test(tekst.replace(RE_GWARANCJA_NA_NAPRAWE, ''))) return false
+  if (typ === 'obietnica' && RE_CZAS_DIAGNOSTYKI.test(dlaczego || '') &&
+    !RE_PRAWDZIWA_OBIETNICA.test(tekst.replace(RE_TERMIN_Z_PROMPTU, ''))) return false
+  if (typ === 'obietnica' && RE_CZAS_NAPRAWY_W_ZARZUCIE.test(dlaczego || '') && !obiecujeCzasNaprawy(tekst)) return false
+  if (RE_RESET_FABRYCZNY.test(dlaczego || '') && !RE_RESET_FABRYCZNY.test(tekst)) return false
+  return true
+}
+
+/**
+ * Oceniający potrafi zwrócić typ przetłumaczony na angielski („cost_transport" zamiast
+ * „koszt_transportu", 23.09.2026). Filtr po liście typów po cichu gubił wtedy prawdziwą wpadkę,
+ * a test „darmowy kurier" przestawał przechodzić. Znane warianty sprowadzamy do nazwy z listy.
+ */
+const ALIASY_TYPOW: Record<string, TypAlertu> = {
+  cost_transport: 'koszt_transportu',
+  transport_cost: 'koszt_transportu',
+  shipping_cost: 'koszt_transportu',
+  warranty: 'gwarancja',
+  promise: 'obietnica',
+  wrong_data: 'bledne_dane',
+  premature_quote: 'wycena_przedwczesnie',
+}
+
+export function normalizujTyp(typ: unknown): string {
+  const t = String(typ || '').trim().toLowerCase()
+  return ALIASY_TYPOW[t] || t
+}
+
+const LITERY = 'a-ząćęłńóśźż'
+
+/**
+ * Czy zarzut „bledne_dane" dotyczy faktów, które oceniający może rozstrzygnąć.
+ *
+ * Oceniający nie ma instrukcji, a mimo opisu typu i filtra w prompcie zgłaszał błędne dane
+ * z własnej pamięci (3–8.10.2026: sześć alertów na osiem, wszystkie fałszywe). „ZT231 nie ma
+ * opcji Gap/Notch" i „ZC300 nie obsługuje YMCKOK" — obie rzeczy stoją w instrukcjach tych
+ * drukarek — a inne zarzuty miały uzasadnienie „nie ma tego w instrukcji". Pole z podstawą
+ * zarzutu w odpowiedzi modelu nie pomogło: model wpisywał „zasada" także przy domysłach.
+ * Dlatego kod przepuszcza błędne dane tylko w trzech sytuacjach, które widać w tekście:
+ * zarzut o sterownik ZDesigner (czy asystent o nim pisał, sprawdza zarzutMaPokrycie),
+ * błędna procedura dla drukarek EU RED w odpowiedziach asystenta oraz zarzut oparty na tym,
+ * co padło wcześniej w tej samej rozmowie.
+ *
+ * Zarzut o sterownik przechodzi tylko wtedy, gdy asystent napisał o v10, a w rozmowie pada jeden
+ * z siedmiu modeli obsługiwanych wyłącznie przez v5 — to jedyny błąd sterownika, który oceniający
+ * może rozstrzygnąć. 22.10.2026 oceniający uznał, że ZT230 jako model bez Link-OS wymaga v5,
+ * choć Zebra wymienia ZT230 wśród drukarek obsługiwanych przez v10. Po przepisaniu reguły na
+ * zamkniętą listę modeli dalej zgłaszał „błąd" przy poprawnym zaleceniu v10 dla ZT230,
+ * z uzasadnieniem przeczącym samemu sobie.
+ *
+ * Zarzut wobec zdania, że drukarka nie ma fabrycznego hasła ani PIN-u panelu (1234 nie działa),
+ * odpada, gdy asystent właśnie to napisał. W egzemplarzach EU RED tak podaje instrukcja Zebry
+ * (ZQ610/620/630 Plus, Tools → Password Protect: hasło i PIN „initially undefined", w pozostałych
+ * drukarkach PIN 1234) i wpis zebra-wymaga-hasla-dyrektywa-red-konfiguracja. 23.11.2026 oceniający
+ * zgłosił to zdanie przy ZQ620 Plus, bo „nie ma tego w instrukcji", a bramka przepuściła zarzut,
+ * bo w tej samej odpowiedzi stała obietnica monitu o hasło w ZSU. Zarzut wymierzony w tę obietnicę
+ * (uzasadnienie o ZSU albo setvar) dalej przechodzi.
+ */
+const RE_TEMAT_STEROWNIKA = /zdesigner|sterownik\S*\s+v\s?(?:5|10)\b|wersj\S*\s+sterownik/i
+const RE_V10 = /\bv\s?10\b/i
+const RE_MODEL_TYLKO_V5 = /\b(?:G[KC]\s?420[dt]?|GT\s?800|T?LP\s?2844)\b/i
+const RE_TEMAT_EU_RED = /setvar|zsu|setup utilities|hasł|wersj|chronion|protected|snmp/i
+// Kroki, których prompt czatu zakazuje przy trybie chronionym (sekcja o EU RED od 9.10.2026).
+// Zdanie z przeczeniem („ZSU nie poprosi o hasło", „nie wyświetli monitu") nie jest obietnicą monitu.
+// Zmienne device.protected_mode i ip.snmpv3.* służą tylko do odczytu (PrintSecure Printer Administration
+// Guide P1099957-12EN, s. 11 i 58–67; punkty 6 i 7 promptu czatu). Wzorce wymagają komendy z wartością,
+// więc zdanie „setvar na zmiennej device.protected_mode niczego nie włączy" ich nie zapala. 26.11.2026 czat
+// kazał włączyć tryb chroniony komendą setvar na device.protected_mode, a bramka nie znała tego kroku.
+// Wzorzec SNMPv3 stoi przed ogólnym ip., żeby przepisany zarzut dostał właściwy opis.
+const RE_BLEDNA_PROCEDURA_EU_RED = [
+  /setvar\s+"ip\.snmpv3\.[^"]*"\s+"/i,
+  /setvar\s+"device\.protected_mode(?:_allowed)?"\s+"/i,
+  /setvar\s+"(?:ip|internal_wired|wlan)\./i,
+  /(?:zsu|setup utilities)[\s\S]{0,160}?(?<!\bnie\s+(?:\S+\s+){0,2})(?:poprosi|zapyta|prośb|monit)[^.]{0,40}hasł/i,
+  /(?:zsu|setup utilities)[^.]{0,80}(?:star(?:[aąyeę]|sz)|przestarzał|nieaktualn)|najnowsz\S*\s+wersj\S*\s+(?:zsu|zebra setup)/i,
+]
+// Opisy do zarzutu przepisanego w przepiszZarzutOBrakuHasla(), w kolejności wzorców powyżej.
+const OPIS_BLEDNEJ_PROCEDURY_EU_RED = [
+  'Każe ustawiać SNMPv3 komendą setvar na zmiennych ip.snmpv3, które służą tylko do odczytu; użytkownika SNMPv3 tworzy operacja JSON setup-snmpv3-user w trybie chronionym.',
+  'Każe włączać tryb chroniony komendą setvar na device.protected_mode, a ta zmienna służy tylko do odczytu; tryb chroniony włącza operacja JSON setup, która ustawia hasło administratora.',
+  'Każe włączać port lub usługi sieciowe komendą setvar, a w trybie chronionym (EU RED) setvar ich nie zmienia; robi to kreator zabezpieczeń Zebry.',
+  'Obiecuje monit o hasło w Zebra Setup Utilities, a ZSU nie ustawia hasła trybu chronionego ani PIN-u panelu; ustawia je kreator zabezpieczeń Zebry (Nucleus Connector).',
+  'Twierdzi, że wersja ZSU klienta jest za stara, a w trybie chronionym (EU RED) przyczyną nie jest wersja programu.',
+]
+// Zdanie o braku fabrycznego hasła lub PIN-u panelu: „hasło nie jest fabrycznie ustawione",
+// „PIN panelu nie jest ustawiony fabrycznie", „nie ma hasła fabrycznego", „1234 nie działa".
+const RE_BRAK_HASLA_FABRYCZNEGO =
+  /(?:hasł|\bpin)[^.]{0,60}?nie\s+(?:jest|są|został\S*|ma)\s+(?:\S+\s+){0,2}?(?:fabryczn|domyśln)|(?:nie\s+ma|brak\S*|bez)\s+(?:\S+\s+){0,2}?(?:(?:fabryczn|domyśln)\S*\s+(?:hasł|pin\b)|(?:hasł|pin\b)\S*\s+(?:fabryczn|domyśln))|1234[^.]{0,40}?nie\s+(?:działa|zadziała|przechodzi)/i
+const RE_ZARZUT_O_ZSU_LUB_SETVAR = /setvar|zsu|setup utilities/i
+// „Sprzeczne" znaczy tu: asystent przeczy sam sobie albo temu, co napisał klient. „Sprzeczne z zasadami",
+// „z instrukcją" czy „z dokumentacją" to ocena z pamięci oceniającego, a nie odwołanie do rozmowy.
+// 5.11.2026 tak brzmiało uzasadnienie zarzutu wobec odpowiedzi o kablach przy wysyłce, zgodnej z FAQ
+// serwisu, i zarzut przechodził przez bramkę.
+const RE_ODWOLANIE_DO_ROZMOWY =
+  /sprzeczn(?!\S*\s+z\s+(?:zasad|reguł|regulamin|instrukcj|dokumentacj|specyfikacj|procedur|zalece|faq|polityk))|wcześniej\S*[^.]{0,40}(?:napisał|podał|twierdził|stwierdził)|klient\S*[^.]{0,40}(?:nie (?:podał|napisał|potwierdził)|napisał|podał|odpowiedział)/i
+
+// Temat sterownika i odwołanie do rozmowy bierzemy z uzasadnienia oceniającego, nie z cytatu:
+// zdanie asystenta „sprawdź w sterowniku" przepuściłoby każdy zarzut z tej samej odpowiedzi.
+// Model drukarki często podaje tylko klient, dlatego sprawdzamy też jego wiadomości.
+export function zarzutMaPodstawe(typ: string, dlaczego: string, cytat: string, tekstAsystenta: string, tekstKlienta = ''): boolean {
+  if (typ !== 'bledne_dane') return true
+  const uzasadnienie = dlaczego || ''
+  if (RE_ODWOLANIE_DO_ROZMOWY.test(uzasadnienie)) return true
+  if (RE_TEMAT_STEROWNIKA.test(uzasadnienie)) {
+    return RE_V10.test(tekstAsystenta || '') && RE_MODEL_TYLKO_V5.test(`${tekstAsystenta || ''}\n${tekstKlienta || ''}`)
+  }
+  if (RE_BRAK_HASLA_FABRYCZNEGO.test(tekstAsystenta || '') && zarzutPrzeciwBrakowiHasla(uzasadnienie, cytat)) return false
+  const blednaProcedura = RE_BLEDNA_PROCEDURA_EU_RED.some((re) => re.test(tekstAsystenta || ''))
+  return blednaProcedura && RE_TEMAT_EU_RED.test(`${uzasadnienie} ${cytat || ''}`)
+}
+
+// Czy zarzut podważa zdanie o braku fabrycznego hasła lub PIN-u. Zarzut o ZSU albo setvar dotyczy
+// procedury, nie tego zdania. Cytat liczy się tylko wtedy, gdy sam nie zawiera błędnej procedury:
+// cała odpowiedź wklejona jako cytat nie może zdjąć prawdziwego zarzutu o monit w ZSU.
+function zarzutPrzeciwBrakowiHasla(uzasadnienie: string, cytat: string): boolean {
+  if (RE_ZARZUT_O_ZSU_LUB_SETVAR.test(uzasadnienie || '')) return false
+  const wCytacie = cytat || ''
+  const cytatOBrakuHasla = RE_BRAK_HASLA_FABRYCZNEGO.test(wCytacie) && !RE_BLEDNA_PROCEDURA_EU_RED.some((re) => re.test(wCytacie))
+  return RE_BRAK_HASLA_FABRYCZNEGO.test(uzasadnienie || '') || cytatOBrakuHasla
+}
+
+/**
+ * Zarzut wobec prawdziwego zdania o braku fabrycznego hasła przepisujemy na błędną procedurę EU RED,
+ * jeśli ta stoi w odpowiedzi asystenta. 23.11.2026 (ZQ620 Plus, hasło przy Load Defaults) oceniający
+ * w trzech powtórkach na trzy wskazał zdanie o braku hasła, a obietnicy monitu o hasło w ZSU z tej
+ * samej odpowiedzi nie zgłosił, mimo reguły w prompcie. Sama bramka odrzuciłaby wtedy zarzut i błąd
+ * z rozmowy zostałby bez alertu. Waga 1: naruszenie reguły potwierdza wzorzec w kodzie, a prompt
+ * czujki nazywa takie kroki zawsze błędem.
+ */
+export function przepiszZarzutOBrakuHasla<T extends { typ: string; dlaczego?: unknown; cytat?: unknown; tura?: unknown; waga?: unknown }>(
+  p: T, odpowiedzi: string[]): T {
+  if (p.typ !== 'bledne_dane' || !zarzutPrzeciwBrakowiHasla(String(p.dlaczego || ''), String(p.cytat || ''))) return p
+  const wskazana = Number(p.tura) - 1
+  const kolejnosc = [wskazana, ...odpowiedzi.map((_, i) => i).filter((i) => i !== wskazana)]
+  for (const i of kolejnosc) {
+    const tekst = odpowiedzi[i]
+    if (!tekst) continue
+    for (let w = 0; w < RE_BLEDNA_PROCEDURA_EU_RED.length; w++) {
+      const m = RE_BLEDNA_PROCEDURA_EU_RED[w].exec(tekst)
+      if (!m) continue
+      const poczatek = Math.max(tekst.lastIndexOf('.', m.index - 1), tekst.lastIndexOf('\n', m.index)) + 1
+      const koniec = tekst.indexOf('.', m.index + m[0].length)
+      const cytat = tekst.slice(poczatek, koniec < 0 ? undefined : koniec + 1).trim()
+      return { ...p, tura: i + 1, waga: 1, cytat, dlaczego: OPIS_BLEDNEJ_PROCEDURY_EU_RED[w] }
+    }
+  }
+  return p
+}
+
+/**
+ * Czy zarzut „odrzucony_klient" ma podstawę, gdy dotyczy szablonu sklepu.
+ *
+ * Prompt czatu każe pytania o zakup urządzenia, części, akcesoriów i materiałów kierować
+ * szablonem do sklepu TAKMA, bez odpowiedzi merytorycznej i bez tagu serwisu. Opis typu zgłasza
+ * szablon sklepu tylko wtedy, gdy przerywa diagnozę. 28.10.2026 klient po pytaniu doprecyzowującym
+ * napisał wprost, że chce kupić odklejak do drukarki, a oceniający w pięciu powtórkach na pięć
+ * uznał szablon sklepu za odbicie klienta „pytającego o akcesorium do naprawy" (pewność 0,8).
+ * Zarzut poniżej progu nie idzie mailem, ale zapisuje się w chat_logs, więc rozmowa trafiała
+ * na listę do naprawy (scripts/alerty-do-naprawy.mjs).
+ *
+ * Zarzut odrzucamy tylko wtedy, gdy wskazana tura zawiera szablon sklepu, a wiadomość klienta
+ * w tej turze prosi o zakup i nie opisuje usterki ani nie mówi o naprawie, serwisie czy wysyłce.
+ * Czas przeszły („kupiłem", „data zakupu") nie jest prośbą o zakup: zwykle zaczyna opis usterki
+ * i wtedy szablon sklepu jest właśnie tym przerwaniem diagnozy, które typ ma łapać.
+ */
+const RE_SZABLON_SKLEPU = /sklep\S*\s+TAKMA/i
+const RE_PROSBA_O_ZAKUP = new RegExp(
+  `(?<![${LITERY}])(?:(?:za|do)?kup(?:i[cćeę]|imy|uj[eę])|zam[oó]wi(?:[cćeę]|my)|nab(?:y[cć]|ęd[eę])|` +
+  `sprzedaj(?:ecie|esz)|w\\s+sprzeda[żz]y)(?![${LITERY}])`, 'i')
+const RE_USTERKA_LUB_SERWIS = new RegExp(
+  `napraw|serwis|kurier|wysy[łl]|wys[łl]a[cćn]|odbi[oóe]r|diagnoz|reklamac|usterk|awari|zepsu|uszkodz|zacina|b[łl][aąeę]d|` +
+  `(?<![${LITERY}])(?:u\\s+was|nie\\s+(?:dzia[łl]|drukuj|w[łl][aą]cz|skanuj|czyt|[łl][aą]cz|widzi|reaguj|[łl]aduj))`, 'i')
+
+// Tura, której dotyczy cytat. Numer tury od oceniającego bywa przesunięty, dlatego najpierw
+// szukamy początku cytatu w odpowiedziach. Cytat model podaje bez znaczników markdownu.
+function turaCytatu(cytat: string, tura: number, odpowiedzi: string[]): number {
+  const norm = (s: string) => (s || '')
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/[*_`]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase()
+  const poczatek = norm(cytat).slice(0, 60)
+  if (poczatek.length >= 20) {
+    const i = odpowiedzi.findIndex((o) => norm(o).includes(poczatek))
+    if (i >= 0) return i
+  }
+  return Number.isInteger(tura) && tura >= 1 && tura <= odpowiedzi.length ? tura - 1 : -1
+}
+
+export function zarzutOdrzuceniaMaPodstawe(
+  typ: string, cytat: string, tura: number, odpowiedzi: string[], wiadomosciKlienta: string[],
+): boolean {
+  if (typ !== 'odrzucony_klient') return true
+  const i = turaCytatu(cytat, tura, odpowiedzi)
+  if (i < 0) return true
+  const klient = wiadomosciKlienta[i] || ''
+  const szablonNaProsbe = RE_SZABLON_SKLEPU.test(odpowiedzi[i] || '') &&
+    RE_PROSBA_O_ZAKUP.test(klient) && !RE_USTERKA_LUB_SERWIS.test(klient)
+  return !szablonNaProsbe
+}
+
+/**
+ * Czy zarzut „zaprzeczenie" dotyczy tego, co opisuje ten typ: twierdzenia, że urządzenie czegoś
+ * nie ma albo czegoś nie potrafi.
+ *
+ * 5.11.2026 klient zapytał, czy do wysyłki drukarki do serwisu dołączyć kable. Asystent odpowiedział
+ * zgodnie z FAQ serwisu: zwykle nie trzeba, a zasilacz albo kabel dołącza się, gdy usterka dotyczy
+ * zasilania albo połączenia. Oceniający w czterech powtórkach na cztery zgłosił to jako „zaprzeczenie"
+ * z pewnością 1,0 i oceną 1/5, bo asystent „nie przyznał, że czasem kable są potrzebne" — choć wyjątki
+ * stały w tej samej odpowiedzi. Zdanie „nie trzeba dołączać kabli" opisuje zasady wysyłki, a nie
+ * urządzenie, więc nie ma w nim czego zaprzeczać.
+ *
+ * Kod przepuszcza ten typ tylko wtedy, gdy cytat zawiera przeczenie o urządzeniu („nie ma", „nie
+ * obsługuje", „nie potrafi", „brak funkcji"). Gdy cytatu nie ma dosłownie w odpowiedziach, bo model
+ * go streścił, sprawdzamy całą wypowiedź asystenta.
+ */
+const RE_URZADZENIE_CZEGOS_NIE_MA = new RegExp(
+  `(?<![${LITERY}])(?:` +
+  `nie\\s+(?:ma(?:ją)?|posiada\\S*|obsługuj\\S*|potrafi\\S*|umie|wspiera\\S*|pozwala\\S*|można|da\\s+się|` +
+  `jest\\s+wyposażon\\S*|współprac\\S*|występuj\\S*)|` +
+  `brak\\S*\\s+(?:\\S+\\s+)?(?:opcj\\S*|funkcj\\S*|obsług\\S*|wsparci\\S*|złącz\\S*|port\\S*|gniazd\\S*|możliwośc\\S*|modułu|czujnik\\S*)` +
+  `)(?![${LITERY}])`, 'i')
+
+export function zaprzeczenieMaPodstawe(typ: string, cytat: string, odpowiedzi: string[]): boolean {
+  if (typ !== 'zaprzeczenie') return true
+  const cytatJestWOdpowiedzi = turaCytatu(cytat, 0, odpowiedzi) >= 0
+  return RE_URZADZENIE_CZEGOS_NIE_MA.test(cytatJestWOdpowiedzi ? cytat : odpowiedzi.join('\n'))
+}
+
+/**
+ * Czy zarzut „koszt_transportu" ma podstawę: czy asystent w ogóle napisał coś o koszcie przesyłki.
+ *
+ * Prompt czatu każe przy propozycji wysyłki podać dwa zdania: „Kurier odbierze urządzenie z podanego
+ * adresu" i zdanie o diagnostyce, bezpłatnej przy akceptacji naprawy i za 99 zł netto przy rezygnacji.
+ * Opis typu i prompt oceniającego mówią wprost, że oba są dozwolone. Mimo to 12.11.2026 oceniający
+ * zgłosił „koszt_transportu", bo asystent „podał informacje o kosztach diagnostyki" (ZD421d po trzech
+ * darmowych krokach skierowana do serwisu). W powtórkach ten sam zarzut wracał z typem
+ * „wycena_przedwczesnie" i uzasadnieniem, że asystent „nie powinien pisać nic o kosztach transportu".
+ * Jak przy kwocie za naprawę, warunek konieczny sprawdzamy w kodzie, a nie dopisujemy wyjątku do promptu.
+ *
+ * Zarzut przechodzi, gdy w którejś odpowiedzi jedno zdanie łączy słowo o przesyłce (kurier, transport,
+ * wysyłka, odbiór, paczka) ze słowem o koszcie (koszt, bezpłatnie, za darmo, doliczymy, kwota w zł).
+ * Fragmenty zdania o diagnostyce, naprawie albo wycenie, w których nie ma słowa o przesyłce, odrzucamy
+ * przed sprawdzeniem, bo ich koszt dotyczy usługi, nie transportu. Zdanie dzielimy na fragmenty tylko
+ * po przecinku, dwukropku, nawiasie i myślniku. Zdanie „Kurier odbierze urządzenie i diagnostyka jest
+ * bezpłatna" zostaje więc w całości i zarzut przechodzi. Wolimy przepuścić taki zarzut, niż zgubić
+ * prawdziwą wpadkę w rodzaju „transport i diagnostyka są bezpłatne".
+ */
+const RE_SLOWO_O_PRZESYLCE = new RegExp(
+  `(?<![${LITERY}])(?:kurier|transport|przesył|wysył|wysła|przesła|odbi[oó]r|odbier|dostaw|paczk|odesł|odsył|dpd|inpost|dhl|ups|gls)`, 'i')
+const RE_SLOWO_O_KOSZCIE = new RegExp(
+  `(?<![${LITERY}])(?:koszt|(?:od|nie|bez)?płatn|płac|zapła|opłat|darmo|gratis|dolicz|wlicz|pokrywa|pokryj)|\\d\\s*(?:zł|pln)(?![${LITERY}])`, 'i')
+const RE_KOSZT_USLUGI = /diagnost|rezygnac|napraw|wymian|wycen|głowic|częś|konserwac|ekspres|usług/i
+// Rolki transportowe to część mechanizmu z cennika, a nie przesyłka.
+// „Rolek" ma inny rdzeń niż „rolka" i „rolki", stąd dwie odmiany.
+const RE_ROLKI_TRANSPORTOWE = /rol(?:k|ek)\S*\s+transportow\S*/gi
+
+function zdaniaOKoszciePrzesylki(tekst: string): string[] {
+  return (tekst || '')
+    .replace(RE_ROLKI_TRANSPORTOWE, '')
+    .split(/[.!?;\n]+/)
+    .map((zdanie) => zdanie
+      .split(/[,:()]|\s[—–-]\s/)
+      .filter((fragment) => RE_SLOWO_O_PRZESYLCE.test(fragment) || !RE_KOSZT_USLUGI.test(fragment))
+      .join(' '))
+    .filter((zdanie) => RE_SLOWO_O_PRZESYLCE.test(zdanie) && RE_SLOWO_O_KOSZCIE.test(zdanie))
+}
+
+export function kosztTransportuMaPodstawe(typ: string, odpowiedzi: string[]): boolean {
+  if (typ !== 'koszt_transportu') return true
+  return odpowiedzi.some((o) => zdaniaOKoszciePrzesylki(o).length > 0)
+}
+
+/**
+ * Czy wycena przyszła zgodnie z zasadą czatu: po co najmniej dwóch turach z darmowym krokiem
+ * i ze zdaniem o wiążącej wycenie po diagnozie w każdej turze, która podaje kwotę.
+ *
+ * Prompt czatu każe po dwóch nieudanych krokach (najwyżej trzech) zaproponować serwis
+ * z widełkami z cennika. Oceniający zgłaszał w takich rozmowach „wycena_przedwczesnie"
+ * z pewnością 1,0 (7 i 8.10.2026: drukarka kart z błędem taśmy, GK420d z czujnikiem pokrywy):
+ * „nie wyczerpał darmowych kroków" po trzech krokach albo „nie dodał zdania o wiążącej
+ * wycenie", choć zdanie stało w odpowiedzi. Oba warunki typu da się sprawdzić w tekście,
+ * więc sprawdzamy je w kodzie, tak jak samą obecność kwoty.
+ *
+ * Gdy klient przed pierwszą kwotą opisał uszkodzenie widoczne gołym okiem — pęknięty ekran,
+ * zalanie, wyrwane gniazdo, urwany przycisk — kroki nie są wymagane: zasady czatu i opis typu
+ * kierują wtedy prosto do serwisu. Oceniający mimo tego wyjątku zgłaszał „wycena_przedwczesnie"
+ * z pewnością 1,0 (13.10.2026, pęknięty ekran terminala MC3300). Zdanie o wiążącej wycenie
+ * obowiązuje także wtedy.
+ */
+const MIN_KROKOW_PRZED_WYCENA = 2
+// Rdzenie słów, także bez polskich znaków i z literówkami klienta („pęknienty", „zalal").
+// Zaprzeczenie tuż przed słowem („nie jest pęknięty") nie zwalnia z kroków.
+const RE_USZKODZENIE_EWIDENTNE = new RegExp(
+  `(?<!(?<![${LITERY}])nie\\s+(?:(?:jest|s[aą]|by[łl][aoy]?)\\s+)?)(?<![${LITERY}])(?:` +
+  `(?:po|s)?p[eę]k(?:n|[łl]|an)|(?:roz|z)bit|st[łl]u[ck]|zala[nłl]|(?:wy|u|ode)rwa[nłl]|` +
+  `(?:z|po|u|od)[łl]ama[nłl]|zgni(?:ec|ót|ot)|rozchwian)`, 'i')
+// Polecenie czynności przy urządzeniu albo w programie, także w formie „sprawdźmy", „zróbmy".
+// Bez „podaj", „przepisz" i „prześlij": prośba o model albo zdjęcie naklejki nie jest krokiem.
+// „Zmniejsz", „obniż" i „zwiększ" to zmiana ustawień druku, np. zaczernienia albo prędkości
+// (26.11.2026, przegrzanie głowicy ZD421t: rada o niższym zaczernieniu nie liczyła się jako krok).
+const RE_POLECENIE = new RegExp(
+  `(?<![${LITERY}])(?:sprawdź|wyjmij|włóż|wsuń|otwórz|zamknij|naciśnij|przytrzymaj|wyłącz|włącz|podłącz|odłącz|podepnij|` +
+  `przetrzyj|wyczyść|załóż|przewiń|obróć|przesuń|uruchom|zrestartuj|wejdź|kliknij|wybierz|ustaw|zmień|wklej|wpisz|` +
+  `wydrukuj|zeskanuj|zrób|odczekaj|dociśnij|wymień|spróbuj|użyj|puść|zainstaluj|pobierz|zaznacz|przełącz|obejrzyj|` +
+  `zdejmij|połącz|wykonaj|zmniejsz|obniż|zwiększ)(?:my)?(?![${LITERY}])`, 'i')
+const RE_PYTANIE_O_MODEL = /model|naklejk|S\/N|numer\S* seryjn|tabliczk|zdjęci/i
+// „Sprawdź wariant: ZD421d, ZD421t czy ZD421c" to pytanie o oznaczenie z naklejki, a nie krok przy
+// urządzeniu (26.11.2026: takie zdanie liczyło się jako krok, więc bramka mogła uznać wycenę po jednym
+// prawdziwym kroku za zgodną z zasadami). W zdaniu o wariancie samo „sprawdź" nie wystarcza. Inne
+// polecenie zostaje krokiem, np. „Otwórz pokrywę i sprawdź, który wariant masz".
+const RE_WARIANT = new RegExp(`(?<![${LITERY}])wariant`, 'i')
+const RE_SPRAWDZ = new RegExp(`(?<![${LITERY}])sprawdź(?:my)?(?![${LITERY}])`, 'gi')
+const RE_ZASTRZEZENIE_WYCENY = new RegExp(
+  `(?:wiążąc|ostateczn)[${LITERY}]*\\s+wycen|wycen[${LITERY}]*[^.]{0,60}po\\s+diagnoz`, 'i')
+
+function maKrok(odpowiedz: string): boolean {
+  return (odpowiedz || '')
+    .split(/(?<=[.!?:])\s+|\n+/)
+    .some((zdanie) => {
+      if (RE_PYTANIE_O_MODEL.test(zdanie)) return false
+      const polecenia = RE_WARIANT.test(zdanie) ? zdanie.replace(RE_SPRAWDZ, '') : zdanie
+      return RE_POLECENIE.test(polecenia)
+    })
+}
+
+export function wycenaZgodnaZZasadami(odpowiedzi: string[], wiadomosciKlienta: string[] = []): boolean {
+  const zKwota = odpowiedzi.map((o) => podajeKwoteZaNaprawe(o))
+  const pierwsza = zKwota.indexOf(true)
+  if (pierwsza < 0) return true
+  const kroki = odpowiedzi.slice(0, pierwsza).filter(maKrok).length
+  const zastrzezenie = odpowiedzi.every((o, i) => !zKwota[i] || RE_ZASTRZEZENIE_WYCENY.test(o))
+  const uszkodzenieEwidentne = wiadomosciKlienta.slice(0, pierwsza + 1).some((w) => RE_USZKODZENIE_EWIDENTNE.test(w || ''))
+  return (uszkodzenieEwidentne || kroki >= MIN_KROKOW_PRZED_WYCENA) && zastrzezenie
+}
+
+/** Poniżej tej oceny całej rozmowy alertujemy nawet przy średniej pewności pojedynczego problemu. */
+const OCENA_ALARMOWA = 2
+
+/**
+ * Ocena rozmowy po tym, jak bramka w kodzie odrzuciła zarzut.
+ *
+ * Oceniający wystawia ocenę razem z zarzutami, a bramki odrzucają zarzut dopiero po fakcie.
+ * Ocena zostawała więc taka, jakby zarzut był prawdziwy. 22.10.2026: drukarka po trzech
+ * darmowych krokach skierowana do serwisu z regulaminową opłatą 99 zł — w trzech powtórkach
+ * oceny za każdym razem 2/5 i jeden zarzut, „wycena_przedwczesnie", odrzucany przez bramkę kwoty.
+ * Rozmowa bez żadnego zapisanego problemu trafiała przez samą ocenę na listę do naprawy
+ * (scripts/alerty-do-naprawy.mjs bierze każdą sesję z oceną 2 lub niższą), a w doAlertu()
+ * obniżała próg pewności dla pozostałych zarzutów.
+ *
+ * Podnosimy ocenę tylko tuż nad próg alarmowy. Wyżej nie idziemy, bo nie wiemy, jak model
+ * oceniłby rozmowę bez tego zarzutu.
+ */
+export function ocenaPoBramce(ocena: number, bramkaOdrzucilaZarzut: boolean): number {
+  return bramkaOdrzucilaZarzut ? Math.max(ocena, OCENA_ALARMOWA + 1) : ocena
+}
+
+/**
+ * Wypowiedź przycięta do transkryptu: bez białych znaków na brzegach i bez ich długich ciągów.
+ *
+ * Wypowiedzi obcinamy do stałej długości, żeby cała rozmowa zmieściła się w prompcie. 27.10.2026
+ * wiadomość klienta zaczynała się od ok. 6500 spacji, a treść stała dopiero na końcu. Po obcięciu
+ * do 900 znaków zostawały same spacje, więc oceniający dostawał rozmowę bez odpowiedzi klienta
+ * na ostatni krok diagnostyczny, czyli bez tego, na czym asystent oparł wycenę. Dlatego najpierw
+ * ściskamy białe znaki, a dopiero potem obcinamy. Podziały wierszy zostają, bo asystent pisze
+ * listy kroków.
+ */
+export function doTranskryptu(tekst: string | null | undefined, limit: number): string {
+  return (tekst || '')
+    .replace(/[^\S\n]+/g, ' ')
+    .replace(/ ?\n ?/g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim()
+    .slice(0, limit)
+}
+
 export function zbudujTranskrypt(tury: Tura[]): string {
   return tury
     .map((t, i) => {
       const ocena = t.user_rating === -1 ? '  [klient ocenił tę odpowiedź na minus]' : ''
-      return `Klient: ${(t.user_message || '').slice(0, 900)}\nAsystent (tura ${i + 1}): ${(t.ai_response || '').slice(0, 1800)}${ocena}`
+      return `Klient: ${doTranskryptu(t.user_message, 900)}\nAsystent (tura ${i + 1}): ${doTranskryptu(t.ai_response, 1800)}${ocena}`
     })
     .join('\n\n')
 }
@@ -265,11 +724,30 @@ export async function ocenRozmowe(tury: Tura[]): Promise<OcenaRozmowy | null> {
     const kategoria = KATEGORIE.includes(parsed.kategoria) ? parsed.kategoria : 'other'
     const ocena = Number.isFinite(parsed.ocena) ? Math.min(5, Math.max(1, Math.round(parsed.ocena))) : 3
     // Bez kwoty za naprawę w całej rozmowie typ „wycena_przedwczesnie" nie ma o czym mówić.
-    const bylaKwota = podajeKwoteZaNaprawe(tury.map((t) => t.ai_response || '').join('\n'))
+    const odpowiedzi = tury.map((t) => t.ai_response || '')
+    const tekstAsystenta = odpowiedzi.join('\n')
+    const bylaKwota = podajeKwoteZaNaprawe(tekstAsystenta)
+    // Kwota po dwóch krokach (albo od razu przy ewidentnym uszkodzeniu) i ze zdaniem o wiążącej
+    // wycenie to dokładnie to, czego wymaga prompt czatu.
+    const wiadomosciKlienta = tury.map((t) => t.user_message || '')
+    const wycenaPoZasadach = wycenaZgodnaZZasadami(odpowiedzi, wiadomosciKlienta)
 
-    const problemy: ZnalezionyProblem[] = (Array.isArray(parsed.problemy) ? parsed.problemy : [])
-      .filter((p: any) => p && typeof p.typ === 'string' && (p.typ as TypAlertu) in ALERTY)
-      .filter((p: any) => p.typ !== 'wycena_przedwczesnie' || bylaKwota)
+    const znane = (Array.isArray(parsed.problemy) ? parsed.problemy : [])
+      .filter((p: any) => p && typeof p.typ === 'string')
+      .map((p: any) => ({ ...p, typ: normalizujTyp(p.typ) }))
+      .filter((p: any) => (p.typ as TypAlertu) in ALERTY)
+      .map((p: any) => przepiszZarzutOBrakuHasla(p, odpowiedzi))
+    const przyjete = znane
+      .filter((p: any) => p.typ !== 'wycena_przedwczesnie' || (bylaKwota && !wycenaPoZasadach))
+      .filter((p: any) => zarzutMaPokrycie(p.typ, `${p.dlaczego || ''} ${p.cytat || ''}`, tekstAsystenta))
+      .filter((p: any) =>
+        zarzutMaPodstawe(p.typ, String(p.dlaczego || ''), String(p.cytat || ''), tekstAsystenta, wiadomosciKlienta.join('\n')))
+      .filter((p: any) =>
+        zarzutOdrzuceniaMaPodstawe(p.typ, String(p.cytat || ''), Number(p.tura), odpowiedzi, wiadomosciKlienta))
+      .filter((p: any) => zaprzeczenieMaPodstawe(p.typ, String(p.cytat || ''), odpowiedzi))
+      .filter((p: any) => kosztTransportuMaPodstawe(p.typ, odpowiedzi))
+
+    const problemy: ZnalezionyProblem[] = przyjete
       .map((p: any) => ({
         typ: p.typ as TypAlertu,
         waga: Math.min(1, Math.max(0, Number(p.waga) || 0)),
@@ -278,15 +756,13 @@ export async function ocenRozmowe(tury: Tura[]): Promise<OcenaRozmowy | null> {
         dlaczego: String(p.dlaczego || '').slice(0, 300),
       }))
 
-    return { kategoria, ocena, problemy }
+    return { kategoria, ocena: ocenaPoBramce(ocena, przyjete.length < znane.length), problemy }
   } catch (error: any) {
     console.error('❌ Ocena rozmowy nie powiodła się:', error?.message || error)
     return null
   }
 }
 
-/** Poniżej tej oceny całej rozmowy alertujemy nawet przy średniej pewności pojedynczego problemu. */
-const OCENA_ALARMOWA = 2
 const PEWNOSC_PRZY_ZLEJ_OCENIE = 0.6
 
 /**
