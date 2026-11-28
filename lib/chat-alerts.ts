@@ -50,7 +50,7 @@ interface DefinicjaAlertu {
  */
 export const ALERTY: Record<TypAlertu, DefinicjaAlertu> = {
   bledne_dane: {
-    opis: 'Podał nieprawdziwe dane o urządzeniu: parametr, ścieżkę w menu, wersję sterownika albo oprogramowania. Zalecenie sterownika ZDesigner v10 dla drukarki sprzed Link-OS (GK420d, GK420t, GC420d, GC420t, GT800, LP2844, TLP2844) jest zawsze błędem — te modele obsługuje wyłącznie v5. UWAGA: nie masz instrukcji serwisowych, więc NIE oceniaj z własnej pamięci, jak zbudowane jest urządzenie ani ile trwa dana operacja. Zgłoś ten typ tylko wtedy, gdy błąd wynika wprost z reguł podanych Ci wyżej albo gdy sam asystent zaprzecza sobie w tej samej rozmowie. Domysł typu „chyba ten podzespół jest osobny" albo „ten czas wydaje mi się zbyt optymistyczny" to NIE jest podstawa do alertu',
+    opis: 'Podał nieprawdziwe dane o urządzeniu: parametr, ścieżkę w menu, wersję sterownika albo oprogramowania. Zalecenie sterownika ZDesigner v10 dla drukarki sprzed Link-OS (GK420d, GK420t, GC420d, GC420t, GT800, LP2844, TLP2844) jest zawsze błędem — te modele obsługuje wyłącznie v5. Zalecenie v10 dla modeli serii ZD, ZT, ZQ i ZC, także ZD220 i ZD230, NIE jest błędem. UWAGA: nie masz instrukcji serwisowych, więc NIE oceniaj z własnej pamięci, jak zbudowane jest urządzenie ani ile trwa dana operacja. Zgłoś ten typ tylko wtedy, gdy błąd wynika wprost z reguł podanych Ci wyżej albo gdy sam asystent zaprzecza sobie w tej samej rozmowie. Domysł typu „chyba ten podzespół jest osobny" albo „ten czas wydaje mi się zbyt optymistyczny" to NIE jest podstawa do alertu',
     prog: 0.9,
     waga: 'krytyczny',
   },
@@ -132,6 +132,9 @@ export interface OcenaRozmowy {
   problemy: ZnalezionyProblem[]
 }
 
+// Reguła o sterownikach podaje modele wprost, a nie kryterium „Link-OS". 27.11.2026 oceniający
+// uznał ZD220 za drukarkę sprzed Link-OS i zgłosił poprawne zalecenie v10 jako błąd, choć Zebra
+// zaleca v10 dla ZD220 i ZD230. Przypadki w scripts/test-chat-alerts.mjs pilnują obu kierunków.
 const PROMPT = `Jesteś kontrolerem jakości czatu serwisowego firmy naprawiającej urządzenia Zebra.
 Dostajesz całą rozmowę klienta z asystentem. Twoim zadaniem jest znaleźć miejsca, w których asystent
 pomylił się albo napisał coś, czego napisać nie powinien. Nie oceniaj stylu ani uprzejmości.
@@ -152,8 +155,11 @@ Zasady, które obowiązują asystenta:
   serwisu było słuszne i gdy kwotę opisano słowem „orientacyjnie".
 - Asystent nie twierdzi, że urządzenie czegoś nie ma, chyba że ma to wprost w instrukcji.
 - Asystent nie obiecuje terminów, przyjazdu technika ani sprzętu zastępczego.
-- Sterowniki: ZDesigner v10 obsługuje drukarki Link-OS (serie ZD, ZT, ZQ, ZC). Modele sprzed Link-OS —
-  GK420d, GK420t, GC420d, GC420t, GT800, LP2844, TLP2844 — wymagają ZDesigner v5; v10 potrafi je unieruchomić.
+- Sterowniki ZDesigner. Zalecenie v10 jest POPRAWNE dla każdego modelu serii ZD, ZT, ZQ i ZC, także dla
+  ZD220 i ZD230, choć nie mają pełnego Link-OS: Zebra zaleca dla nich właśnie v10, a v5 tylko awaryjnie,
+  gdy po instalacji v10 drukarka nie drukuje. Błędem jest zalecenie v10 dla modeli GK420d, GK420t, GC420d,
+  GC420t, GT800, LP2844, TLP2844 — te wymagają ZDesigner v5, a v10 potrafi je unieruchomić. Który sterownik
+  pasuje, rozstrzygasz wyłącznie według tych dwóch list, nie według własnej pamięci o tym, czy model ma Link-OS.
 - Gotowa odmowa „jestem asystentem specjalizującym się wyłącznie w urządzeniach Zebra" jest na miejscu tylko
   wtedy, gdy klient naprawdę pisze o czymś innym niż sprzęt, usterka, wysyłka do serwisu czy zakup urządzenia.
 - Asystent ma nie zalecać resetu fabrycznego drukarki, która nie odpowiada po sieci, i ma uprzedzić, że przy

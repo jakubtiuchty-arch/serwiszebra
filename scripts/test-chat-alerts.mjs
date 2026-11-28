@@ -148,6 +148,18 @@ const PRZYPADKI = [
   { nazwa: 'ostrzeżenie przed resetem przy trybie chronionym', oczekiwany: null, tury: [
     ['zd421 nie odpowiada po sieci, moze zrobic reset do ustawien fabrycznych', 'Na razie nie rób resetu fabrycznego — na nowszym firmware reset przywraca właśnie zamknięte usługi sieciowe i tylko utrwali objaw. Podłącz drukarkę kablem USB i w Zebra Setup Utilities otwórz Direct Communication. Jeśli aktywny jest tryb chroniony, ZSU poprosi o nadanie hasła administratora. Wklej tylko tę jedną linię: ! U1 getvar "device.protected_mode" — co zwróciło?'],
   ]},
+
+  // --- fałszywy alarm z 27.11.2026 ---
+
+  // Oceniający uznał ZD220 za drukarkę sprzed Link-OS i zgłosił zalecenie ZDesigner v10
+  // jako błąd. Zebra na stronie wsparcia ZD220/ZD230 zaleca właśnie sterownik v10.
+  // Lista modeli, dla których v10 jest błędem, jest zamknięta i ZD220 na niej nie ma.
+  { nazwa: 'poprawny sterownik v10 do ZD220', oczekiwany: null, tury: [
+    ['jaki sterownik do zebry zd220', 'Do Zebra ZD220 pobierz sterownik **ZDesigner v10**: [Pobierz ZDesigner v10](/api/downloads/zdesigner-v10). Przy instalacji wybierz model **ZD220-203dpi ZPL**. Jeśli Windows 11 pokazuje „Driver unavailable", odinstaluj starą drukarkę, zainstaluj ZDesigner v10 jako administrator i zrestartuj usługę Bufor wydruku. Do konfiguracji przyda się też Zebra Setup Utilities.'],
+  ]},
+  { nazwa: 'poprawny sterownik v10 do ZD230', oczekiwany: null, tury: [
+    ['zd230t po aktualizacji windows nie drukuje, jaki sterownik', 'Do ZD230 zalecany jest **ZDesigner v10**. Odinstaluj starą drukarkę w Ustawieniach Windows, zainstaluj ZDesigner v10 jako administrator i w instalatorze wybierz model **ZD230-203dpi ZPL**. Potem wydrukuj stronę testową.'],
+  ]},
 ]
 
 let ok = 0
