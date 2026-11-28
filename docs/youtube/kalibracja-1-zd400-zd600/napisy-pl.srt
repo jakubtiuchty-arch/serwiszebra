@@ -1,0 +1,107 @@
+1
+00:00:00,000 --> 00:00:01,983
+Twoja drukarka Zebra ZD421, ZD411,
+
+2
+00:00:02,033 --> 00:00:06,049
+ZD621 albo starsza ZD420 wypluwa puste etykiety lub przesuwa wydruk?
+
+3
+00:00:06,099 --> 00:00:08,740
+Autoryzowany serwis serwis-zebry.pl pokazuje,
+
+4
+00:00:08,790 --> 00:00:11,850
+jak uruchomić kalibrację SmartCal w dziesięć sekund.
+
+5
+00:00:11,900 --> 00:00:16,633
+Załaduj etykiety, a w modelach termotransferowych także taśmę barwiącą.
+
+6
+00:00:16,683 --> 00:00:21,550
+Zamknij pokrywę i poczekaj, aż dioda STATUS zaświeci na stałe na zielono.
+
+7
+00:00:21,600 --> 00:00:26,871
+Następnie przytrzymaj jednocześnie przyciski PAUSE i CANCEL przez dwie sekundy i
+
+8
+00:00:26,921 --> 00:00:27,204
+puść.
+
+9
+00:00:27,254 --> 00:00:32,259
+Drukarka wysunie kilka etykiet, zmierzy ich długość i sama dopasuje czujnik.
+
+10
+00:00:32,309 --> 00:00:36,450
+Kalibracja kończy się, gdy dioda STATUS znów świeci na zielono.
+
+11
+00:00:36,500 --> 00:00:39,681
+Aby sprawdzić wynik, naciśnij raz przycisk FEED.
+
+12
+00:00:39,731 --> 00:00:44,663
+Jeśli wysunie się dokładnie jedna etykieta, drukarka jest gotowa do pracy.
+
+13
+00:00:44,713 --> 00:00:48,837
+Wskazówka: po założeniu rolki dokładnie takich samych etykiet,
+
+14
+00:00:48,887 --> 00:00:54,290
+od tego samego producenta i w tym samym rozmiarze, kalibracja nie jest potrzebna.
+
+15
+00:00:54,340 --> 00:00:57,050
+Wystarczy raz lub dwa razy nacisnąć FEED.
+
+16
+00:00:57,100 --> 00:01:02,776
+Modele z ekranem dotykowym, jak Zebra ZD621, mają też kreator kalibracji ręcznej.
+
+17
+00:01:02,826 --> 00:01:06,734
+Wejdź w Menu, potem Print, Sensors i Manual Calibration,
+
+18
+00:01:06,784 --> 00:01:09,350
+i postępuj według poleceń na ekranie.
+
+19
+00:01:09,400 --> 00:01:13,651
+Pamiętaj też o ruchomym czujniku etykiet, który ma cała seria ZD.
+
+20
+00:01:13,701 --> 00:01:18,018
+Przy standardowych etykietach z przerwą czujnik zostaje na środku.
+
+21
+00:01:18,068 --> 00:01:22,980
+Jeśli używasz etykiet z czarnym znacznikiem albo z nacięciem poza środkiem,
+
+22
+00:01:23,030 --> 00:01:26,950
+przesuń czujnik dokładnie pod znacznik i powtórz kalibrację.
+
+23
+00:01:27,000 --> 00:01:32,342
+Jeśli mimo kalibracji dioda dalej mruga na czerwono albo wysuwają się puste etykiety,
+
+24
+00:01:32,392 --> 00:01:36,339
+obejrzyj nasz film o tym, co zrobić, gdy kalibracja nie działa.
+
+25
+00:01:36,389 --> 00:01:41,351
+Pokazujemy w nim czyszczenie czujnika i kalibrację przez Zebra Setup Utilities.
+
+26
+00:01:41,401 --> 00:01:46,046
+A jeśli podejrzewasz uszkodzony czujnik, zgłoś naprawę na serwis-zebry.pl.
+
+27
+00:01:46,096 --> 00:01:50,550
+Kurier odbierze drukarkę bezpłatnie, a wycenę dostaniesz przed naprawą.

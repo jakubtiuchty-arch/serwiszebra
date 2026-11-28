@@ -3,6 +3,7 @@ import { Composition } from 'remotion'
 import { Film, type FilmProps } from './Film'
 import film01 from '../../docs/youtube/01-skaner-enter-tab/sceny.json'
 import film02 from '../../docs/youtube/02-kalibracja-drukarki/sceny.json'
+import kalibracja1 from '../../docs/youtube/kalibracja-1-zd400-zd600/sceny.json'
 
 const FPS = 30
 
@@ -10,6 +11,7 @@ const FPS = 30
 const FILMY: { id: string; katalog: string; dane: FilmProps['dane'] }[] = [
   { id: 'Film01-SkanerEnterTab', katalog: '01-skaner-enter-tab', dane: film01 },
   { id: 'Film02-KalibracjaDrukarki', katalog: '02-kalibracja-drukarki', dane: film02 },
+  { id: 'Kalibracja1-ZD400-ZD600', katalog: 'kalibracja-1-zd400-zd600', dane: kalibracja1 },
 ]
 
 export const Root: React.FC = () => (

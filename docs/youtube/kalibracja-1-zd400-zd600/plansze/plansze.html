@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>Plansze — kalibracja serii ZD400/ZD600</title>
+<style>
+  :root {
+    --navy: #0a1228;
+    --navy2: #121f45;
+    --cyan: #22d3ee;
+    --green: #a3e635;
+    --yellow: #facc15;
+    --text: #ffffff;
+    --muted: #b8c4dc;
+    --card: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #222; font-family: 'Inter', 'DejaVu Sans', sans-serif; }
+  .slide {
+    width: 1920px; height: 1080px; position: relative; overflow: hidden;
+    background:
+      radial-gradient(900px 600px at 78% 30%, rgba(34, 211, 238, 0.16), transparent 70%),
+      radial-gradient(700px 500px at 12% 92%, rgba(163, 230, 53, 0.10), transparent 70%),
+      linear-gradient(160deg, var(--navy2), var(--navy) 60%);
+    color: var(--text);
+    padding: 96px 120px;
+    display: flex; flex-direction: column;
+    margin-bottom: 40px;
+  }
+  /* cienkie „wyładowania" jak w miniaturach v4 — tylko akcent na krawędzi */
+  .slide::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background:
+      linear-gradient(115deg, transparent 0 86%, rgba(34, 211, 238, 0.55) 86.2%, transparent 86.6%),
+      linear-gradient(100deg, transparent 0 91%, rgba(163, 230, 53, 0.45) 91.15%, transparent 91.5%),
+      linear-gradient(125deg, transparent 0 95%, rgba(250, 204, 21, 0.4) 95.1%, transparent 95.4%);
+  }
+  .top { display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 1; }
+  .kicker { font-size: 26px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); }
+  .brand { display: flex; align-items: center; gap: 16px; background: #fff; color: #111; border-radius: 999px; padding: 10px 26px 10px 22px; font-size: 22px; font-weight: 600; }
+  .brand img { height: 34px; }
+  .body { flex: 1; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 1; }
+  .badge { align-self: flex-start; width: fit-content; font-size: 30px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy); background: var(--cyan); border-radius: 14px; padding: 10px 24px; margin-bottom: 34px; }
+  .badge.green { background: var(--green); }
+  .badge.yellow { background: var(--yellow); }
+  h1 { font-size: 96px; font-weight: 800; line-height: 1.04; letter-spacing: -0.02em; }
+  h2 { font-size: 76px; font-weight: 800; line-height: 1.08; letter-spacing: -0.015em; }
+  .sub { font-size: 40px; line-height: 1.4; color: var(--muted); margin-top: 30px; max-width: 1500px; }
+  .hl { color: var(--cyan); }
+  .hl-g { color: var(--green); }
+  .hl-y { color: var(--yellow); }
+  .row { display: flex; gap: 80px; align-items: center; }
+  .codecard {
+    background: var(--card); border-radius: 28px; padding: 40px 56px;
+    box-shadow: 0 0 0 6px rgba(34, 211, 238, 0.85), 0 0 80px rgba(34, 211, 238, 0.35);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .codecard img { image-rendering: pixelated; display: block; }
+  .pause { position: relative; z-index: 1; display: flex; align-items: center; gap: 20px; font-size: 32px; font-weight: 600; color: #fff; }
+  .pause .ico { width: 56px; height: 56px; border-radius: 50%; background: var(--yellow); display: flex; align-items: center; justify-content: center; gap: 7px; }
+  .pause .ico i { width: 8px; height: 22px; background: var(--navy); border-radius: 2px; }
+  ul.list { list-style: none; margin-top: 44px; display: flex; flex-direction: column; gap: 26px; }
+  ul.list li { font-size: 44px; line-height: 1.3; display: flex; gap: 26px; align-items: baseline; }
+  ul.list li b { color: var(--cyan); font-weight: 800; min-width: 60px; }
+  .notepad { background: #fff; color: #111; border-radius: 18px; width: 760px; box-shadow: 0 30px 80px rgba(0,0,0,0.45); overflow: hidden; }
+  .notepad .bar { background: #e5e7eb; padding: 14px 22px; font-size: 22px; color: #374151; }
+  .notepad pre { font-family: 'JetBrains Mono', monospace; font-size: 34px; line-height: 1.6; padding: 26px 30px; }
+  .notepad pre span { background: rgba(163, 230, 53, 0.35); }
+  .cell { display: inline-block; border: 3px solid #9ca3af; padding: 16px 26px; font-family: 'JetBrains Mono', monospace; font-size: 30px; background: #fff; color: #111; min-width: 230px; }
+  .cell.on { border-color: var(--green); box-shadow: 0 0 0 4px rgba(163,230,53,0.5); }
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 50px; }
+  .box { border-radius: 26px; padding: 40px 44px; background: rgba(255,255,255,0.06); border: 2px solid rgba(255,255,255,0.14); }
+  .box h3 { font-size: 44px; font-weight: 800; margin-bottom: 16px; }
+  .box p { font-size: 34px; line-height: 1.4; color: var(--muted); }
+  .grid-codes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px 40px; margin-top: 36px; }
+  .mini { background: #fff; border-radius: 20px; padding: 22px; display: flex; align-items: center; justify-content: center; height: 250px; }
+  .mini img { max-width: 100%; max-height: 210px; }
+  .url { font-family: 'JetBrains Mono', monospace; font-size: 34px; color: var(--cyan); background: rgba(34,211,238,0.10); border: 2px solid rgba(34,211,238,0.5); border-radius: 16px; padding: 18px 28px; display: inline-block; margin-top: 34px; }
+
+
+  kbd { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 0.8em; background: #fff; color: var(--navy); border-radius: 10px; padding: 4px 14px; box-shadow: 0 4px 0 #94a3b8; }
+  code { font-family: 'JetBrains Mono', monospace; color: var(--cyan); background: rgba(34,211,238,0.12); padding: 2px 10px; border-radius: 8px; }
+  .dim { color: var(--muted); font-size: 0.8em; }
+  .photo { background: #fff; border-radius: 26px; overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: 0 30px 80px rgba(0,0,0,0.45); flex-shrink: 0; }
+  .photo img { width: 100%; height: 100%; object-fit: contain; }
+  .shortcuts { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 34px; margin-top: 46px; }
+  .sc { display: flex; gap: 26px; align-items: center; background: rgba(255,255,255,0.06); border: 2px solid rgba(255,255,255,0.14); border-radius: 22px; padding: 18px 26px 18px 18px; }
+  .sc .ph { width: 170px; height: 150px; border-radius: 16px; background: #fff; overflow: hidden; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .sc .ph img { width: 100%; height: 100%; object-fit: contain; }
+  .sc .ph-txt { background: rgba(255,255,255,0.08); color: var(--muted); font-size: 52px; font-weight: 800; }
+  .sc .m { font-size: 25px; font-weight: 700; color: var(--cyan); letter-spacing: 0.02em; margin-bottom: 12px; }
+  .sc .k { font-size: 33px; font-weight: 600; line-height: 1.35; }
+  ol.steps { list-style: none; counter-reset: s; margin-top: 36px; display: flex; flex-direction: column; gap: 26px; }
+  ol.steps li { counter-increment: s; font-size: 42px; line-height: 1.35; display: flex; gap: 24px; align-items: baseline; }
+  ol.steps li::before { content: counter(s); font-weight: 800; color: var(--navy); background: var(--cyan); border-radius: 50%; width: 54px; height: 54px; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; font-size: 30px; transform: translateY(-4px); }
+  .panel { position: relative; background: #2b2f36; border-radius: 22px; padding: 22px 30px; box-shadow: inset 0 2px 0 rgba(255,255,255,0.08), 0 20px 50px rgba(0,0,0,0.4); }
+  .panel .leds { display: flex; gap: 16px; margin-bottom: 18px; }
+  .panel .led { font-size: 15px; font-weight: 700; color: #9ca3af; display: flex; align-items: center; gap: 7px; letter-spacing: 0.04em; }
+  .panel .led::before { content: ''; width: 14px; height: 14px; border-radius: 50%; background: #4b5563; }
+  .panel .led.on { color: #bef264; } .panel .led.on::before { background: #84cc16; box-shadow: 0 0 14px #84cc16; }
+  .panel .btns { display: flex; gap: 16px; }
+  .panel .btn { font-size: 24px; font-weight: 800; color: #d1d5db; background: #3f444d; border-radius: 999px; padding: 12px 26px; }
+  .panel .btn.hot { background: var(--cyan); color: var(--navy); box-shadow: 0 0 24px rgba(34,211,238,0.7); }
+  .panel .sec { position: absolute; right: -26px; top: -26px; background: var(--yellow); color: var(--navy); font-weight: 800; font-size: 28px; border-radius: 999px; padding: 8px 18px; }
+  .blinks { margin-top: 40px; display: flex; flex-direction: column; gap: 22px; }
+  .bk { display: flex; gap: 28px; align-items: center; background: rgba(255,255,255,0.06); border: 2px solid rgba(255,255,255,0.14); border-radius: 20px; padding: 22px 30px; }
+  .bk.go { border-color: var(--green); background: rgba(163,230,53,0.12); }
+  .bk .dots { display: flex; gap: 12px; width: 120px; }
+  .bk .dots i { width: 40px; height: 40px; border-radius: 50%; background: #84cc16; box-shadow: 0 0 22px #84cc16; }
+  .bk b { display: block; font-size: 40px; } .bk.go b { color: var(--green); }
+  .bk span { font-size: 30px; color: var(--muted); }
+  .warn { border: 6px solid #ef4444; border-radius: 34px; padding: 50px 56px; background: rgba(239,68,68,0.08); box-shadow: 0 0 80px rgba(239,68,68,0.25); }
+  .warn .split { grid-template-columns: 1fr 1fr; }
+  .box.red { border-color: rgba(248,113,113,0.6); }
+  .box.red h3 { color: #fca5a5; }
+  .path { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 40px; }
+  .path span { font-size: 34px; font-weight: 700; background: rgba(255,255,255,0.08); border: 2px solid rgba(255,255,255,0.2); border-radius: 14px; padding: 12px 22px; }
+  .path span.go { background: var(--cyan); color: var(--navy); border-color: var(--cyan); }
+  .path kbd { font-size: 30px; }
+  .path em { font-style: normal; font-size: 40px; color: var(--cyan); }
+  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 50px; }
+  .grid4 > div { background: rgba(255,255,255,0.06); border: 2px solid rgba(255,255,255,0.14); border-radius: 24px; padding: 34px; font-size: 36px; font-weight: 600; line-height: 1.3; }
+  .grid4 b { display: block; font-size: 60px; color: var(--cyan); margin-bottom: 12px; }
+
+
+  .models { font-size: 34px; font-weight: 700; color: var(--cyan); margin-top: 36px; letter-spacing: 0.02em; }
+  .chips { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 36px; }
+  .chips span { font-size: 30px; font-weight: 600; border: 2px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.06); border-radius: 999px; padding: 10px 26px; }
+  .chips span.red { border-color: rgba(248,113,113,0.7); color: #fca5a5; }
+  .realpanel { position: relative; width: 1080px; height: 420px; flex-shrink: 0; }
+  .realpanel img { width: 1080px; height: 420px; border-radius: 26px; box-shadow: 0 30px 80px rgba(0,0,0,0.5); display: block; }
+  .realpanel .ring { position: absolute; border-radius: 999px; border: 7px solid; }
+  .realpanel .ring.c { border-color: var(--cyan); box-shadow: 0 0 30px rgba(34,211,238,0.8); }
+  .realpanel .ring.g { border-color: var(--green); box-shadow: 0 0 30px rgba(163,230,53,0.8); border-radius: 18px; }
+  .realpanel .tag { position: absolute; font-size: 34px; font-weight: 800; padding: 6px 20px; border-radius: 12px; color: var(--navy); }
+  .realpanel .tag.c { background: var(--cyan); } .realpanel .tag.g { background: var(--green); }
+  .realpanel .clock { position: absolute; right: -40px; top: -40px; width: 140px; height: 140px; border-radius: 50%; background: var(--yellow); color: var(--navy); font-size: 52px; font-weight: 800; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 40px rgba(250,204,21,0.6); }
+</style>
+</head>
+<body>
+<!-- r01 INTRO -->
+<section class="slide" id="r01">
+  <div class="top"><div class="kicker">Kalibracja · seria ZD400 / ZD600</div><div class="brand"><img src="logo-zebra.png" alt="">Autoryzowany Serwis</div></div>
+  <div class="body">
+    <div class="row" style="gap:70px;align-items:center">
+      <div style="flex:1">
+        <h1 style="font-size:88px">Kalibracja<br><span class="hl">SmartCal</span> w 10 s</h1>
+        <div class="models">ZD411 · ZD421 · ZD611 · ZD621 · ZD420 · ZD620</div>
+        <div class="chips"><span>Puste etykiety</span><span>Przesunięty wydruk</span><span class="red">Czerwona dioda</span></div>
+      </div>
+      <div class="photo" style="width:620px;height:620px"><img src="zd421t_1.webp" alt="Zebra ZD421t"></div>
+    </div>
+  </div>
+</section>
+
+<!-- r02 PRZYGOTOWANIE -->
+<section class="slide" id="r02">
+  <div class="top"><div class="kicker">Krok 1 · przygotowanie</div><div class="brand"><img src="logo-zebra.png" alt="">Autoryzowany Serwis</div></div>
+  <div class="body">
+    <div class="row" style="gap:70px;align-items:center">
+      <div style="flex:1">
+        <ol class="steps">
+          <li><span>Załaduj etykiety <span class="dim">(w wersji t także taśmę)</span></span></li>
+          <li><span>Zamknij pokrywę</span></li>
+          <li><span>Poczekaj: <b class="hl-g">STATUS świeci na stałe na zielono</b></span></li>
+        </ol>
+      </div>
+      <div class="realpanel" style="zoom:0.72">
+        <img src="panel-zd621.png" alt="Panel drukarki Zebra">
+        <i class="ring g" style="left:78px;top:42px;width:96px;height:86px"></i>
+        <b class="tag g" style="left:20px;top:-58px">STATUS</b>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- r03 PAUSE + CANCEL -->
+<section class="slide" id="r03">
+  <div class="top"><div class="kicker">Krok 2 · SmartCal</div><div class="brand"><img src="logo-zebra.png" alt="">Autoryzowany Serwis</div></div>
+  <div class="body">
+    <h2>Przytrzymaj <kbd>PAUSE</kbd> + <kbd>CANCEL</kbd> · <span class="hl-y">2 s</span></h2>
+    <p class="sub" style="margin-top:20px">Drukarka wysunie kilka etykiet, zmierzy je i dopasuje czujnik. Koniec: STATUS znów zielony.</p>
+    <div style="display:flex;justify-content:center;margin-top:50px">
+      <div class="realpanel">
+        <img src="panel-zd621.png" alt="Panel drukarki Zebra">
+        <i class="ring c" style="left:88px;top:248px;width:236px;height:132px"></i>
+        <i class="ring c" style="left:740px;top:248px;width:236px;height:132px"></i>
+        <b class="tag c" style="left:118px;top:400px">PAUSE</b>
+        <b class="tag c" style="left:760px;top:400px">CANCEL</b>
+        <div class="clock">2 s</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- r04 TEST FEED -->
+<section class="slide" id="r04">
+  <div class="top"><div class="kicker">Krok 3 · sprawdzenie</div><div class="brand"><img src="logo-zebra.png" alt="">Autoryzowany Serwis</div></div>
+  <div class="body">
+    <div class="row" style="gap:70px;align-items:center">
+      <div style="flex:1">
+        <h2>Naciśnij raz <kbd>FEED</kbd></h2>
+        <p class="sub">Wychodzi <b class="hl-g">dokładnie jedna etykieta</b> — drukarka gotowa.</p>
+        <div class="box" style="margin-top:46px;border-color:rgba(250,204,21,0.6)">
+          <h3 class="hl-y">Wskazówka</h3>
+          <p>Nowa rolka takich samych etykiet (ten sam producent i rozmiar)? Kalibracja niepotrzebna — wystarczy FEED raz lub dwa.</p>
+        </div>
+      </div>
+      <div class="photo" style="width:560px;height:560px"><img src="zd421t_1.webp" alt="Zebra ZD421t"></div>
+    </div>
+  </div>
+</section>
+
+<!-- r05 ZD621 EKRAN DOTYKOWY -->
+<section class="slide" id="r05">
+  <div class="top"><div class="kicker">Modele z ekranem dotykowym</div><div class="brand"><img src="logo-zebra.png" alt="">Autoryzowany Serwis</div></div>
+  <div class="body">
+    <div class="row" style="gap:70px;align-items:center">
+      <div style="flex:1">
+        <h2>ZD621 · kalibracja ręczna</h2>
+        <div class="path"><span>Menu</span><em>›</em><span>Print</span><em>›</em><span>Sensors</span><em>›</em><span class="go">Manual Calibration</span></div>
+        <p class="sub" style="margin-top:34px">Dalej według poleceń kreatora na ekranie.</p>
+      </div>
+      <div class="photo" style="width:620px;height:620px"><img src="zd621t_2.webp" alt="Zebra ZD621t z ekranem dotykowym"></div>
+    </div>
+  </div>
+</section>
+
+<!-- r06 RUCHOMY CZUJNIK -->
+<section class="slide" id="r06">
+  <div class="top"><div class="kicker">Ruchomy czujnik · cała seria ZD</div><div class="brand"><img src="logo-zebra.png" alt="">Autoryzowany Serwis</div></div>
+  <div class="body">
+    <div class="row" style="gap:60px;align-items:center">
+      <div style="flex:1">
+        <div class="box" style="margin-bottom:30px">
+          <h3>Etykiety z przerwą</h3>
+          <svg viewBox="190 -5 320 140" width="100%" height="170">
+            <rect x="200" y="0" width="300" height="130" fill="#e9dfc7"/>
+            <rect x="215" y="8" width="270" height="52" rx="6" fill="#fff"/><rect x="215" y="72" width="270" height="52" rx="6" fill="#fff"/>
+            <circle cx="350" cy="66" r="16" fill="#22d3ee"/>
+          </svg>
+          <p>Czujnik zostaje <b style="color:#fff">na środku</b></p>
+        </div>
+        <div class="box" style="border-color:rgba(163,230,53,0.6)">
+          <h3 class="hl-g">Czarny znacznik lub nacięcie poza środkiem</h3>
+          <svg viewBox="190 -5 320 140" width="100%" height="170">
+            <rect x="200" y="0" width="300" height="130" fill="#fff"/>
+            <rect x="215" y="58" width="60" height="16" fill="#111"/>
+            <circle cx="350" cy="66" r="14" fill="none" stroke="#64748b" stroke-width="3" stroke-dasharray="5 4"/>
+            <path d="M330 66 L268 66" stroke="#a3e635" stroke-width="5" marker-end="url(#g)"/>
+            <defs><marker id="g" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8z" fill="#a3e635"/></marker></defs>
+            <circle cx="245" cy="66" r="16" fill="#a3e635" opacity="0.85"/>
+          </svg>
+          <p>Przesuń czujnik <b style="color:#fff">pod znacznik</b> i powtórz kalibrację</p>
+        </div>
+      </div>
+      <div class="photo" style="width:560px;height:620px"><img src="zd421t_3.webp" alt="Otwarta Zebra ZD421t, widoczny pomarańczowy suwak czujnika"></div>
+    </div>
+  </div>
+</section>
+
+<!-- r07 KONIEC (lewa połowa wolna na elementy końcowe YouTube) -->
+<section class="slide" id="r07">
+  <div class="top"><div class="kicker">Kalibracja nie pomogła?</div><div class="brand"><img src="logo-zebra.png" alt="">Autoryzowany Serwis</div></div>
+  <div class="body" style="align-items:flex-end;text-align:right">
+    <h2>Dalej puste etykiety<br>albo czerwona dioda?</h2>
+    <p class="sub" style="text-align:right">Czyszczenie czujnika i Zebra Setup Utilities — w kolejnym filmie</p>
+    <div class="url">serwis-zebry.pl</div>
+    <p class="sub" style="text-align:right;font-size:32px">Bezpłatny odbiór kurierem · wycena przed naprawą<br><b style="color:#fff">+48 601 619 898</b></p>
+  </div>
+</section>
+
+</body>
+</html>

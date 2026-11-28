@@ -1,0 +1,50 @@
+{
+  "tytul": "Kalibracja Zebra ZD400 / ZD600",
+  "uwagi": "Czasy szacunkowe (2,3 słowa/s). Po wygenerowaniu lektora podmienić na długości nagrań scen.",
+  "koniec": 122.6,
+  "sceny": [
+    {
+      "od": 0.0,
+      "do": 11.9,
+      "plansza": "r01.png",
+      "tekst": "Twoja drukarka Zebra ZD421, ZD411, ZD621 albo starsza ZD420 wypluwa puste etykiety lub przesuwa wydruk? Autoryzowany serwis serwis-zebry.pl pokazuje, jak uruchomić kalibrację SmartCal w dziesięć sekund."
+    },
+    {
+      "od": 11.9,
+      "do": 21.6,
+      "plansza": "r02.png",
+      "tekst": "Załaduj etykiety, a w modelach termotransferowych także taśmę barwiącą. Zamknij pokrywę i poczekaj, aż dioda STATUS zaświeci na stałe na zielono."
+    },
+    {
+      "od": 21.6,
+      "do": 36.5,
+      "plansza": "r03.png",
+      "tekst": "Następnie przytrzymaj jednocześnie przyciski PAUSE i CANCEL przez dwie sekundy i puść. Drukarka wysunie kilka etykiet, zmierzy ich długość i sama dopasuje czujnik. Kalibracja kończy się, gdy dioda STATUS znów świeci na zielono."
+    },
+    {
+      "od": 36.5,
+      "do": 57.1,
+      "plansza": "r04.png",
+      "tekst": "Aby sprawdzić wynik, naciśnij raz przycisk FEED. Jeśli wysunie się dokładnie jedna etykieta, drukarka jest gotowa do pracy. Wskazówka: po założeniu rolki dokładnie takich samych etykiet, od tego samego producenta i w tym samym rozmiarze, kalibracja nie jest potrzebna. Wystarczy raz lub dwa razy nacisnąć FEED."
+    },
+    {
+      "od": 57.1,
+      "do": 69.4,
+      "plansza": "r05.png",
+      "tekst": "Modele z ekranem dotykowym, jak Zebra ZD621, mają też kreator kalibracji ręcznej. Wejdź w Menu, potem Print, Sensors i Manual Calibration, i postępuj według poleceń na ekranie."
+    },
+    {
+      "od": 69.4,
+      "do": 87.0,
+      "plansza": "r06.png",
+      "tekst": "Pamiętaj też o ruchomym czujniku etykiet, który ma cała seria ZD. Przy standardowych etykietach z przerwą czujnik zostaje na środku. Jeśli używasz etykiet z czarnym znacznikiem albo z nacięciem poza środkiem, przesuń czujnik dokładnie pod znacznik i powtórz kalibrację."
+    },
+    {
+      "od": 87.0,
+      "do": 122.6,
+      "plansza": "r07.png",
+      "tekst": "Jeśli mimo kalibracji dioda dalej mruga na czerwono albo wysuwają się puste etykiety, obejrzyj nasz film o tym, co zrobić, gdy kalibracja nie działa. Pokazujemy w nim czyszczenie czujnika i kalibrację przez Zebra Setup Utilities. A jeśli podejrzewasz uszkodzony czujnik, zgłoś naprawę na serwis-zebry.pl. Kurier odbierze drukarkę bezpłatnie, a wycenę dostaniesz przed naprawą.",
+      "tekstDo": 110.6
+    }
+  ]
+}
