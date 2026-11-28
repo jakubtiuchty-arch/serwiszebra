@@ -1,0 +1,19 @@
+{
+  "tytul": "Skaner Zebra: Enter lub Tab po każdym skanie",
+  "uwagi": "Czasy w sekundach. kod=true: plansza z kodem do zeskanowania — stoi nieruchomo, bez zbliżenia. ujecie: B-roll ze scenariusza, na razie zastępowany planszą.",
+  "koniec": 165,
+  "sceny": [
+    { "od": 0, "do": 7, "plansza": "p01.png", "ujecie": "B1", "tekst": "Skanujesz kod, a kursor stoi w miejscu i za każdym razem dociskasz Enter? Jeden kod kreskowy i skaner Zebra zrobi to sam." },
+    { "od": 7, "do": 17, "plansza": "p02.png", "ujecie": "B1", "tekst": "Domyślnie skaner wpisuje tylko sam kod. Po każdym skanie trzeba ręcznie wcisnąć Enter albo przejść do następnej komórki. Przy setce paczek dziennie to setka zbędnych kliknięć." },
+    { "od": 17, "do": 29, "plansza": "p03.png", "ujecie": "B2", "tekst": "Potrzebujesz skanera Zebra podłączonego przez USB, na przykład DS2208, DS4608 albo LI2208, i otwartego Notatnika, żeby od razu sprawdzić efekt. Kody pokażę na ekranie." },
+    { "od": 29, "do": 45, "plansza": "p04.png", "kod": true, "ujecie": "B3", "tekst": "Krok pierwszy: przywróć ustawienia fabryczne. Zatrzymaj film i zeskanuj kod Restore Defaults. Skaner potwierdzi to sygnałem. Jeśli skaner ustawiał wasz dział IT, najpierw zapytaj, bo reset kasuje ich konfigurację." },
+    { "od": 45, "do": 57, "plansza": "p05.png", "kod": true, "ujecie": "B4", "tekst": "Krok drugi: zeskanuj kod Add Enter Key. Od teraz skaner po każdym kodzie sam naciska Enter." },
+    { "od": 57, "do": 69, "plansza": "p06.png", "ujecie": "B5", "tekst": "Sprawdź w Notatniku. Skanujesz kod i kursor sam przechodzi do nowej linii. Tak samo działa to w Excelu, w programie magazynowym i w przeglądarce." },
+    { "od": 69, "do": 87, "plansza": "p07.png", "kod": true, "ujecie": "B6", "tekst": "Wolisz, żeby kursor przeskakiwał do następnego pola formularza albo do komórki obok? Wtedy zamiast Entera ustaw Tab. Zeskanuj Restore Defaults, a potem kod Tab Key. Wybierz jedno: Enter albo Tab." },
+    { "od": 87, "do": 107, "plansza": "p08.png", "kod": true, "ujecie": "B7", "tekst": "Skaner nie czyta kodów QR? Najpierw sprawdź model. Skanery serii LS i LI czytają tylko zwykłe kody kreskowe i żadne ustawienie tego nie zmieni. Seria DS czyta QR i DataMatrix. Jeśli ktoś je wyłączył, zeskanuj kod Enable QR Code albo Enable Data Matrix." },
+    { "od": 107, "do": 122, "plansza": "p09.png", "ujecie": "B8", "tekst": "Zamiast polskich liter pojawiają się krzaki? Układ klawiatury w skanerze i w komputerze musi się zgadzać. Kod dla Polski znajdziesz w instrukcji PRG swojego modelu, w sekcji Country Codes, a w Windows ustaw polski układ klawiatury." },
+    { "od": 122, "do": 139, "plansza": "p10.png", "ujecie": "B9", "tekst": "Trzy rzeczy na koniec. Ustawienia zostają po odłączeniu i restarcie skanera. Żeby wszystko cofnąć, zeskanuj Restore Defaults. A jeśli kod z ekranu nie chce wejść, powiększ go, rozjaśnij monitor i trzymaj skaner dziesięć do dwudziestu centymetrów od ekranu." },
+    { "od": 139, "do": 148, "plansza": "p11.png", "kod": true, "tekst": "Wszystkie kody z tego filmu masz tutaj na jednej planszy. Zatrzymaj film i skanuj." },
+    { "od": 148, "do": 165, "plansza": "p12.png", "tekst": "Kody do wydruku i pełny poradnik znajdziesz w opisie filmu. A jeśli skaner dalej nie działa jak trzeba, zadzwoń. Jesteśmy autoryzowanym serwisem Zebra.", "tekstDo": 158 }
+  ]
+}

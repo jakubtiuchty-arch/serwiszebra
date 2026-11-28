@@ -36,3 +36,5 @@ next-env.d.ts
 
 # Google Cloud credentials
 google-cloud-key.json
+# Filmy Remotion: wyrenderowane pliki
+/wideo/out/
