@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>Plansze — kalibracja drukarki Zebra</title>
+<style>
+  :root {
+    --navy: #0a1228;
+    --navy2: #121f45;
+    --cyan: #22d3ee;
+    --green: #a3e635;
+    --yellow: #facc15;
+    --text: #ffffff;
+    --muted: #b8c4dc;
+    --card: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #222; font-family: 'Inter', 'DejaVu Sans', sans-serif; }
+  .slide {
+    width: 1920px; height: 1080px; position: relative; overflow: hidden;
+    background:
+      radial-gradient(900px 600px at 78% 30%, rgba(34, 211, 238, 0.16), transparent 70%),
+      radial-gradient(700px 500px at 12% 92%, rgba(163, 230, 53, 0.10), transparent 70%),
+      linear-gradient(160deg, var(--navy2), var(--navy) 60%);
+    color: var(--text);
+    padding: 96px 120px;
+    display: flex; flex-direction: column;
+    margin-bottom: 40px;
+  }
+  /* cienkie „wyładowania" jak w miniaturach v4 — tylko akcent na krawędzi */
+  .slide::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background:
+      linear-gradient(115deg, transparent 0 86%, rgba(34, 211, 238, 0.55) 86.2%, transparent 86.6%),
+      linear-gradient(100deg, transparent 0 91%, rgba(163, 230, 53, 0.45) 91.15%, transparent 91.5%),
+      linear-gradient(125deg, transparent 0 95%, rgba(250, 204, 21, 0.4) 95.1%, transparent 95.4%);
+  }
+  .top { display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 1; }
+  .kicker { font-size: 26px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); }
+  .brand { display: flex; align-items: center; gap: 16px; background: #fff; color: #111; border-radius: 999px; padding: 10px 26px 10px 22px; font-size: 22px; font-weight: 600; }
+  .brand img { height: 34px; }
+  .body { flex: 1; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 1; }
+  .badge { align-self: flex-start; width: fit-content; font-size: 30px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy); background: var(--cyan); border-radius: 14px; padding: 10px 24px; margin-bottom: 34px; }
+  .badge.green { background: var(--green); }
+  .badge.yellow { background: var(--yellow); }
+  h1 { font-size: 96px; font-weight: 800; line-height: 1.04; letter-spacing: -0.02em; }
+  h2 { font-size: 76px; font-weight: 800; line-height: 1.08; letter-spacing: -0.015em; }
+  .sub { font-size: 40px; line-height: 1.4; color: var(--muted); margin-top: 30px; max-width: 1500px; }
+  .hl { color: var(--cyan); }
+  .hl-g { color: var(--green); }
+  .hl-y { color: var(--yellow); }
+  .row { display: flex; gap: 80px; align-items: center; }
+  .codecard {
+    background: var(--card); border-radius: 28px; padding: 40px 56px;
+    box-shadow: 0 0 0 6px rgba(34, 211, 238, 0.85), 0 0 80px rgba(34, 211, 238, 0.35);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .codecard img { image-rendering: pixelated; display: block; }
+  .pause { position: relative; z-index: 1; display: flex; align-items: center; gap: 20px; font-size: 32px; font-weight: 600; color: #fff; }
+  .pause .ico { width: 56px; height: 56px; border-radius: 50%; background: var(--yellow); display: flex; align-items: center; justify-content: center; gap: 7px; }
+  .pause .ico i { width: 8px; height: 22px; background: var(--navy); border-radius: 2px; }
+  ul.list { list-style: none; margin-top: 44px; display: flex; flex-direction: column; gap: 26px; }
+  ul.list li { font-size: 44px; line-height: 1.3; display: flex; gap: 26px; align-items: baseline; }
+  ul.list li b { color: var(--cyan); font-weight: 800; min-width: 60px; }
+  .notepad { background: #fff; color: #111; border-radius: 18px; width: 760px; box-shadow: 0 30px 80px rgba(0,0,0,0.45); overflow: hidden; }
+  .notepad .bar { background: #e5e7eb; padding: 14px 22px; font-size: 22px; color: #374151; }
+  .notepad pre { font-family: 'JetBrains Mono', monospace; font-size: 34px; line-height: 1.6; padding: 26px 30px; }
+  .notepad pre span { background: rgba(163, 230, 53, 0.35); }
+  .cell { display: inline-block; border: 3px solid #9ca3af; padding: 16px 26px; font-family: 'JetBrains Mono', monospace; font-size: 30px; background: #fff; color: #111; min-width: 230px; }
+  .cell.on { border-color: var(--green); box-shadow: 0 0 0 4px rgba(163,230,53,0.5); }
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 50px; }
+  .box { border-radius: 26px; padding: 40px 44px; background: rgba(255,255,255,0.06); border: 2px solid rgba(255,255,255,0.14); }
+  .box h3 { font-size: 44px; font-weight: 800; margin-bottom: 16px; }
+  .box p { font-size: 34px; line-height: 1.4; color: var(--muted); }
+  .grid-codes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px 40px; margin-top: 36px; }
+  .mini { background: #fff; border-radius: 20px; padding: 22px; display: flex; align-items: center; justify-content: center; height: 250px; }
+  .mini img { max-width: 100%; max-height: 210px; }
+  .url { font-family: 'JetBrains Mono', monospace; font-size: 34px; color: var(--cyan); background: rgba(34,211,238,0.10); border: 2px solid rgba(34,211,238,0.5); border-radius: 16px; padding: 18px 28px; display: inline-block; margin-top: 34px; }
+
+
+  kbd { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 0.8em; background: #fff; color: var(--navy); border-radius: 10px; padding: 4px 14px; box-shadow: 0 4px 0 #94a3b8; }
+  code { font-family: 'JetBrains Mono', monospace; color: var(--cyan); background: rgba(34,211,238,0.12); padding: 2px 10px; border-radius: 8px; }
+  .dim { color: var(--muted); font-size: 0.8em; }
+  .photo { background: #fff; border-radius: 26px; overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: 0 30px 80px rgba(0,0,0,0.45); flex-shrink: 0; }
+  .photo img { width: 100%; height: 100%; object-fit: contain; }
+  .shortcuts { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 34px; margin-top: 46px; }
+  .sc { display: flex; gap: 26px; align-items: center; background: rgba(255,255,255,0.06); border: 2px solid rgba(255,255,255,0.14); border-radius: 22px; padding: 18px 26px 18px 18px; }
+  .sc .ph { width: 170px; height: 150px; border-radius: 16px; background: #fff; overflow: hidden; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .sc .ph img { width: 100%; height: 100%; object-fit: contain; }
+  .sc .ph-txt { background: rgba(255,255,255,0.08); color: var(--muted); font-size: 52px; font-weight: 800; }
+  .sc .m { font-size: 25px; font-weight: 700; color: var(--cyan); letter-spacing: 0.02em; margin-bottom: 12px; }
+  .sc .k { font-size: 33px; font-weight: 600; line-height: 1.35; }
+  ol.steps { list-style: none; counter-reset: s; margin-top: 36px; display: flex; flex-direction: column; gap: 26px; }
+  ol.steps li { counter-increment: s; font-size: 42px; line-height: 1.35; display: flex; gap: 24px; align-items: baseline; }
+  ol.steps li::before { content: counter(s); font-weight: 800; color: var(--navy); background: var(--cyan); border-radius: 50%; width: 54px; height: 54px; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; font-size: 30px; transform: translateY(-4px); }
+  .panel { position: relative; background: #2b2f36; border-radius: 22px; padding: 22px 30px; box-shadow: inset 0 2px 0 rgba(255,255,255,0.08), 0 20px 50px rgba(0,0,0,0.4); }
+  .panel .leds { display: flex; gap: 16px; margin-bottom: 18px; }
+  .panel .led { font-size: 15px; font-weight: 700; color: #9ca3af; display: flex; align-items: center; gap: 7px; letter-spacing: 0.04em; }
+  .panel .led::before { content: ''; width: 14px; height: 14px; border-radius: 50%; background: #4b5563; }
+  .panel .led.on { color: #bef264; } .panel .led.on::before { background: #84cc16; box-shadow: 0 0 14px #84cc16; }
+  .panel .btns { display: flex; gap: 16px; }
+  .panel .btn { font-size: 24px; font-weight: 800; color: #d1d5db; background: #3f444d; border-radius: 999px; padding: 12px 26px; }
+  .panel .btn.hot { background: var(--cyan); color: var(--navy); box-shadow: 0 0 24px rgba(34,211,238,0.7); }
+  .panel .sec { position: absolute; right: -26px; top: -26px; background: var(--yellow); color: var(--navy); font-weight: 800; font-size: 28px; border-radius: 999px; padding: 8px 18px; }
+  .blinks { margin-top: 40px; display: flex; flex-direction: column; gap: 22px; }
+  .bk { display: flex; gap: 28px; align-items: center; background: rgba(255,255,255,0.06); border: 2px solid rgba(255,255,255,0.14); border-radius: 20px; padding: 22px 30px; }
+  .bk.go { border-color: var(--green); background: rgba(163,230,53,0.12); }
+  .bk .dots { display: flex; gap: 12px; width: 120px; }
+  .bk .dots i { width: 40px; height: 40px; border-radius: 50%; background: #84cc16; box-shadow: 0 0 22px #84cc16; }
+  .bk b { display: block; font-size: 40px; } .bk.go b { color: var(--green); }
+  .bk span { font-size: 30px; color: var(--muted); }
+  .warn { border: 6px solid #ef4444; border-radius: 34px; padding: 50px 56px; background: rgba(239,68,68,0.08); box-shadow: 0 0 80px rgba(239,68,68,0.25); }
+  .warn .split { grid-template-columns: 1fr 1fr; }
+  .box.red { border-color: rgba(248,113,113,0.6); }
+  .box.red h3 { color: #fca5a5; }
+  .path { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 40px; }
+  .path span { font-size: 34px; font-weight: 700; background: rgba(255,255,255,0.08); border: 2px solid rgba(255,255,255,0.2); border-radius: 14px; padding: 12px 22px; }
+  .path span.go { background: var(--cyan); color: var(--navy); border-color: var(--cyan); }
+  .path kbd { font-size: 30px; }
+  .path em { font-style: normal; font-size: 40px; color: var(--cyan); }
+  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 50px; }
+  .grid4 > div { background: rgba(255,255,255,0.06); border: 2px solid rgba(255,255,255,0.14); border-radius: 24px; padding: 34px; font-size: 36px; font-weight: 600; line-height: 1.3; }
+  .grid4 b { display: block; font-size: 60px; color: var(--cyan); margin-bottom: 12px; }
+</style>
+</head>
+<body>
+<!-- q01 TYTUŁ + SKRÓTY -->
+<section class="slide" id="q01">
+  <div class="top"><div class="kicker">Poradnik · drukarki etykiet Zebra</div><div class="brand"><img src="logo-zebra.png" alt="">Autoryzowany Serwis</div></div>
+  <div class="body">
+    <h1 style="font-size:84px">Kalibracja drukarki <span class="hl">Zebra</span></h1>
+    <div class="shortcuts">
+      <div class="sc"><div class="ph"><img src="zd421t_1.webp" alt=""></div><div><div class="m">ZD411 · ZD421 · ZD611 · ZD621 · ZD420 · ZD620</div><div class="k"><kbd>PAUSE</kbd> + <kbd>CANCEL</kbd> · 2 s</div></div></div>
+      <div class="sc"><div class="ph"><img src="zd220d_1.webp" alt=""></div><div><div class="m">ZD220 · ZD230 · GK420 · GX420 · GC420</div><div class="k"><kbd>FEED</kbd> → puść po <b class="hl-g">2 mignięciach</b></div></div></div>
+      <div class="sc"><div class="ph"><img src="zt411_1.webp" alt=""></div><div><div class="m">ZT411 · ZT421</div><div class="k">Menu › Print › Sensors › Manual Calibration</div></div></div>
+      <div class="sc"><div class="ph ph-txt">ZT</div><div><div class="m">ZT220 · ZT230 · ZT410 · ZT420 · ZT510</div><div class="k"><kbd>PAUSE</kbd> + <kbd>CANCEL</kbd> → podkład, potem etykieta</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- q02 KIEDY KALIBROWAĆ -->
+<section class="slide" id="q02">
+  <div class="top"><div class="kicker">Kiedy kalibrować</div><div class="brand"><img src="logo-zebra.png" alt="">Autoryzowany Serwis</div></div>
+  <div class="body">
+    <h2>Drukarka uczy się <span class="hl">typu, początku i długości</span> etykiety</h2>
+    <ul class="list">
+      <li><b>✓</b><span>Inny rozmiar albo rodzaj etykiet</span></li>
+      <li><b>✓</b><span>Rolka od innego producenta</span></li>
+      <li><b>✓</b><span>Po wymianie głowicy albo wałka dociskowego</span></li>
+      <li><b style="color:var(--muted)">✕</b><span style="color:var(--muted)">Nowa rolka takich samych etykiet — nie trzeba</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- q03 ZD — PAUSE + CANCEL -->
+<section class="slide" id="q03">
+  <div class="top"><div class="kicker">Seria ZD411 · ZD421 · ZD611 · ZD621 · ZD420 · ZD620</div><div class="brand"><img src="logo-zebra.png" alt="">Autoryzowany Serwis</div></div>
+  <div class="body">
+    <div class="row" style="gap:70px;align-items:center">
+      <div style="flex:1">
+        <ol class="steps">
+          <li><span>Załaduj etykiety <span class="dim">(w wersji t także taśmę)</span></span></li>
+          <li><span>Zamknij pokrywę — <b class="hl-g">STATUS świeci na zielono</b></span></li>
+          <li><span>Przytrzymaj <kbd>PAUSE</kbd> + <kbd>CANCEL</kbd> <b class="hl">2 s</b> i puść</span></li>
+          <li><span>Test: <kbd>FEED</kbd> → wychodzi <b class="hl-g">dokładnie 1 etykieta</b></span></li>
+        </ol>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:30px;align-items:center">
+        <div class="photo" style="width:520px;height:390px"><img src="zd421t_1.webp" alt="Zebra ZD421t"></div>
+        <div class="panel">
+          <div class="leds">
+            <span class="led on">STATUS</span><span class="led">PAUSE</span><span class="led">DATA</span><span class="led">SUPPLIES</span><span class="led">NETWORK</span>
+          </div>
+          <div class="btns"><span class="btn hot">‖ PAUSE</span><span class="btn">FEED</span><span class="btn hot">✕ CANCEL</span></div>
+          <div class="sec">2 s</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- q04 FEED — 2 MIGNIĘCIA -->
+<section class="slide" id="q04">
+  <div class="top"><div class="kicker">ZD220 · ZD230 · GK420 · GX420 · GC420</div><div class="brand"><img src="logo-zebra.png" alt="">Autoryzowany Serwis</div></div>
+  <div class="body">
+    <div class="row" style="gap:80px;align-items:center">
+      <div style="flex:1">
+        <h2>Przytrzymaj <span class="hl">FEED</span><br>i licz mignięcia</h2>
+        <div class="blinks">
+          <div class="bk"><div class="dots"><i></i></div><div><b>1 mignięcie</b><span>wydruk konfiguracji — trzymaj dalej</span></div></div>
+          <div class="bk go"><div class="dots"><i></i><i></i></div><div><b>2 mignięcia → PUŚĆ</b><span>kalibracja</span></div></div>
+        </div>
+        <p class="sub" style="font-size:30px;margin-top:30px">Drukarka musi być włączona i gotowa.</p>
+      </div>
+      <div class="photo" style="width:620px;height:560px"><img src="zd220d_1.webp" alt="Zebra ZD220d"></div>
+    </div>
+  </div>
+</section>
+
+<!-- q05 OSTRZEŻENIE -->
+<section class="slide" id="q05">
+  <div class="top"><div class="kicker">Uwaga</div><div class="brand"><img src="logo-zebra.png" alt="">Autoryzowany Serwis</div></div>
+  <div class="body">
+    <div class="warn">
+      <h2>Nie trzymaj <span style="color:#f87171">do resetu</span></h2>
+      <div class="split" style="margin-top:36px;gap:40px">
+        <div class="box red"><h3>3 mignięcia</h3><p>ZD220 i ZD230: ustawienia fabryczne</p></div>
+        <div class="box red"><h3>4 mignięcia</h3><p>GK420: ustawienia fabryczne</p></div>
+        <div class="box red"><h3>FEED przy włączaniu</h3><p>Tryb serwisowy, nie kalibracja</p></div>
+        <div class="box" style="border-color:rgba(250,204,21,0.6)"><h3 class="hl-y">7 mignięć · GK420</h3><p>Pełna kalibracja ręczna — etykiety z nadrukiem wstępnym</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- q06 ZT411 / ZT421 — MENU -->
+<section class="slide" id="q06">
+  <div class="top"><div class="kicker">Drukarki przemysłowe z ekranem dotykowym</div><div class="brand"><img src="logo-zebra.png" alt="">Autoryzowany Serwis</div></div>
+  <div class="body">
+    <div class="row" style="gap:70px;align-items:center">
+      <div style="flex:1">
+        <h2 style="font-size:64px">ZT411 · ZT421</h2>
+        <div class="path">
+          <span>Menu</span><em>›</em><span>Print</span><em>›</em><span>Sensors</span><em>›</em><span>Manual Calibration</span>
+        </div>
+        <div class="path" style="margin-top:18px"><span class="go">Start Calibration</span><em>→</em><span>komunikaty na ekranie</span><em>→</em><kbd>PAUSE</kbd></div>
+        <div class="box" style="margin-top:44px;padding:28px 34px"><h3 style="font-size:34px">ZT610 · ZT620</h3><p style="font-size:30px">Z ekranem dotykowym — tak samo. Bez ekranu dotykowego: <b style="color:#fff">TOOLS › MEDIA/RIBBON CAL</b></p></div>
+      </div>
+      <div class="photo" style="width:560px;height:640px"><img src="zt411_1.webp" alt="Zebra ZT411"></div>
+    </div>
+  </div>
+</section>
+
+<!-- q07 ZT220/230/410/420/510 — PODKŁAD → ETYKIETA -->
+<section class="slide" id="q07">
+  <div class="top"><div class="kicker">ZT220 · ZT230 · ZT410 · ZT420 · ZT510</div><div class="brand"><img src="logo-zebra.png" alt="">Autoryzowany Serwis</div></div>
+  <div class="body">
+    <h2 style="font-size:64px">Najpierw <kbd style="font-size:44px">PAUSE</kbd> + <kbd style="font-size:44px">CANCEL</kbd> przez 2 s</h2>
+    <div class="split" style="margin-top:44px">
+      <div class="box">
+        <div class="badge" style="margin-bottom:20px">Krok 1 · sam podkład</div>
+        <svg viewBox="0 0 700 150" width="100%" height="150">
+          <rect x="0" y="60" width="700" height="34" rx="4" fill="#e9dfc7"/>
+          <rect x="300" y="20" width="100" height="22" rx="5" fill="#22d3ee"/><rect x="300" y="112" width="100" height="22" rx="5" fill="#22d3ee"/>
+          <line x1="350" y1="42" x2="350" y2="112" stroke="#22d3ee" stroke-width="4" stroke-dasharray="8 6"/>
+          <text x="20" y="85" font-size="22" fill="#6b5a3a" font-family="Inter">ok. 20 cm bez etykiet</text>
+        </svg>
+        <p>Zdejmij etykiety z ok. 20 cm, wyjmij taśmę, zamknij głowicę → <b style="color:#fff">PAUSE</b></p>
+      </div>
+      <div class="box" style="border-color:rgba(163,230,53,0.6)">
+        <div class="badge green" style="margin-bottom:20px">Krok 2 · etykieta</div>
+        <svg viewBox="0 0 700 150" width="100%" height="150">
+          <rect x="0" y="60" width="700" height="34" rx="4" fill="#e9dfc7"/>
+          <rect x="230" y="58" width="240" height="38" rx="6" fill="#fff" stroke="#cbd5e1"/>
+          <rect x="490" y="58" width="200" height="38" rx="6" fill="#fff" stroke="#cbd5e1"/>
+          <rect x="300" y="20" width="100" height="22" rx="5" fill="#a3e635"/><rect x="300" y="112" width="100" height="22" rx="5" fill="#a3e635"/>
+          <line x1="350" y1="42" x2="350" y2="112" stroke="#a3e635" stroke-width="4" stroke-dasharray="8 6"/>
+        </svg>
+        <p>Etykieta pod czujnikiem, załóż taśmę, zamknij głowicę → <b style="color:#fff">PAUSE</b></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- q08 4 PRZYCZYNY -->
+<section class="slide" id="q08">
+  <div class="top"><div class="kicker">Kalibracja nie pomogła?</div><div class="brand"><img src="logo-zebra.png" alt="">Autoryzowany Serwis</div></div>
+  <div class="body">
+    <h2>Puste etykiety albo <span style="color:#f87171">Media Out</span>?<br>Sprawdź 4 rzeczy</h2>
+    <div class="grid4">
+      <div><b>1</b>Rodzaj i położenie czujnika</div>
+      <div><b>2</b>Brud na czujniku</div>
+      <div><b>3</b>Nietypowe lub przezroczyste etykiety</div>
+      <div><b>4</b>Marginesy i wałek dociskowy</div>
+    </div>
+  </div>
+</section>
+
+<!-- q09 GAP vs BLACK MARK -->
+<section class="slide" id="q09">
+  <div class="top"><div class="kicker">1 · Czujnik</div><div class="brand"><img src="logo-zebra.png" alt="">Autoryzowany Serwis</div></div>
+  <div class="body">
+    <div class="split" style="gap:50px">
+      <div class="box">
+        <h3>Etykiety z przerwą</h3>
+        <svg viewBox="0 0 700 170" width="100%" height="170">
+          <rect x="0" y="70" width="700" height="34" rx="4" fill="#e9dfc7"/>
+          <rect x="20" y="68" width="300" height="38" rx="6" fill="#fff"/><rect x="345" y="68" width="300" height="38" rx="6" fill="#fff"/>
+          <rect x="295" y="20" width="80" height="22" rx="5" fill="#22d3ee"/><rect x="295" y="132" width="80" height="22" rx="5" fill="#22d3ee"/>
+          <line x1="333" y1="42" x2="333" y2="132" stroke="#22d3ee" stroke-width="5"/>
+        </svg>
+        <p>Światło przechodzi przez <b style="color:#fff">przerwę</b> — czujnik przerwy (transmisyjny)</p>
+      </div>
+      <div class="box">
+        <h3>Czarny znacznik na spodzie</h3>
+        <svg viewBox="0 0 700 170" width="100%" height="170">
+          <rect x="0" y="50" width="700" height="34" rx="4" fill="#fff"/>
+          <rect x="300" y="84" width="70" height="14" fill="#111"/>
+          <rect x="295" y="136" width="80" height="22" rx="5" fill="#facc15"/>
+          <path d="M318 136 L335 100 L352 136" stroke="#facc15" stroke-width="5" fill="none"/>
+        </svg>
+        <p>Światło odbija się od spodu — czujnik <b style="color:#fff">czarnego znacznika</b> (odblaskowy)</p>
+      </div>
+    </div>
+    <div class="row" style="margin-top:40px;gap:40px;align-items:center">
+      <div class="photo" style="width:330px;height:250px"><img src="zd421t_3.webp" alt="Otwarta Zebra ZD421t"></div>
+      <div style="font-size:34px;line-height:1.45;flex:1;padding-right:60px">
+        <div><b class="hl-g">Ruchomy czujnik:</b> seria ZD, ZT411, ZT421, ZT510, ZT610 — ustaw go na przerwę lub znacznik</div>
+        <div style="color:var(--muted)"><b>Stały:</b> ZT220, ZT230, ZT410, ZT420</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- q10 CZYSZCZENIE -->
+<section class="slide" id="q10">
+  <div class="top"><div class="kicker">2 · Brud</div><div class="brand"><img src="logo-zebra.png" alt="">Autoryzowany Serwis</div></div>
+  <div class="body">
+    <div class="row" style="gap:70px;align-items:center">
+      <div style="flex:1">
+        <h2>Pył i klej <span class="hl-y">zasłaniają czujnik</span></h2>
+        <ol class="steps">
+          <li><span>Wyłącz drukarkę</span></li>
+          <li><span>Przedmuchaj czujnik <b class="hl">sprężonym powietrzem</b></span></li>
+          <li><span>Mocny brud: wacik z <b class="hl">alkoholem izopropylowym 99%</b></span></li>
+        </ol>
+      </div>
+      <div class="photo" style="width:600px;height:600px"><img src="zd421t_3.webp" alt="Otwarta Zebra ZD421t"></div>
+    </div>
+  </div>
+</section>
+
+<!-- q11 ZEBRA SETUP UTILITIES -->
+<section class="slide" id="q11">
+  <div class="top"><div class="kicker">3 · Nietypowe etykiety</div><div class="brand"><img src="logo-zebra.png" alt="">Autoryzowany Serwis</div></div>
+  <div class="body">
+    <h2 style="font-size:64px">Zebra Setup Utilities <span style="color:var(--muted);font-weight:600">(darmowy)</span></h2>
+    <div class="path" style="margin-top:40px"><span>Open Printer Tools</span><em>›</em><span>Action</span><em>›</em><span>Calibrate Media</span><em>›</em><span class="go">Send</span></div>
+    <div class="split" style="margin-top:50px">
+      <div class="box"><h3>Zakładka Printing</h3><p><b style="color:#fff">Media Type</b> — rodzaj nośnika<br><b style="color:#fff">Label Length</b> — długość etykiety</p></div>
+      <div class="box"><h3>Komenda ZPL</h3><p>Kalibracja z poziomu ZPL: <code>~JC</code></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- q12 MARGINESY I WAŁEK -->
+<section class="slide" id="q12">
+  <div class="top"><div class="kicker">4 · Wydruk dalej ucieka</div><div class="brand"><img src="logo-zebra.png" alt="">Autoryzowany Serwis</div></div>
+  <div class="body">
+    <h2>Kalibracja OK,<br>a wydruk <span class="hl-y">się przesuwa</span>?</h2>
+    <div class="split">
+      <div class="box"><h3>Sterownik</h3><p><b style="color:#fff">Label Top</b> i <b style="color:#fff">Left Position</b> — marginesy</p></div>
+      <div class="box"><h3>Wałek dociskowy</h3><p>Zużyty lub brudny — etykieta się ślizga</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- q13 USTERKA SPRZĘTOWA -->
+<section class="slide" id="q13">
+  <div class="top"><div class="kicker">Kiedy przestać resetować</div><div class="brand"><img src="logo-zebra.png" alt="">Autoryzowany Serwis</div></div>
+  <div class="body">
+    <h2>To już <span style="color:#f87171">usterka sprzętowa</span></h2>
+    <div class="grid4" style="grid-template-columns:repeat(2,1fr)">
+      <div><b>!</b>Czysty czujnik, a drukarka nie widzi etykiet</div>
+      <div><b>!</b>Czerwona dioda na każdej, sprawdzonej rolce</div>
+      <div><b>!</b>Zużyty wałek — etykieta się ślizga</div>
+      <div><b>!</b>Błąd płyty głównej lub oprogramowania</div>
+    </div>
+    <p class="sub" style="margin-top:36px">Wymiana czujnika: orientacyjnie <b style="color:#fff">150–550 zł</b>, zależnie od modelu</p>
+  </div>
+</section>
+
+<!-- q14 KONIEC (lewa połowa wolna na elementy końcowe YouTube) -->
+<section class="slide" id="q14">
+  <div class="top"><div class="kicker">serwis-zebry.pl</div><div class="brand"><img src="logo-zebra.png" alt="">Autoryzowany Serwis</div></div>
+  <div class="body" style="align-items:flex-end;text-align:right">
+    <h2>Zgłoś naprawę<br>online</h2>
+    <div class="url">serwis-zebry.pl</div>
+    <p class="sub" style="text-align:right">Bezpłatny odbiór kurierem · wycena przed naprawą<br>Tabela kalibracji wszystkich modeli — link w opisie<br><b style="color:#fff">+48 601 619 898</b></p>
+  </div>
+</section>
+
+</body>
+</html>

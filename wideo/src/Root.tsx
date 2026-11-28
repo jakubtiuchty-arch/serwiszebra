@@ -2,12 +2,14 @@ import React from 'react'
 import { Composition } from 'remotion'
 import { Film, type FilmProps } from './Film'
 import film01 from '../../docs/youtube/01-skaner-enter-tab/sceny.json'
+import film02 from '../../docs/youtube/02-kalibracja-drukarki/sceny.json'
 
 const FPS = 30
 
 // Każdy film: katalog w docs/youtube/ z plansze/*.png i sceny.json
 const FILMY: { id: string; katalog: string; dane: FilmProps['dane'] }[] = [
   { id: 'Film01-SkanerEnterTab', katalog: '01-skaner-enter-tab', dane: film01 },
+  { id: 'Film02-KalibracjaDrukarki', katalog: '02-kalibracja-drukarki', dane: film02 },
 ]
 
 export const Root: React.FC = () => (

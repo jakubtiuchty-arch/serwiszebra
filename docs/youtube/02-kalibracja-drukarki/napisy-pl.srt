@@ -1,0 +1,319 @@
+1
+00:00:00,000 --> 00:00:02,857
+Drukarka etykiet Zebra wypluwa puste etykiety,
+
+2
+00:00:02,907 --> 00:00:05,511
+przesuwa wydruk albo mruga czerwoną diodą?
+
+3
+00:00:05,561 --> 00:00:08,482
+Najczęściej pomaga kalibracja czujnika etykiet.
+
+4
+00:00:08,532 --> 00:00:10,883
+W modelach ZD411, ZD421, ZD611, ZD621,
+
+5
+00:00:10,933 --> 00:00:15,054
+ZD420 i ZD620 przytrzymaj razem PAUSE i CANCEL przez dwie sekundy.
+
+6
+00:00:15,104 --> 00:00:16,445
+W GK420, GX420, GC420,
+
+7
+00:00:16,495 --> 00:00:20,553
+ZD220 i ZD230 przytrzymaj FEED i puść po dwóch mignięciach diody.
+
+8
+00:00:20,603 --> 00:00:24,850
+Ten poradnik przygotował autoryzowany serwis Zebra, serwis-zebry.pl.
+
+9
+00:00:24,900 --> 00:00:29,953
+Kalibracja uczy drukarkę rozpoznawać rodzaj etykiety, jej początek i długość.
+
+10
+00:00:30,003 --> 00:00:32,338
+Zrób ją po zmianie rozmiaru etykiet,
+
+11
+00:00:32,388 --> 00:00:37,110
+po założeniu rolki od innego producenta i po wymianie głowicy albo wałka
+
+12
+00:00:37,160 --> 00:00:37,905
+dociskowego.
+
+13
+00:00:37,955 --> 00:00:41,550
+Nowa rolka takich samych etykiet kalibracji nie wymaga.
+
+14
+00:00:41,600 --> 00:00:44,829
+Zaczynamy od serii biurkowej: ZD411, ZD421, ZD611,
+
+15
+00:00:44,879 --> 00:00:47,125
+ZD621 oraz starszych ZD420 i ZD620.
+
+16
+00:00:47,175 --> 00:00:51,191
+Załaduj etykiety, a w modelach termotransferowych także taśmę.
+
+17
+00:00:51,241 --> 00:00:55,389
+Zamknij pokrywę i poczekaj, aż dioda STATUS zaświeci na zielono.
+
+18
+00:00:55,439 --> 00:00:59,258
+Przytrzymaj razem PAUSE i CANCEL przez dwie sekundy i puść.
+
+19
+00:00:59,308 --> 00:01:02,669
+Drukarka wysunie kilka etykiet i zapisze ustawienia.
+
+20
+00:01:02,719 --> 00:01:03,849
+Naciśnij raz FEED.
+
+21
+00:01:03,899 --> 00:01:07,850
+Jeśli wyjdzie dokładnie jedna etykieta, kalibracja się udała.
+
+22
+00:01:07,900 --> 00:01:09,396
+W GK420d, GK420t, GX420,
+
+23
+00:01:09,446 --> 00:01:13,649
+GC420 oraz ZD220 i ZD230 kalibrację robisz samym przyciskiem FEED,
+
+24
+00:01:13,699 --> 00:01:15,196
+przy włączonej drukarce.
+
+25
+00:01:15,246 --> 00:01:16,291
+Przytrzymaj FEED.
+
+26
+00:01:16,341 --> 00:01:21,124
+Po pierwszym mignięciu drukarka wydrukuje konfigurację, więc trzymaj dalej.
+
+27
+00:01:21,174 --> 00:01:23,250
+Po drugim mignięciu od razu puść.
+
+28
+00:01:23,300 --> 00:01:25,360
+Nie trzymaj przycisku za długo.
+
+29
+00:01:25,410 --> 00:01:27,470
+W ZD220 i ZD230 trzy mignięcia,
+
+30
+00:01:27,520 --> 00:01:31,553
+a w GK420 cztery mignięcia przywracają ustawienia fabryczne.
+
+31
+00:01:31,603 --> 00:01:36,522
+Nie włączaj też drukarki z wciśniętym FEED, bo uruchomisz tryb serwisowy,
+
+32
+00:01:36,572 --> 00:01:37,679
+a nie kalibrację.
+
+33
+00:01:37,729 --> 00:01:42,987
+Przy etykietach z nadrukiem wstępnym w GK420 puść FEED po siedmiu mignięciach.
+
+34
+00:01:43,037 --> 00:01:46,050
+Drukarka zrobi wtedy pełną kalibrację ręczną.
+
+35
+00:01:46,100 --> 00:01:49,963
+Drukarki przemysłowe ZT411 i ZT421 mają ekran dotykowy.
+
+36
+00:01:50,013 --> 00:01:53,947
+Wybierz Menu, potem Print, Sensors i Manual Calibration,
+
+37
+00:01:53,997 --> 00:01:56,650
+a następnie dotknij Start Calibration.
+
+38
+00:01:56,700 --> 00:02:01,275
+Postępuj według komunikatów na ekranie i na końcu naciśnij PAUSE.
+
+39
+00:02:01,325 --> 00:02:05,259
+Tak samo zrobisz to w ZT610 i ZT620 z ekranem dotykowym.
+
+40
+00:02:05,309 --> 00:02:10,950
+W wersjach bez ekranu dotykowego wybierz w menu TOOLS, a potem MEDIA RIBBON CAL.
+
+41
+00:02:11,000 --> 00:02:13,653
+W starszych modelach ZT220, ZT230, ZT410,
+
+42
+00:02:13,703 --> 00:02:19,060
+ZT420 i ZT510 przy gotowej drukarce przytrzymaj PAUSE i CANCEL przez dwie sekundy.
+
+43
+00:02:19,110 --> 00:02:23,742
+Otwórz głowicę i zdejmij etykiety z około dwudziestu centymetrów rolki,
+
+44
+00:02:23,792 --> 00:02:26,775
+tak żeby między czujnikami został sam podkład.
+
+45
+00:02:26,825 --> 00:02:29,874
+Wyjmij taśmę, zamknij głowicę i naciśnij PAUSE.
+
+46
+00:02:29,924 --> 00:02:35,478
+Gdy drukarka zmierzy podkład, otwórz głowicę, wsuń etykietę pod czujnik, załóż taśmę,
+
+47
+00:02:35,528 --> 00:02:38,050
+zamknij głowicę i znowu naciśnij PAUSE.
+
+48
+00:02:38,100 --> 00:02:44,113
+Drukarka po kalibracji dalej wypluwa puste etykiety albo mruga na czerwono z błędem
+
+49
+00:02:44,163 --> 00:02:44,843
+Media Out?
+
+50
+00:02:44,893 --> 00:02:46,450
+Sprawdź cztery rzeczy.
+
+51
+00:02:46,500 --> 00:02:49,296
+Pierwsza: rodzaj czujnika i jego położenie.
+
+52
+00:02:49,346 --> 00:02:53,333
+Etykiety z przerwą czyta czujnik przerwy, czyli transmisyjny.
+
+53
+00:02:53,383 --> 00:02:58,297
+Etykiety z czarnym paskiem na spodzie wymagają czujnika czarnego znacznika.
+
+54
+00:02:58,347 --> 00:03:03,659
+Przy wąskich etykietach albo znaczniku poza środkiem przesuń ruchomy czujnik tak,
+
+55
+00:03:03,709 --> 00:03:06,041
+żeby trafiał w przerwę lub znacznik.
+
+56
+00:03:06,091 --> 00:03:10,807
+Ruchomy czujnik mają drukarki serii ZD oraz ZT411, ZT421, ZT510 i ZT610.
+
+57
+00:03:10,857 --> 00:03:14,050
+W ZT220, ZT230, ZT410 i ZT420 czujnik jest stały.
+
+58
+00:03:14,100 --> 00:03:14,748
+Druga: brud.
+
+59
+00:03:14,798 --> 00:03:17,074
+Pył z etykiet i klej zasłaniają czujnik.
+
+60
+00:03:17,124 --> 00:03:20,505
+Wyłącz drukarkę i przedmuchaj czujnik sprężonym powietrzem.
+
+61
+00:03:20,555 --> 00:03:25,273
+Przy mocnym zabrudzeniu przetrzyj go delikatnie wacikiem z alkoholem izopropylowym
+
+62
+00:03:25,323 --> 00:03:27,250
+dziewięćdziesiąt dziewięć procent.
+
+63
+00:03:27,300 --> 00:03:30,125
+Trzecia: nietypowe albo przezroczyste etykiety.
+
+64
+00:03:30,175 --> 00:03:32,939
+Użyj darmowego programu Zebra Setup Utilities.
+
+65
+00:03:32,989 --> 00:03:37,221
+Wybierz drukarkę, kliknij Open Printer Tools, wejdź w zakładkę Action,
+
+66
+00:03:37,271 --> 00:03:39,607
+wybierz Calibrate Media i kliknij Send.
+
+67
+00:03:39,657 --> 00:03:43,950
+W zakładce Printing ustawisz ręcznie rodzaj nośnika i długość etykiety.
+
+68
+00:03:44,000 --> 00:03:47,587
+Czwarta: kalibracja przechodzi, a wydruk dalej ucieka.
+
+69
+00:03:47,637 --> 00:03:51,897
+Sprawdź marginesy w sterowniku, czyli Label Top i Left Position,
+
+70
+00:03:51,947 --> 00:03:53,311
+oraz wałek dociskowy.
+
+71
+00:03:53,361 --> 00:03:57,150
+Zużyty albo brudny wałek sprawia, że etykieta się ślizga.
+
+72
+00:03:57,200 --> 00:03:58,653
+Kiedy przestać resetować?
+
+73
+00:03:58,703 --> 00:04:01,539
+Jeśli po wyczyszczeniu czujnika i próbie z inną,
+
+74
+00:04:01,589 --> 00:04:06,168
+sprawdzoną rolką dioda dalej mruga na czerwono, a drukarka nie widzi etykiet,
+
+75
+00:04:06,218 --> 00:04:10,316
+uszkodzony jest najpewniej czujnik, płyta główna albo oprogramowanie.
+
+76
+00:04:10,366 --> 00:04:14,765
+Wymiana czujnika kosztuje orientacyjnie od stu pięćdziesięciu do pięciuset
+
+77
+00:04:14,815 --> 00:04:17,350
+pięćdziesięciu złotych, zależnie od modelu.
+
+78
+00:04:17,400 --> 00:04:19,468
+Naprawę zgłosisz na serwis-zebry.pl.
+
+79
+00:04:19,518 --> 00:04:24,232
+Kurier odbierze drukarkę bezpłatnie, a wycenę dostaniesz przed rozpoczęciem prac.
+
+80
+00:04:24,282 --> 00:04:28,350
+Pełną tabelę kalibracji wszystkich modeli znajdziesz w linku w opisie.
