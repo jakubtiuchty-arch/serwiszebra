@@ -1,0 +1,179 @@
+1
+00:00:00,000 --> 00:00:04,208
+Skanujesz kod, a kursor stoi w miejscu i za każdym razem dociskasz Enter?
+
+2
+00:00:04,258 --> 00:00:06,950
+Jeden kod kreskowy i skaner Zebra zrobi to sam.
+
+3
+00:00:07,000 --> 00:00:09,204
+Domyślnie skaner wpisuje tylko sam kod.
+
+4
+00:00:09,254 --> 00:00:13,829
+Po każdym skanie trzeba ręcznie wcisnąć Enter albo przejść do następnej komórki.
+
+5
+00:00:13,879 --> 00:00:16,950
+Przy setce paczek dziennie to setka zbędnych kliknięć.
+
+6
+00:00:17,000 --> 00:00:22,041
+Potrzebujesz skanera Zebra podłączonego przez USB, na przykład DS2208,
+
+7
+00:00:22,091 --> 00:00:27,277
+DS4608 albo LI2208, i otwartego Notatnika, żeby od razu sprawdzić efekt.
+
+8
+00:00:27,327 --> 00:00:28,950
+Kody pokażę na ekranie.
+
+9
+00:00:29,000 --> 00:00:30,027
+Krok pierwszy:
+
+10
+00:00:30,077 --> 00:00:32,335
+przywróć ustawienia fabryczne.
+
+11
+00:00:32,385 --> 00:00:35,950
+Zatrzymaj film i zeskanuj kod Restore Defaults.
+
+12
+00:00:36,000 --> 00:00:38,258
+Skaner potwierdzi to sygnałem.
+
+13
+00:00:38,308 --> 00:00:42,412
+Jeśli skaner ustawiał wasz dział IT, najpierw zapytaj,
+
+14
+00:00:42,462 --> 00:00:44,950
+bo reset kasuje ich konfigurację.
+
+15
+00:00:45,000 --> 00:00:46,433
+Krok drugi:
+
+16
+00:00:46,483 --> 00:00:50,074
+zeskanuj kod Add Enter Key.
+
+17
+00:00:50,124 --> 00:00:56,950
+Od teraz skaner po każdym kodzie sam naciska Enter.
+
+18
+00:00:57,000 --> 00:00:58,628
+Sprawdź w Notatniku.
+
+19
+00:00:58,678 --> 00:01:03,076
+Skanujesz kod i kursor sam przechodzi do nowej linii.
+
+20
+00:01:03,126 --> 00:01:08,950
+Tak samo działa to w Excelu, w programie magazynowym i w przeglądarce.
+
+21
+00:01:09,000 --> 00:01:16,866
+Wolisz, żeby kursor przeskakiwał do następnego pola formularza albo do komórki obok?
+
+22
+00:01:16,916 --> 00:01:19,788
+Wtedy zamiast Entera ustaw Tab.
+
+23
+00:01:19,838 --> 00:01:24,217
+Zeskanuj Restore Defaults, a potem kod Tab Key.
+
+24
+00:01:24,267 --> 00:01:25,536
+Wybierz jedno:
+
+25
+00:01:25,586 --> 00:01:26,950
+Enter albo Tab.
+
+26
+00:01:27,000 --> 00:01:29,055
+Skaner nie czyta kodów QR?
+
+27
+00:01:29,105 --> 00:01:30,918
+Najpierw sprawdź model.
+
+28
+00:01:30,968 --> 00:01:37,395
+Skanery serii LS i LI czytają tylko zwykłe kody kreskowe i żadne ustawienie tego
+
+29
+00:01:37,445 --> 00:01:38,286
+nie zmieni.
+
+30
+00:01:38,336 --> 00:01:40,796
+Seria DS czyta QR i DataMatrix.
+
+31
+00:01:40,846 --> 00:01:46,950
+Jeśli ktoś je wyłączył, zeskanuj kod Enable QR Code albo Enable Data Matrix.
+
+32
+00:01:47,000 --> 00:01:49,845
+Zamiast polskich liter pojawiają się krzaki?
+
+33
+00:01:49,895 --> 00:01:53,792
+Układ klawiatury w skanerze i w komputerze musi się zgadzać.
+
+34
+00:01:53,842 --> 00:01:59,187
+Kod dla Polski znajdziesz w instrukcji PRG swojego modelu, w sekcji Country Codes,
+
+35
+00:01:59,237 --> 00:02:01,950
+a w Windows ustaw polski układ klawiatury.
+
+36
+00:02:02,000 --> 00:02:03,434
+Trzy rzeczy na koniec.
+
+37
+00:02:03,484 --> 00:02:07,010
+Ustawienia zostają po odłączeniu i restarcie skanera.
+
+38
+00:02:07,060 --> 00:02:10,248
+Żeby wszystko cofnąć, zeskanuj Restore Defaults.
+
+39
+00:02:10,298 --> 00:02:13,553
+A jeśli kod z ekranu nie chce wejść, powiększ go,
+
+40
+00:02:13,603 --> 00:02:18,950
+rozjaśnij monitor i trzymaj skaner dziesięć do dwudziestu centymetrów od ekranu.
+
+41
+00:02:19,000 --> 00:02:25,283
+Wszystkie kody z tego filmu masz tutaj na jednej planszy.
+
+42
+00:02:25,333 --> 00:02:27,950
+Zatrzymaj film i skanuj.
+
+43
+00:02:28,000 --> 00:02:31,910
+Kody do wydruku i pełny poradnik znajdziesz w opisie filmu.
+
+44
+00:02:31,960 --> 00:02:35,400
+A jeśli skaner dalej nie działa jak trzeba, zadzwoń.
+
+45
+00:02:35,450 --> 00:02:37,950
+Jesteśmy autoryzowanym serwisem Zebra.
